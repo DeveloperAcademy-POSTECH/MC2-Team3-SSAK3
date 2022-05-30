@@ -94,6 +94,11 @@
 		000D83242840E23800BA3DFA /* Taxi */ = {
 			isa = PBXGroup;
 			children = (
+				00F85695284492BC008E2E2F /* Extension */,
+				00F85694284492B5008E2E2F /* Constant */,
+				00F85693284492AC008E2E2F /* ViewModel */,
+				00F85692284492A8008E2E2F /* Model */,
+				00F856912844927A008E2E2F /* View */,
 				000D83252840E23800BA3DFA /* TaxiApp.swift */,
 				000D83272840E23800BA3DFA /* ContentView.swift */,
 				000D83292840E23A00BA3DFA /* Assets.xcassets */,
@@ -125,6 +130,41 @@
 				000D83422840E23A00BA3DFA /* TaxiUITestsLaunchTests.swift */,
 			);
 			path = TaxiUITests;
+			sourceTree = "<group>";
+		};
+		00F856912844927A008E2E2F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		00F85692284492A8008E2E2F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		00F85693284492AC008E2E2F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		00F85694284492B5008E2E2F /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		00F85695284492BC008E2E2F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
