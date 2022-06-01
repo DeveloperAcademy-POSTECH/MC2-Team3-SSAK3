@@ -11,10 +11,12 @@
 		000D83282840E23800BA3DFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83272840E23800BA3DFA /* ContentView.swift */; };
 		000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D83292840E23A00BA3DFA /* Assets.xcassets */; };
 		000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D832C2840E23A00BA3DFA /* Preview Assets.xcassets */; };
-		000D83372840E23A00BA3DFA /* TaxiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83362840E23A00BA3DFA /* TaxiTests.swift */; };
 		000D83412840E23A00BA3DFA /* TaxiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83402840E23A00BA3DFA /* TaxiUITests.swift */; };
 		000D83432840E23A00BA3DFA /* TaxiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83422840E23A00BA3DFA /* TaxiUITestsLaunchTests.swift */; };
 		003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 003ABC0B284749F7000FA7A2 /* .swiftlint.yml */; };
+		003ABC0E28474C33000FA7A2 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003ABC0D28474C33000FA7A2 /* Authentication.swift */; };
+		0090B372284755E10042EEE6 /* Firebase.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0090B371284755E10042EEE6 /* Firebase.plist */; };
+		0090B374284758950042EEE6 /* AuthenticationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090B373284758950042EEE6 /* AuthenticationTest.swift */; };
 		00F856972844A825008E2E2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00F856962844A825008E2E2F /* GoogleService-Info.plist */; };
 		00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856992844A985008E2E2F /* FirebaseAnalytics */; };
 		00F8569C2844A985008E2E2F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 00F8569B2844A985008E2E2F /* FirebaseAuth */; };
@@ -52,13 +54,15 @@
 		000D83292840E23A00BA3DFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		000D832C2840E23A00BA3DFA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		000D83322840E23A00BA3DFA /* TaxiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		000D83362840E23A00BA3DFA /* TaxiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiTests.swift; sourceTree = "<group>"; };
 		000D833C2840E23A00BA3DFA /* TaxiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		000D83402840E23A00BA3DFA /* TaxiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiUITests.swift; sourceTree = "<group>"; };
 		000D83422840E23A00BA3DFA /* TaxiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		003ABC0B284749F7000FA7A2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		003ABC0D28474C33000FA7A2 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiRelease.entitlements; sourceTree = "<group>"; };
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0090B371284755E10042EEE6 /* Firebase.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Firebase.plist; sourceTree = "<group>"; };
+		0090B373284758950042EEE6 /* AuthenticationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTest.swift; sourceTree = "<group>"; };
 		00F856962844A825008E2E2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +137,7 @@
 				000D83272840E23800BA3DFA /* ContentView.swift */,
 				000D83292840E23A00BA3DFA /* Assets.xcassets */,
 				000D832B2840E23A00BA3DFA /* Preview Content */,
+				0090B371284755E10042EEE6 /* Firebase.plist */,
 			);
 			path = Taxi;
 			sourceTree = "<group>";
@@ -148,7 +153,7 @@
 		000D83352840E23A00BA3DFA /* TaxiTests */ = {
 			isa = PBXGroup;
 			children = (
-				000D83362840E23A00BA3DFA /* TaxiTests.swift */,
+				0090B373284758950042EEE6 /* AuthenticationTest.swift */,
 			);
 			path = TaxiTests;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 		00F85692284492A8008E2E2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				003ABC0D28474C33000FA7A2 /* Authentication.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -317,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0090B372284755E10042EEE6 /* Firebase.plist in Resources */,
 				003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */,
 				000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */,
 				000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */,
@@ -368,6 +375,7 @@
 			files = (
 				000D83282840E23800BA3DFA /* ContentView.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
+				003ABC0E28474C33000FA7A2 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000D83372840E23A00BA3DFA /* TaxiTests.swift in Sources */,
+				0090B374284758950042EEE6 /* AuthenticationTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
