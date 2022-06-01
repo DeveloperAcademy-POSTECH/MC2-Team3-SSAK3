@@ -17,6 +17,7 @@
 		003ABC0E28474C33000FA7A2 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003ABC0D28474C33000FA7A2 /* Authentication.swift */; };
 		0090B372284755E10042EEE6 /* Firebase.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0090B371284755E10042EEE6 /* Firebase.plist */; };
 		0090B374284758950042EEE6 /* AuthenticationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090B373284758950042EEE6 /* AuthenticationTest.swift */; };
+		0090B377284788B10042EEE6 /* FirebasePlistParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0090B376284788B10042EEE6 /* FirebasePlistParser.swift */; };
 		00F856972844A825008E2E2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00F856962844A825008E2E2F /* GoogleService-Info.plist */; };
 		00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856992844A985008E2E2F /* FirebaseAnalytics */; };
 		00F8569C2844A985008E2E2F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 00F8569B2844A985008E2E2F /* FirebaseAuth */; };
@@ -63,6 +64,7 @@
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0090B371284755E10042EEE6 /* Firebase.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Firebase.plist; sourceTree = "<group>"; };
 		0090B373284758950042EEE6 /* AuthenticationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTest.swift; sourceTree = "<group>"; };
+		0090B376284788B10042EEE6 /* FirebasePlistParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePlistParser.swift; sourceTree = "<group>"; };
 		00F856962844A825008E2E2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +128,7 @@
 		000D83242840E23800BA3DFA /* Taxi */ = {
 			isa = PBXGroup;
 			children = (
+				0090B375284788330042EEE6 /* Utility */,
 				004A833C28470DCC00E07EA0 /* Info.plist */,
 				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
 				00F85695284492BC008E2E2F /* Extension */,
@@ -165,6 +168,14 @@
 				000D83422840E23A00BA3DFA /* TaxiUITestsLaunchTests.swift */,
 			);
 			path = TaxiUITests;
+			sourceTree = "<group>";
+		};
+		0090B375284788330042EEE6 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				0090B376284788B10042EEE6 /* FirebasePlistParser.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		00F856912844927A008E2E2F /* View */ = {
@@ -375,6 +386,7 @@
 			files = (
 				000D83282840E23800BA3DFA /* ContentView.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
+				0090B377284788B10042EEE6 /* FirebasePlistParser.swift in Sources */,
 				003ABC0E28474C33000FA7A2 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
