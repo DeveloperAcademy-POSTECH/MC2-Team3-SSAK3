@@ -15,10 +15,11 @@ final class Authentication {
     func sendSignInEmail(to email: Email, _ completion: ((Error?) -> Void)? = nil) {
         // MARK: 딥링크 관련 정보를 담고 있는 Action Code Setting 인스턴스 생성 함수
         func makeActionCodeSetting(of email: Email) -> ActionCodeSettings {
+            let firebaseDataSource: FirebasePlistParser = FirebasePlistParser()
             let actionCodeSettings = ActionCodeSettings()
             var urlComponent: URLComponents = URLComponents()
             urlComponent.scheme = "https"
-            urlComponent.host = "ssak3-297ee.firebaseapp.com"
+            urlComponent.host = firebaseDataSource.authDomain()
             urlComponent.queryItems = [URLQueryItem(name: "email", value: email)]
             actionCodeSettings.url = urlComponent.url
             actionCodeSettings.handleCodeInApp = true
