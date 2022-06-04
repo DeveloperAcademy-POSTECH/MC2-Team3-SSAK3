@@ -17,6 +17,8 @@
 		000E83B4284A2D55000CD5AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 000E83B3284A2D55000CD5AA /* GoogleService-Info.plist */; };
 		000E83B7284A2DBF000CD5AA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 000E83B6284A2DBF000CD5AA /* FirebaseMessaging */; };
 		003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 003ABC0B284749F7000FA7A2 /* .swiftlint.yml */; };
+		00842A94284B2682000292E5 /* TaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A93284B2682000292E5 /* TaxiParty.swift */; };
+		00842A96284B287D000292E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A95284B287D000292E5 /* Place.swift */; };
 		00E8F1B9284B213C00D68DF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* User.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856992844A985008E2E2F /* FirebaseAnalytics */; };
@@ -63,6 +65,8 @@
 		003ABC0B284749F7000FA7A2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiRelease.entitlements; sourceTree = "<group>"; };
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		00842A93284B2682000292E5 /* TaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiParty.swift; sourceTree = "<group>"; };
+		00842A95284B287D000292E5 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +192,8 @@
 			children = (
 				00E8F1B8284B213C00D68DF0 /* User.swift */,
 				00E8F1BA284B21FE00D68DF0 /* Message.swift */,
+				00842A93284B2682000292E5 /* TaxiParty.swift */,
+				00842A95284B287D000292E5 /* Place.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -386,7 +392,9 @@
 				000D83282840E23800BA3DFA /* ContentView.swift in Sources */,
 				00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
+				00842A96284B287D000292E5 /* Place.swift in Sources */,
 				00E8F1B9284B213C00D68DF0 /* User.swift in Sources */,
+				00842A94284B2682000292E5 /* TaxiParty.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
