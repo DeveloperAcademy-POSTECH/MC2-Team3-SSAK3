@@ -17,6 +17,8 @@
 		000E83B4284A2D55000CD5AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 000E83B3284A2D55000CD5AA /* GoogleService-Info.plist */; };
 		000E83B7284A2DBF000CD5AA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 000E83B6284A2DBF000CD5AA /* FirebaseMessaging */; };
 		003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 003ABC0B284749F7000FA7A2 /* .swiftlint.yml */; };
+		00E8F1B9284B213C00D68DF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* User.swift */; };
+		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856992844A985008E2E2F /* FirebaseAnalytics */; };
 		00F8569C2844A985008E2E2F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 00F8569B2844A985008E2E2F /* FirebaseAuth */; };
 		00F8569E2844A985008E2E2F /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F8569D2844A985008E2E2F /* FirebaseAuthCombine-Community */; };
@@ -61,6 +63,8 @@
 		003ABC0B284749F7000FA7A2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiRelease.entitlements; sourceTree = "<group>"; };
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		00E8F1B8284B213C00D68DF0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,8 @@
 		00F85692284492A8008E2E2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				00E8F1B8284B213C00D68DF0 /* User.swift */,
+				00E8F1BA284B21FE00D68DF0 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -378,7 +384,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				000D83282840E23800BA3DFA /* ContentView.swift in Sources */,
+				00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
+				00E8F1B9284B213C00D68DF0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
