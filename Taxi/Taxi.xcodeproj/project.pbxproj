@@ -107,6 +107,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000AE1CD284C8FE700AF59BE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00E8F1B8284B213C00D68DF0 /* User.swift */,
+				00E8F1BA284B21FE00D68DF0 /* Message.swift */,
+				00842A93284B2682000292E5 /* TaxiParty.swift */,
+				00842A95284B287D000292E5 /* Place.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		000AE1CE284C8FF000AF59BE /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		000D83192840E23800BA3DFA = {
 			isa = PBXGroup;
 			children = (
@@ -137,9 +155,9 @@
 				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
 				00F85695284492BC008E2E2F /* Extension */,
 				00F85694284492B5008E2E2F /* Constant */,
-				00F85693284492AC008E2E2F /* ViewModel */,
-				00F85692284492A8008E2E2F /* Model */,
-				00F856912844927A008E2E2F /* View */,
+				00F85693284492AC008E2E2F /* Data */,
+				00F85692284492A8008E2E2F /* Domain */,
+				00F856912844927A008E2E2F /* Presenter */,
 				000D83252840E23800BA3DFA /* TaxiApp.swift */,
 				000D83272840E23800BA3DFA /* ContentView.swift */,
 				000D83292840E23A00BA3DFA /* Assets.xcassets */,
@@ -180,29 +198,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		00F856912844927A008E2E2F /* View */ = {
+		00F856912844927A008E2E2F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = View;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
-		00F85692284492A8008E2E2F /* Model */ = {
+		00F85692284492A8008E2E2F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				00E8F1B8284B213C00D68DF0 /* User.swift */,
-				00E8F1BA284B21FE00D68DF0 /* Message.swift */,
-				00842A93284B2682000292E5 /* TaxiParty.swift */,
-				00842A95284B287D000292E5 /* Place.swift */,
+				000AE1CE284C8FF000AF59BE /* UseCase */,
+				000AE1CD284C8FE700AF59BE /* Model */,
 			);
-			path = Model;
+			path = Domain;
 			sourceTree = "<group>";
 		};
-		00F85693284492AC008E2E2F /* ViewModel */ = {
+		00F85693284492AC008E2E2F /* Data */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = ViewModel;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		00F85694284492B5008E2E2F /* Constant */ = {
