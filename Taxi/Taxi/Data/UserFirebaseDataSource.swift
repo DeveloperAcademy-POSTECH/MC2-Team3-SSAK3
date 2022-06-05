@@ -16,9 +16,10 @@ final class UserFirebaseDataSource: UserRepository {
     private let fireStore: Firestore = .firestore()
 
     func setUser(_ id: String, _ nickname: String) -> AnyPublisher<User, Error> {
-        let user: User = User(id: id, nickName: nickname, profileImage: nil)
+        let user: User = User(id: id, nickname: nickname, profileImage: nil)
         return fireStore.collection("User").document(id).setData(from: user)
             .map { user }
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 
@@ -34,6 +35,7 @@ final class UserFirebaseDataSource: UserRepository {
                 }
             }
         }
+        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
 
@@ -43,8 +45,16 @@ final class UserFirebaseDataSource: UserRepository {
     }
 
     func updateNickname(_ user: User, _ nickname: String) -> AnyPublisher<User, Error> {
-        // TODO: 닉네임 업데이트 함수
-        return getUser(user.id)
+        let docRef = fireStore.collection("User").document(user.id)
+
+        return docRef.updateData([
+            "nickname": nickname
+        ])
+        .map { _ in
+            User(id: user.id, nickname: user.nickname, profileImage: user.profileImage)
+        }
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
     }
 
 }

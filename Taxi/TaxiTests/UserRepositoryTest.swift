@@ -47,7 +47,7 @@ class UserRepositoryTest: XCTestCase {
             }.store(in: &cancelBag)
 
         // then
-        wait(for: [promise], timeout: 0.5)
+        wait(for: [promise], timeout: 5)
         XCTAssertNil(error)
     }
 
@@ -65,7 +65,54 @@ class UserRepositoryTest: XCTestCase {
                 user = $0
             }.store(in: &cancelBag)
 
-        wait(for: [promise], timeout: 1)
+        wait(for: [promise], timeout: 5)
         XCTAssertNotNil(user)
+    }
+
+    func testNicknameChangeCauseErrorWhenInvalidIdGiven() {
+        // given
+        var error: Error?
+        let promise = expectation(description: "User doesn`t exist")
+
+        // when
+        userRepository
+            .updateNickname(User(id: "0", nickname: "HojongE", profileImage: nil), "haha!!")
+            .sink { completion in
+                switch completion {
+                case .failure(let err):
+                    error = err
+                default:
+                    print("There is no error")
+                }
+                promise.fulfill()
+            } receiveValue: { _ in }.store(in: &cancelBag)
+
+        // then
+        wait(for: [promise], timeout: 5)
+        XCTAssertNotNil(error)
+    }
+
+    func testNicknameChange() {
+        // given
+        var error: Error?
+        let promise = expectation(description: "User nickname changed")
+
+        // when
+        userRepository
+            .updateNickname(User(id: "1", nickname: "호종이", profileImage: nil), "레이몬드")
+            .sink { completion in
+                switch completion {
+                case .failure(let err):
+                    error = err
+                default:
+                    print("There is no error")
+                }
+                promise.fulfill()
+            } receiveValue: { _ in }
+            .store(in: &cancelBag)
+
+        // then
+        wait(for: [promise], timeout: 5)
+        XCTAssertNil(error)
     }
 }
