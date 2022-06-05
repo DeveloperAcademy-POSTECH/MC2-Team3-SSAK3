@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AE1D0284C922500AF59BE /* UserRepository.swift */; };
 		000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83252840E23800BA3DFA /* TaxiApp.swift */; };
 		000D83282840E23800BA3DFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83272840E23800BA3DFA /* ContentView.swift */; };
 		000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D83292840E23A00BA3DFA /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		000AE1D0284C922500AF59BE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		000D83222840E23800BA3DFA /* Taxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		000D83252840E23800BA3DFA /* TaxiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiApp.swift; sourceTree = "<group>"; };
 		000D83272840E23800BA3DFA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,14 @@
 			children = (
 			);
 			path = UseCase;
+			sourceTree = "<group>";
+		};
+		000AE1CF284C920B00AF59BE /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				000AE1D0284C922500AF59BE /* UserRepository.swift */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		000D83192840E23800BA3DFA = {
@@ -208,6 +218,7 @@
 		00F85692284492A8008E2E2F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				000AE1CF284C920B00AF59BE /* Interface */,
 				000AE1CE284C8FF000AF59BE /* UseCase */,
 				000AE1CD284C8FE700AF59BE /* Model */,
 			);
@@ -408,6 +419,7 @@
 				000D83282840E23800BA3DFA /* ContentView.swift in Sources */,
 				00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
+				000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */,
 				00842A96284B287D000292E5 /* Place.swift in Sources */,
 				00E8F1B9284B213C00D68DF0 /* User.swift in Sources */,
 				00842A94284B2682000292E5 /* TaxiParty.swift in Sources */,
