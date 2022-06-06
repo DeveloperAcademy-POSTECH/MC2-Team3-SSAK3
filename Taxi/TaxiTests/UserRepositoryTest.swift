@@ -26,6 +26,7 @@ class UserRepositoryTest: XCTestCase {
         try super.tearDownWithError()
     }
 
+    /// 회원가입 함수를 테스트하는 코드
     func testSetUser() {
         // given
         var error: Error?
@@ -51,6 +52,7 @@ class UserRepositoryTest: XCTestCase {
         XCTAssertNil(error)
     }
 
+    /// 회원정보 로딩 함수를 테스트하는 코드
     func testGetUser() {
         // given
         var user: User?
@@ -69,6 +71,7 @@ class UserRepositoryTest: XCTestCase {
         XCTAssertNotNil(user)
     }
 
+    /// 없는 유저의 닉네임을 변경할 경우 에러가 뜨는지 테스트하는 코드
     func testNicknameChangeCauseErrorWhenInvalidIdGiven() {
         // given
         var error: Error?
@@ -92,6 +95,7 @@ class UserRepositoryTest: XCTestCase {
         XCTAssertNotNil(error)
     }
 
+    /// 닉네임 업데이트 함수를 테스트하는 코드
     func testNicknameChange() {
         // given
         var error: Error?
@@ -116,15 +120,13 @@ class UserRepositoryTest: XCTestCase {
         XCTAssertNil(error)
     }
 
+    /// 프로필 이미지 업데이트 함수를 테스트하는 코드
     func testUpdateProfileImage() {
         // given
         var error: Error?
         let promise = expectation(description: "Update profile image succeed")
-        let fileUrl: String = "file:///Users/jonghopark/Library/Developer/CoreSimulator/Devices/411A59B8-2371-4F06-95A4-FB215B13E603/data/Containers/Data/Application/7159A520-988A-4CFF-B776-94CB690059C1/tmp/67F5B591-A601-4FB2-9656-F1F0201DDBCE.jpeg"
-        let bundle: Bundle = Bundle.allBundles.first { bundle in
-            bundle.bundleURL.absoluteString.contains("Tests")
-        }!
-        guard let data = try? Data(contentsOf: bundle.url(forResource: "1Profile", withExtension: "jpg")!) else {
+        let testBundle: Bundle = Bundle(for: type(of: self))
+        guard let data = try? Data(contentsOf: testBundle.url(forResource: "1Profile", withExtension: "jpg")!) else {
             XCTFail("data not exist")
             return
         }
