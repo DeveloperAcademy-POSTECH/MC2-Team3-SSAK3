@@ -17,6 +17,9 @@ final class UserFirebaseDataSource: UserRepository {
 
     private let fireStore: Firestore = .firestore()
     private let storage: Storage = Storage.storage()
+    static let shared: UserRepository = UserFirebaseDataSource()
+
+    private init() {}
 
     func setUser(_ id: String, _ nickname: String) -> AnyPublisher<User, Error> {
         let user: User = User(id: id, nickname: nickname, profileImage: nil)
