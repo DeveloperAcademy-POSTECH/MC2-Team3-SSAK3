@@ -115,4 +115,35 @@ class UserRepositoryTest: XCTestCase {
         wait(for: [promise], timeout: 5)
         XCTAssertNil(error)
     }
+
+    func testUpdateProfileImage() {
+        // given
+        var error: Error?
+        let promise = expectation(description: "Update profile image succeed")
+        let fileUrl: String = "file:///Users/jonghopark/Library/Developer/CoreSimulator/Devices/411A59B8-2371-4F06-95A4-FB215B13E603/data/Containers/Data/Application/7159A520-988A-4CFF-B776-94CB690059C1/tmp/67F5B591-A601-4FB2-9656-F1F0201DDBCE.jpeg"
+        let bundle: Bundle = Bundle.allBundles.first { bundle in
+            bundle.bundleURL.absoluteString.contains("Tests")
+        }!
+        guard let data = try? Data(contentsOf: bundle.url(forResource: "1Profile", withExtension: "jpg")!) else {
+            XCTFail("data not exist")
+            return
+        }
+        // when
+        userRepository
+            .updateProfileImage(User(id: "1", nickname: "호종이", profileImage: nil), data)
+            .sink { completion in
+                switch completion {
+                case .failure(let err):
+                    error = err
+                default:
+                    print("Error not exist")
+                }
+                promise.fulfill()
+            } receiveValue: { _ in }
+            .store(in: &cancelBag)
+
+        // then
+        wait(for: [promise], timeout: 60)
+        XCTAssertNil(error)
+    }
 }
