@@ -23,6 +23,7 @@
 		003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 003ABC0B284749F7000FA7A2 /* .swiftlint.yml */; };
 		00842A94284B2682000292E5 /* TaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A93284B2682000292E5 /* TaxiParty.swift */; };
 		00842A96284B287D000292E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A95284B287D000292E5 /* Place.swift */; };
+		00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */; };
 		00E8F1B9284B213C00D68DF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* User.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856992844A985008E2E2F /* FirebaseAnalytics */; };
@@ -75,6 +76,7 @@
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		00842A93284B2682000292E5 /* TaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiParty.swift; sourceTree = "<group>"; };
 		00842A95284B287D000292E5 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepository.swift; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				000AE1D0284C922500AF59BE /* UserRepository.swift */,
+				00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				000D83282840E23800BA3DFA /* ContentView.swift in Sources */,
+				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */,
 				002F89EB284CA10800D7E51B /* UserFirebaseDataSource.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
