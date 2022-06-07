@@ -16,7 +16,7 @@ class UserRepositoryTest: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        userRepository = UserFirebaseDataSource()
+        userRepository = UserFirebaseDataSource.shared
         cancelBag = []
     }
 
