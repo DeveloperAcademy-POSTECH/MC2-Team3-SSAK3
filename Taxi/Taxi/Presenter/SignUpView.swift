@@ -16,48 +16,37 @@ struct SignUpView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("가입 코드").fontWeight(.bold).opacity(0.3)
-            VStack(alignment: .trailing) {
-                makeTextField(self.$signUpCode) {typedCode in
-                    codeIsTrue = (typedCode == developerCode)
+            underlinedTextField($signUpCode)
+                .onSubmit {
+                    codeIsTrue = (signUpCode == developerCode)
                 }
-                Text(codeIsTrue ? "✅ 인증 완료되었습니다" : "* 최초 인증 및 가입에 활용됩니다.").customTextStyle(isTrue: codeIsTrue)
-            }
+            Text(codeIsTrue ? "✅ 인증 완료되었습니다" : "* 최초 인증 및 가입에 활용됩니다.")
+                .font(.caption)
+                .foregroundColor(codeIsTrue ? .green : .black.opacity(0.3))
+                .frame(maxWidth: .infinity, alignment: .trailing)
             Text("닉네임").fontWeight(.bold).opacity(0.3)
-            VStack(alignment: .trailing) {
-                makeTextField(self.$nickName)
-                Group {
-                    Text("* 사용하실 닉네임을 입력해주세요").opacity(0.3)
-                    Text("(아카데미 내의 닉네임을 권장드립니다)").opacity(0.3)
-                }.font(.caption)
-            }
+            underlinedTextField($nickName)
+            Group {
+                Text("* 사용하실 닉네임을 입력해주세요")
+                Text("(아카데미 내의 닉네임을 권장드립니다)")
+            }.font(.caption).opacity(0.3).frame(maxWidth: .infinity, alignment: .trailing)
             Spacer()
-            Button(action: {print("button clicked")}){
-                Text("버튼")
-                    .frame(maxWidth: .infinity)
-                }.disabled(!codeIsTrue || nickName.isEmpty)
+            Button {
+                UserDefaults.standard.set(true, forKey: "isLogin")
+            } label: {
+                    Text("버튼")
+                        .frame(maxWidth: .infinity)
+                }
+                .disabled(!codeIsTrue || nickName.isEmpty)
         }
         .padding()
     }
 
-    private func makeTextField( _ inputString: Binding<String>, _ codeCheckHandler: ((String) -> Void)? = nil) -> some View {
+    private func underlinedTextField( _ inputString: Binding<String>) -> some View {
         TextField("", text: inputString)
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
-            .onSubmit {
-                codeCheckHandler?(inputString.wrappedValue)
-            }
             .underlineTextField()
-    }
-}
-
-struct CustomTextModifier: ViewModifier {
-    var isTrue: Bool
-    
-    func body(content: Content) -> some View {
-        content
-            .font(.caption)
-            .foregroundColor(isTrue ? .green : .black)
-            .opacity(isTrue ? 1 : 0.3)
     }
 }
 
