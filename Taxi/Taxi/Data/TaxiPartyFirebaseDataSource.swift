@@ -22,18 +22,17 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
         fireStore.collection("TaxiParty")
             .whereField("isClosed", isEqualTo: false)
             .getDocuments(source: load ? .server: .cache)
-            .flatMap(\.documents.publisher)
-            .tryMap { document in
-                try document.data(as: TaxiParty.self)
-            }
-            .filter { taxiParty in
-                if let id = id {
-                    return !taxiParty.members.contains(id)
-                } else {
-                    return true
+            .map(\.documents)
+            .tryMap { documents -> [TaxiParty] in
+                var ret: [TaxiParty] = []
+                for document in documents {
+                    let taxiParty: TaxiParty = try document.data(as: TaxiParty.self)
+                    if taxiParty.id != id {
+                        ret.append(taxiParty)
+                    }
                 }
+                return ret
             }
-            .collect(100)
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
