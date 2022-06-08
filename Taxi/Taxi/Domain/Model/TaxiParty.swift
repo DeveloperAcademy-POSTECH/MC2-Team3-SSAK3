@@ -14,7 +14,7 @@ struct TaxiParty: Codable {
     let meetingDate: Int // (YYYYMMdd)
     let meetingTime: Int // (hhmm)
     let maxPersonNumber: Int
-    let memebers: [String]
+    let members: [String]
     let isClosed: Bool
 }
 
