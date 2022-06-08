@@ -51,6 +51,8 @@
 		50595595285037AE001DA44C /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50595594285037AE001DA44C /* MyPageView.swift */; };
 		505955972850BF46001DA44C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505955962850BF46001DA44C /* ProfileView.swift */; };
 		A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D578972852F2000059FE49 /* TextStyleExtension.swift */; };
+		E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F328503A53005A68F3 /* SignUpView.swift */; };
+		E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F528503D19005A68F3 /* ViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,8 @@
 		50595594285037AE001DA44C /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		505955962850BF46001DA44C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A8D578972852F2000059FE49 /* TextStyleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleExtension.swift; sourceTree = "<group>"; };
+		E622D8F328503A53005A68F3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		E622D8F528503D19005A68F3 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +274,7 @@
 				00A570652851EA33008B220E /* RootView.swift */,
 				50595594285037AE001DA44C /* MyPageView.swift */,
 				505955962850BF46001DA44C /* ProfileView.swift */,
+				E622D8F328503A53005A68F3 /* SignUpView.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 			children = (
 				00A570592851826A008B220E /* ColorExtension.swift */,
 				A8D578972852F2000059FE49 /* TextStyleExtension.swift */,
+				E622D8F528503D19005A68F3 /* ViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -490,6 +496,8 @@
 				505955972850BF46001DA44C /* ProfileView.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
 				00A570642851E993008B220E /* ImageName.swift in Sources */,
+				E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */,
+				E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */,
 				000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */,
 				00A570662851EA33008B220E /* RootView.swift in Sources */,
 				50595595285037AE001DA44C /* MyPageView.swift in Sources */,
