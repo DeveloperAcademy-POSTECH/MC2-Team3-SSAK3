@@ -16,6 +16,7 @@ class TaxiPartyRepositoryTest: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
+        taxiPartyRepository = TaxiPartyFirebaseDataSource.shared
     }
 
     override func tearDownWithError() throws {
@@ -27,7 +28,7 @@ class TaxiPartyRepositoryTest: XCTestCase {
         let promise = expectation(description: "Get Taxi Party Success!")
         var error: Error?
         // when
-        taxiPartyRepository.getTaxiParty(exclude: nil, force: true)
+        taxiPartyRepository.getTaxiParty(exclude: "테스트 아이디1", force: true)
             .sink { completion in
                 switch completion {
                 case .failure(let err):
@@ -36,9 +37,10 @@ class TaxiPartyRepositoryTest: XCTestCase {
                     print("no error")
                 }
                 promise.fulfill()
-            } receiveValue: { _ in }
+            } receiveValue: { taxiParties in
+                print(taxiParties)
+            }
             .store(in: &cancelBag)
-
         // then
         wait(for: [promise], timeout: 5)
         XCTAssertNil(error)
@@ -47,7 +49,7 @@ class TaxiPartyRepositoryTest: XCTestCase {
     func testAddTaxiParty() throws {
         // given
         let promise = expectation(description: "Add Taxi Party Success!")
-        let taxiParty: TaxiParty = TaxiParty(id: "테스트", departureCode: 0, destinationCode: 1, meetingDate: 0, meetingTime: 0, maxPersonNumber: 0, memebers: ["테스트 아이디"], isClosed: false)
+        let taxiParty: TaxiParty = TaxiParty(id: "테스트2", departureCode: 0, destinationCode: 1, meetingDate: 12, meetingTime: 12, maxPersonNumber: 4, members: ["테스트 아이디2"], isClosed: false)
         var error: Error?
         // when
         taxiPartyRepository.addTaxiParty(taxiParty)
@@ -69,7 +71,7 @@ class TaxiPartyRepositoryTest: XCTestCase {
     func testJoinTaxParty() throws {
         // given
         let promise = expectation(description: "Join Taxi Party Success")
-        let taxiParty: TaxiParty = TaxiParty(id: "테스트", departureCode: 0, destinationCode: 1, meetingDate: 0, meetingTime: 0, maxPersonNumber: 0, memebers: ["테스트 아이디"], isClosed: false)
+        let taxiParty: TaxiParty = TaxiParty(id: "테스트", departureCode: 0, destinationCode: 1, meetingDate: 0, meetingTime: 0, maxPersonNumber: 0, members: ["테스트 아이디"], isClosed: false)
         var error: Error?
         // when
         taxiPartyRepository.joinTaxiParty(to: taxiParty)
