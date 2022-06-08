@@ -22,6 +22,7 @@
 		002F89EF284CA5FF00D7E51B /* UserRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */; };
 		003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 003ABC0B284749F7000FA7A2 /* .swiftlint.yml */; };
 		00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */; };
+		00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */; };
 		00842A94284B2682000292E5 /* TaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A93284B2682000292E5 /* TaxiParty.swift */; };
 		00842A96284B287D000292E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A95284B287D000292E5 /* Place.swift */; };
 		00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */; };
@@ -76,6 +77,7 @@
 		002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryTest.swift; sourceTree = "<group>"; };
 		003ABC0B284749F7000FA7A2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyRepository.swift; sourceTree = "<group>"; };
+		00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
 		004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiRelease.entitlements; sourceTree = "<group>"; };
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		00842A93284B2682000292E5 /* TaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiParty.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				000D83362840E23A00BA3DFA /* TaxiTests.swift */,
 				002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */,
 				00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */,
+				00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */,
 			);
 			path = TaxiTests;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 			files = (
 				00D3AE74284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift in Sources */,
 				002F89EF284CA5FF00D7E51B /* UserRepositoryTest.swift in Sources */,
+				00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */,
 				000D83372840E23A00BA3DFA /* TaxiTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
