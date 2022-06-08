@@ -16,6 +16,7 @@ class MyTaxiPartyRepositoryTest: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
+        myTaxiPartyRepository = MyTaxiPartyFirebaseSource.shared
     }
 
     override func tearDownWithError() throws {
@@ -27,16 +28,19 @@ class MyTaxiPartyRepositoryTest: XCTestCase {
         var error: Error?
         let promise = expectation(description: "Get My Taxi Party Success!")
         // when
-        myTaxiPartyRepository.getMyTaxiParty(of: User(id: "1", nickname: "테스트 아이디1", profileImage: nil))
+        myTaxiPartyRepository.getMyTaxiParty(of: User(id: "테스트 아이디1", nickname: "테스트 아이디1", profileImage: nil), force: true)
             .sink { completion in
                 switch completion {
                 case .failure(let err):
                     error = err
+                    print(err)
                 default:
                     print("no error")
                 }
-
-            } receiveValue: { _ in }.store(in: &cancelBag)
+                promise.fulfill()
+            } receiveValue: { taxiParties in
+                print(taxiParties)
+            }.store(in: &cancelBag)
 
         // then
         wait(for: [promise], timeout: 5)
@@ -49,7 +53,7 @@ class MyTaxiPartyRepositoryTest: XCTestCase {
         let promise = expectation(description: "Leave Taxi Party Success!")
         // when
         let taxiParty: TaxiParty = TaxiParty(id: "테스트2", departureCode: 0, destinationCode: 1, meetingDate: 12, meetingTime: 12, maxPersonNumber: 4, members: ["테스트 아이디2"], isClosed: false)
-        myTaxiPartyRepository.leaveTaxiParty(taxiParty)
+        myTaxiPartyRepository.leaveTaxiParty(taxiParty, user: User(id: "테스트 아이디2", nickname: "", profileImage: nil))
             .sink { completion in
                 switch completion {
                 case .failure(let err):
@@ -57,7 +61,7 @@ class MyTaxiPartyRepositoryTest: XCTestCase {
                 default:
                     print("no error")
                 }
-
+                promise.fulfill()
             } receiveValue: { _ in }.store(in: &cancelBag)
         // then
         wait(for: [promise], timeout: 5)
