@@ -9,12 +9,29 @@ import SwiftUI
 
 struct TaxiPartyListView: View {
     var body: some View {
+        VStack{
+            HStack{
+            Text("Test")
+                .font(.title)
+                .fontWeight(.bold)
+                Spacer()
+            Image(systemName: "plus")
+            .foregroundColor(.black)
+            }
+            Spacer()
+            HStack{
+            Text("Test")
+            Text("Test")
+            Text("Test")
+                Spacer()
+            Text("Test")
+            }
             ScrollView{
                 ForEach(0..<50) { num in
                     Text("Test: \(num)")
-                    
                 }
             }
+        }.padding(20)
 }
 }
 
