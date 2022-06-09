@@ -69,6 +69,8 @@
 		A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D578972852F2000059FE49 /* TextStyleExtension.swift */; };
 		E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F328503A53005A68F3 /* SignUpView.swift */; };
 		E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F528503D19005A68F3 /* ViewExtension.swift */; };
+		50F3D18B28537B110004B5CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */; };
+		E66048D22852107100EFDE05 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66048D12852107100EFDE05 /* DateExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +146,7 @@
 		A8D578972852F2000059FE49 /* TextStyleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleExtension.swift; sourceTree = "<group>"; };
 		E622D8F328503A53005A68F3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		E622D8F528503D19005A68F3 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		E66048D12852107100EFDE05 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +371,7 @@
 				A8D578972852F2000059FE49 /* TextStyleExtension.swift */,
 				E622D8F528503D19005A68F3 /* ViewExtension.swift */,
 				50459E322854701C00287371 /* ImageExtension.swift */,
+				E66048D12852107100EFDE05 /* DateExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -570,6 +574,7 @@
 				37F698852855FB910008C022 /* MyPartyView.swift in Sources */,
 				00A570662851EA33008B220E /* RootView.swift in Sources */,
 				50595595285037AE001DA44C /* MyPageView.swift in Sources */,
+				E66048D22852107100EFDE05 /* DateExtension.swift in Sources */,
 				00842A96284B287D000292E5 /* Place.swift in Sources */,
 				37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */,
 				00E8F1B9284B213C00D68DF0 /* User.swift in Sources */,
