@@ -11,20 +11,27 @@ struct TaxiPartyListView: View {
     var body: some View {
         VStack{
             HStack{
-            Text("Test")
+            Text("택시팟")
                 .font(.title)
                 .fontWeight(.bold)
                 Spacer()
             Image(systemName: "plus")
-            .foregroundColor(.black)
+                .resizable()
+                .frame(width: 25, height: 25)
+                .foregroundColor(.black)
             }
-            Spacer()
+            Spacer(minLength: 20)
             HStack{
-            Text("Test")
-            Text("Test")
-            Text("Test")
-                Spacer()
-            Text("Test")
+            Text("전체")
+                    .padding(2)
+            Text("포항역")
+                    .padding(2)
+            Text("포스텍")
+                    .padding(2)
+            Spacer()
+            Text("날짜변경")
+              .foregroundColor(.yellow)
+              .fontWeight(.bold)
             }
             ScrollView{
                 ForEach(0..<50) { num in
