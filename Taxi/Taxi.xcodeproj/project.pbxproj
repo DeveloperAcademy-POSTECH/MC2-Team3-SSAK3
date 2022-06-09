@@ -74,6 +74,7 @@
 		E63C7AA52858B5B50080530B /* TaxiPartyMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AA42858B5B50080530B /* TaxiPartyMockData.swift */; };
 		E63C7AA72858B5DE0080530B /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AA62858B5DE0080530B /* CalendarHelper.swift */; };
 		E63C7AA92858B6130080530B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AA82858B6130080530B /* CalendarView.swift */; };
+		AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF174B252851859300BCF680 /* TaxiPartyListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +155,7 @@
 		E63C7AA42858B5B50080530B /* TaxiPartyMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyMockData.swift; sourceTree = "<group>"; };
 		E63C7AA62858B5DE0080530B /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		E63C7AA82858B6130080530B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		AF174B252851859300BCF680 /* TaxiPartyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +345,7 @@
 				37D4D1F02856D285002E787B /* ChatRoomView.swift */,
 				E63C7AA62858B5DE0080530B /* CalendarHelper.swift */,
 				E63C7AA82858B6130080530B /* CalendarView.swift */,
+				AF174B252851859300BCF680 /* TaxiPartyListView.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */,
 				E63C7AA52858B5B50080530B /* TaxiPartyMockData.swift in Sources */,
 				E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */,
+				AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */,
 				000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */,
 				37F698852855FB910008C022 /* MyPartyView.swift in Sources */,
 				00A570662851EA33008B220E /* RootView.swift in Sources */,
