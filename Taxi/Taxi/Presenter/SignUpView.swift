@@ -31,7 +31,9 @@ struct SignUpView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("가입 코드").fontWeight(.bold).opacity(0.3)
+            Text("가입 코드")
+                .fontWeight(.bold)
+                .opacity(0.3)
             underlinedTextField($signUpCode)
                 .focused($focusField, equals: .code)
                 .disabled(codeState.isCorrect())
@@ -39,13 +41,18 @@ struct SignUpView: View {
                 .font(.caption)
                 .foregroundColor(codeFieldMessageColor(codeState))
                 .frame(maxWidth: .infinity, alignment: .trailing)
-            Text("닉네임").fontWeight(.bold).opacity(0.3)
+            Text("닉네임")
+                .fontWeight(.bold)
+                .opacity(0.3)
             underlinedTextField($nickName)
                 .focused($focusField, equals: .nickname)
             Group {
                 Text("* 사용하실 닉네임을 입력해주세요")
                 Text("(아카데미 내의 닉네임을 권장드립니다)")
-            }.font(.caption).opacity(0.3).frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            .font(.caption)
+            .opacity(0.3)
+            .frame(maxWidth: .infinity, alignment: .trailing)
             Spacer()
             Button {
                 UserDefaults.standard.set(true, forKey: "isLogined")
