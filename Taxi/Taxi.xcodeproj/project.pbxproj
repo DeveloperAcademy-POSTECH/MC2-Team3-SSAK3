@@ -26,6 +26,8 @@
 		00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */; };
 		00842A94284B2682000292E5 /* TaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A93284B2682000292E5 /* TaxiParty.swift */; };
 		00842A96284B287D000292E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A95284B287D000292E5 /* Place.swift */; };
+		00A5705A2851826A008B220E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570592851826A008B220E /* ColorExtension.swift */; };
+		00A5705C285182E1008B220E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5705B285182E1008B220E /* RoundedButton.swift */; };
 		00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */; };
 		00D3AE74284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */; };
 		00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */; };
@@ -84,6 +86,8 @@
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		00842A93284B2682000292E5 /* TaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiParty.swift; sourceTree = "<group>"; };
 		00842A95284B287D000292E5 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		00A570592851826A008B220E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		00A5705B285182E1008B220E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepository.swift; sourceTree = "<group>"; };
 		00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
 		00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 		000D83242840E23800BA3DFA /* Taxi */ = {
 			isa = PBXGroup;
 			children = (
+				00A5705628518200008B220E /* Component */,
 				004A833C28470DCC00E07EA0 /* Info.plist */,
 				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
 				00F85695284492BC008E2E2F /* Extension */,
@@ -232,6 +237,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		00A5705628518200008B220E /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				00A5705B285182E1008B220E /* RoundedButton.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		00F856912844927A008E2E2F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +282,7 @@
 		00F85695284492BC008E2E2F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				00A570592851826A008B220E /* ColorExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -455,7 +469,9 @@
 				00E8F1B9284B213C00D68DF0 /* User.swift in Sources */,
 				00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */,
 				00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */,
+				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
 				00842A94284B2682000292E5 /* TaxiParty.swift in Sources */,
+				00A5705A2851826A008B220E /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
