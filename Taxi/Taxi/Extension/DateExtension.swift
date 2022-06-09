@@ -47,22 +47,6 @@ extension Date {
         return Int(formattedStr) ?? -1
     }
 
-    /// yyyyMMdd의 Int 형태 데이터를 Date 타입으로 변경
-    func intToDate(_ dateInt: Int) -> Date {
-        let dateStr = String(dateInt)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-
-        return formatter.date(from: dateStr) ?? Date()
-    }
-
-    /// yyyyMMdd의 Int 형태 데이터를 MM월 dd
-    func intToString(_ dateInt: Int) -> String {
-        let date = self.intToDate(dateInt)
-
-        return "\(date.month)월 \(date.day)일"
-    }
-
     func getMonthDates() -> [Date] {
         let calendar = Calendar.current
         guard let startDate = calendar.date(
@@ -78,5 +62,17 @@ extension Date {
         return range.compactMap { day -> Date in
             calendar.date(byAdding: .day, value: day - 1, to: startDate) ?? Date()
         }
+    }
+
+    func isSameDay(_ comparedDate: Date) -> Bool {
+        let calendar = Calendar.current
+
+        return calendar.isDate(self, inSameDayAs: comparedDate)
+    }
+    
+    func isToday() -> Bool {
+        let calendar = Calendar.current
+
+        return calendar.isDate(self, inSameDayAs: Date())
     }
 }

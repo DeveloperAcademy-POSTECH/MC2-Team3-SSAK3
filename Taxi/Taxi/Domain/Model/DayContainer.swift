@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DayStruct: Identifiable{
+struct DayContainer: Identifiable {
     let id = UUID().uuidString
     let day: Int
     let date: Date
