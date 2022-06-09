@@ -39,28 +39,17 @@ struct TaxiPartyHeadLine: View {
 }
 
 struct TaxiPartyFiltering: View {
+    @State var destinations: [String] = ["전체", "포항역", "포스텍"]
     var body: some View {
         HStack {
-            Button {
-                print("전체 tapped!")
-            } label: {
-                Text("전체")
-                    .padding(5)
-                    .foregroundColor(.black)
-            }
-            Button {
-                print("포항역 tapped!")
-            } label: {
-                Text("포항역")
-                    .padding(5)
-                    .foregroundColor(.black)
-            }
-            Button {
-                print("포스텍 tapped!")
-            } label: {
-                Text("포스텍")
-                    .padding(5)
-                    .foregroundColor(.black)
+            ForEach(destinations, id: \.self) { name in
+                Button {
+                    print("filter tapped!")
+                } label: {
+                    Text(name)
+                        .padding(5)
+                        .foregroundColor(.black)
+                }
             }
             Spacer()
             Button {
