@@ -11,9 +11,12 @@ struct SignUpView: View {
     enum Field: Hashable {
         case code, nickname
     }
+    enum FieldState {
+        case empty, wrong, right
+    }
     @State private var signUpCode: String = ""
     @State private var nickName: String = ""
-    @State private var codeIsCorrect: Bool?
+    @State private var codeIsCorrect: FieldState = .empty
     @FocusState private var focusField: Field?
     private let developerCode: String = "레몬"
 
@@ -22,7 +25,7 @@ struct SignUpView: View {
             Text("가입 코드").fontWeight(.bold).opacity(0.3)
             underlinedTextField($signUpCode)
                 .focused($focusField, equals: .code)
-                .disabled(codeIsCorrect == true)
+                .disabled(codeIsCorrect == .right)
             Text(codeFieldMessage(codeIsCorrect))
                 .font(.caption)
                 .foregroundColor(codeFieldMessageColor(codeIsCorrect))
@@ -41,7 +44,7 @@ struct SignUpView: View {
                 Text("버튼")
                     .frame(maxWidth: .infinity)
             }
-            .disabled(!(codeIsCorrect == true) || nickName.isEmpty)
+            .disabled(!(codeIsCorrect == .right) || nickName.isEmpty)
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -51,8 +54,8 @@ struct SignUpView: View {
         .onSubmit {
             switch focusField {
             case .code:
-                codeIsCorrect = (signUpCode == developerCode)
-                guard codeIsCorrect == true else {
+                codeIsCorrect = (signUpCode == developerCode ? .right : .wrong)
+                guard codeIsCorrect == .right else {
                     focusField = .code
                     return
                 }
@@ -73,21 +76,25 @@ struct SignUpView: View {
             .underlineTextField()
     }
 
-    private func codeFieldMessage( _ isCorrect: Bool?) -> String {
-        guard let isCorrect = isCorrect else { return "* 최초 인증 및 가입에 활용됩니다" }
-        if isCorrect {
-            return "✅ 인증 완료되었습니다"
-        } else {
+    private func codeFieldMessage( _ fieldText: FieldState) -> String {
+        switch fieldText {
+        case .empty:
+            return "* 최초 인증 및 가입에 활용됩니다"
+        case .wrong:
             return "올바른 코드를 입력해주세요"
+        case .right:
+            return "✅ 인증 완료되었습니다"
         }
     }
 
-    private func codeFieldMessageColor( _ isCorrect: Bool?) -> Color {
-        guard let isCorrect = isCorrect else { return Color.black.opacity(0.3) }
-        if isCorrect {
-            return Color.green
-        } else {
+    private func codeFieldMessageColor( _ fieldText: FieldState) -> Color {
+        switch fieldText {
+        case .empty:
+            return Color.black.opacity(0.3)
+        case .wrong:
             return Color.red
+        case .right:
+            return Color.green
         }
     }
 }
