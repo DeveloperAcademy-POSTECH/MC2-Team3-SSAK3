@@ -16,7 +16,7 @@ struct MyPageView: View {
             VStack(alignment: .leading, spacing: 0) {
                 navigationBar
                 NavigationLink {
-                    // ProfileView()
+                     ProfileView()
                 } label: {
                     profileSettingButton
                 }
@@ -36,7 +36,6 @@ struct MyPageView: View {
                 }
                 Spacer(minLength: 0)
             }
-            .navigationTitle("설정")
             .navigationBarHidden(true)
         }
     }
