@@ -13,10 +13,19 @@ struct SignUpView: View {
     }
     enum FieldState {
         case empty, wrong, right
+
+        func isCorrect() -> Bool {
+            switch self {
+            case .right:
+                return true
+            case .wrong, .empty:
+                return false
+            }
+        }
     }
     @State private var signUpCode: String = ""
     @State private var nickName: String = ""
-    @State private var codeIsCorrect: FieldState = .empty
+    @State private var codeState: FieldState = .empty
     @FocusState private var focusField: Field?
     private let developerCode: String = "레몬"
 
@@ -25,10 +34,10 @@ struct SignUpView: View {
             Text("가입 코드").fontWeight(.bold).opacity(0.3)
             underlinedTextField($signUpCode)
                 .focused($focusField, equals: .code)
-                .disabled(codeIsCorrect == .right)
-            Text(codeFieldMessage(codeIsCorrect))
+                .disabled(codeState.isCorrect())
+            Text(codeFieldMessage(codeState))
                 .font(.caption)
-                .foregroundColor(codeFieldMessageColor(codeIsCorrect))
+                .foregroundColor(codeFieldMessageColor(codeState))
                 .frame(maxWidth: .infinity, alignment: .trailing)
             Text("닉네임").fontWeight(.bold).opacity(0.3)
             underlinedTextField($nickName)
@@ -39,12 +48,12 @@ struct SignUpView: View {
             }.font(.caption).opacity(0.3).frame(maxWidth: .infinity, alignment: .trailing)
             Spacer()
             Button {
-                UserDefaults.standard.set(true, forKey: "isLogin")
+                UserDefaults.standard.set(true, forKey: "isLogined")
             } label: {
                 Text("버튼")
                     .frame(maxWidth: .infinity)
             }
-            .disabled(!(codeIsCorrect == .right) || nickName.isEmpty)
+            .disabled(!(codeState.isCorrect()) || nickName.isEmpty)
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -54,8 +63,8 @@ struct SignUpView: View {
         .onSubmit {
             switch focusField {
             case .code:
-                codeIsCorrect = (signUpCode == developerCode ? .right : .wrong)
-                guard codeIsCorrect == .right else {
+                codeState = (signUpCode == developerCode ? .right : .wrong)
+                guard codeState.isCorrect() else {
                     focusField = .code
                     return
                 }
