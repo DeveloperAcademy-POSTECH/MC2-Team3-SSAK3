@@ -12,7 +12,11 @@ struct TaxiPartyListView: View {
         VStack {
             TaxiPartyHeadLine()
             Spacer(minLength: 20)
-            TaxiPartyFiltering()
+            HStack {
+                TaxiPartyFiltering()
+                Spacer()
+                MeetingDateChange()
+            }
             Spacer(minLength: 20)
             CellViewList()
         }.padding(20)
@@ -51,14 +55,18 @@ struct TaxiPartyFiltering: View {
                         .foregroundColor(.black)
                 }
             }
-            Spacer()
-            Button {
-                print("날짜변경 tapped!")
-            } label: {
-                Text("날짜 변경")
-                    .foregroundColor(Color(red: 255 / 255, green: 214 / 255, blue: 0 / 255, opacity: 1.0))
-                    .fontWeight(.bold)
-            }
+        }
+    }
+}
+
+struct MeetingDateChange: View {
+    var body: some View {
+        Button {
+            print("날짜변경 tapped!")
+        } label: {
+            Text("날짜 변경")
+                .foregroundColor(Color(red: 255 / 255, green: 214 / 255, blue: 0 / 255, opacity: 1.0))
+                .fontWeight(.bold)
         }
     }
 }
