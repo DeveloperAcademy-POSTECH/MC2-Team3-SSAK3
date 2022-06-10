@@ -72,14 +72,17 @@ struct CalendarView: View {
 
         return LazyVGrid(columns: column) {
             ForEach(getExactDates()) {data in
-                dayCell(data)
-                    .background(
-                        Circle()
-                            .opacity(data.date.isSameDay(selectedDate) ? 1 : 0)
-                    )
-                    .onTapGesture {
-                        selectedDate = data.date
+                Button {
+                    selectedDate = data.date
+                } label: {
+                    dayCell(data)
+                        .background(
+                            Circle()
+                                .opacity(data.date.isSameDay(selectedDate) ? 1 : 0)
+                        )
+                    // TODO: unparticipable day mute 처리
                 }
+                .disabled(data.monthType == .unparticipable)
             }
         }
     }
@@ -125,6 +128,7 @@ struct CalendarView: View {
                 }
                 ) {
                     Text("\(taxiParty.meetingDate)")
+                    // TODO: taxi party가 있는 날에 아래에 작은 점 표시해주기, 선택한 날에 대한 색 대비 주기
                 } else {
                     ZStack {
                         Circle()
