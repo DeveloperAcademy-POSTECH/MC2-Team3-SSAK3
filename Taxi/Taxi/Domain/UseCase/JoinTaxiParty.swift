@@ -14,7 +14,7 @@ final class JoinTaxiPartyUseCase {
         self.taxiPartyRepository = taxiPartyRepository
     }
 
-    func joinTaxiParty(to taxiParty: TaxiParty, _ user: User) -> AnyPublisher<TaxiParty, Error> {
+    func joinTaxiParty(in taxiParty: TaxiParty, _ user: User) -> AnyPublisher<TaxiParty, Error> {
         return taxiPartyRepository.joinTaxiParty(to: taxiParty)
     }
 }
