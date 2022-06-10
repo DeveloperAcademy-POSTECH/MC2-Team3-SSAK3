@@ -12,7 +12,7 @@ struct CalendarView: View {
     @State private var selectedDate = Date()
     @State private var currentMonth = 0
     private let today = Date()
-    private let taxiParties: [TaxiParty] = []
+    private let taxiParties: [TaxiParty] = mockData()
 
     var body: some View {
         VStack {
@@ -70,19 +70,19 @@ struct CalendarView: View {
     var datePicker: some View {
         let column = Array(repeating: GridItem(.flexible()), count: 7)
 
-        return LazyVGrid(columns: column) {
+        return LazyVGrid(columns: column, spacing: 15) {
             ForEach(getExactDates()) {data in
-                Button {
-                    selectedDate = data.date
-                } label: {
-                    dayCell(data)
-                        .background(
-                            Circle()
-                                .opacity(data.date.isSameDay(selectedDate) ? 1 : 0)
-                        )
-                    // TODO: unparticipable day mute 처리
-                }
-                .disabled(data.monthType == .unparticipable)
+                dayCell(data)
+                    .background(
+                        Capsule()
+                            .fill(.yellow)
+                            .opacity(data.date.isSameDay(selectedDate) ? 1 : 0)
+                            .padding(.horizontal, 3)
+                    )
+                    .onTapGesture {
+                        selectedDate = data.date
+                    }
+                    .disabled(data.monthType == .unparticipable)
             }
         }
     }
@@ -119,6 +119,10 @@ struct CalendarView: View {
         return date.isOutOfMonth() ? .unparticipable : .participable
     }
 
+    private func dayNumColor(_ comparing: Date, _ compared: Date, _ dotColor: Color) -> Color {
+        return comparing.isSameDay(compared) ? .white : dotColor
+    }
+
     // MARK: - view maker
     private func dayCell(_ value: DayContainer) -> some View {
         VStack {
@@ -127,20 +131,22 @@ struct CalendarView: View {
                     return value.date.isSameDay(party.meetingDate.intToDate())
                 }
                 ) {
-                    Text("\(taxiParty.meetingDate)")
-                    // TODO: taxi party가 있는 날에 아래에 작은 점 표시해주기, 선택한 날에 대한 색 대비 주기
+                    Text("\(value.day)")
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, taxiParty.meetingDate.intToDate(), .black))
+                    Circle()
+                        .fill(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, taxiParty.meetingDate.intToDate(), .green))
+                        .opacity(value.date.isOutOfMonth() ? 0 : 1)
+                        .frame(width: 8, height: 8)
                 } else {
-                    ZStack {
-                        Circle()
-                            .strokeBorder(value.date.isToday() ? .green : .clear, lineWidth: 2)
-                        Text("\(value.day)")
-                            .frame(maxWidth: .infinity, alignment: .top)
-                            .foregroundColor(value.date.isSameDay(selectedDate) ? .white : .black)
-                    }
+                    Text("\(value.day)")
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(value.date, selectedDate, .black))
                 }
             }
         }
-        .frame(height: 40)
+        .padding(.top, 5)
+        .frame(height: 50, alignment: .top)
     }
 }
 
