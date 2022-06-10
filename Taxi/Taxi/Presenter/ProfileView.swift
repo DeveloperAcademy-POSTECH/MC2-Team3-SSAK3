@@ -8,22 +8,35 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var isPresented: Bool = false
+
     var body: some View {
         VStack {
-            Circle()
-                .foregroundColor(.secondary)
-                .frame(width: 160, height: 160)
+            Image("ProfileDummy")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .clipShape(Circle())
+                .frame(width: 160)
                 .overlay(alignment: .bottom) {
                     Text("편집")
                 }
                 .onTapGesture {
-                    // Edit Profile Image
+                    isPresented.toggle()
+                }
+                .sheet(isPresented: $isPresented) {
+                    Text("PhotoPicker")
                 }
             HStack {
                 Text("닉네임")
                 Spacer()
                 TextField("닉네임", text: .constant(""))
             }
+            Button {
+                // Update User Data
+            } label: {
+                Text("적용")
+            }
+            Spacer(minLength: 0)
         }
     }
 }
