@@ -15,26 +15,23 @@ struct MyPageView: View {
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 0) {
-                navigationBar
+            VStack(alignment: .leading) {
+                Text("설정")
                 NavigationLink {
-                     ProfileView()
+                    ProfileView()
                 } label: {
-                    profileSettingButton
+                    linkToProfile
                 }
                 Divider()
-                    .padding(.leading)
                 Text("알림")
-                    .font(.system(size: 15, weight: .medium))
-                notificationSetting(label: "채팅 알림", isOn: $chattingNoti)
-                notificationSetting(label: "택시팟 완료 알림", isOn: $partyCompleteNoti)
+                notificationSetting("채팅 알림", isOn: $chattingNoti)
+                notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
                 Divider()
-                    .padding(.leading)
-                logoffButton(title: "로그아웃", label: "정말 로그아웃 하시겠습니까?", message: "경고문구", isPresented: $isTryLogout) {
-                    // Logout
+                logonStateButton("로그아웃", label: "정말 로그아웃 하시겠습니까?", message: "경고문구", isPresented: $isTryLogout) {
+                    // Logout Action
                 }
-                logoffButton(title: "회원탈퇴", label: "정말 회원탈퇴 하시겠습니까?", message: "경고문구", isPresented: $isTryWithdrawal) {
-                    // Withdrawal
+                logonStateButton("회원탈퇴", label: "정말 회원탈퇴 하시겠습니까?", message: "경고문구", isPresented: $isTryWithdrawal) {
+                    // Withdrawal Action
                 }
                 Spacer(minLength: 0)
             }
@@ -44,31 +41,19 @@ struct MyPageView: View {
 }
 
 extension MyPageView {
-    var navigationBar: some View {
-        Rectangle()
-            .foregroundColor(.white)
-            .frame(height: 60)
-            .shadow(color: .black.opacity(0.05), radius: 0, x: 0, y: 1)
-            .overlay(alignment: .bottomLeading) {
-                Text("설정")
-                    .font(.system(size: 26, weight: .bold))
-        }
-    }
 
-    var profileSettingButton: some View {
+    var linkToProfile: some View {
         HStack {
             Text("프로필 관리")
-                .font(.system(size: 17, weight: .bold))
             Spacer()
             Image(systemName: "chevron.right")
         }
     }
 
     @ViewBuilder
-    func notificationSetting(label: String, isOn: Binding<Bool>) -> some View {
+    func notificationSetting(_ label: String, isOn: Binding<Bool>) -> some View {
         HStack {
             Text(label)
-                .font(.system(size: 17, weight: .bold))
             Spacer()
             Toggle(label, isOn: isOn)
                 .labelsHidden()
@@ -76,17 +61,17 @@ extension MyPageView {
     }
 
     @ViewBuilder
-    func logoffButton(title: String, label: String, message: String, isPresented: Binding<Bool>, action: @escaping () -> Void) -> some View {
-        Button(title) {
+    func logonStateButton(_ title: String, label: String, message: String, isPresented: Binding<Bool>, action: @escaping () -> Void) -> some View {
+        Button {
             isPresented.wrappedValue.toggle()
+        } label: {
+            Text(title)
         }
         .alert(label, isPresented: isPresented) {
             Button("취소", role: .cancel) {
                 isPresented.wrappedValue.toggle()
             }
-            Button("확인", role: .destructive) {
-                action()
-            }
+            Button("확인", role: .destructive, action: action)
         } message: {
             Text(message)
         }
