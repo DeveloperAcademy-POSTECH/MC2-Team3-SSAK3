@@ -25,7 +25,7 @@ struct RoundedButton: View {
                 .fontWeight(.semibold)
                 .padding(.vertical, 18)
                 .frame(maxWidth: .infinity)
-                .background(Color.brand, in: RoundedRectangle(cornerRadius: 15))
+                .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
                 .padding(.horizontal)
         }
         .disabled(disabled)
