@@ -19,7 +19,7 @@ struct CalendarView: View {
             header
             datePicker
         }
-        .frame(maxWidth: .infinity)
+        .frame(width: UIScreen.main.bounds.width * 0.85, height: UIScreen.main.bounds.height * 0.4, alignment: .top)
     }
 
     // MARK: - view property
@@ -46,7 +46,7 @@ struct CalendarView: View {
             }
             .padding(.bottom, 20)
             .padding(.horizontal, 10)
-            .onChange(of: currentMonth) {newValue in
+            .onChange(of: currentMonth) {_ in
                 currentDate = changeCurrentMonth()
             }
         }
@@ -79,7 +79,7 @@ struct CalendarView: View {
                     )
                     .onTapGesture {
                         selectedDate = data.date
-                    }
+                }
             }
         }
     }
@@ -100,8 +100,8 @@ struct CalendarView: View {
 
         let firstDayIndexOfWeek = calendar.component(.weekday, from: calendar.date(from: components) ?? Date())
 
-        var thisMonthDates = currentDate.getMonthDates().map { date in
-            DayContainer(day: date.day, date: date, monthType: .participable)
+        var thisMonthDates = current.getMonthDates().map { date in
+            DayContainer(day: date.day, date: date, monthType: checkMonthType(date))
         }
 
         for _ in 0..<firstDayIndexOfWeek - 1 {
@@ -109,6 +109,11 @@ struct CalendarView: View {
         }
 
         return thisMonthDates
+    }
+
+    // 해당 날짜가 오늘의 날짜와 한달 차이나는지 monthType 결정
+    private func checkMonthType(_ date: Date) -> MonthType {
+        return date.isOutOfMonth() ? .unparticipable : .participable
     }
 
     // MARK: - view maker
@@ -131,7 +136,7 @@ struct CalendarView: View {
                 }
             }
         }
-        .frame(height: 50)
+        .frame(height: 40)
     }
 }
 
