@@ -45,7 +45,6 @@ struct RootView: View {
                     }
                     .tag(Tab.setting)
             }
-            .accentColor(.brand)
         }
     }
 }
