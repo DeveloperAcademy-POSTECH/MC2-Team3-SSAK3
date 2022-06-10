@@ -13,6 +13,8 @@ extension Int {
         let dateStr = String(self)
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
 
         return formatter.date(from: dateStr) ?? Date()
     }

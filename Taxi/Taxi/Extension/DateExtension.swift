@@ -12,12 +12,15 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MMM"
         formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
         return formatter
     }
 
     var intFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
         return formatter
     }
 
@@ -66,13 +69,18 @@ extension Date {
 
     func isSameDay(_ comparedDate: Date) -> Bool {
         let calendar = Calendar.current
-
         return calendar.isDate(self, inSameDayAs: comparedDate)
     }
-    
+
     func isToday() -> Bool {
         let calendar = Calendar.current
-
         return calendar.isDate(self, inSameDayAs: Date())
+    }
+
+    func isOutOfMonth() -> Bool {
+        let calendar = Calendar.current
+        let diff = calendar.dateComponents([.day], from: Date(), to: self).day ?? -1
+        let monthlyDayCount = calendar.range(of: .day, in: .month, for: Date())?.count ?? 30
+        return (diff >= monthlyDayCount || diff < 0 ) ? true : false
     }
 }
