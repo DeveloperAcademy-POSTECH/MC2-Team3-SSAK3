@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AE1D0284C922500AF59BE /* UserRepository.swift */; };
 		000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83252840E23800BA3DFA /* TaxiApp.swift */; };
-		000D83282840E23800BA3DFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83272840E23800BA3DFA /* ContentView.swift */; };
 		000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D83292840E23A00BA3DFA /* Assets.xcassets */; };
 		000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D832C2840E23A00BA3DFA /* Preview Assets.xcassets */; };
 		000D83372840E23A00BA3DFA /* TaxiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83362840E23A00BA3DFA /* TaxiTests.swift */; };
@@ -68,7 +67,6 @@
 		000AE1D0284C922500AF59BE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		000D83222840E23800BA3DFA /* Taxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		000D83252840E23800BA3DFA /* TaxiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiApp.swift; sourceTree = "<group>"; };
-		000D83272840E23800BA3DFA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		000D83292840E23A00BA3DFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		000D832C2840E23A00BA3DFA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		000D83322840E23A00BA3DFA /* TaxiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,7 +197,6 @@
 				00F85692284492A8008E2E2F /* Domain */,
 				00F856912844927A008E2E2F /* Presenter */,
 				000D83252840E23800BA3DFA /* TaxiApp.swift */,
-				000D83272840E23800BA3DFA /* ContentView.swift */,
 				000D83292840E23A00BA3DFA /* Assets.xcassets */,
 				000D832B2840E23A00BA3DFA /* Preview Content */,
 			);
@@ -464,7 +461,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000D83282840E23800BA3DFA /* ContentView.swift in Sources */,
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */,
 				002F89EB284CA10800D7E51B /* UserFirebaseDataSource.swift in Sources */,
