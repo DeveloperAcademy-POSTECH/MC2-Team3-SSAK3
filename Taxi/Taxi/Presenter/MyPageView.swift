@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct MyPageView: View {
-    @AppStorage("chattingNoti") var chattingNoti: Bool = true
-    @AppStorage("partyCompleteNoti") var partyCompleteNoti: Bool = true
+    @AppStorage("chattingNoti") private var chattingNoti: Bool = true
+    @AppStorage("partyCompleteNoti") private var partyCompleteNoti: Bool = true
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
 
@@ -27,11 +27,11 @@ struct MyPageView: View {
                 notificationSetting("채팅 알림", isOn: $chattingNoti)
                 notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
                 Divider()
-                logonStateButton("로그아웃", label: "정말 로그아웃 하시겠습니까?", message: "경고문구", isPresented: $isTryLogout) {
-                    // Logout Action
+                logOnStateButton("로그아웃", label: "정말 로그아웃 하시겠습니까?", message: "경고문구", isPresented: $isTryLogout) {
+                    // TODO: Add Logout Action
                 }
-                logonStateButton("회원탈퇴", label: "정말 회원탈퇴 하시겠습니까?", message: "경고문구", isPresented: $isTryWithdrawal) {
-                    // Withdrawal Action
+                logOnStateButton("회원탈퇴", label: "정말 회원탈퇴 하시겠습니까?", message: "경고문구", isPresented: $isTryWithdrawal) {
+                    // TODO: Add Withdrawal Action
                 }
                 Spacer(minLength: 0)
             }
@@ -50,7 +50,6 @@ extension MyPageView {
         }
     }
 
-    @ViewBuilder
     func notificationSetting(_ label: String, isOn: Binding<Bool>) -> some View {
         HStack {
             Text(label)
@@ -60,8 +59,7 @@ extension MyPageView {
         }
     }
 
-    @ViewBuilder
-    func logonStateButton(_ title: String, label: String, message: String, isPresented: Binding<Bool>, action: @escaping () -> Void) -> some View {
+    func logOnStateButton(_ title: String, label: String, message: String, isPresented: Binding<Bool>, action: @escaping () -> Void) -> some View {
         Button {
             isPresented.wrappedValue.toggle()
         } label: {
