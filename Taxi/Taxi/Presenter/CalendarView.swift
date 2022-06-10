@@ -13,6 +13,11 @@ struct CalendarView: View {
     @State private var currentMonth = 0
     private let today = Date()
     private let taxiParties: [TaxiParty] = mockData()
+    private let action: () -> Void
+
+    init(action: @escaping () -> Void) {
+        self.action = action
+    }
 
     var body: some View {
         VStack {
@@ -81,6 +86,7 @@ struct CalendarView: View {
                     )
                     .onTapGesture {
                         selectedDate = data.date
+                        action()
                     }
                     .disabled(data.monthType == .unparticipable)
             }
@@ -152,6 +158,6 @@ struct CalendarView: View {
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarView()
+        CalendarView(action: {print("hello")})
     }
 }
