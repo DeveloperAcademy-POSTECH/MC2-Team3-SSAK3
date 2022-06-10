@@ -49,6 +49,7 @@
 		00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856AB2844A985008E2E2F /* FirebaseStorageCombine-Community */; };
 		50595595285037AE001DA44C /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50595594285037AE001DA44C /* MyPageView.swift */; };
 		505955972850BF46001DA44C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505955962850BF46001DA44C /* ProfileView.swift */; };
+		A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D578972852F2000059FE49 /* TextStyleExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		50595594285037AE001DA44C /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		505955962850BF46001DA44C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A8D578972852F2000059FE49 /* TextStyleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				00A570592851826A008B220E /* ColorExtension.swift */,
+				A8D578972852F2000059FE49 /* TextStyleExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				000E545828531C510085C39E /* AddTaxiParty.swift in Sources */,
 				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
 				00842A94284B2682000292E5 /* TaxiParty.swift in Sources */,
+				A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */,
 				00A5705A2851826A008B220E /* ColorExtension.swift in Sources */,
 				000E545C285321E70085C39E /* GetTaxiParty.swift in Sources */,
 			);
