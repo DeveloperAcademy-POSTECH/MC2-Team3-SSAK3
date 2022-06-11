@@ -9,6 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ProfileView: View {
+    @State private var showActionSheet: Bool = false
     @State private var showPicker: Bool = false
     @State private var selectedImage: UIImage?
     // DummyData
@@ -19,7 +20,7 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             Button {
-                showPicker.toggle()
+                showActionSheet.toggle()
             } label: {
                 if let newImage = selectedImage {
                     Image(uiImage: newImage)
@@ -58,6 +59,18 @@ struct ProfileView: View {
                             Text("편집")
                         }
                     }
+                }
+            }
+            .confirmationDialog("편집", isPresented: $showActionSheet) {
+                Button("앨범에서 사진 선택") {
+                    showPicker.toggle()
+                }
+                Button("프로필 사진 제거") {
+                    profileImage = nil
+                    selectedImage = nil
+                }
+                Button("취소", role: .cancel) {
+                    showActionSheet.toggle()
                 }
             }
             .sheet(isPresented: $showPicker) {
