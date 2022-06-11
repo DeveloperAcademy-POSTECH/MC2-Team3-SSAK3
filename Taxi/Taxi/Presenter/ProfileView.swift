@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State private var isPickerPresented: Bool = false
+    @State private var showPicker: Bool = false
     @State private var nickname: String
     @State private var profileImage: String?
+    @State private var newImage: UIImage?
 
     // Dummy Data
     private var user: User = User(
@@ -27,7 +28,7 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             Button {
-                isPickerPresented.toggle()
+                showPicker.toggle()
             } label: {
                 Image("ProfileDummy")
                     .resizable()
@@ -38,8 +39,20 @@ struct ProfileView: View {
                         Text("편집")
                     }
             }
-            .sheet(isPresented: $isPickerPresented) {
-                Text("PhotoPicker")
+            .sheet(isPresented: $showPicker) {
+                PhotoPicker(filter: .images, limit: 1) { results in
+                    PhotoPicker.convertToUIImageArray(fromResults: results) { (imagesOrNil, errorOrNil) in
+                        if let error = errorOrNil {
+                            print(error)
+                        }
+                        if let images = imagesOrNil {
+                            if let first = images.first {
+                                newImage = first
+                            }
+                        }
+                    }
+                }
+                .edgesIgnoringSafeArea(.all)
             }
             HStack {
                 Text("닉네임")
