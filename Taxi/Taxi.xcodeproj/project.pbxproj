@@ -54,6 +54,7 @@
 		A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D578972852F2000059FE49 /* TextStyleExtension.swift */; };
 		E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F328503A53005A68F3 /* SignUpView.swift */; };
 		E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F528503D19005A68F3 /* ViewExtension.swift */; };
+		50F3D18B28537B110004B5CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50F3D18B28537B110004B5CE /* SDWebImageSwiftUI in Frameworks */,
 				00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */,
 				00F856A62844A985008E2E2F /* FirebaseFunctions in Frameworks */,
 				00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */,
@@ -349,6 +351,7 @@
 				00F856A92844A985008E2E2F /* FirebaseStorage */,
 				00F856AB2844A985008E2E2F /* FirebaseStorageCombine-Community */,
 				000E83B6284A2DBF000CD5AA /* FirebaseMessaging */,
+				50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */,
 			);
 			productName = Taxi;
 			productReference = 000D83222840E23800BA3DFA /* Taxi.app */;
@@ -424,6 +427,7 @@
 			mainGroup = 000D83192840E23800BA3DFA;
 			packageReferences = (
 				00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				50F3D18928537B110004B5CE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 000D83232840E23800BA3DFA /* Products */;
 			projectDirPath = "";
@@ -861,6 +865,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		50F3D18928537B110004B5CE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -918,6 +930,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50F3D18928537B110004B5CE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
