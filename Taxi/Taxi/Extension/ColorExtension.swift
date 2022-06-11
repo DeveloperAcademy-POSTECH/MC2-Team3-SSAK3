@@ -18,4 +18,3 @@ extension Color {
     static let postechPink = Color("postechPick")
     static let ktxBlue = Color("ktxBlue")
 }
-

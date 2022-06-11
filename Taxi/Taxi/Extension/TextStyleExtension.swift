@@ -5,9 +5,6 @@
 //  Created by joy on 2022/06/10.
 //
 
-
-//google search keyword : swiftUI text style, swiftUI text custome, swiftUI text Modifier
-
 import Foundation
 import SwiftUI
 
@@ -19,7 +16,7 @@ struct MainTitle: ViewModifier {
     }
 }
 
-struct SubTitle: ViewModifier{
+struct SubTitle: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .foregroundColor(.customGray)
@@ -27,7 +24,7 @@ struct SubTitle: ViewModifier{
     }
 }
 
-struct SubTitleSelect: ViewModifier{
+struct SubTitleSelect: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .foregroundColor(.darkGray)
@@ -35,7 +32,7 @@ struct SubTitleSelect: ViewModifier{
     }
 }
 
-struct ChatStyle: ViewModifier{
+struct ChatStyle: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .foregroundColor(.customBlack)
@@ -43,7 +40,7 @@ struct ChatStyle: ViewModifier{
     }
 }
 
-struct InchatNotification: ViewModifier{
+struct InchatNotification: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .foregroundColor(.customBlack)
@@ -51,7 +48,7 @@ struct InchatNotification: ViewModifier{
     }
 }
 
-struct ListMainTitle: ViewModifier{
+struct ListMainTitle: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .foregroundColor(.customBlack)

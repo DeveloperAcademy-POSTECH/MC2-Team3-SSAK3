@@ -15,7 +15,6 @@ final class AuthenticateUseCase {
         self.userRepository = userRepository
     }
 
-
     /// 기기 고유아이디로 로그인 요청 시 해당 User 정보를 반환하는 함수
     /// - Parameter id: 기기 고유아이디
     /// - Returns: User 혹은 Error 를 발행하는 Publisher
