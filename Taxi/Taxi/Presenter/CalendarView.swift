@@ -12,7 +12,7 @@ struct CalendarView: View {
     @State private var selectedDate = Date()
     @State private var currentMonth = 0
     private let today = Date()
-    private let taxiParties: [TaxiParty] = mockData()
+    private let taxiParties: [TaxiParty] = TaxiPartyMockData().mockData
     private let action: () -> Void
 
     init(action: @escaping () -> Void) {
@@ -40,6 +40,7 @@ struct CalendarView: View {
                     }
                 } label: {
                     Image(systemName: "chevron.left")
+                        .tint(.black)
                 }
                 Button {
                     withAnimation {
@@ -47,6 +48,7 @@ struct CalendarView: View {
                     }
                 } label: {
                     Image(systemName: "chevron.right")
+                        .tint(.black)
                 }
             }
             .padding(.bottom, 20)
@@ -86,7 +88,12 @@ struct CalendarView: View {
                     )
                     .onTapGesture {
                         selectedDate = data.date
-                        action()
+                        guard let taxiParty = taxiParties.first(where: {party in
+                            data.date.isSameDay(party.meetingDate.intToDate())
+                        }) else {
+                            action()
+                            return
+                        }
                     }
                     .disabled(data.monthType == .unparticipable)
             }

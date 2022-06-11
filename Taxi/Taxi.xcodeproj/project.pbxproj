@@ -62,6 +62,7 @@
 		E66048D428522D5F00EFDE05 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66048D328522D5F00EFDE05 /* CalendarView.swift */; };
 		E66048D6285239A400EFDE05 /* DayContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66048D5285239A400EFDE05 /* DayContainer.swift */; };
 		E66048D82852B47000EFDE05 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66048D72852B47000EFDE05 /* IntExtension.swift */; };
+		E6A8FBAB2854204F0042E5F0 /* TaxiPartyMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A8FBAA2854204F0042E5F0 /* TaxiPartyMockData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		E66048D328522D5F00EFDE05 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		E66048D5285239A400EFDE05 /* DayContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayContainer.swift; sourceTree = "<group>"; };
 		E66048D72852B47000EFDE05 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		E6A8FBAA2854204F0042E5F0 /* TaxiPartyMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyMockData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
 				00F85695284492BC008E2E2F /* Extension */,
 				00F85694284492B5008E2E2F /* Constant */,
+				E6A8FBA92854202B0042E5F0 /* MockData */,
 				00F85693284492AC008E2E2F /* Data */,
 				00F85692284492A8008E2E2F /* Domain */,
 				00F856912844927A008E2E2F /* Presenter */,
@@ -341,6 +344,14 @@
 				E66048D72852B47000EFDE05 /* IntExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		E6A8FBA92854202B0042E5F0 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				E6A8FBAA2854204F0042E5F0 /* TaxiPartyMockData.swift */,
+			);
+			path = MockData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -517,9 +528,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				000E545A285321250085C39E /* JoinTaxiParty.swift in Sources */,
-				E66048D6285239A400EFDE05 /* DayStruct.swift in Sources */,
 				E66048D6285239A400EFDE05 /* DayContainer.swift in Sources */,
-				000D83282840E23800BA3DFA /* ContentView.swift in Sources */,
+				E66048D6285239A400EFDE05 /* DayContainer.swift in Sources */,
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				50459E332854701C00287371 /* ImageExtension.swift in Sources */,
 				E66048D428522D5F00EFDE05 /* CalendarView.swift in Sources */,
@@ -529,6 +539,7 @@
 				00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */,
 				505955972850BF46001DA44C /* ProfileView.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
+				E6A8FBAB2854204F0042E5F0 /* TaxiPartyMockData.swift in Sources */,
 				00A570642851E993008B220E /* ImageName.swift in Sources */,
 				E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */,
 				E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */,
