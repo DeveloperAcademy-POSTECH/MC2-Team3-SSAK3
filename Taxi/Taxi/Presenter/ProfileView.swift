@@ -25,6 +25,12 @@ struct ProfileView: View {
                 if let imageURL = profileImage {
                     WebImage(url: URL(string: imageURL))
                         .resizable()
+                        .placeholder {
+                            Circle().stroke().foregroundColor(.black)
+                                .overlay {
+                                    ProgressView()
+                                }
+                        }
                         .aspectRatio(contentMode: .fit)
                         .clipShape(Circle())
                         .frame(width: 160)
