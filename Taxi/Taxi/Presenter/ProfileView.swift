@@ -10,8 +10,7 @@ import SDWebImageSwiftUI
 
 struct ProfileView: View {
     @State private var showPicker: Bool = false
-    @State private var newImage: UIImage?
-
+    @State private var selectedImage: UIImage?
     // DummyData
     let id: String = "0"
     @State private var nickname: String = "Avo"
@@ -22,31 +21,42 @@ struct ProfileView: View {
             Button {
                 showPicker.toggle()
             } label: {
-                if let imageURL = profileImage {
-                    WebImage(url: URL(string: imageURL))
+                if let newImage = selectedImage {
+                    Image(uiImage: newImage)
                         .resizable()
-                        .placeholder {
-                            Circle().stroke().foregroundColor(.black)
-                                .overlay {
-                                    ProgressView()
-                                }
-                        }
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
-                        .frame(width: 160)
+                        .frame(width: 160, height: 160)
                         .overlay(alignment: .bottom) {
                             Text("편집")
                         }
                 } else {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(.gray)
+                    if let imageURL = profileImage {
+                        WebImage(url: URL(string: imageURL))
+                            .resizable()
+                            .placeholder {
+                                Circle().stroke().foregroundColor(.black)
+                                    .overlay {
+                                        ProgressView()
+                                    }
+                            }
+                            .aspectRatio(contentMode: .fill)
+                            .clipShape(Circle())
                             .frame(width: 160, height: 160)
-                        Text(nickname.prefix(1))
-                            .foregroundColor(.black)
-                    }
-                    .overlay(alignment: .bottom) {
-                        Text("편집")
+                            .overlay(alignment: .bottom) {
+                                Text("편집")
+                            }
+                    } else {
+                        ZStack {
+                            Circle()
+                                .foregroundColor(.gray)
+                                .frame(width: 160, height: 160)
+                            Text(nickname.prefix(1))
+                                .foregroundColor(.black)
+                        }
+                        .overlay(alignment: .bottom) {
+                            Text("편집")
+                        }
                     }
                 }
             }
@@ -58,7 +68,7 @@ struct ProfileView: View {
                         }
                         if let images = imagesOrNil {
                             if let first = images.first {
-                                newImage = first
+                                selectedImage = first
                             }
                         }
                     }
