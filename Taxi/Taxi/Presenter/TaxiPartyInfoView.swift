@@ -25,7 +25,7 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
             meetingDate: 20220621,
             meetingTime: 1330,
             maxPersonNumber: 4,
-            members: ["아보", "호종", "요셉"],
+            members: ["id1", "id2", "id3"],
             isClosed: false
         ))
     }
