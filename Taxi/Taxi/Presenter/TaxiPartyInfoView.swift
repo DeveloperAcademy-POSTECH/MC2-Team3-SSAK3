@@ -9,8 +9,8 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct TaxiPartyInfoView: View {
-    let taxiParty: TaxiParty
     @Environment(\.dismiss) private var dismiss
+    let taxiParty: TaxiParty
 
     var body: some View {
         VStack {
@@ -25,8 +25,8 @@ struct TaxiPartyInfoView: View {
             Spacer()
             Group {
                 PartyMemberInfo(id: taxiParty.members[0], diameter: 80)
-                PartyMemberInfo(id: taxiParty.members[0], diameter: 80)
-                PartyMemberInfo(id: taxiParty.members[0], diameter: 80)
+                PartyMemberInfo(id: taxiParty.members[1], diameter: 80)
+                PartyMemberInfo(id: taxiParty.members[2], diameter: 80)
                 HStack {
                     Circle()
                         .stroke(style: StrokeStyle(lineWidth: 1, dash: [10]))
@@ -61,8 +61,7 @@ struct TaxiPartyInfoView: View {
 }
 
 struct PartyMemberInfo: View {
-    let id: String
-    let diameter: CGFloat
+    private let diameter: CGFloat
     private let user: User = User(
         id: "id1",
         nickname: "아보",
@@ -70,7 +69,6 @@ struct PartyMemberInfo: View {
     )
 
     init(id: String, diameter: CGFloat) {
-        self.id = id
         self.diameter = diameter
         // TODO: id와 유즈케이스를 통해 유저 정보 가져오고 user 변수에 넣기
     }
