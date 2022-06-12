@@ -142,7 +142,7 @@ struct CellViewList: View {
             Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
         })
         .onPreferenceChange(ViewOffsetKey.self) {
-            if $0 < -270 && !isRefreshing {   // << any creteria we want !!
+            if $0 < -270 && !isRefreshing {   // << any criteria we want !!
                 isRefreshing = true
                 Task {
                     await refresh?()           // << call refreshable !!
