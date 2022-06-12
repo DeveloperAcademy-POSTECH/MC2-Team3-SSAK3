@@ -1,16 +1,15 @@
 //
-//  IntExtension.swift
+//  DateTypeConverter.swift
 //  Taxi
 //
-//  Created by sanghyo on 2022/06/10.
+//  Created by sanghyo on 2022/06/12.
 //
 
 import Foundation
 
-extension Int {
-    /// yyyyMMdd의 Int 형태 데이터를 Date 타입으로 변경
-    func intToDate() -> Date {
-        let dateStr = String(self)
+class IntDateConverter {
+    func makeDateType(from intDate: Int) -> Date {
+        let dateStr = String(intDate)
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         formatter.locale = Locale(identifier: "ko_KR")
@@ -19,10 +18,8 @@ extension Int {
         return formatter.date(from: dateStr) ?? Date()
     }
 
-    /// yyyyMMdd의 Int 형태 데이터를 MM월 dd
-    func intToString() -> String {
-        let date = self.intToDate()
-
+    func makeStringDateLabel(from intDate: Int) -> String {
+        let date = self.makeDateType(from: intDate)
         return "\(date.month)월 \(date.day)일"
     }
 }
