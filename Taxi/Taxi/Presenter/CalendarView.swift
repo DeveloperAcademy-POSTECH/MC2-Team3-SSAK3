@@ -29,7 +29,6 @@ struct CalendarView: View {
             }
             datePicker
         }
-        .frame(maxWidth: .infinity)
     }
 
     // MARK: - view property
@@ -62,7 +61,7 @@ struct CalendarView: View {
     }
 
     var dayOfWeek: some View {
-        return HStack {
+        HStack {
             ForEach(days, id: \.self) {day in
                 Text(day)
                     .frame(maxWidth: .infinity)
@@ -80,7 +79,6 @@ struct CalendarView: View {
                         Circle()
                             .fill(.yellow)
                             .opacity(data.date.isSameDay(selectedDate) ? 1 : 0)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     )
                     .onTapGesture {
                         selectedDate = data.date
