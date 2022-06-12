@@ -15,6 +15,7 @@ struct CalendarView: View {
     private let taxiParties: [TaxiParty] = TaxiPartyMockData.mockData
     private let action: () -> Void
     let days = ["일", "월", "화", "수", "목", "금", "토"]
+    let intDateConverter = IntDateConverter()
 
     init(action: @escaping () -> Void) {
         self.action = action
@@ -84,7 +85,7 @@ struct CalendarView: View {
                     .onTapGesture {
                         selectedDate = data.date
                         guard taxiParties.first(where: {party in
-                            data.date.isSameDay(party.meetingDate.intToDate())
+                            data.date.isSameDay(intDateConverter.makeDateType(from: party.meetingDate))
                         }) == nil else { return }
                             action()
                     }
@@ -145,14 +146,14 @@ struct CalendarView: View {
         ZStack {
             if value.day != 0 {
                 if let taxiParty = taxiParties.first(where: {party in
-                    return value.date.isSameDay(party.meetingDate.intToDate())
+                    return value.date.isSameDay(intDateConverter.makeDateType(from: party.meetingDate))
                 }
                 ) {
                     Text("\(value.day)")
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, taxiParty.meetingDate.intToDate(), color: .black))
+                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, intDateConverter.makeDateType(from: taxiParty.meetingDate), color: .black))
                     Circle()
-                        .fill(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, taxiParty.meetingDate.intToDate(), color: .green))
+                        .fill(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, intDateConverter.makeDateType(from: taxiParty.meetingDate), color: .green))
                         .opacity(value.date.isOutOfMonth() ? 0 : 1)
                         .frame(width: 5, height: 5)
                         .padding(.top, 30)
