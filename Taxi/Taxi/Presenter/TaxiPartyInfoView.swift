@@ -12,6 +12,9 @@ struct TaxiPartyInfoView: View {
     @Environment(\.dismiss) private var dismiss
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 80
+    private var remainSeat: Int {
+        taxiParty.maxPersonNumber - taxiParty.members.count
+    }
 
     var body: some View {
         VStack {
@@ -28,7 +31,7 @@ struct TaxiPartyInfoView: View {
                 ForEach(0..<taxiParty.members.count, id: \.self) { index in
                     PartyMemberInfo(id: taxiParty.members[index], diameter: profileSize)
                 }
-                ForEach(0..<taxiParty.maxPersonNumber - taxiParty.members.count, id: \.self) { _ in
+                ForEach(0..<remainSeat, id: \.self) { _ in
                     emptyProfile
                 }
             }
@@ -41,7 +44,7 @@ struct TaxiPartyInfoView: View {
             HStack {
                 Text("13:30")
                 Spacer()
-                Text("3/4")
+                Text("\(taxiParty.members.count)/\(taxiParty.maxPersonNumber)")
                 Image(systemName: "person.fill")
             }
             HStack {
