@@ -9,7 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ProfileImage: View {
-    let user: User
+    private let user: User
     private let diameter: CGFloat
 
     init(_ user: User, diameter: CGFloat) {
