@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct TaxiPartyInfoView: View {
     @Environment(\.dismiss) private var dismiss
     let taxiParty: TaxiParty
+    private let profileSize: CGFloat = 80
 
     var body: some View {
         VStack {
@@ -24,15 +25,11 @@ struct TaxiPartyInfoView: View {
             }
             Spacer()
             Group {
-                PartyMemberInfo(id: taxiParty.members[0], diameter: 80)
-                PartyMemberInfo(id: taxiParty.members[1], diameter: 80)
-                PartyMemberInfo(id: taxiParty.members[2], diameter: 80)
-                HStack {
-                    Circle()
-                        .stroke(style: StrokeStyle(lineWidth: 1, dash: [10]))
-                        .frame(width: 80, height: 80)
-                    Text("Username")
-                    Spacer()
+                ForEach(0..<taxiParty.members.count, id: \.self) { index in
+                    PartyMemberInfo(id: taxiParty.members[index], diameter: profileSize)
+                }
+                ForEach(0..<taxiParty.maxPersonNumber - taxiParty.members.count, id: \.self) { _ in
+                    emptyProfile
                 }
             }
             Divider()
@@ -56,6 +53,19 @@ struct TaxiPartyInfoView: View {
             RoundedButton("시작하기") {
                 // TODO: Add joinTaxiParty Action
             }
+        }
+    }
+}
+
+extension TaxiPartyInfoView {
+
+    var emptyProfile: some View {
+        HStack {
+            Circle()
+                .stroke(style: StrokeStyle(lineWidth: 1, dash: [10]))
+                .frame(width: 80, height: 80)
+            Text("Username")
+            Spacer()
         }
     }
 }
