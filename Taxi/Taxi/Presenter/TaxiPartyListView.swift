@@ -9,30 +9,24 @@ import SwiftUI
 struct TaxiPartyListView: View {
     var body: some View {
         VStack {
-            TaxiPartyHeadLine()
-            Spacer(minLength: 20)
-            HStack {
-                TaxiPartyFiltering()
-                Spacer()
-                MeetingDateChange()
-            }
-            Spacer(minLength: 0)
+            VStack {
+                TaxiPartyHeadLine()
+                HStack {
+                    TaxiPartyFiltering()
+                    Spacer()
+                    MeetingDateChange()
+                }.padding(.bottom, -7.8)
+            }.padding(.horizontal, 10)
             ZStack {
                 ScrollView {
                     CellViewList()
-                }
-                .frame(width: 400)
-                .background(Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
-                .overlay(
-                    Rectangle()
-                        .stroke(Color(red: 245 / 255, green: 245 / 255, blue: 245 / 255, opacity: 1.0), lineWidth: 1.5)
-                )
-                .ignoresSafeArea()
-                .refreshable {     // << injects environment value !!
-                    await fetchSomething()
-                }
-            }
-        }.padding(20)
+                } .padding(.horizontal, 45)
+                    .refreshable {     // << injects environment value !!
+                        await fetchSomething()
+                    }
+            }.border(Color.gray)
+                .background(Color(red: 1 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
+        }
     }
     func fetchSomething() async {
         // demo, assume we update something long here
@@ -44,10 +38,12 @@ struct TaxiPartyHeadLine: View {
     var body: some View {
         HStack {
             Text("택시팟")
+            // .font(.system(size: 26))
                 .font(.custom("Apple SD Gothic Neo", size: 26))
                 .fontWeight(.bold)
             Spacer()
             Button {
+                // todo: 채팅방 생성 View로 전환
                 print("+ tapped!")
             } label: {
                 Image(systemName: "plus")
@@ -55,7 +51,7 @@ struct TaxiPartyHeadLine: View {
                     .frame(width: 26, height: 26)
                     .foregroundColor(.black)
             }
-        }
+        }.padding(5)
     }
 }
 
@@ -64,6 +60,7 @@ struct TaxiPartyFiltering: View {
     @State var selectedIndex: Int = 0
     var body: some View {
         SegmentedPicker(
+            // todo : CellView 목적지 별로 필터링 가능하게 만들기
             titles,
             selectedIndex: Binding(
                 get: { selectedIndex },
@@ -94,6 +91,7 @@ struct TaxiPartyFiltering: View {
 struct MeetingDateChange: View {
     var body: some View {
         Button {
+            // todo: 달력 모달 띄우기
             print("날짜 선택 tapped!")
         } label: {
             Text("날짜 선택")

@@ -11,14 +11,14 @@ struct CellView: View {
            // Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0)
             VStack(alignment: .leading, spacing: 13) {
                 HStack {
-                    Spacer().frame(width: 6)
                     MeetingTimeCell()
-                    Spacer().frame(width: 130)
+                    Spacer()
                     CurrentUserCell()
                         .padding(EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 1))
                 }
                 DestinationCell()
             }
+            .padding()
             .frame(width: 339, height: 119)
             .background(RoundedRectangle(cornerRadius: 18.0).fill(Color(.white)))
             .overlay(
@@ -94,8 +94,7 @@ struct DestinationCell: View {
             HStack {
                 Spacer().frame(width: 10)
                 Image(systemName: "tram.fill")
-                    .resizable()
-                    .frame(width: 13, height: 17)
+                    .font(.system(size: 18))
                     .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
                 Text("포항역")
                     .fontWeight(.medium)
