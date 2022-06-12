@@ -11,19 +11,20 @@ struct TaxiPartyListView: View {
         VStack {
             VStack {
                 TaxiPartyHeadLine()
+                // .padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
                 HStack {
                     TaxiPartyFiltering()
-                    Spacer()
+                    Spacer() // .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     MeetingDateChange()
-                }.padding(.bottom, -7.8)
-            }.padding(.horizontal, 10)
+                }
+            }.padding(.vertical, -7.8)
+                .padding(.horizontal, 20)
             ZStack {
                 ScrollView {
                     CellViewList()
-                } .padding(.horizontal, 45)
-                    .refreshable {     // << injects environment value !!
-                        await fetchSomething()
-                    }
+                } .refreshable {     // << injects environment value !!
+                    await fetchSomething()
+                }
             }.border(Color.gray)
                 .background(Color(red: 1 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
         }
@@ -51,7 +52,7 @@ struct TaxiPartyHeadLine: View {
                     .frame(width: 26, height: 26)
                     .foregroundColor(.black)
             }
-        }.padding(5)
+        } // .padding(.horizontal, 20)
     }
 }
 
@@ -123,17 +124,17 @@ struct CellViewList: View {
     @Environment(\.refresh) private var refresh   // << refreshable injected !!
     @State private var isRefreshing = false
     var body: some View {
-        VStack {
-            if isRefreshing {
-                MyProgress()    // ProgressView() ?? - no, it's boring :)
-                    .transition(.scale)
-            }
-            ScrollView {
+        if isRefreshing {
+            MyProgress()    // ProgressView() ?? - no, it's boring :)
+                .transition(.scale)
+        }
+        ScrollView {
+            LazyVStack(pinnedViews: [.sectionHeaders]) {
                 ForEach(0..<30, id: \.self) { _ in
                     CellView()
-                        .padding(-4)
+                        .padding(4)
                 }
-            }
+            } .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
         }
         .animation(.default, value: isRefreshing)
         .background(GeometryReader { // detect Pull-to-refresh

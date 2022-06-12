@@ -8,28 +8,26 @@ import SwiftUI
 
 struct CellView: View {
     var body: some View {
-           // Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0)
-            VStack(alignment: .leading, spacing: 13) {
-                HStack {
-                    MeetingTimeCell()
-                    Spacer()
-                    CurrentUserCell()
-                        .padding(EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 1))
-                }
-                DestinationCell()
+        // Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0)
+        VStack(alignment: .leading, spacing: 13) {
+            HStack {
+                MeetingTimeCell()
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 130))
+                CurrentUserCell()
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 1))
             }
-            .padding()
-            .frame(width: 339, height: 119)
-            .background(RoundedRectangle(cornerRadius: 18.0).fill(Color(.white)))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.gray, lineWidth: 1.5)
-                    .opacity(0.17)
-                    .shadow(color: .gray, radius: 1, x: 0, y: 0)
-            )
-            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+            DestinationCell()
+        }
+        .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+        .background(RoundedRectangle(cornerRadius: 18.0).fill(Color(.white)))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.gray, lineWidth: 1.5)
+                .opacity(0.17)
+                .shadow(color: .gray, radius: 1, x: 0, y: 0)
+        )
     }
-} // 전체적인 font를 "Apple SF 산돌고딕 Neo"로 교체 예정
+}
 
 struct MeetingTimeCell: View {
     var body: some View {
@@ -70,7 +68,7 @@ struct DestinationCell: View {
             HStack {
                 Image("taxiOff")
                     .resizable()
-                    .frame(width: 17, height: 15)
+                    .frame(width: 17, height: 16)
                     .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
                 Text("포스텍")
                     .fontWeight(.medium)
@@ -81,20 +79,18 @@ struct DestinationCell: View {
                     .font(.custom("Apple SD Gothic Neo", size: 14))
                     .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
                     .padding(EdgeInsets(top: 1, leading: -5, bottom: 2, trailing: 1))
-            }.frame(minWidth: 90, minHeight: 20, maxHeight: 28, alignment: .center) // ex) 낙원교차로 등의 긴 문장이 와도 frame이 늘어남
+            } .padding(5)
                 .background(RoundedRectangle(cornerRadius: 8.0).fill(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 0.2)))
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 1), lineWidth: 1.5)
                 )
-            Image("forward") // 나중에 이미지 update
-                .resizable()
-                .frame(width: 10, height: 15)
-                .padding(.horizontal, 7)
+            Image(systemName: "chevron.forward")
+                .font(.system(size: 20))
+                .foregroundColor(Color(red: 160 / 255, green: 160 / 255, blue: 160 / 255, opacity: 1.0))
             HStack {
-                Spacer().frame(width: 10)
                 Image(systemName: "tram.fill")
-                    .font(.system(size: 18))
+                    .font(.system(size: 16))
                     .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
                 Text("포항역")
                     .fontWeight(.medium)
@@ -105,8 +101,7 @@ struct DestinationCell: View {
                     .font(.custom("Apple SD Gothic Neo", size: 14))
                     .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
                     .padding(EdgeInsets(top: 1, leading: -5, bottom: 2, trailing: 1))
-                Spacer().frame(width: 3)
-            }.frame(minWidth: 40, minHeight: 20, maxHeight: 28, alignment: .center)
+            }.padding(5)
                 .background(RoundedRectangle(cornerRadius: 8.0).fill(Color(red: 24 / 255, green: 143 / 255, blue: 194 / 255, opacity: 0.2)))
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
