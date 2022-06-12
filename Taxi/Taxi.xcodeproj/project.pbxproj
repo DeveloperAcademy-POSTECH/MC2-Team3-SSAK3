@@ -54,10 +54,11 @@
 		50459E35285490CC00287371 /* TaxiPartyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459E34285490CC00287371 /* TaxiPartyInfoView.swift */; };
 		50595595285037AE001DA44C /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50595594285037AE001DA44C /* MyPageView.swift */; };
 		505955972850BF46001DA44C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505955962850BF46001DA44C /* ProfileView.swift */; };
+		50DA19632856065200DEC46E /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DA19622856065200DEC46E /* ProfileImage.swift */; };
+		50F3D18B28537B110004B5CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */; };
 		A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D578972852F2000059FE49 /* TextStyleExtension.swift */; };
 		E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F328503A53005A68F3 /* SignUpView.swift */; };
 		E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F528503D19005A68F3 /* ViewExtension.swift */; };
-		50F3D18B28537B110004B5CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		50459E34285490CC00287371 /* TaxiPartyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyInfoView.swift; sourceTree = "<group>"; };
 		50595594285037AE001DA44C /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		505955962850BF46001DA44C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		50DA19622856065200DEC46E /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		A8D578972852F2000059FE49 /* TextStyleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleExtension.swift; sourceTree = "<group>"; };
 		E622D8F328503A53005A68F3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		E622D8F528503D19005A68F3 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				00A5705B285182E1008B220E /* RoundedButton.swift */,
+				50DA19622856065200DEC46E /* ProfileImage.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				50459E2F28542E4E00287371 /* PhotoPicker.swift in Sources */,
 				002F89EB284CA10800D7E51B /* UserFirebaseDataSource.swift in Sources */,
 				00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */,
+				50DA19632856065200DEC46E /* ProfileImage.swift in Sources */,
 				505955972850BF46001DA44C /* ProfileView.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
 				00A570642851E993008B220E /* ImageName.swift in Sources */,
