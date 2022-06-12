@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TaxiPartyInfoView: View {
+    let taxiParty: TaxiParty
 
     var body: some View {
         VStack {
@@ -71,9 +72,20 @@ struct TaxiPartyInfoView: View {
     }
 }
 
+
+
 struct TaxiPartyInfoView_Previews: PreviewProvider {
 
     static var previews: some View {
-        TaxiPartyInfoView()
+        TaxiPartyInfoView(taxiParty: TaxiParty(
+            id: "0",
+            departureCode: 0,
+            destinationCode: 1,
+            meetingDate: 20220617,
+            meetingTime: 1330,
+            maxPersonNumber: 4,
+            members: ["id1", "id2", "id3"],
+            isClosed: false
+        ))
     }
 }
