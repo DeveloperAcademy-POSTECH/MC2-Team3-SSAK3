@@ -28,6 +28,7 @@ struct CalendarView: View {
             }
             datePicker
         }
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: - view property
@@ -71,14 +72,14 @@ struct CalendarView: View {
     var datePicker: some View {
         let column = Array(repeating: GridItem(.flexible()), count: 7)
 
-        return LazyVGrid(columns: column, spacing: 15) {
+        return LazyVGrid(columns: column, spacing: 10) {
             ForEach(getExactDates()) {data in
                 dayCell(data)
                     .background(
-                        Capsule()
+                        Circle()
                             .fill(.yellow)
                             .opacity(data.date.isSameDay(selectedDate) ? 1 : 0)
-                            .padding(.horizontal, 3)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     )
                     .onTapGesture {
                         selectedDate = data.date
@@ -105,8 +106,8 @@ struct CalendarView: View {
         let calendar = Calendar.current
         let current = changeCurrentMonth()
         let components = calendar.dateComponents([.year, .month], from: current)
-
         let firstDayIndexOfWeek = calendar.component(.weekday, from: calendar.date(from: components) ?? Date())
+        let currentMonthDays = current.monthlyDayCount()
 
         var thisMonthDates = current.getMonthDates().map { date in
             DayContainer(day: date.day, date: date, monthType: checkMonthType(date))
@@ -115,8 +116,19 @@ struct CalendarView: View {
         for _ in 0..<firstDayIndexOfWeek - 1 {
             thisMonthDates.insert(DayContainer(day: 0, date: Date(), monthType: .unparticipable), at: 0)
         }
+        oneWeekAppend(firstDayIndexOfWeek, currentMonthDays, &thisMonthDates)
 
         return thisMonthDates
+    }
+
+    // 다섯줄의 달력을 여섯줄로 만들기 위해 임의의 데이터를 넣어주는 작업
+    private func oneWeekAppend(_ firstDayOfWeek: Int, _ monthlyDayCount: Int, _ monthDates: inout [DayContainer]) {
+        let lastDayIndex = firstDayOfWeek - 1 + monthlyDayCount
+        if lastDayIndex < 36 {
+            for _ in 0..<(36 - lastDayIndex) {
+                monthDates.insert(DayContainer(day: 0, date: Date(), monthType: .unparticipable), at: monthDates.endIndex)
+            }
+        }
     }
 
     // 해당 날짜가 오늘의 날짜와 한달 차이나는지 monthType 결정
@@ -130,7 +142,7 @@ struct CalendarView: View {
 
     // MARK: - view maker
     private func dayCell(_ value: DayContainer) -> some View {
-        VStack {
+        ZStack {
             if value.day != 0 {
                 if let taxiParty = taxiParties.first(where: {party in
                     return value.date.isSameDay(party.meetingDate.intToDate())
@@ -142,7 +154,8 @@ struct CalendarView: View {
                     Circle()
                         .fill(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, taxiParty.meetingDate.intToDate(), color: .green))
                         .opacity(value.date.isOutOfMonth() ? 0 : 1)
-                        .frame(width: 8, height: 8)
+                        .frame(width: 5, height: 5)
+                        .padding(.top, 30)
                 } else {
                     Text("\(value.day)")
                         .frame(maxWidth: .infinity)
@@ -150,8 +163,7 @@ struct CalendarView: View {
                 }
             }
         }
-        .padding(.top, 5)
-        .frame(height: 50, alignment: .top)
+        .frame(height: 50)
     }
 }
 

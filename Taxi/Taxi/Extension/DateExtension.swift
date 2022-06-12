@@ -50,6 +50,12 @@ extension Date {
         return Int(formattedStr) ?? -1
     }
 
+    func monthlyDayCount() -> Int {
+        let calendar = Calendar.current
+        let range = calendar.range(of: .day, in: .month, for: self)
+        return range?.count ?? 30
+    }
+
     func getMonthDates() -> [Date] {
         let calendar = Calendar.current
         guard let startDate = calendar.date(
@@ -79,8 +85,9 @@ extension Date {
 
     func isOutOfMonth() -> Bool {
         let calendar = Calendar.current
-        let diff = calendar.dateComponents([.day], from: Date(), to: self).day ?? -1
-        let monthlyDayCount = calendar.range(of: .day, in: .month, for: Date())?.count ?? 30
+        let today = Date()
+        let diff = calendar.dateComponents([.day], from: today, to: self).day ?? -1
+        let monthlyDayCount = calendar.range(of: .day, in: .month, for: today)?.count ?? 30
         return (diff >= monthlyDayCount || diff < 0 ) ? true : false
     }
 }
