@@ -12,8 +12,9 @@ struct CalendarView: View {
     @State private var selectedDate = Date()
     @State private var currentMonth = 0
     private let today = Date()
-    private let taxiParties: [TaxiParty] = TaxiPartyMockData().mockData
+    private let taxiParties: [TaxiParty] = TaxiPartyMockData.mockData
     private let action: () -> Void
+    let days = ["일", "월", "화", "수", "목", "금", "토"]
 
     init(action: @escaping () -> Void) {
         self.action = action
@@ -21,58 +22,51 @@ struct CalendarView: View {
 
     var body: some View {
         VStack {
-            header
+            VStack(spacing: 20) {
+                navigation
+                dayOfWeek
+            }
             datePicker
         }
-        .frame(width: UIScreen.main.bounds.width * 0.85, height: UIScreen.main.bounds.height * 0.4, alignment: .top)
     }
 
     // MARK: - view property
 
-    var header: some View {
-        var navigation: some View {
-            HStack {
-                Text("\(currentDate.formattedString)")
-                Spacer()
-                Button {
-                    withAnimation {
-                        currentMonth -= 1
-                    }
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .tint(.black)
+    var navigation: some View {
+        HStack {
+            Text("\(currentDate.formattedString)")
+            Spacer()
+            Button {
+                withAnimation {
+                    currentMonth -= 1
                 }
-                Button {
-                    withAnimation {
-                        currentMonth += 1
-                    }
-                } label: {
-                    Image(systemName: "chevron.right")
-                        .tint(.black)
-                }
+            } label: {
+                Image(systemName: "chevron.left")
+                    .tint(.black)
             }
-            .padding(.bottom, 20)
-            .padding(.horizontal, 10)
-            .onChange(of: currentMonth) {_ in
-                currentDate = changeCurrentMonth()
+            Button {
+                withAnimation {
+                    currentMonth += 1
+                }
+            } label: {
+                Image(systemName: "chevron.right")
+                    .tint(.black)
             }
         }
+        .padding(.horizontal, 10)
+        .onChange(of: currentMonth) {_ in
+            currentDate = changeCurrentMonth()
+        }
+    }
 
-        var dayOfWeek: some View {
-            let days = ["일", "월", "화", "수", "목", "금", "토"]
-            return HStack {
-                ForEach(days, id: \.self) {day in
-                    Text(day)
-                        .frame(maxWidth: .infinity)
-                }
+    var dayOfWeek: some View {
+        return HStack {
+            ForEach(days, id: \.self) {day in
+                Text(day)
+                    .frame(maxWidth: .infinity)
             }
         }
-
-        return VStack {
-                navigation
-                dayOfWeek
-            }
-        }
+    }
 
     var datePicker: some View {
         let column = Array(repeating: GridItem(.flexible()), count: 7)
@@ -88,12 +82,10 @@ struct CalendarView: View {
                     )
                     .onTapGesture {
                         selectedDate = data.date
-                        guard let taxiParty = taxiParties.first(where: {party in
+                        guard taxiParties.first(where: {party in
                             data.date.isSameDay(party.meetingDate.intToDate())
-                        }) else {
+                        }) == nil else { return }
                             action()
-                            return
-                        }
                     }
                     .disabled(data.monthType == .unparticipable)
             }
@@ -132,7 +124,7 @@ struct CalendarView: View {
         return date.isOutOfMonth() ? .unparticipable : .participable
     }
 
-    private func dayNumColor(_ comparing: Date, _ compared: Date, _ dotColor: Color) -> Color {
+    private func dayNumColor(_ comparing: Date, _ compared: Date, color dotColor: Color) -> Color {
         return comparing.isSameDay(compared) ? .white : dotColor
     }
 
@@ -146,15 +138,15 @@ struct CalendarView: View {
                 ) {
                     Text("\(value.day)")
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, taxiParty.meetingDate.intToDate(), .black))
+                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, taxiParty.meetingDate.intToDate(), color: .black))
                     Circle()
-                        .fill(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, taxiParty.meetingDate.intToDate(), .green))
+                        .fill(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, taxiParty.meetingDate.intToDate(), color: .green))
                         .opacity(value.date.isOutOfMonth() ? 0 : 1)
                         .frame(width: 8, height: 8)
                 } else {
                     Text("\(value.day)")
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(value.date, selectedDate, .black))
+                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(value.date, selectedDate, color: .black))
                 }
             }
         }
