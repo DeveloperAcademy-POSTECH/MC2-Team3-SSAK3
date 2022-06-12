@@ -9,43 +9,54 @@ import SwiftUI
 
 struct TaxiPartyInfoView: View {
     let taxiParty: TaxiParty
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack {
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                }
+                Spacer()
+            }
             Spacer()
-            HStack {
-                Image("ProfileDummy")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .frame(width: 80, height: 80)
-                Text("Avo")
-                Spacer()
-            }
-            HStack {
-                Image("ProfileDummy")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .frame(width: 80, height: 80)
-                Text("Avo")
-                Spacer()
-            }
-            HStack {
-                Image("ProfileDummy")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .frame(width: 80, height: 80)
-                Text("Avo")
-                Spacer()
-            }
-            HStack {
-                Circle()
-                    .stroke(style: StrokeStyle(lineWidth: 1, dash: [10]))
-                    .frame(width: 80, height: 80)
-                Text("Username")
-                Spacer()
+            Group {
+                HStack {
+                    Image("ProfileDummy")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                        .frame(width: 80, height: 80)
+                    Text("Avo")
+                    Spacer()
+                }
+                HStack {
+                    Image("ProfileDummy")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                        .frame(width: 80, height: 80)
+                    Text("Avo")
+                    Spacer()
+                }
+                HStack {
+                    Image("ProfileDummy")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                        .frame(width: 80, height: 80)
+                    Text("Avo")
+                    Spacer()
+                }
+                HStack {
+                    Circle()
+                        .stroke(style: StrokeStyle(lineWidth: 1, dash: [10]))
+                        .frame(width: 80, height: 80)
+                    Text("Username")
+                    Spacer()
+                }
             }
             Divider()
             HStack {
@@ -71,8 +82,6 @@ struct TaxiPartyInfoView: View {
         }
     }
 }
-
-
 
 struct TaxiPartyInfoView_Previews: PreviewProvider {
 
