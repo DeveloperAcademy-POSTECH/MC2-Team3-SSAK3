@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MyPartyView: View {
     @State var isSwiped: Bool = false // Swipe to Delete가 활성화 되어있는지 확인
+    @State var showAlert: Bool = false
+    @State var selectedParty: TaxiParty!
     // Dummy Data
     @State var mypartys: [TaxiParty] = [
         TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220610, meetingTime: 1315, maxPersonNumber: 4, members: ["1", "2", "3", "4"], isClosed: true),
@@ -52,7 +54,8 @@ struct MyPartyView: View {
                                 .buttonStyle(CellButtonStyle())
                                 .disabled(isSwiped)
                                 .swipeDelete(isSwiped: $isSwiped, action: {
-                                    print("나가기")
+                                    self.showAlert = true
+                                    self.selectedParty = party
                                 })
                                 .cornerRadius(16)
                                 .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 0)
@@ -63,9 +66,22 @@ struct MyPartyView: View {
                     }
                 }
             }
+            .background(Color.lightGray) // TODO: 색상 변경
             .highPriorityGesture(isSwiped ? cancelSelectDrag : nil)
             .simultaneousGesture(isSwiped ? cancelSelectTap : nil)
-            .background(Color.lightGray) // TODO: 색상 변경
+            .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
+                Button("나가기", role: .destructive) {
+                    delete(object: selectedParty)
+                }
+                Button("취소", role: .cancel) {}
+            } message: {
+                Text("지금 나가면 채팅 데이터는 사라져요")
+            }
+        }
+    }
+    private func delete(object: TaxiParty) {
+        if let index = mypartys.firstIndex(of: object) {
+            mypartys.remove(at: index)
         }
     }
 }
@@ -148,9 +164,7 @@ struct SwipeDelete: ViewModifier {
         }
         .onChange(of: isSwiped) { _ in
             if isSwiped == false {
-                withAnimation(.easeOut) {
-                    swipeState = SwipeActionState.inactive
-                }
+                swipeState = SwipeActionState.inactive
             }
         }
     }
