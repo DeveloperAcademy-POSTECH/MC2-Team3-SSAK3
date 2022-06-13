@@ -38,15 +38,17 @@ struct CalendarView: View {
     var navigation: some View {
         HStack {
             Text("\(currentDate.formattedString)")
+                .calendarTitle()
             Spacer()
-            HStack(spacing: 50) {
+            HStack(spacing: 40) {
                 Button {
                     withAnimation {
                         currentMonth -= 1
                     }
                 } label: {
                     Image(systemName: "chevron.left")
-                        .tint(currentMonth < 1 ? .gray : .black)
+                        .calendarArrow()
+                        .tint(currentMonth < 1 ? .customGray : .charcoal)
                 }
                 .disabled(currentMonth < 1)
                 Button {
@@ -55,10 +57,12 @@ struct CalendarView: View {
                     }
                 } label: {
                     Image(systemName: "chevron.right")
-                        .tint(currentMonth > 0 ? .gray : .black)
+                        .calendarArrow()
+                        .tint(currentMonth > 0 ? .customGray : .charcoal)
                 }
                 .disabled(currentMonth > 0)
             }
+            .padding(.horizontal, 8)
         }
         .padding(.horizontal, 10)
         .onChange(of: currentMonth) {_ in
@@ -70,6 +74,7 @@ struct CalendarView: View {
         HStack {
             ForEach(days, id: \.self) {day in
                 Text(day)
+                    .calendarDay()
                     .frame(maxWidth: .infinity)
             }
         }
@@ -84,11 +89,13 @@ struct CalendarView: View {
                     .background(
                         ZStack {
                             Capsule()
-                                .fill(data.date.isSameDay(selectedDate) ? .yellow : .clear)
+                                .fill(data.date.isSameDay(selectedDate) ? Color.selectYellow : .clear)
+                                .aspectRatio(2/3, contentMode: .fit)
                             Capsule()
-                                .strokeBorder(data.date.isSameDay(selectedDate) ? .green : todayCapsuleBorder(data.date, borderColor: .gray))
+                                .strokeBorder(data.date.isSameDay(selectedDate) ? Color.customYellow : todayCapsuleBorder(data.date, borderColor: Color.darkGray))
+                                .aspectRatio(2/3, contentMode: .fit)
                         }
-                            .padding(.horizontal, 6)
+                            .padding(.horizontal, 5)
                     )
                     .onTapGesture {
                         selectedDate = data.date
@@ -163,17 +170,19 @@ struct CalendarView: View {
                     value.date.isSameDay(intDateConverter.makeDateType(from: party.meetingDate))
                 }) != nil {
                     Text("\(value.day)")
+                        .calendarDate()
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(value.date.isOutOfMonth() ? .gray : .black)
+                        .foregroundColor(value.date.isOutOfMonth() ? .customGray : .charcoal)
                     Circle()
-                        .fill(value.date.isOutOfMonth() ? .gray : .black)
+                        .fill(Color.charcoal)
                         .opacity(value.date.isOutOfMonth() ? 0 : 1)
                         .frame(width: 5, height: 5)
                         .padding(.top, 5)
                 } else {
                     Text("\(value.day)")
+                        .calendarDate()
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(value.date.isOutOfMonth() ? .gray : .black)
+                        .foregroundColor(value.date.isOutOfMonth() ? .customGray : .charcoal)
                 }
             }
         }
