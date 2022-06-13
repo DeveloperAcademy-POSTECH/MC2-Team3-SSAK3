@@ -17,11 +17,11 @@ struct TaxiPartyListView: View {
                     MeetingDateChange()
                 }
             } .padding(.horizontal, 20)
-                ScrollView {
-                    CellViewList()
-                } .refreshable {     // << injects environment value !!
-                    await fetchSomething()
-                }.background(Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
+            ScrollView {
+                CellViewList()
+            } .refreshable {     // << injects environment value !!
+                await fetchSomething()
+            }.background(Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
         }
     }
     func fetchSomething() async {

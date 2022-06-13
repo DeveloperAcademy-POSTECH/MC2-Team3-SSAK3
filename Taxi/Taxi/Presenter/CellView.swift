@@ -18,13 +18,13 @@ struct CellView: View {
         }
         .padding(18)
         .background {
-        ZStack { // Struct로 만들어서 표현하자
-            RoundedRectangle(cornerRadius: 18.0)
-                .fill(Color(.white))
-                .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255, opacity: 1.0), lineWidth: 1.5)
-        }
+            ZStack { // Struct로 만들어서 표현하자
+                RoundedRectangle(cornerRadius: 18.0)
+                    .fill(Color(.white))
+                    .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255, opacity: 1.0), lineWidth: 1.5)
+            }
         }
         .padding(.horizontal)
     }
@@ -79,13 +79,13 @@ struct DestinationCell: View {
                     .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
             } .padding(paddingSize)
                 .background {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 0.2))
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 1), lineWidth: 1.5)
-                        .opacity(1)
-                }
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 0.2))
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 1), lineWidth: 1.5)
+                            .opacity(1)
+                    }
                 }
             Image(systemName: "chevron.forward")
                 .font(.system(size: 20))
@@ -106,13 +106,13 @@ struct DestinationCell: View {
                     .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
             }.padding(paddingSize)
                 .background {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color(red: 24 / 255, green: 143 / 255, blue: 194 / 255, opacity: 0.2))
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color(red: 24 / 255, green: 143 / 255, blue: 194 / 255, opacity: 1), lineWidth: 1.5)
-                        .opacity(1)
-                }
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(red: 24 / 255, green: 143 / 255, blue: 194 / 255, opacity: 0.2))
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(red: 24 / 255, green: 143 / 255, blue: 194 / 255, opacity: 1), lineWidth: 1.5)
+                            .opacity(1)
+                    }
                 }
         }
     }
