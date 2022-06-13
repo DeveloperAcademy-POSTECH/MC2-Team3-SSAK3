@@ -30,7 +30,7 @@ struct MyPartyView: View {
                 LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [.sectionHeaders]) {
                     ForEach(meetingDates, id: \.self) { date in
                         Section(header: SectionHeaderView(date: date)) {
-                            ForEach(partys[date]!) { party in
+                            ForEach(partys[date]!, id: \.id) { party in
                                 NavigationLink {
                                     ChatRoomView(party: party)
                                 } label: {
@@ -78,7 +78,7 @@ struct SectionHeaderView: View {
 // 임시 셀뷰
 // TODO: 구현될 셀뷰와 연결
 struct CellView: View {
-    @State var party: TaxiParty
+    let party: TaxiParty
     var body: some View {
         VStack {
             HStack {
