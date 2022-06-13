@@ -24,6 +24,7 @@
 		002F89EB284CA10800D7E51B /* UserFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F89EA284CA10800D7E51B /* UserFirebaseDataSource.swift */; };
 		002F89EF284CA5FF00D7E51B /* UserRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */; };
 		003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 003ABC0B284749F7000FA7A2 /* .swiftlint.yml */; };
+		003C339928574BBF002B22F4 /* AddTaxiPartyUsecaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C339828574BBF002B22F4 /* AddTaxiPartyUsecaseTest.swift */; };
 		00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */; };
 		00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */; };
 		00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */; };
@@ -100,6 +101,7 @@
 		002F89EA284CA10800D7E51B /* UserFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirebaseDataSource.swift; sourceTree = "<group>"; };
 		002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryTest.swift; sourceTree = "<group>"; };
 		003ABC0B284749F7000FA7A2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		003C339828574BBF002B22F4 /* AddTaxiPartyUsecaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiPartyUsecaseTest.swift; sourceTree = "<group>"; };
 		00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyRepository.swift; sourceTree = "<group>"; };
 		00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
 		00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */,
 				00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */,
 				00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */,
+				003C339828574BBF002B22F4 /* AddTaxiPartyUsecaseTest.swift */,
 			);
 			path = TaxiTests;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				002F89EF284CA5FF00D7E51B /* UserRepositoryTest.swift in Sources */,
 				00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */,
 				000D83372840E23A00BA3DFA /* TaxiTests.swift in Sources */,
+				003C339928574BBF002B22F4 /* AddTaxiPartyUsecaseTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
