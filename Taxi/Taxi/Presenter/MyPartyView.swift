@@ -97,18 +97,6 @@ struct CellView: View {
     }
 }
 
-// 임시 채팅뷰
-// TODO: 구현될 채팅뷰와 연결
-struct ChatRoomView: View {
-    @State var party: TaxiParty
-    var body: some View {
-        VStack {
-            Text("\(party.description)")
-            Text("채팅방")
-        }
-    }
-}
-
 struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
