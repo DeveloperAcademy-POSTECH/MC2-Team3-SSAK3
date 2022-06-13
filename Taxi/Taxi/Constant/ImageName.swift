@@ -14,4 +14,6 @@ enum ImageName {
     static let tabTaxiPartyOn: String = "TaxiPartyOn"
     static let tabMyPartyOn: String = "MyPartyOn"
     static let tabMyPageOn: String = "MyPageOn"
+    static let taxi: String = "Taxi"
+    static let train: String = "Train"
 }
