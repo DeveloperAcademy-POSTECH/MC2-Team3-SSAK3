@@ -37,7 +37,7 @@ struct MyPartyView: View {
                                     CellView(party: party)
                                 }
                                 .cornerRadius(16)
-                                .shadow(color: Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.1), radius: 4, x: 0, y: 0)
+                                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 0)
                                 .buttonStyle(.plain)
                                 .padding(.horizontal)
                             }
