@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TaxiParty: Codable{
+struct TaxiParty: Codable {
     let id: String
     let departureCode: Int
     let destinationCode: Int
