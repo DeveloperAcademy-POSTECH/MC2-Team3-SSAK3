@@ -8,26 +8,20 @@ import SwiftUI
 
 struct TaxiPartyListView: View {
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             VStack {
                 TaxiPartyHeadLine()
-                // .padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
                 HStack {
                     TaxiPartyFiltering()
-                    Spacer() // .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    Spacer()
                     MeetingDateChange()
                 }
-            }.padding(.vertical, -7.8)
-                .padding(.horizontal, 20)
-            ZStack {
+            } .padding(.horizontal, 20)
                 ScrollView {
                     CellViewList()
                 } .refreshable {     // << injects environment value !!
                     await fetchSomething()
-                }
-            }.border(Color.gray)
-                .background(Color(red: 1 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
-                .ignoresSafeArea()
+                }.background(Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
         }
     }
     func fetchSomething() async {
@@ -53,7 +47,7 @@ struct TaxiPartyHeadLine: View {
                     .frame(width: 26, height: 26)
                     .foregroundColor(.black)
             }
-        } // .padding(.horizontal, 20)
+        }
     }
 }
 
@@ -61,8 +55,7 @@ struct TaxiPartyFiltering: View {
     let titles: [String] = ["전체", "포항역", "포스텍"]
     @State var selectedIndex: Int = 0
     var body: some View {
-        SegmentedPicker(
-            // todo : CellView 목적지 별로 필터링 가능하게 만들기
+        SegmentedPicker( // TODO : CellView 목적지 별로 필터링 가능하게 만들기
             titles,
             selectedIndex: Binding(
                 get: { selectedIndex },
@@ -92,8 +85,7 @@ struct TaxiPartyFiltering: View {
 
 struct MeetingDateChange: View {
     var body: some View {
-        Button {
-            // todo: 달력 모달 띄우기
+        Button { // TODO: 달력 모달 띄우기
             print("날짜 선택 tapped!")
         } label: {
             Text("날짜 선택")
@@ -130,13 +122,13 @@ struct CellViewList: View {
                 .transition(.scale)
         }
         ScrollView {
-            LazyVStack(pinnedViews: [.sectionHeaders]) {
+            LazyVStack(spacing: 16, pinnedViews: [.sectionHeaders]) {
                 ForEach(0..<30, id: \.self) { _ in
                     CellView()
-                        .padding(4)
                 }
-            } .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+            }
         }
+        .padding(.top)
         .animation(.default, value: isRefreshing)
         .background(GeometryReader { // detect Pull-to-refresh
             Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
