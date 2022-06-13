@@ -10,7 +10,7 @@ import SwiftUI
 struct MyPartyView: View {
     @State private var isSwiped: Bool = false // Swipe to Delete가 활성화 되어있는지 확인
     @State private var showAlert: Bool = false
-    @State private var selectedParty: TaxiParty!
+    @State private var selectedParty: TaxiParty?
     // Dummy Data
     @State private var myparties: [TaxiParty] = [
         TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220610, meetingTime: 1315, maxPersonNumber: 4, members: ["1", "2", "3", "4"], isClosed: true),
@@ -75,7 +75,7 @@ struct MyPartyView: View {
             .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
                 Button("나가기", role: .destructive) {
                     withAnimation {
-                        delete(object: selectedParty)
+                        delete(object: selectedParty!)
                     }
                 }
                 Button("취소", role: .cancel) {}
