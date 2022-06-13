@@ -116,6 +116,20 @@ struct MyProgress: View {
 struct CellViewList: View {
     @Environment(\.refresh) private var refresh   // << refreshable injected !!
     @State private var isRefreshing = false
+    @State var mypartys: [TaxiParty] = [
+        TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220610, meetingTime: 1315, maxPersonNumber: 4, members: ["요셉", "아보", "조이", "제리"], isClosed: true),
+        TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1330, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
+        TaxiParty(id: "3", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1440, maxPersonNumber: 2, members: ["제리", "조이"], isClosed: false),
+        TaxiParty(id: "4", departureCode: 0, destinationCode: 1, meetingDate: 20220612, meetingTime: 1734, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
+        TaxiParty(id: "5", departureCode: 0, destinationCode: 1, meetingDate: 20220612, meetingTime: 2005, maxPersonNumber: 2, members: ["요셉"], isClosed: false),
+        TaxiParty(id: "6", departureCode: 0, destinationCode: 1, meetingDate: 20220617, meetingTime: 1340, maxPersonNumber: 4, members: ["요셉", "조이"], isClosed: false)
+    ]
+    private var partys: [Int: [TaxiParty]] {
+        Dictionary.init(grouping: mypartys, by: {$0.meetingDate})
+    }
+    private var meetingDates: [Int] {
+        partys.map({$0.key}).sorted()
+    }
     var body: some View {
         if isRefreshing {
             MyProgress()    // ProgressView() ?? - no, it's boring :)
@@ -123,8 +137,12 @@ struct CellViewList: View {
         }
         ScrollView {
             LazyVStack(spacing: 16, pinnedViews: [.sectionHeaders]) {
-                ForEach(0..<30, id: \.self) { _ in
-                    CellView()
+                ForEach(meetingDates, id: \.self) { date in
+                    Section(header: SectionHeaderView(date: date)) {
+                        ForEach(partys[date]!, id: \.id) { party in
+                            CellView(party: party)
+                        }
+                    }
                 }
             }
         }
@@ -152,6 +170,19 @@ struct ViewOffsetKey: PreferenceKey {
     static var defaultValue = CGFloat.zero
     static func reduce(value: inout Value, nextValue: () -> Value) {
         value += nextValue()
+    }
+}
+
+struct SectionHeaderView: View {
+    let date: Int
+    var body: some View {
+        Text("\(date / 100 % 100)월 \(date % 100)일")
+            .foregroundColor(.black)
+            .font(Font.custom("AppleSDGothicNeo-Bold", size: 18))
+            .fontWeight(.medium)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding([.leading, .top])
+            .background(Color.red)
     }
 }
 
