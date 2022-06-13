@@ -49,6 +49,7 @@ struct MyPartyView: View {
                                 } label: {
                                     CellView(party: party)
                                 }
+                                .buttonStyle(CellButtonStyle())
                                 .disabled(isSwiped)
                                 .swipeDelete(isSwiped: $isSwiped, action: {
                                     print("나가기")
@@ -66,6 +67,13 @@ struct MyPartyView: View {
             .simultaneousGesture(isSwiped ? cancelSelectTap : nil)
             .background(Color.lightGray) // TODO: 색상 변경
         }
+    }
+}
+
+struct CellButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(configuration.isPressed ? 0.5 : 1)
     }
 }
 
