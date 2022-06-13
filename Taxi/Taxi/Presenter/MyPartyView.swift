@@ -50,6 +50,30 @@ struct MyPartyView: View {
     }
 }
 
+enum SwipeActionState {
+    case inactive
+    case active
+    case swiping(width: CGFloat)
+    var width: CGFloat {
+        switch self {
+        case .inactive:
+            return .zero
+        case .active:
+            return -75
+        case .swiping(let width):
+            return width
+        }
+    }
+    var isSwiping: Bool {
+        switch self {
+        case .swiping:
+            return true
+        case .inactive, .active:
+            return false
+        }
+    }
+}
+
 struct TitleView: View {
     var body: some View {
         Text("마이팟")
@@ -57,7 +81,7 @@ struct TitleView: View {
             .font(Font.custom("AppleSDGothicNeo-Bold", size: 20))
             .fontWeight(.bold) // TODO: 텍스트 스타일로 변경
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.leading])
+            .padding(.leading)
             .background(Color.white)
     }
 }
