@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MyPartyView: View {
+    @State var isSwiped: Bool = false // Swipe to Delete가 활성화 되어있는지 확인
     // Dummy Data
     @State var mypartys: [TaxiParty] = [
         TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220610, meetingTime: 1315, maxPersonNumber: 4, members: ["1", "2", "3", "4"], isClosed: true),
@@ -23,6 +24,18 @@ struct MyPartyView: View {
     private var meetingDates: [Int] {
         partys.map({$0.key}).sorted()
     }
+    private var cancelSelectDrag : some Gesture {
+        DragGesture()
+            .onChanged { _ in
+                isSwiped = false
+            }
+    }
+    private var cancelSelectTap : some Gesture {
+        TapGesture()
+            .onEnded {
+                isSwiped = false
+            }
+    }
     var body: some View {
         VStack {
             TitleView()
@@ -36,7 +49,8 @@ struct MyPartyView: View {
                                 } label: {
                                     CellView(party: party)
                                 }
-                                .swipeDelete(action: {
+                                .disabled(isSwiped)
+                                .swipeDelete(isSwiped: $isSwiped, action: {
                                     print("나가기")
                                 })
                                 .cornerRadius(16)
@@ -48,6 +62,8 @@ struct MyPartyView: View {
                     }
                 }
             }
+            .highPriorityGesture(isSwiped ? cancelSelectDrag : nil)
+            .simultaneousGesture(isSwiped ? cancelSelectTap : nil)
             .background(Color.lightGray) // TODO: 색상 변경
         }
     }
@@ -78,6 +94,7 @@ enum SwipeActionState {
 }
 
 struct SwipeDelete: ViewModifier {
+    @Binding var isSwiped: Bool
     let action : () -> Void
     @State var swipeState = SwipeActionState.inactive
     @GestureState var isDragging = false
@@ -93,9 +110,8 @@ struct SwipeDelete: ViewModifier {
             }
             .onEnded { value in
                 if value.translation.width < 0 {
-                    withAnimation(.easeOut) {
                         swipeState = SwipeActionState.active
-                    }
+                        isSwiped = true
                 }
             }
     }
@@ -122,14 +138,22 @@ struct SwipeDelete: ViewModifier {
                 swipeState = SwipeActionState.inactive
             }
         }
+        .onChange(of: isSwiped) { _ in
+            if isSwiped == false {
+                withAnimation(.easeOut) {
+                    swipeState = SwipeActionState.inactive
+                }
+            }
+        }
     }
 }
 
 extension View {
     func swipeDelete(
+        isSwiped: Binding<Bool>,
         action: @escaping () -> Void
     ) -> some View {
-        modifier(SwipeDelete(action: action))
+        modifier(SwipeDelete(isSwiped: isSwiped, action: action))
     }
 }
 
