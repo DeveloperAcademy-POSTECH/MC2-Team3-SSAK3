@@ -77,6 +77,7 @@
 		AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF174B252851859300BCF680 /* TaxiPartyListView.swift */; };
 		AFDE88AA28525EED00B627A6 /* SegmentedPicker in Frameworks */ = {isa = PBXBuildFile; productRef = AFDE88A928525EED00B627A6 /* SegmentedPicker */; };
 		AFE9A48F2852F5D800EDAC3F /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9A48E2852F5D800EDAC3F /* CellView.swift */; };
+		AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA12582857BCFE0076CB2F /* CalendarModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,7 @@
 		E63C7AA82858B6130080530B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		AF174B252851859300BCF680 /* TaxiPartyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyListView.swift; sourceTree = "<group>"; };
 		AFE9A48E2852F5D800EDAC3F /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		AFFA12582857BCFE0076CB2F /* CalendarModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +352,7 @@
 				E63C7AA82858B6130080530B /* CalendarView.swift */,
 				AF174B252851859300BCF680 /* TaxiPartyListView.swift */,
 				AFE9A48E2852F5D800EDAC3F /* CellView.swift */,
+				AFFA12582857BCFE0076CB2F /* CalendarModal.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				50DA19632856065200DEC46E /* ProfileImage.swift in Sources */,
 				505955972850BF46001DA44C /* ProfileView.swift in Sources */,
 				E63C7AA92858B6130080530B /* CalendarView.swift in Sources */,
+				AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
 				00A570642851E993008B220E /* ImageName.swift in Sources */,
 				E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */,

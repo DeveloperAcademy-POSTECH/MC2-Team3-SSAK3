@@ -7,21 +7,25 @@
 import SwiftUI
 
 struct TaxiPartyListView: View {
+    @State private var showModal = false
     var body: some View {
-        VStack(spacing: 0) {
-            VStack {
-                TaxiPartyHeadLine()
-                HStack {
-                    TaxiPartyFiltering()
-                    Spacer()
-                    MeetingDateChange()
-                }
-            } .padding(.horizontal, 20)
-            ScrollView {
-                CellViewList()
-            } .refreshable {     // << injects environment value !!
-                await fetchSomething()
-            }.background(Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
+        ZStack {
+            VStack(spacing: 0) {
+                VStack {
+                    TaxiPartyHeadLine()
+                    HStack {
+                        TaxiPartyFiltering()
+                        Spacer()
+                        DatePickerButton(showModal: $showModal)
+                    }
+                } .padding(.horizontal, 20)
+                ScrollView {
+                    CellViewList()
+                } .refreshable {     // << injects environment value !!
+                    await fetchSomething()
+                }.background(Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
+            }
+            CalendarModal(isShowing: $showModal)
         }
     }
     func fetchSomething() async {
@@ -39,7 +43,7 @@ struct TaxiPartyHeadLine: View {
                 .fontWeight(.bold)
             Spacer()
             Button {
-                // todo: 채팅방 생성 View로 전환
+                // TODO: 채팅방 생성 View로 전환
                 print("+ tapped!")
             } label: {
                 Image(systemName: "plus")
@@ -83,11 +87,10 @@ struct TaxiPartyFiltering: View {
     } // Switch 문으로 selectedIndex 별로 나누어 filter 되게끔 동작하게 한다.
 }
 
-struct MeetingDateChange: View {
+struct DatePickerButton: View {
+    @Binding var showModal: Bool
     var body: some View {
-        Button { // TODO: 달력 모달 띄우기
-            print("날짜 선택 tapped!")
-        } label: {
+        Button(action: { showModal = true }){
             Text("날짜 선택")
                 .foregroundColor(Color(red: 255 / 255, green: 204 / 255, blue: 18 / 255, opacity: 1.0))
                 .font(.custom("Apple SD Gothic Neo", size: 16))
@@ -117,12 +120,12 @@ struct CellViewList: View {
     @Environment(\.refresh) private var refresh   // << refreshable injected !!
     @State private var isRefreshing = false
     @State var mypartys: [TaxiParty] = [
-        TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220610, meetingTime: 0915, maxPersonNumber: 4, members: ["요셉", "아보", "조이", "제리"], isClosed: true),
-        TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1330, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
-        TaxiParty(id: "3", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1400, maxPersonNumber: 2, members: ["제리", "조이"], isClosed: false),
-        TaxiParty(id: "4", departureCode: 0, destinationCode: 1, meetingDate: 20220612, meetingTime: 1734, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
-        TaxiParty(id: "5", departureCode: 0, destinationCode: 1, meetingDate: 20220612, meetingTime: 2005, maxPersonNumber: 2, members: ["요셉"], isClosed: false),
-        TaxiParty(id: "6", departureCode: 0, destinationCode: 1, meetingDate: 20220617, meetingTime: 1340, maxPersonNumber: 4, members: ["요셉", "조이"], isClosed: false)
+        TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220601, meetingTime: 0930, maxPersonNumber: 4, members: ["요셉", "아보", "조이", "제리"], isClosed: true),
+        TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220601, meetingTime: 1330, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
+        TaxiParty(id: "3", departureCode: 0, destinationCode: 1, meetingDate: 20220602, meetingTime: 1400, maxPersonNumber: 2, members: ["제리", "조이"], isClosed: false),
+        TaxiParty(id: "4", departureCode: 0, destinationCode: 1, meetingDate: 20220602, meetingTime: 1734, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
+        TaxiParty(id: "5", departureCode: 0, destinationCode: 1, meetingDate: 20220603, meetingTime: 2005, maxPersonNumber: 2, members: ["요셉"], isClosed: false),
+        TaxiParty(id: "6", departureCode: 0, destinationCode: 1, meetingDate: 20220603, meetingTime: 1340, maxPersonNumber: 4, members: ["요셉", "조이"], isClosed: false)
     ]
     private var partys: [Int: [TaxiParty]] {
         Dictionary.init(grouping: mypartys, by: {$0.meetingDate})
