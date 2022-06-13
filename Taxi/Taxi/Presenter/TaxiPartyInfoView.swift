@@ -42,7 +42,7 @@ struct TaxiPartyInfoView: View {
 
 extension TaxiPartyInfoView {
 
-    var dismissButton: some View {
+    private var dismissButton: some View {
         HStack {
             Button {
                 dismiss()
@@ -53,7 +53,7 @@ extension TaxiPartyInfoView {
         }
     }
 
-    var participatingCount: some View {
+    private var participatingCount: some View {
         HStack {
             Text("참여중인 멤버")
             Image(systemName: "person.fill")
@@ -62,7 +62,7 @@ extension TaxiPartyInfoView {
         }
     }
 
-    var emptyProfile: some View {
+    private var emptyProfile: some View {
         HStack {
             Circle()
                 .stroke(style: StrokeStyle(lineWidth: 1, dash: [10]))
@@ -72,7 +72,7 @@ extension TaxiPartyInfoView {
         }
     }
 
-    var taxiPartyDate: some View {
+    private var taxiPartyDate: some View {
         HStack {
             Text("\(taxiParty.meetingDate / 100 % 100)월 \(taxiParty.meetingDate % 100)일")
             Text("모집중")
@@ -80,14 +80,14 @@ extension TaxiPartyInfoView {
         }
     }
 
-    var taxiPartyTime: some View {
+    private var taxiPartyTime: some View {
         HStack {
             Text("\(taxiParty.meetingTime / 100 % 100):\(taxiParty.meetingTime % 100)")
             Spacer()
         }
     }
 
-    var taxiPartyPlace: some View {
+    private var taxiPartyPlace: some View {
         HStack {
             Image(ImageName.taxi)
             switch taxiParty.destinationCode {
