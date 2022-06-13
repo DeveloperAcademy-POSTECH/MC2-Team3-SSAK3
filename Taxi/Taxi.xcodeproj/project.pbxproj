@@ -28,6 +28,7 @@
 		003C339B2857559D002B22F4 /* JoinTaxiPartyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C339A2857559D002B22F4 /* JoinTaxiPartyTest.swift */; };
 		003C339D28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C339C28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift */; };
 		003C339F285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C339E285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift */; };
+		003C33A128575995002B22F4 /* AuthenticateUsecaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C33A028575995002B22F4 /* AuthenticateUsecaseTest.swift */; };
 		00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */; };
 		00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */; };
 		00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */; };
@@ -108,6 +109,7 @@
 		003C339A2857559D002B22F4 /* JoinTaxiPartyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTaxiPartyTest.swift; sourceTree = "<group>"; };
 		003C339C28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTaxiPartyUsecaseTest.swift; sourceTree = "<group>"; };
 		003C339E285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyUsecaseTest.swift; sourceTree = "<group>"; };
+		003C33A028575995002B22F4 /* AuthenticateUsecaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateUsecaseTest.swift; sourceTree = "<group>"; };
 		00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyRepository.swift; sourceTree = "<group>"; };
 		00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
 		00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				003C339A2857559D002B22F4 /* JoinTaxiPartyTest.swift */,
 				003C339C28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift */,
 				003C339E285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift */,
+				003C33A028575995002B22F4 /* AuthenticateUsecaseTest.swift */,
 			);
 			path = TaxiTests;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				003C33A128575995002B22F4 /* AuthenticateUsecaseTest.swift in Sources */,
 				00D3AE74284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift in Sources */,
 				002F89EF284CA5FF00D7E51B /* UserRepositoryTest.swift in Sources */,
 				003C339D28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift in Sources */,
