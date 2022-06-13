@@ -76,3 +76,16 @@ extension View {
         self.modifier(ListMainTitle())
     }
 }
+
+extension Text {
+    func info() -> Text {
+        return self
+            .foregroundColor(.charcoal)
+            .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+    }
+    func caption() -> Text {
+        return self
+            .foregroundColor(.darkGray)
+            .font(Font.custom("AppleSDGothicNeo-Medium", size: 14))
+    }
+}
