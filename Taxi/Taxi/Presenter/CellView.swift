@@ -101,12 +101,13 @@ struct MeetTimeView: View {
     let party: TaxiParty
     func meetTimeSeparator(str1: String) -> String {
         var meet: String = str1
-        let index1 = meet.index(meet.startIndex, offsetBy: 2)
+        let index1 = meet.index(meet.endIndex, offsetBy: -2)
         meet.insert(":", at: index1)
         return "\(meet)"
     }
     var body: some View {
         Text("\(meetTimeSeparator(str1: String(party.meetingTime)))")
+        // Text("\(party.meetingTime / 100 % 100 ):\(party.meetingTime % 100)") --> 00분일 때 0하나 짤림
             .font(.custom("Apple SD Gothic Neo", size: 40))
             .fontWeight(.bold) // 데이터로 처리 필요
             .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
