@@ -56,7 +56,7 @@ struct MyPartyView: View {
                                     CellView(party: party)
                                 }
                                 .buttonStyle(CellButtonStyle())
-                                .disabled(isSwiped)
+                                .disabled(isSwiped) // 스와이프 된 상태일 때 비활성화
                                 .swipeDelete(isSwiped: $isSwiped, action: {
                                     self.showAlert = true
                                     self.selectedParty = party
@@ -71,8 +71,8 @@ struct MyPartyView: View {
                 }
             }
             .background(Color.lightGray) // TODO: 색상 변경
-            .highPriorityGesture(isSwiped ? cancelSelectDrag : nil)
-            .simultaneousGesture(isSwiped ? cancelSelectTap : nil)
+            .highPriorityGesture(isSwiped ? cancelSelectDrag : nil) // 스와이프 된 상태일 때 취소 드래그 활성화
+            .simultaneousGesture(isSwiped ? cancelSelectTap : nil) // 스와이프 된 상태일 때 취소 탭 활성화
             .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
                 Button("나가기", role: .destructive) {
                     withAnimation {
@@ -128,6 +128,7 @@ struct SwipeDelete: ViewModifier {
     let action : () -> Void
     @State var swipeState = SwipeActionState.inactive
     @GestureState var isDragging = false
+    // 스와이프제스쳐
     private var swipeAction: some Gesture {
         DragGesture(coordinateSpace: .local)
             .updating($isDragging) { _, state, _ in
@@ -165,14 +166,14 @@ struct SwipeDelete: ViewModifier {
                 .offset(x: swipeState.width)
                 .highPriorityGesture(swipeAction)
         }
-        .onChange(of: isDragging) { _ in
+        .onChange(of: isDragging) { _ in // Drag 제스쳐가 취소됐을 때 스와이프 상태 inactive로 변경
             if isDragging == false && swipeState.isSwiping {
                 withAnimation(.easeOut) {
                     swipeState = SwipeActionState.inactive
                 }
             }
         }
-        .onChange(of: isSwiped) { _ in
+        .onChange(of: isSwiped) { _ in // 스와이프가 취소됐을 때 스와이프 상태 inactive로 변경
             if isSwiped == false {
                 withAnimation(.easeOut) {
                     swipeState = SwipeActionState.inactive
