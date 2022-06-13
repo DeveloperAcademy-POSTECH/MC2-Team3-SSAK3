@@ -14,10 +14,12 @@ struct CalendarView: View {
     private let today = Date()
     private let taxiParties: [TaxiParty] = TaxiPartyMockData.mockData
     private let action: () -> Void
+    private let calendarType: CalendarType
     let days = ["일", "월", "화", "수", "목", "금", "토"]
     let intDateConverter = IntDateConverter()
 
-    init(action: @escaping () -> Void) {
+    init(calendarType: CalendarType = .modalFilter, action: @escaping () -> Void) {
+        self.calendarType = calendarType
         self.action = action
     }
 
@@ -37,21 +39,25 @@ struct CalendarView: View {
         HStack {
             Text("\(currentDate.formattedString)")
             Spacer()
-            Button {
-                withAnimation {
-                    currentMonth -= 1
+            HStack(spacing: 50) {
+                Button {
+                    withAnimation {
+                        currentMonth -= 1
+                    }
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .tint(currentMonth < 1 ? .gray : .black)
                 }
-            } label: {
-                Image(systemName: "chevron.left")
-                    .tint(.black)
-            }
-            Button {
-                withAnimation {
-                    currentMonth += 1
+                .disabled(currentMonth < 1)
+                Button {
+                    withAnimation {
+                        currentMonth += 1
+                    }
+                } label: {
+                    Image(systemName: "chevron.right")
+                        .tint(currentMonth > 0 ? .gray : .black)
                 }
-            } label: {
-                Image(systemName: "chevron.right")
-                    .tint(.black)
+                .disabled(currentMonth > 0)
             }
         }
         .padding(.horizontal, 10)
@@ -76,16 +82,26 @@ struct CalendarView: View {
             ForEach(getExactDates()) {data in
                 dayCell(data)
                     .background(
-                        Circle()
-                            .fill(.yellow)
-                            .opacity(data.date.isSameDay(selectedDate) ? 1 : 0)
+                        ZStack {
+                            Capsule()
+                                .fill(data.date.isSameDay(selectedDate) ? .yellow : .clear)
+                            Capsule()
+                                .strokeBorder(data.date.isSameDay(selectedDate) ? .green : todayCapsuleBorder(data.date, borderColor: .gray))
+                        }
+                            .padding(.horizontal, 6)
                     )
                     .onTapGesture {
                         selectedDate = data.date
-                        guard taxiParties.first(where: {party in
-                            data.date.isSameDay(intDateConverter.makeDateType(from: party.meetingDate))
-                        }) == nil else { return }
+
+                        switch calendarType {
+                        case .modalFilter:
+                            guard taxiParties.first(where: {party in
+                                data.date.isSameDay(intDateConverter.makeDateType(from: party.meetingDate))
+                            }) == nil else { return }
+                                action()
+                        case .addParty:
                             action()
+                        }
                     }
                     .disabled(data.monthType == .unparticipable)
             }
@@ -135,35 +151,40 @@ struct CalendarView: View {
         return date.isOutOfMonth() ? .unparticipable : .participable
     }
 
-    private func dayNumColor(_ comparing: Date, _ compared: Date, color dotColor: Color) -> Color {
-        return comparing.isSameDay(compared) ? .white : dotColor
+    private func todayCapsuleBorder(_ date: Date, borderColor: Color) -> Color {
+        return date.isToday() ? .gray : .clear
     }
 
     // MARK: - view maker
     private func dayCell(_ value: DayContainer) -> some View {
-        ZStack {
+        VStack(spacing: 0) {
             if value.day != 0 {
-                if let taxiParty = taxiParties.first(where: {party in
-                    return value.date.isSameDay(intDateConverter.makeDateType(from: party.meetingDate))
-                }
-                ) {
+                if taxiParties.first(where: {party in
+                    value.date.isSameDay(intDateConverter.makeDateType(from: party.meetingDate))
+                }) != nil {
                     Text("\(value.day)")
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, intDateConverter.makeDateType(from: taxiParty.meetingDate), color: .black))
+                        .foregroundColor(value.date.isOutOfMonth() ? .gray : .black)
                     Circle()
-                        .fill(value.date.isOutOfMonth() ? .gray : dayNumColor(selectedDate, intDateConverter.makeDateType(from: taxiParty.meetingDate), color: .green))
+                        .fill(value.date.isOutOfMonth() ? .gray : .black)
                         .opacity(value.date.isOutOfMonth() ? 0 : 1)
                         .frame(width: 5, height: 5)
-                        .padding(.top, 30)
+                        .padding(.top, 5)
                 } else {
                     Text("\(value.day)")
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(value.date.isOutOfMonth() ? .gray : dayNumColor(value.date, selectedDate, color: .black))
+                        .foregroundColor(value.date.isOutOfMonth() ? .gray : .black)
                 }
             }
         }
-        .frame(height: 50)
+        .padding(.top, 10)
+        .frame(height: 50, alignment: .top)
     }
+}
+
+// MARK: - calendar component enum
+enum CalendarType {
+    case modalFilter, addParty
 }
 
 struct CalendarView_Previews: PreviewProvider {
