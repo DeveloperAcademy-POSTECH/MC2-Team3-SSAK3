@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct MyPartyView: View {
-    @State var isSwiped: Bool = false // Swipe to Delete가 활성화 되어있는지 확인
-    @State var showAlert: Bool = false
-    @State var selectedParty: TaxiParty!
+    @State private var isSwiped: Bool = false // Swipe to Delete가 활성화 되어있는지 확인
+    @State private var showAlert: Bool = false
+    @State private var selectedParty: TaxiParty!
     // Dummy Data
-    @State var mypartys: [TaxiParty] = [
+    @State private var myparties: [TaxiParty] = [
         TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220610, meetingTime: 1315, maxPersonNumber: 4, members: ["1", "2", "3", "4"], isClosed: true),
         TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1330, maxPersonNumber: 3, members: ["1", "3"], isClosed: false),
         TaxiParty(id: "3", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1440, maxPersonNumber: 3, members: ["1", "2", "3"], isClosed: false),
@@ -21,7 +21,7 @@ struct MyPartyView: View {
         TaxiParty(id: "6", departureCode: 0, destinationCode: 1, meetingDate: 20220617, meetingTime: 1340, maxPersonNumber: 4, members: ["1", "3"], isClosed: false)
     ]
     private var partys: [Int: [TaxiParty]] {
-        Dictionary.init(grouping: mypartys, by: {$0.meetingDate})
+        Dictionary.init(grouping: myparties, by: {$0.meetingDate})
     }
     private var meetingDates: [Int] {
         partys.map({$0.key}).sorted()
@@ -63,7 +63,6 @@ struct MyPartyView: View {
                                 })
                                 .cornerRadius(16)
                                 .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 0)
-                                .buttonStyle(.plain)
                                 .padding(.horizontal)
                             }
                         }
@@ -86,8 +85,8 @@ struct MyPartyView: View {
         }
     }
     private func delete(object: TaxiParty) {
-        if let index = mypartys.firstIndex(of: object) {
-            mypartys.remove(at: index)
+        if let index = myparties.firstIndex(of: object) {
+            myparties.remove(at: index)
         }
     }
 }
@@ -126,8 +125,8 @@ enum SwipeActionState {
 struct SwipeDelete: ViewModifier {
     @Binding var isSwiped: Bool
     let action : () -> Void
-    @State var swipeState = SwipeActionState.inactive
-    @GestureState var isDragging = false
+    @State private var swipeState = SwipeActionState.inactive
+    @GestureState private var isDragging = false
     // 스와이프제스쳐
     private var swipeAction: some Gesture {
         DragGesture(coordinateSpace: .local)
@@ -243,7 +242,6 @@ struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             MyPartyView()
-                .navigationTitle("")
                 .navigationBarHidden(true)
         }
     }
