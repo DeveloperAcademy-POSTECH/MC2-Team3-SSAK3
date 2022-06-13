@@ -15,6 +15,8 @@ extension Color {
     static let lightGray = Color("lightGray")
     static let background = Color("background")
     static let customRed = Color("customRed")
-    static let postechPink = Color("postechPick")
+    static let postechPink = Color("postechPink")
     static let ktxBlue = Color("ktxBlue")
+    static let selectYellow = Color("selectYellow")
+    static let addBackground = Color("addBackground")
 }
