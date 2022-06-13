@@ -8,6 +8,7 @@ import SwiftUI
 
 extension Color {
     static let customYellow = Color("customYellow")
+    static let selectYellow = Color("selectYellow")
     static let customBlack = Color("customBlack")
     static let charcoal = Color("charcoal")
     static let darkGray = Color("darkGray")

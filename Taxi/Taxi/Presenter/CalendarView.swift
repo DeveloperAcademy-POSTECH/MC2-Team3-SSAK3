@@ -84,9 +84,9 @@ struct CalendarView: View {
                     .background(
                         ZStack {
                             Capsule()
-                                .fill(data.date.isSameDay(selectedDate) ? .yellow : .clear)
+                                .fill(data.date.isSameDay(selectedDate) ? Color.selectYellow : .clear)
                             Capsule()
-                                .strokeBorder(data.date.isSameDay(selectedDate) ? .green : todayCapsuleBorder(data.date, borderColor: .gray))
+                                .strokeBorder(data.date.isSameDay(selectedDate) ? Color.customYellow : todayCapsuleBorder(data.date, borderColor: Color.darkGray))
                         }
                             .padding(.horizontal, 6)
                     )
@@ -166,7 +166,7 @@ struct CalendarView: View {
                         .frame(maxWidth: .infinity)
                         .foregroundColor(value.date.isOutOfMonth() ? .gray : .black)
                     Circle()
-                        .fill(value.date.isOutOfMonth() ? .gray : .black)
+                        .fill(Color.charcoal)
                         .opacity(value.date.isOutOfMonth() ? 0 : 1)
                         .frame(width: 5, height: 5)
                         .padding(.top, 5)
