@@ -18,41 +18,19 @@ struct TaxiPartyInfoView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                }
-                Spacer()
-            }
+            dismissButton
             Spacer()
-            Group {
-                ForEach(0..<taxiParty.members.count, id: \.self) { index in
-                    PartyMemberInfo(id: taxiParty.members[index], diameter: profileSize)
-                }
-                ForEach(0..<remainSeat, id: \.self) { _ in
-                    emptyProfile
-                }
+            participatingCount
+            ForEach(0..<taxiParty.members.count, id: \.self) { index in
+                PartyMemberInfo(id: taxiParty.members[index], diameter: profileSize)
+            }
+            ForEach(0..<remainSeat, id: \.self) { _ in
+                emptyProfile
             }
             Divider()
-            HStack {
-                Text("6월 17일 금요일")
-                Text("모집중")
-                Spacer()
-            }
-            HStack {
-                Text("13:30")
-                Spacer()
-                Text("\(taxiParty.members.count)/\(taxiParty.maxPersonNumber)")
-                Image(systemName: "person.fill")
-            }
-            HStack {
-                Image(ImageName.tabTaxiPartyOff)
-                Text("포스텍 C5")
-                Image(systemName: "tram.fill")
-                Text("포항역")
-            }
+            taxiPartyDate
+            taxiPartyTime
+            taxiPartyPlace
             RoundedButton("시작하기") {
                 // TODO: Add joinTaxiParty Action
             }
@@ -62,6 +40,26 @@ struct TaxiPartyInfoView: View {
 
 extension TaxiPartyInfoView {
 
+    var dismissButton: some View {
+        HStack {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark")
+            }
+            Spacer()
+        }
+    }
+
+    var participatingCount: some View {
+        HStack {
+            Text("참여중인 멤버")
+            Image(systemName: "person.fill")
+            Text("\(taxiParty.members.count)/\(taxiParty.maxPersonNumber)")
+            Spacer()
+        }
+    }
+
     var emptyProfile: some View {
         HStack {
             Circle()
@@ -69,6 +67,39 @@ extension TaxiPartyInfoView {
                 .frame(width: 80, height: 80)
             Text("Username")
             Spacer()
+        }
+    }
+
+    var taxiPartyDate: some View {
+        HStack {
+            Text("\(taxiParty.meetingDate / 100 % 100)월 \(taxiParty.meetingDate % 100)일")
+            Text("모집중")
+            Spacer()
+        }
+    }
+
+    var taxiPartyTime: some View {
+        HStack {
+            Text("\(taxiParty.meetingTime / 100 % 100):\(taxiParty.meetingTime % 100)")
+            Spacer()
+        }
+    }
+
+    var taxiPartyPlace: some View {
+        HStack {
+            Image(ImageName.taxi)
+            switch taxiParty.destinationCode {
+            case 0:
+                Text("포항역")
+            case 1:
+                Text("포스텍")
+            default:
+                fatalError()
+            }
+            Text("\(taxiParty.departure)")
+            Image(systemName: "chevron.forward")
+            Image(ImageName.train)
+            Text("\(taxiParty.destincation)")
         }
     }
 }
@@ -88,18 +119,7 @@ struct PartyMemberInfo: View {
 
     var body: some View {
         HStack {
-            if let imageURL = user.profileImage {
-                WebImage(url: URL(string: imageURL))
-                    .profileCircle(diameter)
-            } else {
-                ZStack {
-                    Circle()
-                        .foregroundColor(.gray)
-                        .frame(width: diameter, height: diameter)
-                    Text(user.nickname.prefix(1))
-                        .foregroundColor(.black)
-                }
-            }
+            ProfileImage(user, diameter: 80)
             Text(user.nickname)
             Spacer()
         }
@@ -111,7 +131,7 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
     static var previews: some View {
         TaxiPartyInfoView(taxiParty: TaxiParty(
             id: "0",
-            departureCode: 0,
+            departureCode: 2,
             destinationCode: 1,
             meetingDate: 20220617,
             meetingTime: 1330,
