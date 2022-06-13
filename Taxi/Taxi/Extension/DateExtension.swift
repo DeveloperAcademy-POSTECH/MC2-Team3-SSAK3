@@ -28,16 +28,16 @@ extension Date {
         return Calendar.current.dateComponents([.year, .month, .day], from: self)
     }
 
-    var day: Int {
-        return self.dateComponents.day ?? -1
+    var day: Int? {
+        return self.dateComponents.day
     }
 
-    var month: Int {
-        return self.dateComponents.month ?? -1
+    var month: Int? {
+        return self.dateComponents.month
     }
 
-    var year: Int {
-        return self.dateComponents.year ?? -1
+    var year: Int? {
+        return self.dateComponents.year
     }
 
     var formattedString: String {
@@ -45,18 +45,18 @@ extension Date {
     }
 
     /// date를 yyyyMMdd의 형태로 바꿈
-    var formattedInt: Int {
+    var formattedInt: Int? {
         let formattedStr = self.intFormatter.string(from: self)
-        return Int(formattedStr) ?? -1
+        return Int(formattedStr)
     }
 
-    func monthlyDayCount() -> Int {
+    var monthlyDayCount: Int? {
         let calendar = Calendar.current
         let range = calendar.range(of: .day, in: .month, for: self)
-        return range?.count ?? 30
+        return range?.count
     }
 
-    func getMonthDates() -> [Date] {
+    var monthDates: [Date] {
         let calendar = Calendar.current
         guard let startDate = calendar.date(
             from: calendar.dateComponents(
@@ -73,21 +73,36 @@ extension Date {
         }
     }
 
-    func isSameDay(_ comparedDate: Date) -> Bool {
-        let calendar = Calendar.current
-        return calendar.isDate(self, inSameDayAs: comparedDate)
-    }
-
-    func isToday() -> Bool {
+    var today: Bool {
         let calendar = Calendar.current
         return calendar.isDate(self, inSameDayAs: Date())
     }
 
-    func isOutOfMonth() -> Bool {
+    var outOfMonth: Bool {
         let calendar = Calendar.current
         let today = Date()
         let diff = calendar.dateComponents([.day], from: today, to: self).day ?? -1
         let monthlyDayCount = calendar.range(of: .day, in: .month, for: today)?.count ?? 30
         return (diff >= monthlyDayCount || diff < 0 ) ? true : false
+    }
+
+    func isSameDay(_ comparedDate: Date) -> Bool {
+        let calendar = Calendar.current
+        return calendar.isDate(self, inSameDayAs: comparedDate)
+    }
+
+    static func convertToDateFormat(from date: Int) -> Date? {
+        let dateStr = String(date)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+        return formatter.date(from: dateStr)
+    }
+
+    static func convertToKoreanDateFormat(from date: Int) -> String {
+        guard let date = self.convertToDateFormat(from: date) else { return "" }
+        guard let month = date.month, let day = date.day else { return "" }
+        return "\(month)월 \(day)일"
     }
 }
