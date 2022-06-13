@@ -15,6 +15,7 @@ struct ProfileView: View {
     @State private var nicknameContainer: String = "" // User 닉네임을 임시로 담는 변수
     @State private var imageContainer: String? // User 프로필 사진 URL을 임시로 담는 변수
     @State private var isProfileDeleted: Bool = false
+    @State private var imageData: Data? = nil
     private let profileSize: CGFloat = 160
 
     private let user: User = User(
@@ -110,6 +111,9 @@ extension ProfileView {
                 if let images = imagesOrNil {
                     if let first = images.first {
                         selectedImage = first
+                        if let data = first.jpegData(compressionQuality: 1) {
+                            imageData = data
+                        }
                     }
                 }
             }
