@@ -24,6 +24,13 @@ extension TaxiParty: CustomStringConvertible {
     }
 }
 
+extension TaxiParty: Equatable {
+    static func == (lhs: TaxiParty, rhs: TaxiParty) -> Bool {
+        return
+            lhs.id == rhs.id
+    }
+}
+
 extension TaxiParty {
     var departure: String {
         Place.of(departureCode).rawValue
