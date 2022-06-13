@@ -38,6 +38,8 @@ struct TaxiPartyInfoView: View {
     }
 }
 
+// MARK: - 뷰 변수
+
 extension TaxiPartyInfoView {
 
     var dismissButton: some View {
@@ -104,6 +106,8 @@ extension TaxiPartyInfoView {
     }
 }
 
+// MARK: - PartyMemberInfo 구조체
+
 struct PartyMemberInfo: View {
     private let diameter: CGFloat
     private let user: User = User(
@@ -125,6 +129,8 @@ struct PartyMemberInfo: View {
         }
     }
 }
+
+// MARK: - 프리뷰
 
 struct TaxiPartyInfoView_Previews: PreviewProvider {
 
