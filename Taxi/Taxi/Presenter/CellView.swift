@@ -21,10 +21,9 @@ struct CellView: View {
         ZStack { // Struct로 만들어서 표현하자
             RoundedRectangle(cornerRadius: 18.0)
                 .fill(Color(.white))
+                .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.gray, lineWidth: 1.5)
-                .opacity(0.17)
-                .shadow(color: .gray, radius: 1, x: 0, y: 0)
+                .stroke(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255, opacity: 1.0), lineWidth: 1.5)
         }
         }
         .padding(.horizontal)
