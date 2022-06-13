@@ -10,6 +10,7 @@ import Foundation
 
 final class AuthenticateUseCase {
     private let userRepository: UserRepository
+    private var cancelBag: Set<AnyCancellable> = []
 
     init(_ userRepository: UserRepository = UserFirebaseDataSource.shared) {
         self.userRepository = userRepository
@@ -47,5 +48,49 @@ final class AuthenticateUseCase {
     /// - Returns: User 혹은 Error 를 발행하는 Publisher
     func register(_ id: String, _ nickname: String) -> AnyPublisher<User, Error> {
         return userRepository.setUser(id, nickname)
+    }
+
+    func login(_ id: String, completion: @escaping (User?, Error?) -> Void) {
+        userRepository.getUser(id)
+            .sink { result in
+                if case let .failure(error) = result {
+                    completion(nil, error)
+                }
+            } receiveValue: { user in
+                completion(user, nil)
+            }.store(in: &cancelBag)
+    }
+
+    func changeNickname(_ user: User, to nickname: String, completion: @escaping (User?, Error?) -> Void) {
+        userRepository.updateNickname(user, nickname)
+            .sink { result in
+                if case let .failure(error) = result {
+                    completion(nil, error)
+                }
+            } receiveValue: { user in
+                completion(user, nil)
+            }.store(in: &cancelBag)
+    }
+
+    func changeProfileImage(_ user: User, to imageData: Data, completion: @escaping (User?, Error?) -> Void) {
+        userRepository.updateProfileImage(user, imageData)
+            .sink { result in
+                if case let .failure(error) = result {
+                    completion(nil, error)
+                }
+            } receiveValue: { user in
+                completion(user, nil)
+            }.store(in: &cancelBag)
+    }
+
+    func register(_ id: String, _ nickname: String, completion: @escaping (User?, Error?) -> Void) {
+        userRepository.setUser(id, nickname)
+            .sink { result in
+                if case let .failure(error) = result {
+                    completion(nil, error)
+                }
+            } receiveValue: { user in
+                completion(user, nil)
+            }.store(in: &cancelBag)
     }
 }
