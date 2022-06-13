@@ -49,6 +49,7 @@
 		00F856A82844A985008E2E2F /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A72844A985008E2E2F /* FirebaseFunctionsCombine-Community */; };
 		00F856AA2844A985008E2E2F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A92844A985008E2E2F /* FirebaseStorage */; };
 		00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856AB2844A985008E2E2F /* FirebaseStorageCombine-Community */; };
+		37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D4D1F02856D285002E787B /* ChatRoomView.swift */; };
 		37F698852855FB910008C022 /* MyPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F698842855FB910008C022 /* MyPartyView.swift */; };
 		50459E2F28542E4E00287371 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459E2E28542E4E00287371 /* PhotoPicker.swift */; };
 		50459E332854701C00287371 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459E322854701C00287371 /* ImageExtension.swift */; };
@@ -116,6 +117,7 @@
 		00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyUseCase.swift; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		37D4D1F02856D285002E787B /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		37F698842855FB910008C022 /* MyPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPartyView.swift; sourceTree = "<group>"; };
 		50459E2E28542E4E00287371 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		50459E322854701C00287371 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				50459E2E28542E4E00287371 /* PhotoPicker.swift */,
 				50459E34285490CC00287371 /* TaxiPartyInfoView.swift */,
 				37F698842855FB910008C022 /* MyPartyView.swift */,
+				37D4D1F02856D285002E787B /* ChatRoomView.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				00A570662851EA33008B220E /* RootView.swift in Sources */,
 				50595595285037AE001DA44C /* MyPageView.swift in Sources */,
 				00842A96284B287D000292E5 /* Place.swift in Sources */,
+				37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */,
 				00E8F1B9284B213C00D68DF0 /* User.swift in Sources */,
 				000E545E2853622D0085C39E /* AuthenticateUseCase.swift in Sources */,
 				00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */,
