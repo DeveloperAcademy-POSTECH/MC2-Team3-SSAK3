@@ -36,6 +36,9 @@ struct MyPartyView: View {
                                 } label: {
                                     CellView(party: party)
                                 }
+                                .swipeDelete(action: {
+                                    print("나가기")
+                                })
                                 .cornerRadius(16)
                                 .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 0)
                                 .buttonStyle(.plain)
@@ -71,6 +74,62 @@ enum SwipeActionState {
         case .inactive, .active:
             return false
         }
+    }
+}
+
+struct SwipeDelete: ViewModifier {
+    let action : () -> Void
+    @State var swipeState = SwipeActionState.inactive
+    @GestureState var isDragging = false
+    private var swipeAction: some Gesture {
+        DragGesture(coordinateSpace: .local)
+            .updating($isDragging) { _, state, _ in
+                state = true
+            }
+            .onChanged { value in
+                if value.translation.width < 0 {
+                    swipeState = SwipeActionState.swiping(width: value.translation.width)
+                }
+            }
+            .onEnded { value in
+                if value.translation.width < 0 {
+                    withAnimation(.easeOut) {
+                        swipeState = SwipeActionState.active
+                    }
+                }
+            }
+    }
+    func body(content: Content) -> some View {
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .foregroundColor(.red)
+            HStack {
+                Spacer()
+                Text("나가기")
+                    .frame(width: 75)
+                    .foregroundColor(.white)
+                    .gesture(TapGesture().onEnded({self.action()}))
+                    .offset(x: 75 + swipeState.width)
+            }
+            content
+                .frame(maxWidth: .infinity)
+                .background(.white)
+                .offset(x: swipeState.width)
+                .highPriorityGesture(swipeAction)
+        }
+        .onChange(of: isDragging) { _ in
+            if isDragging == false && swipeState.isSwiping {
+                swipeState = SwipeActionState.inactive
+            }
+        }
+    }
+}
+
+extension View {
+    func swipeDelete(
+        action: @escaping () -> Void
+    ) -> some View {
+        modifier(SwipeDelete(action: action))
     }
 }
 
