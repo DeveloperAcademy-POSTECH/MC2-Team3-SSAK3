@@ -29,13 +29,17 @@ struct MyPartyView: View {
     private var cancelSelectDrag : some Gesture {
         DragGesture()
             .onChanged { _ in
-                isSwiped = false
+                withAnimation(.easeOut) {
+                    isSwiped = false
+                }
             }
     }
     private var cancelSelectTap : some Gesture {
         TapGesture()
             .onEnded {
-                isSwiped = false
+                withAnimation(.easeOut) {
+                    isSwiped = false
+                }
             }
     }
     var body: some View {
@@ -71,7 +75,9 @@ struct MyPartyView: View {
             .simultaneousGesture(isSwiped ? cancelSelectTap : nil)
             .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
                 Button("나가기", role: .destructive) {
-                    delete(object: selectedParty)
+                    withAnimation {
+                        delete(object: selectedParty)
+                    }
                 }
                 Button("취소", role: .cancel) {}
             } message: {
@@ -134,8 +140,10 @@ struct SwipeDelete: ViewModifier {
             }
             .onEnded { value in
                 if value.translation.width < 0 {
+                    withAnimation(.easeOut) {
                         swipeState = SwipeActionState.active
                         isSwiped = true
+                    }
                 }
             }
     }
@@ -159,12 +167,16 @@ struct SwipeDelete: ViewModifier {
         }
         .onChange(of: isDragging) { _ in
             if isDragging == false && swipeState.isSwiping {
-                swipeState = SwipeActionState.inactive
+                withAnimation(.easeOut) {
+                    swipeState = SwipeActionState.inactive
+                }
             }
         }
         .onChange(of: isSwiped) { _ in
             if isSwiped == false {
-                swipeState = SwipeActionState.inactive
+                withAnimation(.easeOut) {
+                    swipeState = SwipeActionState.inactive
+                }
             }
         }
     }
@@ -230,8 +242,8 @@ struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             MyPartyView()
-            .navigationTitle("")
-            .navigationBarHidden(true)
+                .navigationTitle("")
+                .navigationBarHidden(true)
         }
     }
 }
