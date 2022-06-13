@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatRoomView: View {
-    @State var party: TaxiParty
+    let party: TaxiParty
     var body: some View {
         VStack {
             Text("\(party.description)")

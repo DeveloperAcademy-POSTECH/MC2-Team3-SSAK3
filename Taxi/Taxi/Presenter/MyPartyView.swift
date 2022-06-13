@@ -91,7 +91,7 @@ struct CellView: View {
                 Text("\(party.destincation)")
             }
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+        .frame(maxWidth: .infinity)
         .padding()
         .background(Color.white)
     }
