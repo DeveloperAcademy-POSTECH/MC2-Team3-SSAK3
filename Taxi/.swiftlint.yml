@@ -1,5 +1,6 @@
 disabled_rules:
     - line_length
+    - cyclomatic_complexity
 included:
 excluded:
     - Taxi/Domain/Model/Place.swift
