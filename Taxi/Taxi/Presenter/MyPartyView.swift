@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct MyPartyView: View {
-    @State private var isSwiped: Bool = false // Swipe to Delete가 활성화 되어있는지 확인
-    @State private var showAlert: Bool = false
-    @State private var selectedParty: TaxiParty?
     // Dummy Data
-    @State private var myparties: [TaxiParty] = [
+    private let myParties: [TaxiParty] = [
         TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220610, meetingTime: 1315, maxPersonNumber: 4, members: ["1", "2", "3", "4"], isClosed: true),
         TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1330, maxPersonNumber: 3, members: ["1", "3"], isClosed: false),
         TaxiParty(id: "3", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1440, maxPersonNumber: 3, members: ["1", "2", "3"], isClosed: false),
@@ -20,12 +17,53 @@ struct MyPartyView: View {
         TaxiParty(id: "5", departureCode: 0, destinationCode: 1, meetingDate: 20220612, meetingTime: 2005, maxPersonNumber: 2, members: ["1"], isClosed: false),
         TaxiParty(id: "6", departureCode: 0, destinationCode: 1, meetingDate: 20220617, meetingTime: 1340, maxPersonNumber: 4, members: ["1", "3"], isClosed: false)
     ]
+
+    var body: some View {
+        VStack {
+            MyPartyTitle()
+            MyPartyList(myParties: myParties)
+        }
+    }
+}
+
+struct MyPartyTitle: View {
+    var body: some View {
+        Text("마이팟")
+            .foregroundColor(.customBlack)
+            .font(Font.custom("AppleSDGothicNeo-Bold", size: 20))
+            .fontWeight(.bold) // TODO: 텍스트 스타일로 변경
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading)
+            .background(Color.white)
+    }
+}
+
+struct MyPartySectionHeader: View {
+    let date: Int
+    var body: some View {
+        Text("\(date / 100 % 100)월 \(date % 100)일")
+            .foregroundColor(.charcoal)
+            .font(Font.custom("AppleSDGothicNeo-Bold", size: 18))
+            .fontWeight(.medium) // TODO: 텍스트 스타일로 변경
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding([.leading, .top])
+            .background(Color.lightGray) // TODO: 색상 변경
+    }
+}
+
+struct MyPartyList: View {
+    @State var myParties: [TaxiParty]
+    @State private var isSwiped: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var selectedParty: TaxiParty?
+
     private var partys: [Int: [TaxiParty]] {
-        Dictionary.init(grouping: myparties, by: {$0.meetingDate})
+        Dictionary.init(grouping: myParties, by: {$0.meetingDate})
     }
     private var meetingDates: [Int] {
         partys.map({$0.key}).sorted()
     }
+
     private var cancelSelectDrag : some Gesture {
         DragGesture()
             .onChanged { _ in
@@ -42,51 +80,50 @@ struct MyPartyView: View {
                 }
             }
     }
+
     var body: some View {
-        VStack {
-            TitleView()
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [.sectionHeaders]) {
-                    ForEach(meetingDates, id: \.self) { date in
-                        Section(header: SectionHeaderView(date: date)) {
-                            ForEach(partys[date]!, id: \.id) { party in
-                                NavigationLink {
-                                    ChatRoomView(party: party)
-                                } label: {
-                                    CellView(party: party)
-                                }
-                                .buttonStyle(CellButtonStyle())
-                                .disabled(isSwiped) // 스와이프 된 상태일 때 비활성화
-                                .swipeDelete(isSwiped: $isSwiped, action: {
-                                    self.showAlert = true
-                                    self.selectedParty = party
-                                })
-                                .cornerRadius(16)
-                                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 0)
-                                .padding(.horizontal)
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [.sectionHeaders]) {
+                ForEach(meetingDates, id: \.self) { date in
+                    Section(header: MyPartySectionHeader(date: date)) {
+                        ForEach(partys[date]!, id: \.id) { party in
+                            NavigationLink {
+                                ChatRoomView(party: party)
+                            } label: {
+                                CellView(party: party)
                             }
+                            .buttonStyle(CellButtonStyle())
+                            .disabled(isSwiped) // 스와이프 된 상태일 때 비활성화
+                            .swipeDelete(isSwiped: $isSwiped, action: {
+                                self.showAlert = true
+                                self.selectedParty = party
+                            })
+                            .cornerRadius(16)
+                            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 0)
+                            .padding(.horizontal)
                         }
                     }
                 }
             }
-            .background(Color.lightGray) // TODO: 색상 변경
-            .highPriorityGesture(isSwiped ? cancelSelectDrag : nil) // 스와이프 된 상태일 때 취소 드래그 활성화
-            .simultaneousGesture(isSwiped ? cancelSelectTap : nil) // 스와이프 된 상태일 때 취소 탭 활성화
-            .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
-                Button("나가기", role: .destructive) {
-                    withAnimation {
-                        delete(object: selectedParty!)
-                    }
+        }
+        .background(Color.lightGray) // TODO: 색상 변경
+        .highPriorityGesture(isSwiped ? cancelSelectDrag : nil) // 스와이프 된 상태일 때 취소 드래그 활성화
+        .simultaneousGesture(isSwiped ? cancelSelectTap : nil) // 스와이프 된 상태일 때 취소 탭 활성화
+        .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
+            Button("나가기", role: .destructive) {
+                withAnimation(.spring()) {
+                    delete(object: selectedParty!)
                 }
-                Button("취소", role: .cancel) {}
-            } message: {
-                Text("지금 나가면 채팅 데이터는 사라져요")
             }
+            Button("취소", role: .cancel) {}
+        } message: {
+            Text("지금 나가면 채팅 데이터는 사라져요")
         }
     }
+
     private func delete(object: TaxiParty) {
-        if let index = myparties.firstIndex(of: object) {
-            myparties.remove(at: index)
+        if let index = myParties.firstIndex(of: object) {
+            myParties.remove(at: index)
         }
     }
 }
@@ -102,6 +139,7 @@ enum SwipeActionState {
     case inactive
     case active
     case swiping(width: CGFloat)
+
     var width: CGFloat {
         switch self {
         case .inactive:
@@ -127,7 +165,7 @@ struct SwipeDelete: ViewModifier {
     let action : () -> Void
     @State private var swipeState = SwipeActionState.inactive
     @GestureState private var isDragging = false
-    // 스와이프제스쳐
+
     private var swipeAction: some Gesture {
         DragGesture(coordinateSpace: .local)
             .updating($isDragging) { _, state, _ in
@@ -147,6 +185,7 @@ struct SwipeDelete: ViewModifier {
                 }
             }
     }
+
     func body(content: Content) -> some View {
         ZStack(alignment: .leading) {
             Rectangle()
@@ -188,31 +227,6 @@ extension View {
         action: @escaping () -> Void
     ) -> some View {
         modifier(SwipeDelete(isSwiped: isSwiped, action: action))
-    }
-}
-
-struct TitleView: View {
-    var body: some View {
-        Text("마이팟")
-            .foregroundColor(.customBlack)
-            .font(Font.custom("AppleSDGothicNeo-Bold", size: 20))
-            .fontWeight(.bold) // TODO: 텍스트 스타일로 변경
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading)
-            .background(Color.white)
-    }
-}
-
-struct SectionHeaderView: View {
-    let date: Int
-    var body: some View {
-        Text("\(date / 100 % 100)월 \(date % 100)일")
-            .foregroundColor(.charcoal)
-            .font(Font.custom("AppleSDGothicNeo-Bold", size: 18))
-            .fontWeight(.medium) // TODO: 텍스트 스타일로 변경
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.leading, .top])
-            .background(Color.lightGray) // TODO: 색상 변경
     }
 }
 
