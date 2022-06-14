@@ -17,14 +17,15 @@ struct CalendarView: View {
     @State private var currentMonth = 0
     @State private var renderDate = Date()
     private let today = Date()
-    private let taxiParties: [TaxiParty] = TaxiPartyMockData.mockData
+    private let taxiParties: [TaxiParty]
     private let action: (Bool, Date) -> Void
     private let calendarType: CalendarType
     private let days = ["일", "월", "화", "수", "목", "금", "토"]
     private let calendarHelper = CalendarHelper()
 
-    init(calendarType: CalendarType = .modalFilter, action: @escaping (Bool, Date) -> Void) {
+    init(calendarType: CalendarType = .modalFilter, taxiParties: [TaxiParty] = [], action: @escaping (Bool, Date) -> Void) {
         self.calendarType = calendarType
+        self.taxiParties = taxiParties
         self.action = action
     }
 
