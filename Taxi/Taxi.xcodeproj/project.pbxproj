@@ -86,6 +86,9 @@
 		E63C7AA52858B5B50080530B /* TaxiPartyMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AA42858B5B50080530B /* TaxiPartyMockData.swift */; };
 		E63C7AA72858B5DE0080530B /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AA62858B5DE0080530B /* CalendarHelper.swift */; };
 		E63C7AA92858B6130080530B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AA82858B6130080530B /* CalendarView.swift */; };
+		E63C7AB02858C2380080530B /* SignUpCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AAF2858C2380080530B /* SignUpCodeView.swift */; };
+		E63C7AB22858C2520080530B /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AB12858C2520080530B /* SignUpNicknameView.swift */; };
+		E63C7AB42858C2650080530B /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AB32858C2650080530B /* UnderlinedTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +180,9 @@
 		E63C7AA42858B5B50080530B /* TaxiPartyMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyMockData.swift; sourceTree = "<group>"; };
 		E63C7AA62858B5DE0080530B /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		E63C7AA82858B6130080530B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		E63C7AAF2858C2380080530B /* SignUpCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCodeView.swift; sourceTree = "<group>"; };
+		E63C7AB12858C2520080530B /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
+		E63C7AB32858C2650080530B /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +348,7 @@
 			children = (
 				00A5705B285182E1008B220E /* RoundedButton.swift */,
 				50DA19622856065200DEC46E /* ProfileImage.swift */,
+				E63C7AB32858C2650080530B /* UnderlinedTextField.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -364,7 +371,6 @@
 				00A570652851EA33008B220E /* RootView.swift */,
 				50595594285037AE001DA44C /* MyPageView.swift */,
 				505955962850BF46001DA44C /* ProfileView.swift */,
-				E622D8F328503A53005A68F3 /* SignUpView.swift */,
 				50459E2E28542E4E00287371 /* PhotoPicker.swift */,
 				50459E34285490CC00287371 /* TaxiPartyInfoView.swift */,
 				37F698842855FB910008C022 /* MyPartyView.swift */,
@@ -373,6 +379,8 @@
 				E63C7AA82858B6130080530B /* CalendarView.swift */,
 				AF174B252851859300BCF680 /* TaxiPartyListView.swift */,
 				AFFA12582857BCFE0076CB2F /* CalendarModal.swift */,
+				E63C7AAF2858C2380080530B /* SignUpCodeView.swift */,
+				E63C7AB12858C2520080530B /* SignUpNicknameView.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -616,6 +624,7 @@
 				00BC47472858CAF80055CB6A /* AddTaxiPartyUseCase.swift in Sources */,
 				00F6B7312859C44D00DACA06 /* ChattingRepository.swift in Sources */,
 				000E545A285321250085C39E /* JoinTaxiPartyUseCase.swift in Sources */,
+				E63C7AB22858C2520080530B /* SignUpNicknameView.swift in Sources */,
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				50459E332854701C00287371 /* ImageExtension.swift in Sources */,
 				00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */,
@@ -629,10 +638,10 @@
 				505955972850BF46001DA44C /* ProfileView.swift in Sources */,
 				E63C7AA92858B6130080530B /* CalendarView.swift in Sources */,
 				AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */,
+				E63C7AB02858C2380080530B /* SignUpCodeView.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
 				508AE80F285A6E5500D111D3 /* UserProfileViewModel.swift in Sources */,
 				00A570642851E993008B220E /* ImageName.swift in Sources */,
-				E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */,
 				E63C7AA52858B5B50080530B /* TaxiPartyMockData.swift in Sources */,
 				E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */,
 				AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */,
@@ -649,6 +658,9 @@
 				E63C7AA02858B5170080530B /* DayContainer.swift in Sources */,
 				00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */,
 				00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */,
+				000E545828531C510085C39E /* AddTaxiPartyUseCase.swift in Sources */,
+				000E545828531C510085C39E /* AddTaxiPartyUseCase.swift in Sources */,
+				E63C7AB42858C2650080530B /* UnderlinedTextField.swift in Sources */,
 				50F8003B28586F9200FA1063 /* Authentication.swift in Sources */,
 				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
 				AF6FD9FF285A951C00827D8C /* TaxiPartyListViewModel.swift in Sources */,
