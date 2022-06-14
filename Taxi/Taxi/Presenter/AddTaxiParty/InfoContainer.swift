@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - 정보 선택 영역 가이드 뷰
-extension AddTaxiPartyView {
+extension AddTaxiParty {
     struct InfoContainer: ViewModifier {
         let title: String
         let selectedInfo: String
@@ -57,7 +57,7 @@ extension AddTaxiPartyView {
 // MARK: - Info Container Modifier Extension
 extension View {
     func toInfoContainer(title: String, selectedInfo: String, toggle: Bool, onClick: @escaping () -> Void) -> some View {
-        self.modifier(AddTaxiPartyView.InfoContainer(title: title, selectedInfo: selectedInfo, toggle: toggle, onClick: onClick))
+        self.modifier(AddTaxiParty.InfoContainer(title: title, selectedInfo: selectedInfo, toggle: toggle, onClick: onClick))
     }
 }
 // MARK: - InfoContainer 프리뷰
