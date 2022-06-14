@@ -42,7 +42,252 @@ struct AddTaxiParty: View {
     }
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 0) {
+            closeButton
+            destinationSelect
+            datePicker
+                .offset(y: -1)
+            timePicker
+                .offset(y: -2)
+            departurePicker
+                .offset(y: -3)
+            personNumberPicker
+                .offset(y: -4)
+            Spacer()
+            if checkAllInfoSelected() {
+                guideText
+            }
+            RoundedButton("택시팟 생성", !checkAllInfoSelected()) {
+                // TODO: 택시팟 생성 유즈케이스와 연결하기!
+            }
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var guideText: some View {
+        HStack {
+            Spacer()
+            Text("해당 사항이 맞으시면 택시팟 생성을 눌러주세요")
+                .caption()
+                .padding(.bottom, 12)
+            Spacer()
+        }
+    }
+
+    private var closeButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            Image(systemName: "xmark")
+                .imageScale(.large)
+                .padding()
+        }
+    }
+}
+// MARK: - 여기서부턴 목적지를 설정하는 뷰입니다.
+extension AddTaxiParty {
+    private var destinationSelect: some View {
+        HStack(spacing: 16) {
+            ForEach(Place.destinations(), id: \.self) { destination in
+                destinationItem(destination)
+            }
+        }
+        .padding(EdgeInsets(top: 24, leading: 16, bottom: 24, trailing: 16))
+        .background(Color.addBackground)
+        .toInfoContainer(title: "어디로 가시나요?", selectedInfo: destination?.rawValue ?? "", toggle: step == .destination) {
+            changeStep(to: .destination)
+        }
+    }
+
+    private func destinationItem(_ place: Place) -> some View {
+        Button {
+            if destination != place {
+                destination = place
+                departure = nil
+                toNextStep()
+            }
+        } label: {
+            Text(place.rawValue)
+                .info()
+                .padding()
+                .frame(maxWidth: .infinity)
+                .roundedBackground(destination == place)
+        }
+    }
+}
+// MARK: - 날짜 선택 뷰
+extension AddTaxiParty {
+    private var datePicker: some View {
+        Button {
+            startDate = "1월 1일"
+            toNextStep()
+        } label: {
+            Text("추후 구현 예정")
+                .padding()
+        }
+        .toInfoContainer(title: "날짜를 선택해주세요", selectedInfo: startDate ?? "", toggle: step == .date) {
+            changeStep(to: .date)
+        }
+    }
+}
+// MARK: - 시간 선택 뷰
+extension AddTaxiParty {
+    private var timePicker: some View {
+        VStack(spacing: 0) {
+            hourSelector
+            Divider().background(Color.customGray.opacity(0.3))
+            minuteSelector
+        }
+        .background(Color.addBackground)
+        .toInfoContainer(title: "몇시에 모이고 싶으신가요?", selectedInfo: startTimeToString(), toggle: step == .time) {
+            changeStep(to: .time)
+        }
+    }
+
+    private func startTimeToString() -> String {
+        if let startHour = startHour, let startMinute = startMinute {
+            return "\(startHour)시 \(String(format: "%02d", startMinute))분"
+        } else {
+            return ""
+        }
+    }
+    private var hourSelector: some View {
+        ScrollView(.horizontal, showsIndicators: true) {
+            HStack(spacing: 17) {
+                ForEach(hourRange) { index in
+                    hourItem(index)
+                }
+            }
+            .padding()
+        }
+    }
+
+    private var minuteSelector: some View {
+        LazyVGrid(columns: columns) {
+            ForEach(0..<6) { minute in
+                minuteItem(minute * 10)
+            }
+        }
+        .padding()
+    }
+
+    private func hourItem(_ hour: Int) -> some View {
+        Button {
+            if startHour != hour {
+                startHour = hour
+                startMinute = nil
+            }
+        } label: {
+            Text("\(String(hour))시")
+                .subTitleSelect()
+                .frame(width: 48, height: 48)
+                .roundedBackground(startHour == hour)
+        }
+    }
+    @ViewBuilder
+    private func minuteItem(_ minute: Int) -> some View {
+        if let startHour = startHour {
+            Button {
+                startMinute = minute
+                toNextStep()
+            } label: {
+                Text("\(String(format: "%02d", startHour)):\(String(format: "%02d", minute))")
+                    .info()
+                    .padding(EdgeInsets(top: 10, leading: 26, bottom: 10, trailing: 26))
+                    .roundedBackground(startMinute == minute)
+            }
+        } else {
+            Text("00:\(String(format: "%02d", minute))")
+                .foregroundColor(.customGray)
+                .padding(EdgeInsets(top: 10, leading: 26, bottom: 10, trailing: 26))
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color.lightGray))
+        }
+    }
+}
+// MARK: - 출발 장소 선택
+extension AddTaxiParty {
+    private var departurePicker: some View {
+        HStack {
+            if let destination = destination {
+                ForEach(Place.departures(of: destination), id: \.self) { place in
+                    Button {
+                        departure = place
+                        toNextStep()
+                    } label: {
+                        Text(place.rawValue)
+                            .info()
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .roundedBackground(departure == place)
+                    }
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(EdgeInsets(top: 24, leading: 18, bottom: 24, trailing: 18))
+        .background(Color.addBackground)
+        .toInfoContainer(title: "어디서 모이시나요?", selectedInfo: departure?.rawValue ?? "", toggle: step == .departure) {
+            changeStep(to: .departure)
+        }
+    }
+}
+// MARK: - 정원 선택
+extension AddTaxiParty {
+    private var personNumberPicker: some View {
+        HStack {
+            ForEach(2..<5, id: \.self) { number in
+                Button {
+                    maxNumber = number
+                    toNextStep()
+                } label: {
+                    Text("\(number)인")
+                        .info()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .roundedBackground(maxNumber == number)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(EdgeInsets(top: 24, leading: 18, bottom: 24, trailing: 18))
+        .background(Color.addBackground)
+        .toInfoContainer(title: "최대 몇명을 모으고 싶으신가요?", selectedInfo: maxNumberToString(), toggle: step == .personNumber) {
+            changeStep(to: .personNumber)
+        }
+    }
+
+    private func maxNumberToString() -> String {
+        if let maxNumber = maxNumber {
+            return "\(maxNumber)인"
+        } else {
+            return ""
+        }
+    }
+}
+// MARK: - 선택, 비선택 RoundedRectangle 을 반환하는 함수입니다.
+extension AddTaxiParty {
+    struct RoundedBackground: ViewModifier {
+        private let selected: Bool
+
+        init(_ selected: Bool) {
+            self.selected = selected
+        }
+        func body(content: Content) -> some View {
+            let backgroundColor: Color = selected ? .selectYellow : .white
+            let strokeColor: Color = selected ? .customYellow : .lightGray
+            return content.background(
+                RoundedRectangle(cornerRadius: 10)
+                    .strokeBorder(strokeColor, lineWidth: 1, antialiased: false)
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .fill(backgroundColor)
+                        .shadow(color: .black.opacity(0.15), radius: 1, x: 0, y: 1))
+            )
+        }
+    }
+}
+extension View {
+    func roundedBackground(_ selected: Bool) -> some View {
+        self.modifier(AddTaxiParty.RoundedBackground(selected))
     }
 }
 // MARK: Step 변경 로직
