@@ -59,7 +59,7 @@ struct TaxiPartyHeadLine: View {
 }
 
 struct TaxiPartyFiltering: View {
-    let titles: [String] = ["전체", "포항역", "포스텍"]
+    private let titles: [String] = ["전체", "포항역", "포스텍"]
     @State var selectedIndex: Int = 0
     var body: some View {
         SegmentedPicker( // TODO : CellView 목적지 별로 필터링 가능하게 만들기
@@ -127,7 +127,7 @@ struct MyProgress: View {
 struct CellViewList: View {
     @Environment(\.refresh) private var refresh   // << refreshable injected !!
     @State private var isRefreshing = false
-    @State var mypartys: [TaxiParty] = [
+    @State private var mypartys: [TaxiParty] = [
         TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220601, meetingTime: 0930, maxPersonNumber: 4, members: ["요셉", "아보", "조이", "제리"], isClosed: true),
         TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220601, meetingTime: 1330, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
         TaxiParty(id: "3", departureCode: 0, destinationCode: 1, meetingDate: 20220602, meetingTime: 1400, maxPersonNumber: 2, members: ["제리", "조이"], isClosed: false),

@@ -11,10 +11,10 @@ struct CalendarModal: View {
     @Binding var isShowing: Bool
     @State private var isPresented = false
     @State private var curHeight: CGFloat = 400
-    let minHeight: CGFloat = 300
-    let maxHeight: CGFloat = 300
-    let startOpacity: Double = 0.4
-    let endOpacity: Double = 0.8
+    private let minHeight: CGFloat = 300
+    private let maxHeight: CGFloat = 300
+    private let startOpacity: Double = 0.4
+    private let endOpacity: Double = 0.8
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -45,7 +45,7 @@ struct CalendarModal: View {
             .frame(maxWidth: .infinity)
             .background(Color.white.opacity(0.00001))
             NavigationView {
-            }
+            } // 차후 달력 컴포넌트와 연동 예정
             .frame(maxHeight: .infinity)
             .padding(.bottom, 35)
         }
