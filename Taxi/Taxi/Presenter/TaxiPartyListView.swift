@@ -95,7 +95,9 @@ struct DatePickerButton: View {
     @Binding var showModal: Bool
     var body: some View {
         Button {
-            showModal = true
+            withAnimation(.easeInOut) {
+                showModal = true
+            }
         } label: {
             Text("날짜 선택")
                 .foregroundColor(Color(red: 255 / 255, green: 204 / 255, blue: 18 / 255, opacity: 1.0))

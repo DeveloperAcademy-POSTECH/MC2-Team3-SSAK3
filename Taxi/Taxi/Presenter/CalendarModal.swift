@@ -15,6 +15,7 @@ struct CalendarModal: View {
     let maxHeight: CGFloat = 300
     let startOpacity: Double = 0.4
     let endOpacity: Double = 0.8
+
     var body: some View {
         ZStack(alignment: .bottom) {
             if isShowing {
@@ -22,7 +23,9 @@ struct CalendarModal: View {
                     .opacity(0.3)
                     .ignoresSafeArea()
                     .onTapGesture {
-                        isShowing = false
+                        withAnimation(.easeInOut) {
+                            isShowing = false
+                        }
                     }
                 mainView
                     .transition(.move(edge: .bottom))
@@ -30,19 +33,18 @@ struct CalendarModal: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .ignoresSafeArea()
-        .animation(.easeInOut)
     }
+
     var mainView: some View {
-        VStack { // handle
+        VStack {
             ZStack {
                 Capsule()
                     .frame(width: 40, height: 6)
             }
             .frame(height: 40)
             .frame(maxWidth: .infinity)
-            .background(Color.white.opacity(0.00001)) // this is important for the dragging
+            .background(Color.white.opacity(0.00001))
             NavigationView {
-                
             }
             .frame(maxHeight: .infinity)
             .padding(.bottom, 35)
@@ -50,7 +52,6 @@ struct CalendarModal: View {
         .frame(height: curHeight)
         .frame(maxWidth: .infinity)
         .background(
-            // HACK for RoundedCorners only on top
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                 Rectangle()
