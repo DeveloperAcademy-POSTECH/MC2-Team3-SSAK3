@@ -16,29 +16,27 @@ struct SignUpCodeView: View {
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 80) {
                 Text("가입코드를 입력해주세요")
-                    .fontWeight(.bold)
-                    .opacity(0.3)
+                    .signUpTitle()
+                VStack {
                 UnderlinedTextField(text: $signUpCode, codeState, "가입코드를 입력해주세요")
+                    .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
                     .focused($focusField)
-                    .disabled(codeState.correct)
+                    .disabled(codeState.isCorrect)
                 makeMessage(codeState)
-                    .font(.caption)
+                    .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
                     .foregroundColor(codeFieldMessageColor(codeState))
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top)
+                }
                 Spacer()
                 NavigationLink(destination: SignUpNicknameView(), isActive: $isActive) {
                     Text("")
                 }
-                Button {
+                RoundedButton("다음", !codeState.isCorrect) {
                     isActive.toggle()
-                } label: {
-                    Text("다음")
-                        .frame(maxWidth: .infinity)
                 }
-                .disabled(!codeState.correct)
-
             }
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -79,7 +77,7 @@ struct SignUpCodeView: View {
     private func codeFieldMessageColor( _ fieldText: FieldState) -> Color {
         switch fieldText {
         case .notFocused, .focused:
-            return Color.charcoal
+            return Color.signUpYellowGray
         case .wrong:
             return Color.customRed
         case .right:

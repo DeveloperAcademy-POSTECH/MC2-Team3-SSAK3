@@ -10,7 +10,7 @@ import SwiftUI
 enum FieldState {
     case notFocused, focused, wrong, right
 
-    var correct: Bool {
+    var isCorrect: Bool {
         switch self {
         case .right:
             return true
@@ -39,8 +39,7 @@ struct UnderlinedTextField: View {
                 Rectangle()
                     .frame(height: 2)
                     .foregroundColor(setUnderlineColor(fieldState))
-                    .padding(.top, 50)
-                    .padding(.bottom, 20)
+                    .padding(.top, 40)
             )
     }
 
