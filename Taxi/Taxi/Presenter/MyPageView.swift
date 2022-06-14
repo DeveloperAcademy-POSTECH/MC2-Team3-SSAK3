@@ -42,7 +42,7 @@ struct MyPageView: View {
 
 extension MyPageView {
 
-    var linkToProfile: some View {
+    private var linkToProfile: some View {
         HStack {
             Text("프로필 관리")
             Spacer()
@@ -50,7 +50,7 @@ extension MyPageView {
         }
     }
 
-    func notificationSetting(_ label: String, isOn: Binding<Bool>) -> some View {
+    private func notificationSetting(_ label: String, isOn: Binding<Bool>) -> some View {
         HStack {
             Text(label)
             Spacer()
@@ -59,7 +59,7 @@ extension MyPageView {
         }
     }
 
-    func logOnStateButton(_ title: String, label: String, message: String, isPresented: Binding<Bool>, action: @escaping () -> Void) -> some View {
+    private func logOnStateButton(_ title: String, label: String, message: String, isPresented: Binding<Bool>, action: @escaping () -> Void) -> some View {
         Button {
             isPresented.wrappedValue.toggle()
         } label: {
