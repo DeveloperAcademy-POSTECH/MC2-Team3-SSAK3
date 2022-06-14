@@ -4,7 +4,7 @@
 //
 //  Created by Yosep on 2022/06/09.
 //
-// import SegmentedPicker
+import SegmentedPicker
 import SwiftUI
 
 struct TaxiPartyListView: View {
