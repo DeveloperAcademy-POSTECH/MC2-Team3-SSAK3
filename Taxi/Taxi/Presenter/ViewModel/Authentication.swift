@@ -40,4 +40,12 @@ final class Authentication: ObservableObject {
             self.user = user
         }
     }
+
+    func deleteProfileImage() {
+        guard let user = user else { return }
+        authenticateUseCase.deleteProfileImage(for: user) { user, error in
+            guard let user = user, error == nil else { return }
+            self.user = user
+        }
+    }
 }
