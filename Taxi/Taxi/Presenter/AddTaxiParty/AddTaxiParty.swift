@@ -61,7 +61,6 @@ struct AddTaxiParty: View {
                 // TODO: 택시팟 생성 유즈케이스와 연결하기!
             }
         }
-        .buttonStyle(.plain)
     }
 
     private var guideText: some View {
@@ -154,7 +153,7 @@ extension AddTaxiParty {
     private var hourSelector: some View {
         ScrollView(.horizontal, showsIndicators: true) {
             HStack(spacing: 17) {
-                ForEach(hourRange) { index in
+                ForEach(hourRange, id: \.self) { index in
                     hourItem(index)
                 }
             }
@@ -179,7 +178,8 @@ extension AddTaxiParty {
             }
         } label: {
             Text("\(String(hour))시")
-                .subTitleSelect()
+                .font(.custom("AppleSDGothicNeo-Medium", size: 18))
+                .foregroundColor(startHour == hour ? .customBlack: .charcoal)
                 .frame(width: 48, height: 48)
                 .roundedBackground(startHour == hour)
         }
@@ -280,7 +280,7 @@ extension AddTaxiParty {
                     .strokeBorder(strokeColor, lineWidth: 1, antialiased: false)
                     .background(RoundedRectangle(cornerRadius: 10)
                         .fill(backgroundColor)
-                        .shadow(color: .black.opacity(0.15), radius: 1, x: 0, y: 1))
+                        .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1))
             )
         }
     }
