@@ -33,7 +33,7 @@ extension AddTaxiPartyView {
             } label: {
                 HStack {
                     Text(title)
-                        .font(.system(size: 18, weight: toggle ? .bold: .medium, design: .default))
+                        .font(.system(size: 18, weight: toggle ? .bold: .medium))
                         .foregroundColor(toggle ? Color.customBlack : .darkGray)
                         .lineLimit(1)
                     Spacer()
@@ -50,7 +50,6 @@ extension AddTaxiPartyView {
             }
             .padding()
             .border(toggle ? .clear : .gray.opacity(0.2), width: 1)
-            .buttonStyle(.plain)
             .background(toggle ? Color.selectYellow.shadow(color: .black.opacity(0.12), radius: 1, x: 0, y: 1) : Color.white.shadow(radius: 0))
         }
     }
