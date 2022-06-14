@@ -88,6 +88,24 @@ class AuthenticateUsecaseTest: XCTestCase {
         // then
         wait(for: [promise], timeout: 10)
         XCTAssertNil(error)
+    }
 
+    func testDeleteProfileImageCompletionHandler() {
+        // given
+        let promise = expectation(description: "profile Image delete Success!")
+        var error: Error?
+        let user: User = User(id: "1", nickname: "켄드릭 라마", profileImage: nil)
+
+        // when
+        authenticateUsecase.deleteProfileImage(for: user) { user, err in
+            error = err
+            if let user = user {
+                print(user)
+            }
+            promise.fulfill()
+        }
+        // then
+        wait(for: [promise], timeout: 5)
+        XCTAssertNil(error)
     }
 }
