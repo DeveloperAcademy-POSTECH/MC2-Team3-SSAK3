@@ -35,4 +35,9 @@ protocol UserRepository {
     ///   - nickname: 업데이트 할 닉네임
     /// - Returns: User 혹은 Error 를 발행하는 Publisher, 업데이트에 성공하면 User 를, 실패하면 Error 를 반환한다.
     func updateNickname(_ user: User, _ nickname: String) -> AnyPublisher<User, Error>
+
+    /// 프로필 이미지를 삭제하는 함수
+    /// - Parameter user: 프로필 이미지를 삭제할 유저
+    /// - Returns: User 혹은 Error 를 발행하는 Publisher, 업데이트에 성공하면 User 를, 실패하면 Error 를 반환한다.
+    func deleteProfileImage(for user: User) -> AnyPublisher<User, Error>
 }
