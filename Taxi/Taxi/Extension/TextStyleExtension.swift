@@ -90,6 +90,37 @@ struct SignUpAgreement: ViewModifier {
 
 
 
+struct CalendarDay: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .foregroundColor(.customGray)
+            .font(.system(size: 12, weight: .medium))
+    }
+}
+
+struct CalendarDate: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .font(.system(size: 18, weight: .medium))
+    }
+}
+
+struct CalendarTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .foregroundColor(.charcoal)
+            .font(.system(size: 18, weight: .medium))
+    }
+}
+
+struct CalendarArrow: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .font(.system(size: 18, weight: .medium))
+    }
+}
+
+
 extension View {
     func mainTitle() -> some View {
         self.modifier(MainTitle())
@@ -120,6 +151,18 @@ extension View {
     }
     func signUpAgreement() -> some View {
         self.modifier(SignUpAgreement())
+    }
+    func calendarDay() -> some View {
+            self.modifier(CalendarDay())
+        }
+    func calendarDate() -> some View {
+        self.modifier(CalendarDate())
+    }
+    func calendarTitle() -> some View {
+        self.modifier(CalendarTitle())
+    }
+    func calendarArrow() -> some View {
+        self.modifier(CalendarArrow())
     }
 }
 
