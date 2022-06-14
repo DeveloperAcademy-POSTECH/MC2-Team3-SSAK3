@@ -99,4 +99,17 @@ final class UserFirebaseDataSource: UserRepository {
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
+
+    func deleteProfileImage(for user: User) -> AnyPublisher<User, Error> {
+        let docRef = fireStore.collection("User").document(user.id)
+
+        return docRef.updateData([
+            "profileImage": FieldValue.delete()
+        ])
+        .map {
+            User(id: user.id, nickname: user.nickname, profileImage: nil)
+        }
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
+    }
 }
