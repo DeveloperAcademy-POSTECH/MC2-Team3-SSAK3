@@ -19,20 +19,18 @@ final class Authentication: ObservableObject {
     }
 
     func updateNickname(_ newName: String) {
-        if let user = user {
-            authenticateUseCase.changeNickname(user, to: newName) { user, error in
-                guard user != nil, error == nil else { return }
-                self.user = user
-            }
+        guard let user = user else { return }
+        authenticateUseCase.changeNickname(user, to: newName) { user, error in
+            guard error == nil else { return }
+            self.user = user
         }
     }
 
     func updateProfileImage(_ newImage: Data) {
-        if let user = user {
-            authenticateUseCase.changeProfileImage(user, to: newImage) { user, error in
-                guard user != nil, error == nil else { return }
-                self.user = user
-            }
+        guard let user = user else { return }
+        authenticateUseCase.changeProfileImage(user, to: newImage) { user, error in
+            guard error == nil else { return }
+            self.user = user
         }
     }
 
