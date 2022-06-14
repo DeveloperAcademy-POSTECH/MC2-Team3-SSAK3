@@ -13,7 +13,7 @@ final class Authentication: ObservableObject {
 
     func login(_ id: String) {
         authenticateUseCase.login(id) { user, error in
-            guard user != nil, error == nil else { return }
+            guard let user = user, error == nil else { return }
             self.user = user
         }
     }
@@ -21,7 +21,7 @@ final class Authentication: ObservableObject {
     func updateNickname(_ newName: String) {
         guard let user = user else { return }
         authenticateUseCase.changeNickname(user, to: newName) { user, error in
-            guard error == nil else { return }
+            guard let user = user, error == nil else { return }
             self.user = user
         }
     }
@@ -29,14 +29,14 @@ final class Authentication: ObservableObject {
     func updateProfileImage(_ newImage: Data) {
         guard let user = user else { return }
         authenticateUseCase.changeProfileImage(user, to: newImage) { user, error in
-            guard error == nil else { return }
+            guard let user = user, error == nil else { return }
             self.user = user
         }
     }
 
     func register(id: String, nickname: String) {
         authenticateUseCase.register(id, nickname) { user, error in
-            guard user != nil, error == nil else { return }
+            guard let user = user, error == nil else { return }
             self.user = user
         }
     }
