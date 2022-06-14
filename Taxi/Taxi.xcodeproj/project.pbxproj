@@ -14,9 +14,9 @@
 		000D83372840E23A00BA3DFA /* TaxiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83362840E23A00BA3DFA /* TaxiTests.swift */; };
 		000D83412840E23A00BA3DFA /* TaxiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83402840E23A00BA3DFA /* TaxiUITests.swift */; };
 		000D83432840E23A00BA3DFA /* TaxiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83422840E23A00BA3DFA /* TaxiUITestsLaunchTests.swift */; };
-		000E545828531C510085C39E /* AddTaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545728531C510085C39E /* AddTaxiParty.swift */; };
-		000E545A285321250085C39E /* JoinTaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E5459285321250085C39E /* JoinTaxiParty.swift */; };
-		000E545C285321E70085C39E /* GetTaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545B285321E70085C39E /* GetTaxiParty.swift */; };
+		000E545828531C510085C39E /* AddTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545728531C510085C39E /* AddTaxiPartyUseCase.swift */; };
+		000E545A285321250085C39E /* JoinTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E5459285321250085C39E /* JoinTaxiPartyUseCase.swift */; };
+		000E545C285321E70085C39E /* GetTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545B285321E70085C39E /* GetTaxiPartyUseCase.swift */; };
 		000E545E2853622D0085C39E /* AuthenticateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545D2853622D0085C39E /* AuthenticateUseCase.swift */; };
 		000E83B4284A2D55000CD5AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 000E83B3284A2D55000CD5AA /* GoogleService-Info.plist */; };
 		000E83B7284A2DBF000CD5AA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 000E83B6284A2DBF000CD5AA /* FirebaseMessaging */; };
@@ -38,7 +38,7 @@
 		00A5705C285182E1008B220E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5705B285182E1008B220E /* RoundedButton.swift */; };
 		00A570642851E993008B220E /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570632851E993008B220E /* ImageName.swift */; };
 		00A570662851EA33008B220E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570652851EA33008B220E /* RootView.swift */; };
-		00BC473F28581E740055CB6A /* AddTaxiPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC473E28581E740055CB6A /* AddTaxiPartyView.swift */; };
+		00BC473F28581E740055CB6A /* AddTaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC473E28581E740055CB6A /* AddTaxiParty.swift */; };
 		00BC474128581E860055CB6A /* InfoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC474028581E860055CB6A /* InfoContainer.swift */; };
 		00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */; };
 		00D3AE74284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */; };
@@ -98,9 +98,9 @@
 		000D833C2840E23A00BA3DFA /* TaxiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		000D83402840E23A00BA3DFA /* TaxiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiUITests.swift; sourceTree = "<group>"; };
 		000D83422840E23A00BA3DFA /* TaxiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		000E545728531C510085C39E /* AddTaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiParty.swift; sourceTree = "<group>"; };
-		000E5459285321250085C39E /* JoinTaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTaxiParty.swift; sourceTree = "<group>"; };
-		000E545B285321E70085C39E /* GetTaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTaxiParty.swift; sourceTree = "<group>"; };
+		000E545728531C510085C39E /* AddTaxiPartyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiPartyUseCase.swift; sourceTree = "<group>"; };
+		000E5459285321250085C39E /* JoinTaxiPartyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTaxiPartyUseCase.swift; sourceTree = "<group>"; };
+		000E545B285321E70085C39E /* GetTaxiPartyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTaxiPartyUseCase.swift; sourceTree = "<group>"; };
 		000E545D2853622D0085C39E /* AuthenticateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateUseCase.swift; sourceTree = "<group>"; };
 		000E83B3284A2D55000CD5AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		00102B62284D833C000B8BFF /* 1Profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1Profile.jpg; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		00A5705B285182E1008B220E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		00A570632851E993008B220E /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		00A570652851EA33008B220E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		00BC473E28581E740055CB6A /* AddTaxiPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiPartyView.swift; sourceTree = "<group>"; };
+		00BC473E28581E740055CB6A /* AddTaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiParty.swift; sourceTree = "<group>"; };
 		00BC474028581E860055CB6A /* InfoContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoContainer.swift; sourceTree = "<group>"; };
 		00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepository.swift; sourceTree = "<group>"; };
 		00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
@@ -195,9 +195,9 @@
 		000AE1CE284C8FF000AF59BE /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				000E545728531C510085C39E /* AddTaxiParty.swift */,
-				000E5459285321250085C39E /* JoinTaxiParty.swift */,
-				000E545B285321E70085C39E /* GetTaxiParty.swift */,
+				000E545728531C510085C39E /* AddTaxiPartyUseCase.swift */,
+				000E5459285321250085C39E /* JoinTaxiPartyUseCase.swift */,
+				000E545B285321E70085C39E /* GetTaxiPartyUseCase.swift */,
 				000E545D2853622D0085C39E /* AuthenticateUseCase.swift */,
 				00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */,
 			);
@@ -308,7 +308,7 @@
 		00BC473D28581E530055CB6A /* AddTaxiParty */ = {
 			isa = PBXGroup;
 			children = (
-				00BC473E28581E740055CB6A /* AddTaxiPartyView.swift */,
+				00BC473E28581E740055CB6A /* AddTaxiParty.swift */,
 				00BC474028581E860055CB6A /* InfoContainer.swift */,
 			);
 			path = AddTaxiParty;
@@ -542,7 +542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000E545A285321250085C39E /* JoinTaxiParty.swift in Sources */,
+				000E545A285321250085C39E /* JoinTaxiPartyUseCase.swift in Sources */,
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				50459E332854701C00287371 /* ImageExtension.swift in Sources */,
 				00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */,
@@ -566,15 +566,15 @@
 				000E545E2853622D0085C39E /* AuthenticateUseCase.swift in Sources */,
 				00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */,
 				00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */,
-				000E545828531C510085C39E /* AddTaxiParty.swift in Sources */,
+				000E545828531C510085C39E /* AddTaxiPartyUseCase.swift in Sources */,
 				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
 				50459E35285490CC00287371 /* TaxiPartyInfoView.swift in Sources */,
 				00842A94284B2682000292E5 /* TaxiParty.swift in Sources */,
 				00D904B52854A64E0003BA5A /* MyTaxiPartyUseCase.swift in Sources */,
-				00BC473F28581E740055CB6A /* AddTaxiPartyView.swift in Sources */,
+				00BC473F28581E740055CB6A /* AddTaxiParty.swift in Sources */,
 				A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */,
 				00A5705A2851826A008B220E /* ColorExtension.swift in Sources */,
-				000E545C285321E70085C39E /* GetTaxiParty.swift in Sources */,
+				000E545C285321E70085C39E /* GetTaxiPartyUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
