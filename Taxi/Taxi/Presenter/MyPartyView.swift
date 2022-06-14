@@ -146,8 +146,12 @@ enum SwipeActionState {
             return .zero
         case .active:
             return -75
-        case .swiping(let width):
-            return width
+        case .swiping(let width): // width가 최대 95를 넘지 않게
+            if width > -75 {
+                return width
+            } else {
+                return -75 + (20 * width / UIScreen.main.bounds.width)
+            }
         }
     }
     var isSwiping: Bool {
@@ -165,7 +169,7 @@ struct SwipeDelete: ViewModifier {
     let action : () -> Void
     @State private var swipeState = SwipeActionState.inactive
     @GestureState private var isDragging = false
-
+    
     private var swipeAction: some Gesture {
         DragGesture(coordinateSpace: .local)
             .updating($isDragging) { _, state, _ in
@@ -173,12 +177,14 @@ struct SwipeDelete: ViewModifier {
             }
             .onChanged { value in
                 if value.translation.width < 0 {
-                    swipeState = SwipeActionState.swiping(width: value.translation.width)
+                    withAnimation(.easeInOut) {
+                        swipeState = SwipeActionState.swiping(width: value.translation.width)
+                    }
                 }
             }
             .onEnded { value in
                 if value.translation.width < 0 {
-                    withAnimation(.easeOut) {
+                    withAnimation(.easeInOut) {
                         swipeState = SwipeActionState.active
                         isSwiped = true
                     }
@@ -188,15 +194,15 @@ struct SwipeDelete: ViewModifier {
 
     func body(content: Content) -> some View {
         ZStack(alignment: .leading) {
-            Rectangle()
-                .foregroundColor(.red)
             HStack {
                 Spacer()
                 Text("나가기")
-                    .frame(width: 75)
-                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: 95, maxHeight: .infinity, alignment: .leading)
                     .gesture(TapGesture().onEnded({self.action()}))
-                    .offset(x: 75 + swipeState.width)
+                    .foregroundColor(.white)
+                    .background(.red, in: Rectangle())
+                    .offset(x: 95 + swipeState.width)
             }
             content
                 .frame(maxWidth: .infinity)
