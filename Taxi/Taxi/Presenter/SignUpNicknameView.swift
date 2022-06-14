@@ -31,6 +31,7 @@ struct SignUpNicknameView: View {
                 UserDefaults.standard.set(true, forKey: "isLogined")
             }
         }
+        .navigationBarHidden(true)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 focusField = true
@@ -40,7 +41,7 @@ struct SignUpNicknameView: View {
         .onSubmit {
             focusField = true
         }
-        .padding()
+        .padding(.horizontal)
     }
 }
 
