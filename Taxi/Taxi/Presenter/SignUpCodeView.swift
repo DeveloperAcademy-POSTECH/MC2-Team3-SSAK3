@@ -32,12 +32,12 @@ struct SignUpCodeView: View {
                 }
                 Spacer()
                 NavigationLink(destination: SignUpNicknameView(), isActive: $isActive) {
-                    Text("")
                 }
                 RoundedButton("다음", !codeState.isCorrect) {
                     isActive.toggle()
                 }
             }
+            .navigationBarHidden(true)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     focusField = true
@@ -48,7 +48,7 @@ struct SignUpCodeView: View {
                 codeState = (signUpCode == developerCode ? .right : .wrong)
                 focusField = true
             }
-            .padding()
+            .padding(.horizontal)
         }
     }
 
