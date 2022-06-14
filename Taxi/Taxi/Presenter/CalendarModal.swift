@@ -45,7 +45,7 @@ struct CalendarModal: View {
             .frame(maxWidth: .infinity)
             .background(Color.white.opacity(0.00001))
             NavigationView {
-            } // 차후 달력 컴포넌트와 연동 예정
+            } // TODO: 차후 달력 컴포넌트와 연동 예정
             .frame(maxHeight: .infinity)
             .padding(.bottom, 35)
         }

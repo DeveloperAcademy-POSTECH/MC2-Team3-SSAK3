@@ -9,10 +9,11 @@ import SwiftUI
 struct CellView: View {
     let party: TaxiParty
     private let paddingSize: CGFloat = 6
+
     var body: some View {
         VStack(alignment: .leading, spacing: 13) {
             HStack {
-                MeetTimeView(party: party)
+                MeetTimeView(meetingTime: party.meetingTime)
                 Spacer()
                 HStack(spacing: 4) {
                     Image(systemName: "person.fill")
@@ -100,19 +101,21 @@ struct CellView: View {
 }
 
 struct MeetTimeView: View {
-    let party: TaxiParty
-    func meetTimeSeparator(str1: String) -> String {
-        var meet: String = str1
-        let index1 = meet.index(meet.endIndex, offsetBy: -2)
-        meet.insert(":", at: index1)
-        return "\(meet)"
-    }
+    let meetingTime: Int
+
     var body: some View {
-        Text("\(meetTimeSeparator(str1: String(party.meetingTime)))")
+        Text("\(meetTimeSeparator(meetTime: String(meetingTime)))")
         // Text("\(party.meetingTime / 100 % 100 ):\(party.meetingTime % 100)") --> 00분일 때 0하나 짤림
             .font(.custom("Apple SD Gothic Neo", size: 40))
             .fontWeight(.bold) // 데이터로 처리 필요
             .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
+    }
+
+    func meetTimeSeparator(meetTime: String) -> String {
+        var meet: String = meetTime
+        let index1 = meet.index(meet.endIndex, offsetBy: -2) // TODO: offsetBy부분 if문으로 처리하여 app crash 방지
+        meet.insert(":", at: index1)
+        return "\(meet)"
     }
 }
 

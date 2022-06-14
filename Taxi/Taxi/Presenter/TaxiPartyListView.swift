@@ -4,10 +4,12 @@
 //
 //  Created by Yosep on 2022/06/09.
 //
+import SegmentedPicker
 import SwiftUI
 
 struct TaxiPartyListView: View {
     @State private var showModal = false
+
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -41,7 +43,6 @@ struct TaxiPartyHeadLine: View {
     var body: some View {
         HStack {
             Text("택시팟")
-            // .font(.system(size: 26))
                 .font(.custom("Apple SD Gothic Neo", size: 26))
                 .fontWeight(.bold)
             Spacer()
@@ -61,6 +62,7 @@ struct TaxiPartyHeadLine: View {
 struct TaxiPartyFiltering: View {
     private let titles: [String] = ["전체", "포항역", "포스텍"]
     @State var selectedIndex: Int = 0
+
     var body: some View {
         SegmentedPicker( // TODO : CellView 목적지 별로 필터링 가능하게 만들기
             titles,
@@ -93,6 +95,7 @@ struct TaxiPartyFiltering: View {
 
 struct DatePickerButton: View {
     @Binding var showModal: Bool
+
     var body: some View {
         Button {
             withAnimation(.easeInOut) {
@@ -109,6 +112,7 @@ struct DatePickerButton: View {
 
 struct MyProgress: View {
     @State private var isProgress = false
+
     var body: some View {
         HStack {
             ForEach(0...4, id: \.self) { index in
@@ -141,9 +145,10 @@ struct CellViewList: View {
     private var meetingDates: [Int] {
         partys.map({$0.key}).sorted()
     }
+
     var body: some View {
         if isRefreshing {
-            MyProgress()    // ProgressView() ?? - no, it's boring :)
+            MyProgress()
                 .transition(.scale)
         }
         ScrollView {
@@ -186,6 +191,7 @@ struct ViewOffsetKey: PreferenceKey {
 
 struct SectionHeaderView: View {
     let date: Int
+
     var body: some View {
         Text("\(date / 100 % 100)월 \(date % 100)일")
             .foregroundColor(.black)
