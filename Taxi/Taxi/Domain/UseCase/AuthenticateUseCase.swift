@@ -93,4 +93,19 @@ final class AuthenticateUseCase {
                 completion(user, nil)
             }.store(in: &cancelBag)
     }
+
+    func deleteProfileImage(for user: User) -> AnyPublisher<User, Error> {
+        return userRepository.deleteProfileImage(for: user)
+    }
+
+    func deleteProfileImage(for user: User, completion: @escaping (User?, Error?) -> Void) {
+        userRepository.deleteProfileImage(for: user)
+            .sink { result in
+                if case let .failure(error) = result {
+                    completion(nil, error)
+                }
+            } receiveValue: { user in
+                completion(user, nil)
+            }.store(in: &cancelBag)
+    }
 }
