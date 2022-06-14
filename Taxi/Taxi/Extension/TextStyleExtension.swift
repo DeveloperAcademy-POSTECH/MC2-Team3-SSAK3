@@ -12,7 +12,7 @@ struct MainTitle: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .foregroundColor(.customBlack)
-            .font(Font.custom("AppleSDGothicNeo-Bold", size: 26))
+            .font(Font.custom("AppleSDGothicNeo-Bold", size: 20))
     }
 }
 
@@ -44,7 +44,7 @@ struct InchatNotification: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .foregroundColor(.customBlack)
-            .font(Font.custom("AppleSDGothicNeo-Regular", size: 10))
+            .font(Font.custom("AppleSDGothicNeo-Regular", size: 12))
     }
 }
 
@@ -52,9 +52,43 @@ struct ListMainTitle: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .foregroundColor(.customBlack)
-            .font(Font.custom("AppleSDGothicNeo-Regular", size: 10))
+            .font(Font.custom("AppleSDGothicNeo-Regular", size: 36))
     }
 }
+
+struct SignUpTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .foregroundColor(.customBlack)
+            .font(Font.custom("AppleSDGothicNeo-Bold", size: 25))
+    }
+}
+
+struct SignUpPlaceholder: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .foregroundColor(.signUpYellowGray)
+            .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
+    }
+}
+
+struct SignUpExplain: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .foregroundColor(.signUpYellowGray)
+            .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
+    }
+}
+
+struct SignUpAgreement: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .foregroundColor(.signUpYellowGray)
+            .font(Font.custom("AppleSDGothicNeo-Regular", size: 16))
+    }
+}
+
+
 
 extension View {
     func mainTitle() -> some View {
@@ -74,6 +108,18 @@ extension View {
     }
     func listMaintitle() -> some View {
         self.modifier(ListMainTitle())
+    }
+    func signUpTitle() -> some View {
+        self.modifier(SignUpTitle())
+    }
+    func signUpPlaceholder() -> some View {
+        self.modifier(SignUpPlaceholder())
+    }
+    func signUpExplain() -> some View {
+        self.modifier(SignUpExplain())
+    }
+    func signUpAgreement() -> some View {
+        self.modifier(SignUpAgreement())
     }
 }
 
