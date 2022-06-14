@@ -18,12 +18,15 @@ struct TaxiPartyListView: View {
                         Spacer()
                         DatePickerButton(showModal: $showModal)
                     }
-                } .padding(.horizontal, 20)
+                }
+                .padding(.horizontal, 20)
                 ScrollView {
                     CellViewList()
-                } .refreshable {     // << injects environment value !!
+                }
+                .refreshable {     // << injects environment value !!
                     await fetchSomething()
-                }.background(Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
+                }
+                .background(Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
             }
             CalendarModal(isShowing: $showModal)
         }
@@ -79,7 +82,8 @@ struct TaxiPartyFiltering: View {
                         .fill(Color.black)
                         .frame(width: 50, height: 2)
                 }
-            })
+            }
+        )
         .onAppear {
             selectedIndex = 0
         }
@@ -90,7 +94,9 @@ struct TaxiPartyFiltering: View {
 struct DatePickerButton: View {
     @Binding var showModal: Bool
     var body: some View {
-        Button(action: { showModal = true }){
+        Button {
+            showModal = true
+        } label: {
             Text("날짜 선택")
                 .foregroundColor(Color(red: 255 / 255, green: 204 / 255, blue: 18 / 255, opacity: 1.0))
                 .font(.custom("Apple SD Gothic Neo", size: 16))

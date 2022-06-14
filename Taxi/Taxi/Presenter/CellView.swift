@@ -44,16 +44,17 @@ struct CellView: View {
                         .fontWeight(.thin)
                         .font(.custom("Apple SD Gothic Neo", size: 14))
                         .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
-                } .padding(paddingSize)
-                    .background {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 0.2))
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 1), lineWidth: 1.5)
-                                .opacity(1)
-                        }
+                }
+                .padding(paddingSize)
+                .background {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 0.2))
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(red: 200 / 255, green: 1 / 255, blue: 80 / 255, opacity: 1), lineWidth: 1.5)
+                            .opacity(1)
                     }
+                }
                 Image(systemName: "chevron.forward")
                     .font(.system(size: 20))
                     .foregroundColor(Color(red: 160 / 255, green: 160 / 255, blue: 160 / 255, opacity: 1.0))
@@ -71,16 +72,17 @@ struct CellView: View {
                         .fontWeight(.thin)
                         .font(.custom("Apple SD Gothic Neo", size: 14))
                         .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
-                }.padding(paddingSize)
-                    .background {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color(red: 24 / 255, green: 143 / 255, blue: 194 / 255, opacity: 0.2))
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(red: 24 / 255, green: 143 / 255, blue: 194 / 255, opacity: 1), lineWidth: 1.5)
-                                .opacity(1)
-                        }
+                }
+                .padding(paddingSize)
+                .background {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(red: 24 / 255, green: 143 / 255, blue: 194 / 255, opacity: 0.2))
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(red: 24 / 255, green: 143 / 255, blue: 194 / 255, opacity: 1), lineWidth: 1.5)
+                            .opacity(1)
                     }
+                }
             }
         }
         .padding(18)
