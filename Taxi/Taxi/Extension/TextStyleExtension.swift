@@ -98,12 +98,6 @@ struct CalendarDay: ViewModifier {
     }
 }
 
-struct CalendarDate: ViewModifier {
-    func body(content: Content) -> some View {
-        return content
-            .font(.system(size: 18, weight: .medium))
-    }
-}
 
 struct CalendarTitle: ViewModifier {
     func body(content: Content) -> some View {

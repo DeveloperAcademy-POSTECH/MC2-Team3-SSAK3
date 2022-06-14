@@ -71,7 +71,8 @@ struct CalendarView: View {
         }
         .padding(.horizontal, 10)
         .onChange(of: currentMonth) {_ in
-            currentDate = calendarHelper.changeCurrentMonth(currentMonth)        }
+            currentDate = calendarHelper.changeCurrentMonth(currentMonth)
+        }
     }
 
     var dayOfWeek: some View {
@@ -118,7 +119,7 @@ struct CalendarView: View {
 
     // MARK: - function
     private func todayCapsuleBorder(_ date: Date, borderColor: Color) -> Color {
-        return date.today ? .gray : .clear
+        return date.isToday ? .gray : .clear
     }
 
     // MARK: - view maker
@@ -132,17 +133,17 @@ struct CalendarView: View {
                     Text("\(value.day)")
                         .calendarDate()
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(value.date.outOfMonth ? .customGray : .charcoal)
+                        .foregroundColor(value.date.isOutOfMonth ? .customGray : .charcoal)
                     Circle()
                         .fill(Color.charcoal)
-                        .opacity(value.date.outOfMonth ? 0 : 1)
+                        .opacity(value.date.isOutOfMonth ? 0 : 1)
                         .frame(width: 5, height: 5)
                         .padding(.top, 5)
                 } else {
                     Text("\(value.day)")
                         .calendarDate()
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(value.date.outOfMonth ? .customGray : .charcoal)
+                        .foregroundColor(value.date.isOutOfMonth ? .customGray : .charcoal)
                 }
             }
         }

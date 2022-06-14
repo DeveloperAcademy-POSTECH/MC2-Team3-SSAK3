@@ -63,27 +63,24 @@ extension Date {
                 [.year, .month],
                 from: self
             )
-        )else { return [] }
-
-        guard let range = calendar.range(of: .day, in: .month, for: startDate)
-        else { return [] }
+        ), let range = calendar.range(of: .day, in: .month, for: startDate) else { return [] }
 
         return range.compactMap { day -> Date in
             calendar.date(byAdding: .day, value: day - 1, to: startDate) ?? Date()
         }
     }
 
-    var today: Bool {
+    var isToday: Bool {
         let calendar = Calendar.current
         return calendar.isDate(self, inSameDayAs: Date())
     }
-    
+
     // 해당 날짜가 오늘의 날짜와 한달 차이나는지 monthType 결정
     var monthType: MonthType {
-        return self.outOfMonth ? .unparticipable : .participable
+        return self.isOutOfMonth ? .unparticipable : .participable
     }
 
-    var outOfMonth: Bool {
+    var isOutOfMonth: Bool {
         let calendar = Calendar.current
         let today = Date()
         let diff = calendar.dateComponents([.day], from: today, to: self).day ?? -1
@@ -106,8 +103,7 @@ extension Date {
     }
 
     static func convertToKoreanDateFormat(from date: Int) -> String {
-        guard let date = self.convertToDateFormat(from: date) else { return "" }
-        guard let month = date.month, let day = date.day else { return "" }
+        guard let date = self.convertToDateFormat(from: date), let month = date.month, let day = date.day else { return "" }
         return "\(month)월 \(day)일"
     }
 }
