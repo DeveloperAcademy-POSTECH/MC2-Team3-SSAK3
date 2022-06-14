@@ -15,13 +15,15 @@ struct CalendarView: View {
     @State private var currentDate = Date()
     @State private var selectedDate = Date()
     @State private var currentMonth = 0
+    @State private var renderDate = Date()
     private let today = Date()
     private let taxiParties: [TaxiParty] = TaxiPartyMockData.mockData
-    private let action: () -> Void
+    private let action: (Bool, Date) -> Void
     private let calendarType: CalendarType
     private let days = ["일", "월", "화", "수", "목", "금", "토"]
+    private let calendarHelper = CalendarHelper()
 
-    init(calendarType: CalendarType = .modalFilter, action: @escaping () -> Void) {
+    init(calendarType: CalendarType = .modalFilter, action: @escaping (Bool, Date) -> Void) {
         self.calendarType = calendarType
         self.action = action
     }
@@ -69,8 +71,7 @@ struct CalendarView: View {
         }
         .padding(.horizontal, 10)
         .onChange(of: currentMonth) {_ in
-            currentDate = changeCurrentMonth()
-        }
+            currentDate = calendarHelper.changeCurrentMonth(currentMonth)        }
     }
 
     var dayOfWeek: some View {
@@ -87,7 +88,7 @@ struct CalendarView: View {
         let column = Array(repeating: GridItem(.flexible()), count: 7)
 
         return LazyVGrid(columns: column, spacing: 10) {
-            ForEach(getExactDates()) {data in
+            ForEach(calendarHelper.getExactDates(currentMonth)) {data in
                 makeDayCell(data)
                     .background(
                         ZStack {
@@ -101,17 +102,14 @@ struct CalendarView: View {
                     )
                     .onTapGesture {
                         selectedDate = data.date
-
-                        switch calendarType {
-                        case .modalFilter:
-                            guard taxiParties.first(where: {party in
-                                guard let convertedDate = Date.convertToDateFormat(from: party.meetingDate) else { return false }
-                                return data.date.isSameDay(convertedDate)
-                            }) == nil else { return }
-                                action()
-                        case .addParty:
-                            action()
+                        guard taxiParties.first(where: {party in
+                            guard let convertedDate = Date.convertToDateFormat(from: party.meetingDate) else { return false }
+                            return data.date.isSameDay(convertedDate)
+                        }) == nil else {
+                            action(true, selectedDate)
+                            return
                         }
+                        action(false, selectedDate)
                     }
                     .disabled(data.monthType == .unparticipable)
             }
@@ -119,49 +117,6 @@ struct CalendarView: View {
     }
 
     // MARK: - function
-
-    // 화살표 이동에 따른 달 이동
-    private func changeCurrentMonth() -> Date {
-        let calendar = Calendar.current
-        return calendar.date(byAdding: .month, value: currentMonth, to: Date()) ?? Date()
-    }
-
-    // 해당 달 에서의 날짜 계산
-    private func getExactDates() -> [DayContainer] {
-        let calendar = Calendar.current
-        let current = changeCurrentMonth()
-        let components = calendar.dateComponents([.year, .month], from: current)
-        let firstDayIndexOfWeek = calendar.component(.weekday, from: calendar.date(from: components) ?? Date())
-        guard let currentMonthDays = current.monthlyDayCount else { return [] }
-
-        var thisMonthDates = current.monthDates.map { date -> DayContainer in
-            guard let day = date.day else { return DayContainer(day: 0, date: date, monthType: .unparticipable) }
-            return DayContainer(day: day, date: date, monthType: checkMonthType(date))
-        }
-
-        for _ in 0..<firstDayIndexOfWeek - 1 {
-            thisMonthDates.insert(DayContainer(day: 0, date: Date(), monthType: .unparticipable), at: 0)
-        }
-        appendOneWeek(firstDayIndexOfWeek, currentMonthDays, &thisMonthDates)
-
-        return thisMonthDates
-    }
-
-    // 다섯줄의 달력을 여섯줄로 만들기 위해 임의의 데이터를 넣어주는 작업
-    private func appendOneWeek(_ firstDayOfWeek: Int, _ monthlyDayCount: Int, _ monthDates: inout [DayContainer]) {
-        let lastDayIndex = firstDayOfWeek - 1 + monthlyDayCount
-        if lastDayIndex < 36 {
-            for _ in 0..<(36 - lastDayIndex) {
-                monthDates.insert(DayContainer(day: 0, date: Date(), monthType: .unparticipable), at: monthDates.endIndex)
-            }
-        }
-    }
-
-    // 해당 날짜가 오늘의 날짜와 한달 차이나는지 monthType 결정
-    private func checkMonthType(_ date: Date) -> MonthType {
-        return date.outOfMonth ? .unparticipable : .participable
-    }
-
     private func todayCapsuleBorder(_ date: Date, borderColor: Color) -> Color {
         return date.today ? .gray : .clear
     }
@@ -198,6 +153,12 @@ struct CalendarView: View {
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarView(action: {print("hello")})
+        CalendarView(calendarType: .modalFilter) {bool, date in
+            if bool {
+                print("there is taxiParty \(date)")
+            } else {
+                print("there isn't taxiParty \(date)")
+            }
+        }
     }
 }

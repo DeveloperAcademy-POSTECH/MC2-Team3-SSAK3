@@ -69,6 +69,7 @@
 		A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D578972852F2000059FE49 /* TextStyleExtension.swift */; };
 		E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F328503A53005A68F3 /* SignUpView.swift */; };
 		E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F528503D19005A68F3 /* ViewExtension.swift */; };
+		E62533F6285893D90007F919 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62533F5285893D90007F919 /* CalendarHelper.swift */; };
 		E66048D22852107100EFDE05 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66048D12852107100EFDE05 /* DateExtension.swift */; };
 		E66048D428522D5F00EFDE05 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66048D328522D5F00EFDE05 /* CalendarView.swift */; };
 		E66048D6285239A400EFDE05 /* DayContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66048D5285239A400EFDE05 /* DayContainer.swift */; };
@@ -148,6 +149,7 @@
 		A8D578972852F2000059FE49 /* TextStyleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleExtension.swift; sourceTree = "<group>"; };
 		E622D8F328503A53005A68F3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		E622D8F528503D19005A68F3 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		E62533F5285893D90007F919 /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		E66048D12852107100EFDE05 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		E66048D328522D5F00EFDE05 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		E66048D5285239A400EFDE05 /* DayContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayContainer.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				37F698842855FB910008C022 /* MyPartyView.swift */,
 				37D4D1F02856D285002E787B /* ChatRoomView.swift */,
 				E66048D328522D5F00EFDE05 /* CalendarView.swift */,
+				E62533F5285893D90007F919 /* CalendarHelper.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				50F8003B28586F9200FA1063 /* Authentication.swift in Sources */,
 				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
 				50459E35285490CC00287371 /* TaxiPartyInfoView.swift in Sources */,
+				E62533F6285893D90007F919 /* CalendarHelper.swift in Sources */,
 				00842A94284B2682000292E5 /* TaxiParty.swift in Sources */,
 				00D904B52854A64E0003BA5A /* MyTaxiPartyUseCase.swift in Sources */,
 				00BC473F28581E740055CB6A /* AddTaxiParty.swift in Sources */,

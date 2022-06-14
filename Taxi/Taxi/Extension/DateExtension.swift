@@ -77,6 +77,11 @@ extension Date {
         let calendar = Calendar.current
         return calendar.isDate(self, inSameDayAs: Date())
     }
+    
+    // 해당 날짜가 오늘의 날짜와 한달 차이나는지 monthType 결정
+    var monthType: MonthType {
+        return self.outOfMonth ? .unparticipable : .participable
+    }
 
     var outOfMonth: Bool {
         let calendar = Calendar.current
