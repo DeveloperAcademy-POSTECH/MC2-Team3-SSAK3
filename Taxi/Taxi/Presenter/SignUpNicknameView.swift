@@ -13,35 +13,34 @@ struct SignUpNicknameView: View {
     @FocusState private var focusField: Bool
 
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
-                Text("닉네임을 입력해주세요")
-                    .fontWeight(.bold)
-                    .opacity(0.3)
-                UnderlinedTextField(text: $nickName, nickFieldState, "닉네임을 입력해주세요")
-                    .focused($focusField)
-                Text("아카데미 내에서 사용중인 닉네임을 권장드려요")
-                    .font(.caption)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Spacer()
-                Button {
-                } label: {
-                    Text("다음")
-                        .frame(maxWidth: .infinity)
-                }
-                .disabled(nickName.isEmpty)
+        VStack(alignment: .leading, spacing: 80) {
+            Text("닉네임을 입력해주세요")
+                .signUpTitle()
+            VStack {
+            UnderlinedTextField(text: $nickName, nickFieldState, "닉네임을 입력해주세요")
+                .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
+                .focused($focusField)
+                        Text("아카데미 내에서 사용중인 닉네임을 권장드려요")
+                .signUpExplain()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top)
             }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    focusField = true
-                    nickFieldState = .focused
-                }
+            Spacer()
+            RoundedButton("다음", nickName.isEmpty) {
+                // TODO: usecase 연결
+                UserDefaults.standard.set(true, forKey: "isLogined")
             }
-            .onSubmit {
-                focusField = true
-            }
-            .padding()
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                focusField = true
+                nickFieldState = .focused
+            }
+        }
+        .onSubmit {
+            focusField = true
+        }
+        .padding()
     }
 }
 
