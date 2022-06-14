@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyPartyView: View {
     // Dummy Data
-    private let myParties: [TaxiParty] = [
+    @State private var myParties: [TaxiParty] = [
         TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220610, meetingTime: 1315, maxPersonNumber: 4, members: ["1", "2", "3", "4"], isClosed: true),
         TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1330, maxPersonNumber: 3, members: ["1", "3"], isClosed: false),
         TaxiParty(id: "3", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1440, maxPersonNumber: 3, members: ["1", "2", "3"], isClosed: false),
@@ -21,7 +21,7 @@ struct MyPartyView: View {
     var body: some View {
         VStack {
             MyPartyTitle()
-            MyPartyList(myParties: myParties)
+            MyPartyList(myParties: $myParties)
         }
     }
 }
@@ -52,7 +52,7 @@ struct MyPartySectionHeader: View {
 }
 
 struct MyPartyList: View {
-    @State var myParties: [TaxiParty]
+    @Binding var myParties: [TaxiParty]
     @State private var isSwiped: Bool = false
     @State private var showAlert: Bool = false
     @State private var selectedParty: TaxiParty?
@@ -169,7 +169,7 @@ struct SwipeDelete: ViewModifier {
     let action : () -> Void
     @State private var swipeState = SwipeActionState.inactive
     @GestureState private var isDragging = false
-    
+
     private var swipeAction: some Gesture {
         DragGesture(coordinateSpace: .local)
             .updating($isDragging) { _, state, _ in
