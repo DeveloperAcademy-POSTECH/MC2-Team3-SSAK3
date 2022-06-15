@@ -9,6 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ProfileView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var showActionSheet: Bool = false
     @State private var showPicker: Bool = false
     @State private var selectedImage: UIImage? // 피커에서 선택한 사진을 담는 변수
@@ -31,6 +32,12 @@ struct ProfileView: View {
 
     var body: some View {
         VStack {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark")
+                    .imageScale(.large)
+            }
             Button {
                 showActionSheet.toggle()
             } label: {
