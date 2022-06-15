@@ -11,7 +11,7 @@ struct Message: Codable {
     let id: String // (메시지의 고유 id)
     let sender: String // (보낸 유저의 고유 id)
     let body: String // 채팅 메시지
-    let timeStamp: Int // (yyyyMMddhhmm)
+    let timeStamp: Int // (yyyyMMddhhmmss)
     let typeCode: Int // (0 - 일반 채팅, 1 - 입장 채팅)
 }
 
@@ -43,5 +43,14 @@ extension Message {
     enum MessageType {
         case normal
         case entrance
+
+        var code: Int {
+            switch self {
+            case .normal:
+                return 0
+            case .entrance:
+                return 1
+            }
+        }
     }
 }

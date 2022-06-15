@@ -11,6 +11,7 @@
 		000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */; };
 		000C24F72859CB440054D679 /* ChattingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F62859CB440054D679 /* ChattingUseCase.swift */; };
 		000C24F92859CC240054D679 /* ChattingUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F82859CC240054D679 /* ChattingUseCaseTest.swift */; };
+		000C24FB2859E74E0054D679 /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24FA2859E74E0054D679 /* ChattingViewModel.swift */; };
 		000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83252840E23800BA3DFA /* TaxiApp.swift */; };
 		000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D83292840E23A00BA3DFA /* Assets.xcassets */; };
 		000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D832C2840E23A00BA3DFA /* Preview Assets.xcassets */; };
@@ -107,6 +108,7 @@
 		000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingFirebaseDataSource.swift; sourceTree = "<group>"; };
 		000C24F62859CB440054D679 /* ChattingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingUseCase.swift; sourceTree = "<group>"; };
 		000C24F82859CC240054D679 /* ChattingUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingUseCaseTest.swift; sourceTree = "<group>"; };
+		000C24FA2859E74E0054D679 /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
 		000D83222840E23800BA3DFA /* Taxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		000D83252840E23800BA3DFA /* TaxiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiApp.swift; sourceTree = "<group>"; };
 		000D83292840E23A00BA3DFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			children = (
 				50F8003A28586F9200FA1063 /* Authentication.swift */,
 				00F6B72E2859C00E00DACA06 /* AddTaxiPartyViewModel.swift */,
+				000C24FA2859E74E0054D679 /* ChattingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				00842A96284B287D000292E5 /* Place.swift in Sources */,
 				37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */,
 				00E8F1B9284B213C00D68DF0 /* User.swift in Sources */,
+				000C24FB2859E74E0054D679 /* ChattingViewModel.swift in Sources */,
 				00BC474128581E860055CB6A /* InfoContainer.swift in Sources */,
 				000E545E2853622D0085C39E /* AuthenticateUseCase.swift in Sources */,
 				E63C7AA02858B5170080530B /* DayContainer.swift in Sources */,

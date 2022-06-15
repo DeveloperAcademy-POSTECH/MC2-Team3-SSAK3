@@ -32,6 +32,14 @@ extension Date {
         return formatter
     }
 
+    private var messageTimeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMddhhmmss"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+        return formatter
+    }
+
     private var dateComponents: DateComponents {
         return Calendar.current.dateComponents([.year, .month, .day], from: self)
     }
@@ -54,6 +62,10 @@ extension Date {
 
     var monthDay: String {
         return self.monthDayFormatter.string(from: self)
+    }
+
+    var messageTime: Int {
+        return Int(self.messageTimeFormatter.string(from: self))!
     }
 
     /// date를 yyyyMMdd의 형태로 바꿈
