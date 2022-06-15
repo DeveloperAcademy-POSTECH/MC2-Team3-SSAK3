@@ -21,7 +21,7 @@ struct SignUpCodeView: View {
                 VStack(alignment: .leading, spacing: 80) {
                     Text("가입코드를 입력해주세요")
                         .signUpTitle()
-                    UnderlinedTextField(text: $signUpCode, codeState, "가입코드를 입력해주세요")
+                    UnderlinedTextField(text: $signUpCode, codeState, "가입코드")
                         .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
                         .focused($focusField)
                         .disabled(codeState.isCorrect)
@@ -49,12 +49,6 @@ struct SignUpCodeView: View {
                     }
                 }
             }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    focusField = true
-                    codeState = .focused
-                }
-            }
             .onSubmit {
                 codeState = (signUpCode == developerCode ? .right : .wrong)
             }
@@ -67,8 +61,6 @@ struct SignUpCodeView: View {
         case .notFocused, .focused:
             HStack {
                 Text("최초 인증 및 가입에 활용됩니다")
-                Spacer()
-                Text("가입코드 받기")
             }
         case .wrong:
             HStack {
