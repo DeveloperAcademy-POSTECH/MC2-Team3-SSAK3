@@ -25,7 +25,7 @@ struct TaxiPartyListView: View {
                 ScrollView {
                     CellViewList()
                 }
-                .refreshable {     // << injects environment value !!
+                .refreshable {
                     await fetchSomething()
                 }
                 .background(Color.background)
@@ -34,7 +34,6 @@ struct TaxiPartyListView: View {
         }
     }
     func fetchSomething() async {
-        // demo, assume we update something long here
         try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
     }
 }
@@ -87,7 +86,7 @@ struct TaxiPartyFiltering: View {
             selectedIndex = 0
         }
         .animation(.easeInOut(duration: 0.3), value: selectedIndex)
-    } // Switch 문으로 selectedIndex 별로 나누어 filter 되게끔 동작하게 한다.
+    }
 }
 
 struct DatePickerButton: View {
@@ -130,7 +129,7 @@ struct MyProgress: View {
 }
 
 struct CellViewList: View {
-    @Environment(\.refresh) private var refresh   // << refreshable injected !!
+    @Environment(\.refresh) private var refresh
     @State private var isRefreshing = false
     @State private var mypartys: [TaxiParty] = [
         TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220601, meetingTime: 0930, maxPersonNumber: 4, members: ["요셉", "아보", "조이", "제리"], isClosed: true),
