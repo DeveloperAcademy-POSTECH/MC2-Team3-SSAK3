@@ -88,8 +88,6 @@ struct SignUpAgreement: ViewModifier {
     }
 }
 
-
-
 struct CalendarDay: ViewModifier {
     func body(content: Content) -> some View {
         return content
@@ -119,7 +117,6 @@ struct CalendarArrow: ViewModifier {
             .font(.system(size: 18, weight: .medium))
     }
 }
-
 
 extension View {
     func mainTitle() -> some View {
