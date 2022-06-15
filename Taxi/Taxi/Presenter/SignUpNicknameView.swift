@@ -10,8 +10,8 @@ import SwiftUI
 struct SignUpNicknameView: View {
     @EnvironmentObject var userViewModel: Authentication
     @Environment(\.dismiss) private var dismiss
-    @State private var nickName: String = ""
-    @State private var nickFieldState: FieldState = .notFocused
+    @State private var nickname: String = ""
+    @State private var nickFieldState: FieldState = .normal
     @FocusState private var focusField: Bool
     private let deviceUUID = UIDevice.current.identifierForVendor!.uuidString
 
@@ -20,20 +20,20 @@ struct SignUpNicknameView: View {
             VStack(alignment: .leading, spacing: 80) {
                 Text("닉네임을 입력해주세요")
                     .signUpTitle()
-                UnderlinedTextField(text: $nickName, nickFieldState, "닉네임")
+                UnderlinedTextField(text: $nickname, nickFieldState, "닉네임")
                     .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
                     .focused($focusField)
-                // TODO: 특수 문자 및 공백 체크
             }
             .padding(.horizontal)
-            Text("아카데미 내에서 사용중인 닉네임을 권장드려요")
-                .signUpExplain()
+            makeMessage(nickname: nickname)
+                .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
+                .foregroundColor(setMessageColor(nickname: nickname))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding([.top, .horizontal])
-            Spacer(minLength: 0)
-            makeConditionalButton("완료", nickName.isEmpty, focusField) {
+            Spacer()
+            makeConditionalButton("완료", !String.isValidNickname(nickname: nickname).isValid, focusField) {
                 print("완료버튼 눌림")
-                userViewModel.register(id: deviceUUID, nickname: nickName)
+                userViewModel.register(id: deviceUUID, nickname: nickname)
                 // TODO: 유저 환영 화면 연결 or pop to root
                 UserDefaults.standard.set(true, forKey: "isLogined")
             }
@@ -48,9 +48,6 @@ struct SignUpNicknameView: View {
                 }
             }
         }
-        .onSubmit {
-            focusField = true
-        }
     }
 
     @ViewBuilder
@@ -62,6 +59,27 @@ struct SignUpNicknameView: View {
         }
     }
 
+    @ViewBuilder
+    private func makeMessage(nickname: String) -> some View {
+        switch String.isValidNickname(nickname: nickname) {
+        case .normal, .valid:
+            VStack(alignment: .leading, spacing: 5) {
+                Text("아카데미 내에서 사용중인 닉네임을 권장드려요")
+                Text("특수문자와 공백을 제외하고 입력해주세요")
+            }
+        case .invalid:
+            Text("형식에 맞지 않은 닉네임입니다.")
+        }
+    }
+
+    private func setMessageColor(nickname: String) -> Color {
+        switch String.isValidNickname(nickname: nickname) {
+        case .normal, .valid:
+            return Color.signUpYellowGray
+        case .invalid:
+            return Color.customRed
+        }
+    }
 }
 
 struct SignUpNicknameView_Previews: PreviewProvider {
