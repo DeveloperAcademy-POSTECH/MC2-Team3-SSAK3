@@ -12,15 +12,21 @@ struct MyPageView: View {
     @AppStorage("partyCompleteNoti") private var partyCompleteNoti: Bool = true
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
-    @State private var user: User = User(id: "", nickname: "Avo", profileImage: nil)
     @State private var showProfile: Bool = false
+    @State private var user: User?
+    @EnvironmentObject var userViewModel: Authentication
 
     var body: some View {
         VStack(alignment: .leading) {
             Text("설정")
             HStack {
-                ProfileImage(user, diameter: 46)
-                Text(user.nickname)
+                if let user = user {
+                    ProfileImage(user, diameter: 46)
+                    Text(user.nickname)
+                } else {
+                    Circle().foregroundColor(.lightGray).frame(width: 46, height: 46)
+                    Rectangle().foregroundColor(.lightGray).frame(width: 60, height: 20)
+                }
                 Spacer()
                 Button {
                     showProfile.toggle()
@@ -43,6 +49,9 @@ struct MyPageView: View {
         }
         .sheet(isPresented: $showProfile) {
             ProfileView()
+        }
+        .onAppear {
+            user = userViewModel.user
         }
     }
 }
@@ -78,5 +87,6 @@ extension MyPageView {
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
         MyPageView()
+            .environmentObject(Authentication())
     }
 }
