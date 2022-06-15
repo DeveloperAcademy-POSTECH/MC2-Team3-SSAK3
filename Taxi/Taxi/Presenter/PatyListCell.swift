@@ -18,27 +18,28 @@ struct PatyListCell: View {
                 DepartureView(party: party)
                 Spacer()
                 UserView(party: party)
-            } .padding(.vertical, 8)
-                .padding(.horizontal, 18)
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 18)
         }
         .padding()
         .background {
-            ZStack {
                 if party.departureCode == 1 {
-                    RoundedRectangle(cornerRadius: 18.0)
-                        .fill(Color.postechPink.opacity(0.05))
-                        .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.postechPink.opacity(1.0), lineWidth: 1.5)
+                    cellBackground(color: Color.postechPink)
                 } else {
-                    RoundedRectangle(cornerRadius: 18.0)
-                        .fill(Color.ktxBlue.opacity(0.05))
-                        .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.ktxBlue.opacity(1.0), lineWidth: 1.5)
+                    cellBackground(color: Color.ktxBlue)
                 }
-            }
-        }.padding(.horizontal)
+        }
+        .padding(.horizontal)
+    }
+    private func cellBackground(color: Color) -> some View {
+        ZStack {
+        RoundedRectangle(cornerRadius: 18.0)
+            .fill(color.opacity(0.05))
+            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+        RoundedRectangle(cornerRadius: 16)
+            .stroke(color, lineWidth: 1.5)
+        }
     }
 }
 
@@ -47,35 +48,21 @@ struct DestinationView: View {
 
     var body: some View {
         if party.departureCode == 1 {
-            HStack(alignment: .center, spacing: 2) {
-                Image(systemName: "graduationcap.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 17, height: 18)
-                    .foregroundColor(Color.postechPink)
-                Text("\(party.destincation)으로")
-                    .font(.custom("AppleSDGothicNeo-Medium", size: 14))
-                    .foregroundColor(Color.postechPink)
-                Text("") // 나중에 데이터로 처리
-                    .fontWeight(.thin)
-                    .font(.custom("AppleSDGothicNeo-Regular", size: 14))
-                    .foregroundColor(Color.postechPink)
-            }
+            cellHeader(image: "graduationcap.fill", color: Color.postechPink)
         } else {
-            HStack(alignment: .center, spacing: 2) {
-                Image(systemName: "train.side.front.car")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 17, height: 18)
-                    .foregroundColor(Color.ktxBlue)
-                Text("\(party.destincation)으로")
-                    .font(.custom("AppleSDGothicNeo-Medium", size: 14))
-                    .foregroundColor(Color.ktxBlue)
-                Text("") // 나중에 데이터로 처리
-                    .fontWeight(.thin)
-                    .font(.custom("AppleSDGothicNeo-Regular", size: 14))
-                    .foregroundColor(Color.ktxBlue)
-            }
+            cellHeader(image: "train.side.front.car", color: Color.ktxBlue)
+        }
+    }
+    private func cellHeader(image: String, color: Color) -> some View {
+        HStack(spacing: 2) {
+            Image(systemName: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 17, height: 18)
+                .foregroundColor(color)
+            Text("\(party.destincation)으로")
+                .font(.custom("AppleSDGothicNeo-Medium", size: 14))
+                .foregroundColor(color)
         }
     }
 }
@@ -86,7 +73,6 @@ struct MeetTimeView: View {
     var body: some View {
         VStack {
             Text("\(meetTimeSeparator(meetTime: String(meetingTime)))")
-            // Text("\(party.meetingTime / 100 % 100 ):\(party.meetingTime % 100)") --> 00분일 때 0하나 짤림
                 .font(.custom("AppleSDGothicNeo-Bold", size: 28))
                 .foregroundColor(Color.customBlack)
                 .padding(0)
@@ -95,7 +81,6 @@ struct MeetTimeView: View {
                 .foregroundColor(Color.darkGray)
         }
     }
-
     func meetTimeSeparator(meetTime: String) -> String {
         var meet: String = meetTime
         let crashBlock = -2
@@ -120,7 +105,8 @@ struct DepartureView: View {
                     .fontWeight(.ultraLight)
                     .font(.custom("AppleSDGothicNeo-Regular", size: 20))
                     .foregroundColor(Color.customBlack)
-            }.padding(5)
+            }
+            .padding(5)
             Text("모임장소")
                 .font(.custom("AppleSDGothicNeo-Regular", size: 12))
                 .foregroundColor(Color.darkGray)
@@ -147,7 +133,8 @@ struct UserView: View {
                     .font(.custom("AppleSDGothicNeo-Regular", size: 16))
                     .foregroundColor(Color.customGray)
             }
-        }.padding(.vertical, 7)
+        }
+        .padding(.vertical, 7)
     }
 }
 

@@ -49,8 +49,7 @@ struct TaxiPartyHeadLine: View {
                 print("+ tapped!")
             } label: {
                 Image(systemName: "plus")
-                    .resizable()
-                    .frame(width: 21, height: 24)
+                    .imageScale(.large)
                     .foregroundColor(.black)
             }
         }
