@@ -11,7 +11,6 @@ import SDWebImageSwiftUI
 struct ProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var userViewModel: Authentication
-    @State private var user: User?
     @State private var showActionSheet: Bool = false
     @State private var showPicker: Bool = false
     @State private var nicknameContainer: String = "" // User 닉네임을 임시로 담는 변수
@@ -61,7 +60,7 @@ struct ProfileView: View {
                     .textInputAutocapitalization(.never)
             }
             Button {
-                guard let user = user else { return }
+                guard let user = userViewModel.user else { return }
                 if nicknameContainer != user.nickname { // 닉네임 바꿨으면 변경
                     userViewModel.updateNickname(nicknameContainer)
                 }
@@ -71,16 +70,14 @@ struct ProfileView: View {
                     userViewModel.deleteProfileImage()
                     isProfileDeleted = false
                 }
-                
             } label: {
                 Text("적용")
             }
-            .disabled(nicknameContainer.contains(" "))
+            .disabled(nicknameContainer.contains(" ") || nicknameContainer == "")
             Spacer(minLength: 0)
         }
         .onAppear {
-            user = userViewModel.user
-            if let user = user {
+            if let user = userViewModel.user {
                 nicknameContainer = user.nickname
                 imageContainer = user.profileImage
             }
@@ -96,7 +93,8 @@ extension ProfileView {
                 .foregroundColor(.gray)
                 .frame(width: diameter, height: diameter)
             Text(nicknameContainer.prefix(1))
-                .foregroundColor(.black)
+                .foregroundColor(.white)
+                .font(.system(size: diameter/1.5))
         }
     }
 

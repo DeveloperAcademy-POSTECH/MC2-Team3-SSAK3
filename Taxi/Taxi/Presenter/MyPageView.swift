@@ -13,14 +13,13 @@ struct MyPageView: View {
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
     @State private var showProfile: Bool = false
-    @State private var user: User?
     @EnvironmentObject var userViewModel: Authentication
 
     var body: some View {
         VStack(alignment: .leading) {
             Text("설정")
             HStack {
-                if let user = user {
+                if let user = userViewModel.user {
                     ProfileImage(user, diameter: 46)
                     Text(user.nickname)
                 } else {
@@ -49,9 +48,6 @@ struct MyPageView: View {
         }
         .sheet(isPresented: $showProfile) {
             ProfileView()
-        }
-        .onAppear {
-            user = userViewModel.user
         }
     }
 }
