@@ -7,24 +7,18 @@
 
 import SwiftUI
 
-enum CalendarType {
-    case modalFilter, addParty
-}
-
 struct CalendarView: View {
     @State private var currentDate = Date()
-    @State private var selectedDate = Date()
+    @State private var selectedDate: Date?
     @State private var currentMonth = 0
     @State private var renderDate = Date()
     private let today = Date()
     private let taxiParties: [TaxiParty]
     private let action: (Bool, Date) -> Void
-    private let calendarType: CalendarType
     private let days = ["일", "월", "화", "수", "목", "금", "토"]
     private let calendarHelper = CalendarHelper()
 
-    init(calendarType: CalendarType = .modalFilter, taxiParties: [TaxiParty] = [], action: @escaping (Bool, Date) -> Void) {
-        self.calendarType = calendarType
+    init(taxiParties: [TaxiParty] = [], action: @escaping (Bool, Date) -> Void) {
         self.taxiParties = taxiParties
         self.action = action
     }
@@ -103,6 +97,7 @@ struct CalendarView: View {
                     )
                     .onTapGesture {
                         selectedDate = data.date
+                        guard let selectedDate = selectedDate else { return }
                         guard taxiParties.first(where: {party in
                             guard let convertedDate = Date.convertToDateFormat(from: party.meetingDate) else { return false }
                             return data.date.isSameDay(convertedDate)
@@ -154,7 +149,7 @@ struct CalendarView: View {
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarView(calendarType: .modalFilter) {bool, date in
+        CalendarView {bool, date in
             if bool {
                 print("there is taxiParty \(date)")
             } else {

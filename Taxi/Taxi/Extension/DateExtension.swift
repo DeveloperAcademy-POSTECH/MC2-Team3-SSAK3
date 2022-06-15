@@ -112,8 +112,9 @@ extension Date {
         return (diff >= monthlyDayCount || diff < 0 ) ? true : false
     }
 
-    func isSameDay(_ comparedDate: Date) -> Bool {
+    func isSameDay(_ comparedDate: Date?) -> Bool {
         let calendar = Calendar.current
+        guard let comparedDate = comparedDate else { return false }
         return calendar.isDate(self, inSameDayAs: comparedDate)
     }
 
