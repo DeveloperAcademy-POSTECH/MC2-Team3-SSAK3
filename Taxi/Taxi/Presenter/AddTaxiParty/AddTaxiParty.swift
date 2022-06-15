@@ -27,7 +27,7 @@ struct AddTaxiParty: View {
     @State private var startMinute: Int? // 출발 분
     @State private var departure: Place? // 출발 장소
     @State private var maxNumber: Int? // 정원
-
+    @StateObject private var viewModel: AddTaxiPartyViewModel = AddTaxiPartyViewModel()
     private let columns: [GridItem] = [GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200))]
 
     private var hourRange: Range<Int> {
@@ -57,7 +57,14 @@ struct AddTaxiParty: View {
                 guideText
             }
             RoundedButton("택시팟 생성", !checkAllInfoSelected()) {
-                // TODO: 택시팟 생성 유즈케이스와 연결하기!
+                let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: (startHour! * 100) + startMinute!, maxPersonNumber: maxNumber!, members: [], isClosed: false)
+                // TODO: User 정보 연결해서 member 에 넣어야함
+                viewModel.addTaxiParty(taxiParty) { taxiParty in
+                    print(taxiParty)
+                    dismiss()
+                } onError: { error in
+                    print(error)
+                }
             }
         }
         .onAppear {
