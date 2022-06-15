@@ -57,7 +57,7 @@ struct CalendarModal: View {
                 Rectangle()
                     .frame(height: curHeight / 2)
             }
-                .foregroundColor(.white)
+                .foregroundColor(.background)
         )
     }
 }

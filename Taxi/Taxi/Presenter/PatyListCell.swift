@@ -43,15 +43,14 @@ struct DestinationView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 17, height: 18)
-                .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
-            Text("\(party.destincation)")
-                .fontWeight(.medium)
-                .font(.custom("Apple SD Gothic Neo", size: 14))
-                .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
+                .foregroundColor(Color.ktxBlue)
+            Text("\(party.destincation)으로")
+                .font(.custom("AppleSDGothicNeo-Medium", size: 14))
+                .foregroundColor(Color.ktxBlue)
             Text("") // 나중에 데이터로 처리
                 .fontWeight(.thin)
-                .font(.custom("Apple SD Gothic Neo", size: 14))
-                .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
+                .font(.custom("AppleSDGothicNeo-Regular", size: 14))
+                .foregroundColor(Color.ktxBlue)
         }
     }
 }
@@ -63,12 +62,12 @@ struct MeetTimeView: View {
         VStack {
             Text("\(meetTimeSeparator(meetTime: String(meetingTime)))")
             // Text("\(party.meetingTime / 100 % 100 ):\(party.meetingTime % 100)") --> 00분일 때 0하나 짤림
-                .font(.custom("Apple SD Gothic Neo", size: 28))
-                .fontWeight(.bold) // 데이터로 처리 필요
-                .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
+                .font(.custom("AppleSDGothicNeo-Bold", size: 28))
+                .foregroundColor(Color.customBlack)
                 .padding(0)
             Text("모임시간")
-                .font(.custom("Apple SD Gothic Neo", size: 12))
+                .font(.custom("AppleSDGothicNeo-Regular", size: 12))
+                .foregroundColor(Color.darkGray)
         }
     }
 
@@ -87,17 +86,16 @@ struct DepartureView: View {
         VStack(alignment: .center, spacing: 0) {
             HStack(alignment: .bottom, spacing: 5) {
                 Text("\(party.departure)")
-                    .fontWeight(.medium)
-                    .font(.custom("Apple SD Gothic Neo", size: 20))
-                    .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
+                    .font(.custom("AppleSDGothicNeo-Medium", size: 20))
+                    .foregroundColor(Color.customBlack)
                 Text("C5") // 나중에 데이터로 처리
-                    .fontWeight(.thin)
-                    .font(.custom("Apple SD Gothic Neo", size: 20))
-                    .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
+                    .fontWeight(.light)
+                    .font(.custom("AppleSDGothicNeo-Regular", size: 20))
+                    .foregroundColor(Color.customBlack)
             }.padding(5)
-            Text("모임시간")
-                .font(.custom("Apple SD Gothic Neo", size: 12))
-
+            Text("모임장소")
+                .font(.custom("AppleSDGothicNeo-Regular", size: 12))
+                .foregroundColor(Color.darkGray)
         }
     }
 }
@@ -109,17 +107,17 @@ struct UserView: View {
         HStack(alignment: .top, spacing: 2) {
             Image(systemName: "person.fill")
                 .font(.system(size: 15))
-                .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
+                .foregroundColor(Color.charcoal)
             HStack(alignment: .center, spacing: 2) {
                 Text("\(party.members.count)") // 데이터로 처리 필요
-                    .foregroundColor(Color(red: 64 / 255, green: 64 / 255, blue: 64 / 255, opacity: 1.0))
-                    .font(.custom("Apple SD Gothic Neo", size: 16))
+                    .font(.custom("AppleSDGothicNeo-Regular", size: 16))
+                    .foregroundColor(Color.customBlack)
                 Text("/")
-                    .foregroundColor(Color(red: 206 / 255, green: 206 / 255, blue: 206 / 255, opacity: 1.0))
-                    .font(.custom("Apple SD Gothic Neo", size: 12))
+                    .font(.custom("AppleSDGothicNeo-Regular", size: 12))
+                    .foregroundColor(Color.customGray)
                 Text("\(party.maxPersonNumber)") // 데이터로 처리 필요
-                    .foregroundColor(Color(red: 206 / 255, green: 206 / 255, blue: 206 / 255, opacity: 1.0))
-                    .font(.custom("Apple SD Gothic Neo", size: 16))
+                    .font(.custom("AppleSDGothicNeo-Regular", size: 16))
+                    .foregroundColor(Color.customGray)
             }
         }.padding(.vertical, 7)
     }

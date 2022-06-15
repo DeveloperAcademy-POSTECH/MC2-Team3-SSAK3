@@ -28,7 +28,7 @@ struct TaxiPartyListView: View {
                 .refreshable {     // << injects environment value !!
                     await fetchSomething()
                 }
-                .background(Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255, opacity: 1.0))
+                .background(Color.background)
             }
             CalendarModal(isShowing: $showModal)
         }
@@ -43,8 +43,7 @@ struct TaxiPartyHeadLine: View {
     var body: some View {
         HStack {
             Text("택시팟")
-                .font(.custom("Apple SD Gothic Neo", size: 26))
-                .fontWeight(.bold)
+                .font(.custom("AppleSDGothicNeo-Bold", size: 25))
             Spacer()
             Button {
                 // TODO: 채팅방 생성 View로 전환
@@ -52,7 +51,7 @@ struct TaxiPartyHeadLine: View {
             } label: {
                 Image(systemName: "plus")
                     .resizable()
-                    .frame(width: 26, height: 26)
+                    .frame(width: 21, height: 24)
                     .foregroundColor(.black)
             }
         }
@@ -72,7 +71,7 @@ struct TaxiPartyFiltering: View {
             content: { item, isSelected in
                 Text(item)
                     .foregroundColor(Color.black)
-                    .font(.custom("Apple SD Gothic Neo", size: 16))
+                    .font(.custom("AppleSDGothicNeo-Regular", size: 16))
                     .fontWeight(isSelected ? .semibold : .light)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
@@ -103,9 +102,13 @@ struct DatePickerButton: View {
             }
         } label: {
             Text("날짜 선택")
-                .foregroundColor(Color(red: 255 / 255, green: 204 / 255, blue: 18 / 255, opacity: 1.0))
-                .font(.custom("Apple SD Gothic Neo", size: 16))
-                .fontWeight(.semibold)
+                .padding(10)
+                .foregroundColor(Color.customBlack)
+                .font(.custom("AppleSDGothicNeo-Medium", size: 12))
+                .background {
+                    RoundedRectangle(cornerRadius: 7.0)
+                        .fill(Color.customYellow)
+                }
         }
     }
 }
@@ -118,7 +121,7 @@ struct MyProgress: View {
             ForEach(0...4, id: \.self) { index in
                 Circle()
                     .frame(width: 10, height: 10)
-                    .foregroundColor(Color(red: 255 / 255, green: 204 / 255, blue: 18 / 255, opacity: 1.0))
+                    .foregroundColor(Color.customYellow)
                     .scaleEffect(self.isProgress ? 1:0.01)
                     .animation(self.isProgress ? Animation .linear(duration: 0.8) .repeatForever() .delay(0.2*Double(index)) : .default, value: isProgress)
             }
@@ -156,7 +159,7 @@ struct CellViewList: View {
                 ForEach(meetingDates, id: \.self) { date in
                     Section(header: SectionHeaderView(date: date)) {
                         ForEach(partys[date]!, id: \.id) { party in
-                            CellView(party: party)
+                            PatyListCell(party: party)
                         }
                     }
                 }
@@ -164,14 +167,15 @@ struct CellViewList: View {
         }
         .padding(.top)
         .animation(.default, value: isRefreshing)
-        .background(GeometryReader { // detect Pull-to-refresh
+        .background(GeometryReader {
             Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
         })
         .onPreferenceChange(ViewOffsetKey.self) {
-            if $0 < -270 && !isRefreshing {   // << any criteria we want !!
+            let heightValueForGesture: CGFloat = 270.0
+            if $0 < -heightValueForGesture && !isRefreshing {
                 isRefreshing = true
                 Task {
-                    await refresh?()           // << call refreshable !!
+                    await refresh?()
                     await MainActor.run {
                         isRefreshing = false
                     }
@@ -195,8 +199,7 @@ struct SectionHeaderView: View {
     var body: some View {
         Text("\(date / 100 % 100)월 \(date % 100)일")
             .foregroundColor(.black)
-            .font(Font.custom("AppleSDGothicNeo-Bold", size: 18))
-            .fontWeight(.medium)
+            .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.leading, .top])
             .background(Color.mint)
