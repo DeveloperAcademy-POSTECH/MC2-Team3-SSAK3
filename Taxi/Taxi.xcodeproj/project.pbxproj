@@ -10,6 +10,7 @@
 		000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AE1D0284C922500AF59BE /* UserRepository.swift */; };
 		000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */; };
 		000C24F72859CB440054D679 /* ChattingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F62859CB440054D679 /* ChattingUseCase.swift */; };
+		000C24F92859CC240054D679 /* ChattingUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F82859CC240054D679 /* ChattingUseCaseTest.swift */; };
 		000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83252840E23800BA3DFA /* TaxiApp.swift */; };
 		000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D83292840E23A00BA3DFA /* Assets.xcassets */; };
 		000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D832C2840E23A00BA3DFA /* Preview Assets.xcassets */; };
@@ -105,6 +106,7 @@
 		000AE1D0284C922500AF59BE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingFirebaseDataSource.swift; sourceTree = "<group>"; };
 		000C24F62859CB440054D679 /* ChattingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingUseCase.swift; sourceTree = "<group>"; };
+		000C24F82859CC240054D679 /* ChattingUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingUseCaseTest.swift; sourceTree = "<group>"; };
 		000D83222840E23800BA3DFA /* Taxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		000D83252840E23800BA3DFA /* TaxiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiApp.swift; sourceTree = "<group>"; };
 		000D83292840E23A00BA3DFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				003C339C28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift */,
 				003C339E285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift */,
 				003C33A028575995002B22F4 /* AuthenticateUsecaseTest.swift */,
+				000C24F82859CC240054D679 /* ChattingUseCaseTest.swift */,
 			);
 			path = TaxiTests;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 				003C33A128575995002B22F4 /* AuthenticateUsecaseTest.swift in Sources */,
 				00D3AE74284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift in Sources */,
 				002F89EF284CA5FF00D7E51B /* UserRepositoryTest.swift in Sources */,
+				000C24F92859CC240054D679 /* ChattingUseCaseTest.swift in Sources */,
 				003C339D28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift in Sources */,
 				00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */,
 				003C339F285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift in Sources */,
