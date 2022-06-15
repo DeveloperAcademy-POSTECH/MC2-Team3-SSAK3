@@ -89,6 +89,7 @@
 		E63C7AB02858C2380080530B /* SignUpCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AAF2858C2380080530B /* SignUpCodeView.swift */; };
 		E63C7AB22858C2520080530B /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AB12858C2520080530B /* SignUpNicknameView.swift */; };
 		E63C7AB42858C2650080530B /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AB32858C2650080530B /* UnderlinedTextField.swift */; };
+		E6F231502859AA3F0094EE03 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2314F2859AA3F0094EE03 /* FlatButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,7 @@
 		E63C7AAF2858C2380080530B /* SignUpCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCodeView.swift; sourceTree = "<group>"; };
 		E63C7AB12858C2520080530B /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		E63C7AB32858C2650080530B /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
+		E6F2314F2859AA3F0094EE03 /* FlatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +351,7 @@
 				00A5705B285182E1008B220E /* RoundedButton.swift */,
 				50DA19622856065200DEC46E /* ProfileImage.swift */,
 				E63C7AB32858C2650080530B /* UnderlinedTextField.swift */,
+				E6F2314F2859AA3F0094EE03 /* FlatButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				50459E2F28542E4E00287371 /* PhotoPicker.swift in Sources */,
 				00F6B72F2859C00E00DACA06 /* AddTaxiPartyViewModel.swift in Sources */,
 				002F89EB284CA10800D7E51B /* UserFirebaseDataSource.swift in Sources */,
+				E6F231502859AA3F0094EE03 /* FlatButton.swift in Sources */,
 				00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */,
 				00F6B72728596EEF00DACA06 /* PatyListCell.swift in Sources */,
 				E63C7AA72858B5DE0080530B /* CalendarHelper.swift in Sources */,
