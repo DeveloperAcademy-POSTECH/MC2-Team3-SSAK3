@@ -24,7 +24,7 @@ struct PatyListCell: View {
         }
         .padding()
         .background {
-                if party.departureCode == 1 {
+                if party.departure == "포스텍" {
                     cellBackground(color: Color.postechPink)
                 } else {
                     cellBackground(color: Color.ktxBlue)
@@ -47,7 +47,7 @@ struct DestinationView: View {
     let party: TaxiParty
 
     var body: some View {
-        if party.departureCode == 1 {
+        if party.departure == "포스텍" {
             cellHeader(image: "graduationcap.fill", color: Color.postechPink)
         } else {
             cellHeader(image: "train.side.front.car", color: Color.ktxBlue)
@@ -83,8 +83,8 @@ struct MeetTimeView: View {
     }
     func meetTimeSeparator(meetTime: String) -> String {
         var meet: String = meetTime
-        let crashBlock = -2
-        if crashBlock == -2 {
+        let crashBlock = -1
+        if crashBlock == -1 {
             let index1 = meet.index(meet.endIndex, offsetBy: crashBlock)
             meet.insert(":", at: index1)
         }
@@ -100,9 +100,6 @@ struct DepartureView: View {
             HStack(alignment: .bottom, spacing: 5) {
                 Text("\(party.departure)")
                     .font(.custom("AppleSDGothicNeo-Medium", size: 20))
-                    .foregroundColor(Color.customBlack)
-                Text("C5") // 나중에 데이터로 처리
-                    .font(.custom("AppleSDGothicNeo-UltraLight", size: 20))
                     .foregroundColor(Color.customBlack)
             }
             .padding(5)
