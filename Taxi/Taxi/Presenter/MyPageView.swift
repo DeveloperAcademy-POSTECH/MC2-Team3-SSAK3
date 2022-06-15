@@ -48,7 +48,7 @@ struct MyPageView: View {
             Spacer(minLength: 0)
         }
         .sheet(isPresented: $showProfile) {
-            ProfileView()
+            ProfileView(user: $user)
         }
         .onAppear {
             user = userViewModel.user
