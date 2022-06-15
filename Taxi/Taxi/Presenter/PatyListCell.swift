@@ -102,8 +102,7 @@ struct DepartureView: View {
                     .font(.custom("AppleSDGothicNeo-Medium", size: 20))
                     .foregroundColor(Color.customBlack)
                 Text("C5") // 나중에 데이터로 처리
-                    .fontWeight(.ultraLight)
-                    .font(.custom("AppleSDGothicNeo-Regular", size: 20))
+                    .font(.custom("AppleSDGothicNeo-UltraLight", size: 20))
                     .foregroundColor(Color.customBlack)
             }
             .padding(5)
