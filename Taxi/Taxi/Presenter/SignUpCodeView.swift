@@ -10,7 +10,7 @@ import SwiftUI
 struct SignUpCodeView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var signUpCode: String = ""
-    @State private var codeState: FieldState = .notFocused
+    @State private var codeState: FieldState = .normal
     @State private var isActive: Bool = false
     private let developerCode: String = "popopot"
     @FocusState private var focusField: Bool
@@ -24,7 +24,7 @@ struct SignUpCodeView: View {
                     UnderlinedTextField(text: $signUpCode, codeState, "가입코드")
                         .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
                         .focused($focusField)
-                        .disabled(codeState.isCorrect)
+                        .disabled(codeState.isValid)
                 }
                 .padding(.horizontal)
                 makeMessage(codeState)
@@ -35,7 +35,7 @@ struct SignUpCodeView: View {
                 Spacer()
                 NavigationLink(destination: SignUpNicknameView(), isActive: $isActive) {
                 }
-                makeConditionalButton("다음", !codeState.isCorrect, focusField) {
+                makeConditionalButton("다음", !codeState.isValid, focusField) {
                     isActive.toggle()
                 }
             }
@@ -50,7 +50,7 @@ struct SignUpCodeView: View {
                 }
             }
             .onSubmit {
-                codeState = (signUpCode == developerCode ? .right : .wrong)
+                codeState = (signUpCode == developerCode ? .valid : .invalid)
             }
         }
     }
@@ -58,16 +58,16 @@ struct SignUpCodeView: View {
     @ViewBuilder
     private func makeMessage( _ fieldText: FieldState) -> some View {
         switch fieldText {
-        case .notFocused, .focused:
+        case .normal:
             HStack {
                 Text("최초 인증 및 가입에 활용됩니다")
             }
-        case .wrong:
+        case .invalid:
             HStack {
                 Image(systemName: "x.circle.fill")
                 Text("올바른 코드를 입력해주세요")
             }
-        case .right:
+        case .valid:
             HStack {
                 Image(systemName: "checkmark.circle.fill")
                 Text("인증 완료되었습니다")
@@ -86,11 +86,11 @@ struct SignUpCodeView: View {
 
     private func codeFieldMessageColor( _ fieldText: FieldState) -> Color {
         switch fieldText {
-        case .notFocused, .focused:
+        case .normal:
             return Color.signUpYellowGray
-        case .wrong:
+        case .invalid:
             return Color.customRed
-        case .right:
+        case .valid:
             return Color.customGreen
         }
     }

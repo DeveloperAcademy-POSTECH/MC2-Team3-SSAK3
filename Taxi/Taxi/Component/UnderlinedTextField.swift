@@ -8,13 +8,12 @@
 import SwiftUI
 
 enum FieldState {
-    case notFocused, focused, wrong, right
-
-    var isCorrect: Bool {
+    case normal, invalid, valid
+    var isValid: Bool {
         switch self {
-        case .right:
+        case .valid:
             return true
-        case .notFocused, .focused, .wrong:
+        case .normal, .invalid:
             return false
         }
     }
@@ -46,13 +45,11 @@ struct UnderlinedTextField: View {
     // MARK: - func
     private func setUnderlineColor(_ state: FieldState) -> Color {
         switch state {
-        case .notFocused:
+        case .normal:
             return Color.charcoal
-        case .focused:
-            return Color.customYellow
-        case .wrong:
+        case .invalid:
             return Color.customRed
-        case .right:
+        case .valid:
             return Color.customGreen
         }
     }
@@ -60,6 +57,6 @@ struct UnderlinedTextField: View {
 
 struct UnderlinedTextField_Previews: PreviewProvider {
     static var previews: some View {
-        UnderlinedTextField(text: .constant(""), .notFocused, "placeholder")
+        UnderlinedTextField(text: .constant(""), .normal, "placeholder")
     }
 }
