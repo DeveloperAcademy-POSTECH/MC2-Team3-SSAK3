@@ -20,9 +20,9 @@ extension AddTaxiParty {
 }
 struct AddTaxiParty: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var step: AddTaxiParty.Step = .destination // 현재 정보 입력 단계
+    @State private var step: AddTaxiParty.Step = .none // 현재 정보 입력 단계
     @State private var destination: Place? // 목적지
-    @State private var startDate: String? // 출발 날짜
+    @State private var startDate: Date? // 출발 날짜
     @State private var startHour: Int? // 출발 시간
     @State private var startMinute: Int? // 출발 분
     @State private var departure: Place? // 출발 장소
@@ -31,8 +31,7 @@ struct AddTaxiParty: View {
     private let columns: [GridItem] = [GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200))]
 
     private var hourRange: Range<Int> {
-        // TODO: 출발 날짜가 오늘과 같으면, 현재 시간 이후로만 모임 시간이 떠야함
-        if startDate == "" {
+        if startDate?.monthDay == Date().monthDay {
             return Calendar.current.component(.hour, from: Date())..<24
         }
         // 출발 날짜가 오늘이 아니면, 0시부터 23시까지 모임 시간이 뜬다.
@@ -61,6 +60,11 @@ struct AddTaxiParty: View {
                 // TODO: 택시팟 생성 유즈케이스와 연결하기!
             }
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                step = .destination
+            }
+        }
     }
 
     private var guideText: some View {
@@ -86,7 +90,8 @@ struct AddTaxiParty: View {
 // MARK: - 여기서부턴 목적지를 설정하는 뷰입니다.
 extension AddTaxiParty {
     private var destinationSelect: some View {
-        HStack(spacing: 16) {
+        print("destination drawing")
+        return HStack(spacing: 16) {
             ForEach(Place.destinations(), id: \.self) { destination in
                 destinationItem(destination)
             }
@@ -117,14 +122,12 @@ extension AddTaxiParty {
 // MARK: - 날짜 선택 뷰
 extension AddTaxiParty {
     private var datePicker: some View {
-        Button {
-            startDate = "1월 1일"
+        CalendarView(action: { _, date in
+            startDate = date
             toNextStep()
-        } label: {
-            Text("추후 구현 예정")
-                .padding()
-        }
-        .toInfoContainer(title: "날짜를 선택해주세요", selectedInfo: startDate ?? "", toggle: step == .date) {
+        })
+        .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16))
+        .toInfoContainer(title: "날짜를 선택해주세요", selectedInfo: startDate?.monthDay ?? "", toggle: step == .date) {
             changeStep(to: .date)
         }
     }
@@ -294,7 +297,7 @@ extension View {
 extension AddTaxiParty {
     // 사용자가 정보 수정을 위해 임의로 탭을 입력하는 경우
     private func changeStep(to step: AddTaxiParty.Step) {
-        withAnimation(.easeInOut) {
+        withAnimation(.easeInOut(duration: 2)) {
             switch step {
             case .destination:
                 // 현재 탭을 닫으려는 경우
@@ -344,7 +347,7 @@ extension AddTaxiParty {
     }
     // 정보 입력 시 다음 단계로 넘어가는 함수
     private func toNextStep() {
-        withAnimation(.easeInOut) {
+        withAnimation(.easeInOut(duration: 2)) {
             if checkAllInfoSelected() {
                 self.step = .none
             } else {
