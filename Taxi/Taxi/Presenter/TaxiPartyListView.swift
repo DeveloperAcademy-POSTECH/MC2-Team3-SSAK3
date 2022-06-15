@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaxiPartyListView: View {
     @State private var showModal = false
-
+    @StateObject private var taxiPartyListViewModel: TaxiPartyListViewModel = TaxiPartyListViewModel()
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -23,7 +23,7 @@ struct TaxiPartyListView: View {
                 }
                 .padding(.horizontal, 20)
                 ScrollView {
-                    CellViewList()
+                    CellViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
                 }
                 .refreshable {
                     await fetchSomething()
@@ -31,6 +31,9 @@ struct TaxiPartyListView: View {
                 .background(Color.background)
             }
             CalendarModal(isShowing: $showModal)
+        }
+        .onAppear {
+            taxiPartyListViewModel.getTaxiParties(id: nil)
         }
     }
     func fetchSomething() async {
@@ -131,16 +134,9 @@ struct MyProgress: View {
 struct CellViewList: View {
     @Environment(\.refresh) private var refresh
     @State private var isRefreshing = false
-    @State private var mypartys: [TaxiParty] = [
-        TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220601, meetingTime: 0930, maxPersonNumber: 4, members: ["요셉", "아보", "조이", "제리"], isClosed: true),
-        TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220601, meetingTime: 1330, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
-        TaxiParty(id: "3", departureCode: 1, destinationCode: 0, meetingDate: 20220602, meetingTime: 1400, maxPersonNumber: 2, members: ["제리", "조이"], isClosed: false),
-        TaxiParty(id: "4", departureCode: 0, destinationCode: 1, meetingDate: 20220602, meetingTime: 1734, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
-        TaxiParty(id: "5", departureCode: 0, destinationCode: 1, meetingDate: 20220603, meetingTime: 2005, maxPersonNumber: 2, members: ["요셉"], isClosed: false),
-        TaxiParty(id: "6", departureCode: 1, destinationCode: 0, meetingDate: 20220603, meetingTime: 1340, maxPersonNumber: 4, members: ["요셉", "조이"], isClosed: false)
-    ]
+    let taxiParties: [TaxiParty]
     private var partys: [Int: [TaxiParty]] {
-        Dictionary.init(grouping: mypartys, by: {$0.meetingDate})
+        Dictionary.init(grouping: taxiParties, by: {$0.meetingDate})
     }
     private var meetingDates: [Int] {
         partys.map({$0.key}).sorted()
