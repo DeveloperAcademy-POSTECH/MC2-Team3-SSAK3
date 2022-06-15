@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AE1D0284C922500AF59BE /* UserRepository.swift */; };
+		000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */; };
 		000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83252840E23800BA3DFA /* TaxiApp.swift */; };
 		000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D83292840E23A00BA3DFA /* Assets.xcassets */; };
 		000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D832C2840E23A00BA3DFA /* Preview Assets.xcassets */; };
@@ -101,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		000AE1D0284C922500AF59BE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingFirebaseDataSource.swift; sourceTree = "<group>"; };
 		000D83222840E23800BA3DFA /* Taxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		000D83252840E23800BA3DFA /* TaxiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiApp.swift; sourceTree = "<group>"; };
 		000D83292840E23A00BA3DFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				002F89EA284CA10800D7E51B /* UserFirebaseDataSource.swift */,
 				00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */,
 				00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */,
+				000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */,
 				50F8003B28586F9200FA1063 /* Authentication.swift in Sources */,
 				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
+				000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */,
 				50459E35285490CC00287371 /* TaxiPartyInfoView.swift in Sources */,
 				00842A94284B2682000292E5 /* TaxiParty.swift in Sources */,
 				00D904B52854A64E0003BA5A /* MyTaxiPartyUseCase.swift in Sources */,
