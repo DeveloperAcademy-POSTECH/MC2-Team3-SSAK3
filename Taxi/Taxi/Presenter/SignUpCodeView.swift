@@ -8,36 +8,47 @@
 import SwiftUI
 
 struct SignUpCodeView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var signUpCode: String = ""
     @State private var codeState: FieldState = .notFocused
     @State private var isActive: Bool = false
-    private let developerCode: String = "레몬"
+    private let developerCode: String = "popopot"
     @FocusState private var focusField: Bool
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 80) {
-                Text("가입코드를 입력해주세요")
-                    .signUpTitle()
-                VStack {
-                UnderlinedTextField(text: $signUpCode, codeState, "가입코드를 입력해주세요")
-                    .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
-                    .focused($focusField)
-                    .disabled(codeState.isCorrect)
+            VStack {
+                VStack(alignment: .leading, spacing: 80) {
+                    Text("가입코드를 입력해주세요")
+                        .signUpTitle()
+                    UnderlinedTextField(text: $signUpCode, codeState, "가입코드를 입력해주세요")
+                        .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
+                        .focused($focusField)
+                        .disabled(codeState.isCorrect)
+                }
+                .padding(.horizontal)
                 makeMessage(codeState)
                     .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
                     .foregroundColor(codeFieldMessageColor(codeState))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top)
-                }
+                    .padding([.top, .horizontal])
                 Spacer()
                 NavigationLink(destination: SignUpNicknameView(), isActive: $isActive) {
                 }
-                RoundedButton("다음", !codeState.isCorrect) {
+                makeConditionalButton("다음", !codeState.isCorrect, focusField) {
                     isActive.toggle()
                 }
             }
-            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                    }
+                }
+            }
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     focusField = true
@@ -46,9 +57,7 @@ struct SignUpCodeView: View {
             }
             .onSubmit {
                 codeState = (signUpCode == developerCode ? .right : .wrong)
-                focusField = true
             }
-            .padding(.horizontal)
         }
     }
 
@@ -71,6 +80,15 @@ struct SignUpCodeView: View {
                 Image(systemName: "checkmark.circle.fill")
                 Text("인증 완료되었습니다")
             }
+        }
+    }
+
+    @ViewBuilder
+    private func makeConditionalButton(_ title: String, _ disabled: Bool = false, _ focusState: Bool, action: @escaping () -> Void) -> some View {
+        if focusState {
+            FlatButton(title, disabled, action: action)
+        } else {
+            RoundedButton(title, disabled, action: action)
         }
     }
 

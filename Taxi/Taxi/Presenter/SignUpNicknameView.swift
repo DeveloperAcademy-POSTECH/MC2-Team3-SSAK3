@@ -8,41 +8,62 @@
 import SwiftUI
 
 struct SignUpNicknameView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var nickName: String = ""
     @State private var nickFieldState: FieldState = .notFocused
     @FocusState private var focusField: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 80) {
-            Text("닉네임을 입력해주세요")
-                .signUpTitle()
-            VStack {
-            UnderlinedTextField(text: $nickName, nickFieldState, "닉네임을 입력해주세요")
-                .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
-                .focused($focusField)
-                        Text("아카데미 내에서 사용중인 닉네임을 권장드려요")
+        VStack {
+            VStack(alignment: .leading, spacing: 80) {
+                Text("닉네임을 입력해주세요")
+                    .signUpTitle()
+                UnderlinedTextField(text: $nickName, nickFieldState, "닉네임을 입력해주세요")
+                    .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
+                    .focused($focusField)
+            }
+            .padding(.horizontal)
+            Text("아카데미 내에서 사용중인 닉네임을 권장드려요")
                 .signUpExplain()
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top)
-            }
-            Spacer()
-            RoundedButton("다음", nickName.isEmpty) {
+                .padding([.top, .horizontal])
+            Spacer(minLength: 0)
+            makeConditionalButton("완료", nickName.isEmpty, focusField) {
                 // TODO: usecase 연결
                 UserDefaults.standard.set(true, forKey: "isLogined")
             }
         }
-        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                }
+            }
+        }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 focusField = true
                 nickFieldState = .focused
             }
         }
+
         .onSubmit {
             focusField = true
         }
-        .padding(.horizontal)
     }
+
+    @ViewBuilder
+    private func makeConditionalButton(_ title: String, _ disabled: Bool = false, _ focusState: Bool, action: @escaping () -> Void) -> some View {
+        if focusState {
+            FlatButton(title, disabled, action: action)
+        } else {
+            RoundedButton(title, disabled, action: action)
+        }
+    }
+
 }
 
 struct SignUpNicknameView_Previews: PreviewProvider {
