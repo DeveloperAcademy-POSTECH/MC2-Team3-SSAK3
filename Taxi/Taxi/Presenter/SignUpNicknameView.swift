@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct SignUpNicknameView: View {
+    @EnvironmentObject var userViewModel: Authentication
     @Environment(\.dismiss) private var dismiss
     @State private var nickName: String = ""
     @State private var nickFieldState: FieldState = .notFocused
     @FocusState private var focusField: Bool
+    private let deviceUUID = UIDevice.current.identifierForVendor!.uuidString
 
     var body: some View {
         VStack {
@@ -29,6 +31,9 @@ struct SignUpNicknameView: View {
                 .padding([.top, .horizontal])
             Spacer(minLength: 0)
             makeConditionalButton("완료", nickName.isEmpty, focusField) {
+                print("완료버튼 눌림")
+                userViewModel.register(id: deviceUUID, nickname: nickName)
+                print(userViewModel.user)
                 // TODO: usecase 연결
                 UserDefaults.standard.set(true, forKey: "isLogined")
             }
@@ -68,6 +73,6 @@ struct SignUpNicknameView: View {
 
 struct SignUpNicknameView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpNicknameView()
+        SignUpNicknameView().environmentObject(Authentication())
     }
 }
