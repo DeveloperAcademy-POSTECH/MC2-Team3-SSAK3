@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-    var formatter: DateFormatter {
+    private var formatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MMM"
         formatter.locale = Locale(identifier: "ko_KR")
@@ -16,7 +16,15 @@ extension Date {
         return formatter
     }
 
-    var intFormatter: DateFormatter {
+    private var monthDayFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM월 dd일"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+        return formatter
+    }
+
+    private var intFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         formatter.locale = Locale(identifier: "ko_KR")
@@ -24,7 +32,7 @@ extension Date {
         return formatter
     }
 
-    var dateComponents: DateComponents {
+    private var dateComponents: DateComponents {
         return Calendar.current.dateComponents([.year, .month, .day], from: self)
     }
 
@@ -42,6 +50,10 @@ extension Date {
 
     var formattedString: String {
         return self.formatter.string(from: self)
+    }
+
+    var monthDay: String {
+        return self.monthDayFormatter.string(from: self)
     }
 
     /// date를 yyyyMMdd의 형태로 바꿈
