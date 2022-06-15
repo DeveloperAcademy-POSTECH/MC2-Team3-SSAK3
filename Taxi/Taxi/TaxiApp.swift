@@ -77,10 +77,12 @@ extension AppDelegate: MessagingDelegate {
 @main
 struct TaxiApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
+    @StateObject private var userViewModel: Authentication = Authentication()
 
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environmentObject(userViewModel)
         }
     }
 }
