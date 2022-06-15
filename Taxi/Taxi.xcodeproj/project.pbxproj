@@ -65,6 +65,7 @@
 		00F856A82844A985008E2E2F /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A72844A985008E2E2F /* FirebaseFunctionsCombine-Community */; };
 		00F856AA2844A985008E2E2F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A92844A985008E2E2F /* FirebaseStorage */; };
 		00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856AB2844A985008E2E2F /* FirebaseStorageCombine-Community */; };
+		374E059E285A18EC00215533 /* MyPartyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374E059D285A18EC00215533 /* MyPartyViewModel.swift */; };
 		37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D4D1F02856D285002E787B /* ChatRoomView.swift */; };
 		37F698852855FB910008C022 /* MyPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F698842855FB910008C022 /* MyPartyView.swift */; };
 		50459E2F28542E4E00287371 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459E2E28542E4E00287371 /* PhotoPicker.swift */; };
@@ -163,6 +164,7 @@
 		00F6B72628596EEF00DACA06 /* PatyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatyListCell.swift; sourceTree = "<group>"; };
 		00F6B72E2859C00E00DACA06 /* AddTaxiPartyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiPartyViewModel.swift; sourceTree = "<group>"; };
 		00F6B7302859C44D00DACA06 /* ChattingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRepository.swift; sourceTree = "<group>"; };
+		374E059D285A18EC00215533 /* MyPartyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPartyViewModel.swift; sourceTree = "<group>"; };
 		37D4D1F02856D285002E787B /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		37F698842855FB910008C022 /* MyPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPartyView.swift; sourceTree = "<group>"; };
 		50459E2E28542E4E00287371 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				508AE80E285A6E5500D111D3 /* UserProfileViewModel.swift */,
 				AF6FD9FE285A951B00827D8C /* TaxiPartyListViewModel.swift */,
 				50CCA9D6285AC4BE00977338 /* JoinTaxiPartyViewModel.swift */,
+				374E059D285A18EC00215533 /* MyPartyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				00F6B7312859C44D00DACA06 /* ChattingRepository.swift in Sources */,
 				000E545A285321250085C39E /* JoinTaxiPartyUseCase.swift in Sources */,
 				E63C7AB22858C2520080530B /* SignUpNicknameView.swift in Sources */,
+				374E059E285A18EC00215533 /* MyPartyViewModel.swift in Sources */,
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				50459E332854701C00287371 /* ImageExtension.swift in Sources */,
 				00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */,
