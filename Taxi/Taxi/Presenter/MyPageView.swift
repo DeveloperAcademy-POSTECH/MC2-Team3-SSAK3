@@ -12,43 +12,42 @@ struct MyPageView: View {
     @AppStorage("partyCompleteNoti") private var partyCompleteNoti: Bool = true
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
+    @State private var user: User = User(id: "", nickname: "Avo", profileImage: nil)
+    @State private var showProfile: Bool = false
 
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
-                Text("설정")
-                NavigationLink {
-                    ProfileView()
+        VStack(alignment: .leading) {
+            Text("설정")
+            HStack {
+                ProfileImage(user, diameter: 46)
+                Text(user.nickname)
+                Spacer()
+                Button {
+                    showProfile.toggle()
                 } label: {
-                    linkToProfile
+                    Text("프로필 수정")
                 }
-                Divider()
-                Text("알림")
-                notificationSetting("채팅 알림", isOn: $chattingNoti)
-                notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
-                Divider()
-                logOnStateButton("로그아웃", label: "정말 로그아웃 하시겠습니까?", message: "경고문구", isPresented: $isTryLogout) {
-                    // TODO: Add Logout Action
-                }
-                logOnStateButton("회원탈퇴", label: "정말 회원탈퇴 하시겠습니까?", message: "경고문구", isPresented: $isTryWithdrawal) {
-                    // TODO: Add Withdrawal Action
-                }
-                Spacer(minLength: 0)
             }
-            .navigationBarHidden(true)
+            Divider()
+            Text("알림")
+            notificationSetting("채팅 알림", isOn: $chattingNoti)
+            notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
+            Divider()
+            logOnStateButton("로그아웃", label: "정말 로그아웃 하시겠습니까?", message: "경고문구", isPresented: $isTryLogout) {
+                // TODO: Add Logout Action
+            }
+            logOnStateButton("회원탈퇴", label: "정말 회원탈퇴 하시겠습니까?", message: "경고문구", isPresented: $isTryWithdrawal) {
+                // TODO: Add Withdrawal Action
+            }
+            Spacer(minLength: 0)
+        }
+        .sheet(isPresented: $showProfile) {
+            ProfileView()
         }
     }
 }
 
 extension MyPageView {
-
-    private var linkToProfile: some View {
-        HStack {
-            Text("프로필 관리")
-            Spacer()
-            Image(systemName: "chevron.right")
-        }
-    }
 
     private func notificationSetting(_ label: String, isOn: Binding<Bool>) -> some View {
         HStack {
