@@ -141,12 +141,12 @@ extension AddTaxiParty {
             minuteSelector
         }
         .background(Color.addBackground)
-        .toInfoContainer(title: "몇시에 모이고 싶으신가요?", selectedInfo: startTimeToString(), toggle: step == .time) {
+        .toInfoContainer(title: "몇시에 모이고 싶으신가요?", selectedInfo: convertStartTimeToString(), toggle: step == .time) {
             changeStep(to: .time)
         }
     }
 
-    private func startTimeToString() -> String {
+    private func convertStartTimeToString() -> String {
         if let startHour = startHour, let startMinute = startMinute {
             return "\(startHour)시 \(String(format: "%02d", startMinute))분"
         } else {
@@ -254,12 +254,12 @@ extension AddTaxiParty {
         .frame(maxWidth: .infinity)
         .padding(EdgeInsets(top: 24, leading: 18, bottom: 24, trailing: 18))
         .background(Color.addBackground)
-        .toInfoContainer(title: "최대 몇명을 모으고 싶으신가요?", selectedInfo: maxNumberToString(), toggle: step == .personNumber) {
+        .toInfoContainer(title: "최대 몇명을 모으고 싶으신가요?", selectedInfo: convertMaxNumberToString(), toggle: step == .personNumber) {
             changeStep(to: .personNumber)
         }
     }
 
-    private func maxNumberToString() -> String {
+    private func convertMaxNumberToString() -> String {
         if let maxNumber = maxNumber {
             return "\(maxNumber)인"
         } else {
@@ -270,14 +270,14 @@ extension AddTaxiParty {
 // MARK: - 선택, 비선택 RoundedRectangle 을 반환하는 함수입니다.
 extension AddTaxiParty {
     struct RoundedBackground: ViewModifier {
-        private let selected: Bool
+        private let isSelected: Bool
 
         init(_ selected: Bool) {
-            self.selected = selected
+            self.isSelected = selected
         }
         func body(content: Content) -> some View {
-            let backgroundColor: Color = selected ? .selectYellow : .white
-            let strokeColor: Color = selected ? .customYellow : .lightGray
+            let backgroundColor: Color = isSelected ? .selectYellow : .white
+            let strokeColor: Color = isSelected ? .customYellow : .lightGray
             return content.background(
                 RoundedRectangle(cornerRadius: 10)
                     .strokeBorder(strokeColor, lineWidth: 1, antialiased: false)
@@ -294,10 +294,10 @@ extension View {
     }
 }
 // MARK: Step 변경 로직
-extension AddTaxiParty {
+private extension AddTaxiParty {
     // 사용자가 정보 수정을 위해 임의로 탭을 입력하는 경우
-    private func changeStep(to step: AddTaxiParty.Step) {
-        withAnimation(.easeInOut(duration: 2)) {
+    func changeStep(to step: AddTaxiParty.Step) {
+        withAnimation(.easeInOut) {
             switch step {
             case .destination:
                 // 현재 탭을 닫으려는 경우
@@ -346,8 +346,8 @@ extension AddTaxiParty {
         }
     }
     // 정보 입력 시 다음 단계로 넘어가는 함수
-    private func toNextStep() {
-        withAnimation(.easeInOut(duration: 2)) {
+    func toNextStep() {
+        withAnimation(.easeInOut) {
             if checkAllInfoSelected() {
                 self.step = .none
             } else {
