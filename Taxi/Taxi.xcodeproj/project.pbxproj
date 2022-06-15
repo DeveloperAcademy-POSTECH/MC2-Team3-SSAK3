@@ -48,7 +48,6 @@
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00F6B72728596EEF00DACA06 /* PatyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B72628596EEF00DACA06 /* PatyListCell.swift */; };
 		00F6B72A28596F7D00DACA06 /* SegmentedPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 00F6B72928596F7D00DACA06 /* SegmentedPicker */; };
-		00F6B72B2859702500DACA06 /* AddTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545728531C510085C39E /* AddTaxiPartyUseCase.swift */; };
 		00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856992844A985008E2E2F /* FirebaseAnalytics */; };
 		00F8569C2844A985008E2E2F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 00F8569B2844A985008E2E2F /* FirebaseAuth */; };
 		00F8569E2844A985008E2E2F /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F8569D2844A985008E2E2F /* FirebaseAuthCombine-Community */; };
@@ -590,7 +589,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00F6B72B2859702500DACA06 /* AddTaxiPartyUseCase.swift in Sources */,
 				00BC47472858CAF80055CB6A /* AddTaxiPartyUseCase.swift in Sources */,
 				000E545A285321250085C39E /* JoinTaxiPartyUseCase.swift in Sources */,
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
