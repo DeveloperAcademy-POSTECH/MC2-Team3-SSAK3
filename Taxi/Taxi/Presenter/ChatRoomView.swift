@@ -45,12 +45,13 @@ extension ChatRoomView {
 }
 extension ChatRoomView {
     private var messageList: some View {
-        LazyVStack {
+        LazyVStack(spacing: 10) {
             ForEach(viewModel.messages, id: \.id) { message in
                 makeMessageRow(message)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(Color.addBackground)
     }
 }
 extension ChatRoomView {
@@ -65,8 +66,12 @@ extension ChatRoomView {
     }
 
     private func entranceMessage(_ message: Message) -> some View {
-        Text(message.body)
+        Text("\(Image(systemName: "sparkles"))\(message.body)")
+            .inchatNotification()
+            .padding(4)
+            .background(RoundedRectangle(cornerRadius: 11).fill(Color(red: 223/255, green: 223/255, blue: 223/255)))
     }
+
     @ViewBuilder
     private func normalMessage(_ message: Message) -> some View {
         Text(message.body)
