@@ -10,14 +10,15 @@ import SDWebImageSwiftUI
 
 struct ProfileView: View {
     @Environment(\.dismiss) private var dismiss
-    @Binding var user: User?
+    @EnvironmentObject private var userViewModel: Authentication
+    @State private var user: User?
     @State private var showActionSheet: Bool = false
     @State private var showPicker: Bool = false
-    @State private var selectedImage: UIImage? // 피커에서 선택한 사진을 담는 변수
     @State private var nicknameContainer: String = "" // User 닉네임을 임시로 담는 변수
     @State private var imageContainer: String? // User 프로필 사진 URL을 임시로 담는 변수
+    @State private var selectedImage: UIImage? // 피커에서 선택한 사진을 담는 변수
+    @State private var imageData: Data? // 피커에서 선택한 사진을 Data로 변환한 것을 담는 변수
     @State private var isProfileDeleted: Bool = false
-    @State private var imageData: Data?
     private let profileSize: CGFloat = 160
 
     var body: some View {
@@ -55,21 +56,30 @@ struct ProfileView: View {
             HStack {
                 Text("닉네임")
                 Spacer()
-                TextField("닉네임", text: $nicknameContainer)
+                TextField("", text: $nicknameContainer)
                     .disableAutocorrection(true)
                     .textInputAutocapitalization(.never)
             }
             Button {
-                // TODO: Update User Nickname, Profile Image
-                // if nicknameContainer != user.nickname { nickname = nicknameContainer }
-                // if let newImage = selectedImage { profileImage = Data(newImage) }
-                // else if isProfileDeleted { profileImage = nil }
+                guard let user = user else { return }
+                if nicknameContainer != user.nickname { // 닉네임 바꿨으면 변경
+                    userViewModel.updateNickname(nicknameContainer)
+                }
+                if let newImage = imageData { //
+                    userViewModel.updateProfileImage(newImage)
+                } else if isProfileDeleted {
+                    userViewModel.deleteProfileImage()
+                    isProfileDeleted = false
+                }
+                
             } label: {
                 Text("적용")
             }
+            .disabled(nicknameContainer.contains(" "))
             Spacer(minLength: 0)
         }
         .onAppear {
+            user = userViewModel.user
             if let user = user {
                 nicknameContainer = user.nickname
                 imageContainer = user.profileImage
@@ -99,6 +109,7 @@ extension ProfileView {
             isProfileDeleted = true
             imageContainer = nil
             selectedImage = nil
+            imageData = nil
         }
         Button("취소", role: .cancel) {
             showActionSheet = false
