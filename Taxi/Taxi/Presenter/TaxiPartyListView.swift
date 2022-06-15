@@ -45,8 +45,7 @@ struct TaxiPartyHeadLine: View {
             Text("택시팟")
                 .font(.custom("AppleSDGothicNeo-Bold", size: 25))
             Spacer()
-            Button {
-                // TODO: 채팅방 생성 View로 전환
+            Button { // TODO: 채팅방 생성 View로 전환
                 print("+ tapped!")
             } label: {
                 Image(systemName: "plus")
@@ -137,10 +136,10 @@ struct CellViewList: View {
     @State private var mypartys: [TaxiParty] = [
         TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220601, meetingTime: 0930, maxPersonNumber: 4, members: ["요셉", "아보", "조이", "제리"], isClosed: true),
         TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220601, meetingTime: 1330, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
-        TaxiParty(id: "3", departureCode: 0, destinationCode: 1, meetingDate: 20220602, meetingTime: 1400, maxPersonNumber: 2, members: ["제리", "조이"], isClosed: false),
+        TaxiParty(id: "3", departureCode: 1, destinationCode: 0, meetingDate: 20220602, meetingTime: 1400, maxPersonNumber: 2, members: ["제리", "조이"], isClosed: false),
         TaxiParty(id: "4", departureCode: 0, destinationCode: 1, meetingDate: 20220602, meetingTime: 1734, maxPersonNumber: 3, members: ["호종이", "아보"], isClosed: false),
         TaxiParty(id: "5", departureCode: 0, destinationCode: 1, meetingDate: 20220603, meetingTime: 2005, maxPersonNumber: 2, members: ["요셉"], isClosed: false),
-        TaxiParty(id: "6", departureCode: 0, destinationCode: 1, meetingDate: 20220603, meetingTime: 1340, maxPersonNumber: 4, members: ["요셉", "조이"], isClosed: false)
+        TaxiParty(id: "6", departureCode: 1, destinationCode: 0, meetingDate: 20220603, meetingTime: 1340, maxPersonNumber: 4, members: ["요셉", "조이"], isClosed: false)
     ]
     private var partys: [Int: [TaxiParty]] {
         Dictionary.init(grouping: mypartys, by: {$0.meetingDate})
@@ -202,7 +201,7 @@ struct SectionHeaderView: View {
             .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.leading, .top])
-            .background(Color.mint)
+            .background(Color.background)
     }
 }
 

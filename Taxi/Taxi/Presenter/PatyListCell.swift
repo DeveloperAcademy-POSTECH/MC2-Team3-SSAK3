@@ -18,17 +18,25 @@ struct PatyListCell: View {
                 DepartureView(party: party)
                 Spacer()
                 UserView(party: party)
-            } .padding(.vertical, 14)
+            } .padding(.vertical, 8)
                 .padding(.horizontal, 18)
         }
         .padding()
         .background {
             ZStack {
-                RoundedRectangle(cornerRadius: 18.0)
-                    .fill(Color(.white))
-                    .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.darkGray.opacity(1.0), lineWidth: 1.5)
+                if party.departureCode == 1 {
+                    RoundedRectangle(cornerRadius: 18.0)
+                        .fill(Color.postechPink.opacity(0.05))
+                        .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.postechPink.opacity(1.0), lineWidth: 1.5)
+                } else {
+                    RoundedRectangle(cornerRadius: 18.0)
+                        .fill(Color.ktxBlue.opacity(0.05))
+                        .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.ktxBlue.opacity(1.0), lineWidth: 1.5)
+                }
             }
         }.padding(.horizontal)
     }
@@ -38,19 +46,36 @@ struct DestinationView: View {
     let party: TaxiParty
 
     var body: some View {
-        HStack(alignment: .center, spacing: 2) {
-            Image(systemName: "tram.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 17, height: 18)
-                .foregroundColor(Color.ktxBlue)
-            Text("\(party.destincation)으로")
-                .font(.custom("AppleSDGothicNeo-Medium", size: 14))
-                .foregroundColor(Color.ktxBlue)
-            Text("") // 나중에 데이터로 처리
-                .fontWeight(.thin)
-                .font(.custom("AppleSDGothicNeo-Regular", size: 14))
-                .foregroundColor(Color.ktxBlue)
+        if party.departureCode == 1 {
+            HStack(alignment: .center, spacing: 2) {
+                Image(systemName: "graduationcap.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 17, height: 18)
+                    .foregroundColor(Color.postechPink)
+                Text("\(party.destincation)으로")
+                    .font(.custom("AppleSDGothicNeo-Medium", size: 14))
+                    .foregroundColor(Color.postechPink)
+                Text("") // 나중에 데이터로 처리
+                    .fontWeight(.thin)
+                    .font(.custom("AppleSDGothicNeo-Regular", size: 14))
+                    .foregroundColor(Color.postechPink)
+            }
+        } else {
+            HStack(alignment: .center, spacing: 2) {
+                Image(systemName: "train.side.front.car")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 17, height: 18)
+                    .foregroundColor(Color.ktxBlue)
+                Text("\(party.destincation)으로")
+                    .font(.custom("AppleSDGothicNeo-Medium", size: 14))
+                    .foregroundColor(Color.ktxBlue)
+                Text("") // 나중에 데이터로 처리
+                    .fontWeight(.thin)
+                    .font(.custom("AppleSDGothicNeo-Regular", size: 14))
+                    .foregroundColor(Color.ktxBlue)
+            }
         }
     }
 }
@@ -73,8 +98,11 @@ struct MeetTimeView: View {
 
     func meetTimeSeparator(meetTime: String) -> String {
         var meet: String = meetTime
-        let index1 = meet.index(meet.endIndex, offsetBy: -2) // TODO: offsetBy부분 if문으로 처리하여 app crash 방지
-        meet.insert(":", at: index1)
+        let crashBlock = -2
+        if crashBlock == -2 {
+            let index1 = meet.index(meet.endIndex, offsetBy: crashBlock)
+            meet.insert(":", at: index1)
+        }
         return "\(meet)"
     }
 }
@@ -89,7 +117,7 @@ struct DepartureView: View {
                     .font(.custom("AppleSDGothicNeo-Medium", size: 20))
                     .foregroundColor(Color.customBlack)
                 Text("C5") // 나중에 데이터로 처리
-                    .fontWeight(.light)
+                    .fontWeight(.ultraLight)
                     .font(.custom("AppleSDGothicNeo-Regular", size: 20))
                     .foregroundColor(Color.customBlack)
             }.padding(5)
