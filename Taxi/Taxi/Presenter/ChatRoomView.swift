@@ -8,82 +8,78 @@
 import SwiftUI
 
 struct ChatRoomView: View {
-    let party: TaxiParty
-    // 더미 데이터
-    private let user: User = User(id: "123456", nickname: "Jerry", profileImage: "")
-    private let othersContent: String = "안녕하세요! 저 C5 앞에 도착했어요 :)"
-    private let myContent: String = "저도 거의 다 왔어요!\n혹시 캐리어 가지고 계신가요?"
+    @ObservedObject private var viewModel: ChattingViewModel
+    @EnvironmentObject private var authentication: Authentication
+    private let taxiParty: TaxiParty
+
+    init(party: TaxiParty) {
+        self.taxiParty = party
+        _viewModel = ObservedObject(initialValue: ChattingViewModel(party))
+    }
 
     var body: some View {
         VStack {
-            OthersChat(sender: user, content: othersContent, time: "13:16")
-            MyChat(content: myContent, time: "13:16")
-            EnterChat(nickname: "Joy")
-            Spacer()
+            messageList
             Typing()
         }
+        .navigationTitle("\(taxiParty.meetingTime / 100):\(taxiParty.meetingTime % 100) \(taxiParty.destincation)")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(content: toolbar)
     }
 }
-
-// 내 채팅
-struct MyChat: View {
-    let content: String
-    let time: String
-    var body: some View {
-        HStack(alignment: .bottom) {
-            Spacer()
-            Text(time)
-                .foregroundColor(.darkGray)
-                .font(Font.custom("AppleSDGothicNeo-Regular", size: 8))
-                .fontWeight(.light) // TODO: 폰트 스타일 추가
-            Text(content)
-                .chatStyle()
-                .padding(10)
-                .background(Color(red: 255/255, green: 224/255, blue: 64/255)) // TODO: clearYellow 색상 추가
-                .cornerRadius(10, corners: [.topLeft, .bottomLeft, .bottomRight])
-        }
-    }
-}
-
-// 상대 채팅
-struct OthersChat: View {
-    let sender: User
-    let content: String
-    let time: String
-    var body: some View {
-        HStack(alignment: .top) {
-            ProfileImage(sender, diameter: 44)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(sender.nickname)
-                    .foregroundColor(.charcoal)
-                    .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
-                    .fontWeight(.regular) // TODO: 폰트 스타일 추가
-                HStack(alignment: .bottom) {
-                    Text(content)
-                        .chatStyle()
-                        .padding(10)
-                        .background(.white)
-                        .cornerRadius(10, corners: [.topRight, .bottomLeft, .bottomRight])
-                    Text(time)
-                        .foregroundColor(.darkGray)
-                        .font(Font.custom("AppleSDGothicNeo-Regular", size: 8))
-                        .fontWeight(.light) // TODO: 폰트 스타일 추가
-                }
+// MARK: - Toolbar 모음
+extension ChatRoomView {
+    @ToolbarContentBuilder
+    private func toolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .primaryAction) {
+            Button {
+                // TODO: 채팅방 나가기 유즈케이스 연결
+            } label: {
+                Text("나가기")
+                    .foregroundColor(.customRed)
+                    .font(.custom("AppleSDGothicNeo-Bold", size: 14))
             }
-            Spacer()
+
         }
     }
 }
+extension ChatRoomView {
+    private var messageList: some View {
+        LazyVStack {
+            ForEach(viewModel.messages, id: \.id) { message in
+                makeMessageRow(message)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+}
+extension ChatRoomView {
+    @ViewBuilder
+    private func makeMessageRow(_ message: Message) -> some View {
+        switch message.type {
+        case .normal:
+            normalMessage(message)
+        case .entrance:
+            entranceMessage(message)
+        }
+    }
 
+    private func entranceMessage(_ message: Message) -> some View {
+        Text(message.body)
+    }
+    @ViewBuilder
+    private func normalMessage(_ message: Message) -> some View {
+        Text(message.body)
+    }
+}
 // 입장 채팅
-struct EnterChat: View {
-    let nickname: String
+struct EntranceMessage: View {
+    let message: Message
     var body: some View {
         HStack(spacing: 2) {
             Image(systemName: "sparkles")
-            Text("\(nickname)님이 택시팟에 참가했습니다.")
+            Text(message.body)
         }
-        .infoChat()
     }
 }
 
@@ -123,8 +119,7 @@ struct Typing: View {
                 print("보내기")
             } label: {
                 Circle()
-                    .strokeBorder(Color.customYellow, lineWidth: 0.5)
-                    .background(Circle().foregroundColor(Color(red: 225/225, green: 229/255, blue: 94/255)))
+                    .background(Circle().fill(Color.customYellow))
                     .frame(width: 24, height: 24)
                     .overlay(
                         Image(systemName: "arrow.up")
@@ -145,19 +140,6 @@ struct ViewHeightKey: PreferenceKey {
     }
 }
 
-
-// TODO: Extension 이동
-// 날짜와 입장에 같이 쓰이는 스타일
-struct InfoChat: ViewModifier {
-    func body(content: Content) -> some View {
-        return content
-            .inchatNotification()
-            .padding(5)
-            .background(Color(red: 223/256, green: 223/256, blue: 223/256)) // TODO: 색상 추가
-            .cornerRadius(11)
-    }
-}
-
 // 특정 코너만 둥글게 하기 위한 Extension
 struct RoundedCorner: Shape {
 
@@ -170,29 +152,13 @@ struct RoundedCorner: Shape {
     }
 }
 
-extension View {
-    func infoChat() -> some View {
-        self.modifier(InfoChat())
-    }
-
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-}
-
 struct ChatRoom_Previews: PreviewProvider {
     static var previews: some View {
-        let user: User = User(id: "123456", nickname: "Jerry", profileImage: "")
-        let othersContent: String = "안녕하세요! 저 C5 앞에 도착했어요 :)"
-        let myContent: String = "저도 거의 다 왔어요!\n혹시 캐리어 가지고 계신가요?"
-
-        VStack {
-            OthersChat(sender: user, content: othersContent, time: "13:16")
-            MyChat(content: myContent, time: "13:16")
-            EnterChat(nickname: "Joy")
-            Spacer()
-            Typing()
+        Group {
+            NavigationView {
+                ChatRoomView(party: TaxiPartyMockData.mockData.first!)
+                    .environmentObject(Authentication())
+            }
         }
-        .background(Color.darkGray)
     }
 }

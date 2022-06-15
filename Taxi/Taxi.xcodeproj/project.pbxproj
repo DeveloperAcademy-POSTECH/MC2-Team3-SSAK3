@@ -50,6 +50,7 @@
 		00D904B52854A64E0003BA5A /* MyTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */; };
 		00E8F1B9284B213C00D68DF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* User.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
+		00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E92498285A152F0026DD73 /* MessageMockData.swift */; };
 		00F6B72728596EEF00DACA06 /* PatyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B72628596EEF00DACA06 /* PatyListCell.swift */; };
 		00F6B72A28596F7D00DACA06 /* SegmentedPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 00F6B72928596F7D00DACA06 /* SegmentedPicker */; };
 		00F6B72F2859C00E00DACA06 /* AddTaxiPartyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B72E2859C00E00DACA06 /* AddTaxiPartyViewModel.swift */; };
@@ -151,6 +152,7 @@
 		00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyUseCase.swift; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		00E92498285A152F0026DD73 /* MessageMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMockData.swift; sourceTree = "<group>"; };
 		00F6B72628596EEF00DACA06 /* PatyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatyListCell.swift; sourceTree = "<group>"; };
 		00F6B72E2859C00E00DACA06 /* AddTaxiPartyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiPartyViewModel.swift; sourceTree = "<group>"; };
 		00F6B7302859C44D00DACA06 /* ChattingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRepository.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				E63C7AA42858B5B50080530B /* TaxiPartyMockData.swift */,
+				00E92498285A152F0026DD73 /* MessageMockData.swift */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				50459E35285490CC00287371 /* TaxiPartyInfoView.swift in Sources */,
 				00842A94284B2682000292E5 /* TaxiParty.swift in Sources */,
 				00D904B52854A64E0003BA5A /* MyTaxiPartyUseCase.swift in Sources */,
+				00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */,
 				00BC473F28581E740055CB6A /* AddTaxiParty.swift in Sources */,
 				A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */,
 				00A5705A2851826A008B220E /* ColorExtension.swift in Sources */,

@@ -28,7 +28,11 @@ final class MessageMockData {
         Message(id: UUID().uuidString, sender: "1", body: "안녕하세요 테스트 메시지", timeStamp: 1, typeCode: 0),
         Message(id: UUID().uuidString, sender: "2", body: "안녕하세요 테스트 메시지", timeStamp: 1, typeCode: 0),
         Message(id: UUID().uuidString, sender: "1", body: "안녕하세요 테스트 메시지", timeStamp: 1, typeCode: 0),
-        Message(id: UUID().uuidString, sender: "1", body: "안녕하세요 테스트 메시지", timeStamp: 1, typeCode: 0),
+        Message(id: UUID().uuidString, sender: "1", body: "안녕하세요 테스트 메시지", timeStamp: 1, typeCode: 0)
     ]
+
+    static var mockMessage: Message {
+        Message(id: UUID().uuidString, sender: "1", body: "안녕하세요 테스트 메시지", timeStamp: 1, typeCode: 0)
+    }
 }
 #endif
