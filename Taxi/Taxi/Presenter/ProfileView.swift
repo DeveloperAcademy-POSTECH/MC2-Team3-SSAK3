@@ -10,25 +10,15 @@ import SDWebImageSwiftUI
 
 struct ProfileView: View {
     @Environment(\.dismiss) private var dismiss
+    @Binding var user: User?
     @State private var showActionSheet: Bool = false
     @State private var showPicker: Bool = false
     @State private var selectedImage: UIImage? // 피커에서 선택한 사진을 담는 변수
     @State private var nicknameContainer: String = "" // User 닉네임을 임시로 담는 변수
     @State private var imageContainer: String? // User 프로필 사진 URL을 임시로 담는 변수
     @State private var isProfileDeleted: Bool = false
-    @State private var imageData: Data? = nil
+    @State private var imageData: Data?
     private let profileSize: CGFloat = 160
-
-    private let user: User = User(
-        id: "1",
-        nickname: "Avo",
-        profileImage: "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f202fce4-a5b6-4e40-9f5e-f22eaf4edd87/ProfileDummy.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220611%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220611T030635Z&X-Amz-Expires=86400&X-Amz-Signature=8756de2e65dc2b6f616fb7a697bbebbaf8f779b53e3481e52fb183b4b5709821&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22ProfileDummy.png%22&x-id=GetObject"
-    )
-
-    init() {
-        self._nicknameContainer = .init(initialValue: user.nickname)
-        self._imageContainer = .init(initialValue: user.profileImage)
-    }
 
     var body: some View {
         VStack {
@@ -79,6 +69,12 @@ struct ProfileView: View {
             }
             Spacer(minLength: 0)
         }
+        .onAppear {
+            if let user = user {
+                nicknameContainer = user.nickname
+                imageContainer = user.profileImage
+            }
+        }
     }
 }
 
@@ -126,11 +122,5 @@ extension ProfileView {
             }
         }
         .edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
     }
 }
