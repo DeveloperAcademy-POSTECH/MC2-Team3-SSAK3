@@ -20,9 +20,10 @@ struct SignUpNicknameView: View {
             VStack(alignment: .leading, spacing: 80) {
                 Text("닉네임을 입력해주세요")
                     .signUpTitle()
-                UnderlinedTextField(text: $nickName, nickFieldState, "닉네임을 입력해주세요")
+                UnderlinedTextField(text: $nickName, nickFieldState, "닉네임")
                     .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
                     .focused($focusField)
+                // TODO: 특수 문자 및 공백 체크
             }
             .padding(.horizontal)
             Text("아카데미 내에서 사용중인 닉네임을 권장드려요")
@@ -33,8 +34,7 @@ struct SignUpNicknameView: View {
             makeConditionalButton("완료", nickName.isEmpty, focusField) {
                 print("완료버튼 눌림")
                 userViewModel.register(id: deviceUUID, nickname: nickName)
-                print(userViewModel.user)
-                // TODO: usecase 연결
+                // TODO: 유저 환영 화면 연결 or pop to root
                 UserDefaults.standard.set(true, forKey: "isLogined")
             }
         }
@@ -48,13 +48,6 @@ struct SignUpNicknameView: View {
                 }
             }
         }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                focusField = true
-                nickFieldState = .focused
-            }
-        }
-
         .onSubmit {
             focusField = true
         }
