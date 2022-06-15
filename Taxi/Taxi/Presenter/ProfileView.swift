@@ -22,59 +22,17 @@ struct ProfileView: View {
 
     var body: some View {
         VStack {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "xmark")
-                    .imageScale(.large)
-            }
-            Button {
-                showActionSheet.toggle()
-            } label: {
-                Group {
-                    if let newImage = selectedImage { // 프로필 사진을 변경한 경우
-                        Image(uiImage: newImage)
-                            .profileCircle(profileSize)
-                    } else if let imageURL = imageContainer { // 프로필 사진이 있는 경우
-                        WebImage(url: URL(string: imageURL))
-                            .profileCircle(profileSize)
-                    } else { // 프로필 사진이 없는 경우
-                        textProfile(profileSize)
-                    }
-                }
-                .overlay(alignment: .bottom) {
-                    Text("편집")
-                }
-            }
+            navigationBar
+            profileImageEditButton
             .confirmationDialog("프로필 사진 설정", isPresented: $showActionSheet) {
                 actionSheetButtons
             }
-            .sheet(isPresented: $showPicker) {
+            .fullScreenCover(isPresented: $showPicker) {
                 photoPicker
             }
-            HStack {
-                Text("닉네임")
-                Spacer()
-                TextField("", text: $nicknameContainer)
-                    .disableAutocorrection(true)
-                    .textInputAutocapitalization(.never)
-            }
-            Button {
-                guard let user = userViewModel.user else { return }
-                if nicknameContainer != user.nickname { // 닉네임 바꿨으면 변경
-                    userViewModel.updateNickname(nicknameContainer)
-                }
-                if let newImage = imageData { //
-                    userViewModel.updateProfileImage(newImage)
-                } else if isProfileDeleted {
-                    userViewModel.deleteProfileImage()
-                    isProfileDeleted = false
-                }
-            } label: {
-                Text("적용")
-            }
-            .disabled(nicknameContainer.contains(" ") || nicknameContainer == "")
-            Spacer(minLength: 0)
+            nicknameTextField
+            applyChangeButton
+            Spacer()
         }
         .onAppear {
             if let user = userViewModel.user {
@@ -85,7 +43,38 @@ struct ProfileView: View {
     }
 }
 
-extension ProfileView {
+private extension ProfileView {
+
+    var navigationBar: some View {
+        HStack {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark")
+                    .imageScale(.large)
+            }
+            Spacer()
+        }
+    }
+
+    var profileImageEditButton: some View {
+        Button {
+            showActionSheet.toggle()
+        } label: {
+            if let newImage = selectedImage { // 프로필 사진을 변경한 경우
+                Image(uiImage: newImage)
+                    .profileCircle(profileSize)
+            } else if let imageURL = imageContainer { // 프로필 사진이 있는 경우
+                WebImage(url: URL(string: imageURL))
+                    .profileCircle(profileSize)
+            } else { // 프로필 사진이 없는 경우
+                textProfile(profileSize)
+            }
+        }
+        .overlay(alignment: .bottom) {
+            Text("편집")
+        }
+    }
 
     func textProfile(_ diameter: CGFloat) -> some View {
         ZStack {
@@ -131,5 +120,33 @@ extension ProfileView {
             }
         }
         .edgesIgnoringSafeArea(.all)
+    }
+
+    var nicknameTextField: some View {
+        HStack {
+            Text("닉네임")
+            Spacer()
+            TextField("", text: $nicknameContainer)
+                .disableAutocorrection(true)
+                .textInputAutocapitalization(.never)
+        }
+    }
+
+    var applyChangeButton: some View {
+        Button {
+            guard let user = userViewModel.user else { return }
+            if nicknameContainer != user.nickname { // 닉네임 바꿨으면 변경
+                userViewModel.updateNickname(nicknameContainer)
+            }
+            if let newImage = imageData { //
+                userViewModel.updateProfileImage(newImage)
+            } else if isProfileDeleted {
+                userViewModel.deleteProfileImage()
+                isProfileDeleted = false
+            }
+        } label: {
+            Text("적용")
+        }
+        .disabled(nicknameContainer.contains(" ") || nicknameContainer == "") // TODO: 특수문자 불가능하게
     }
 }
