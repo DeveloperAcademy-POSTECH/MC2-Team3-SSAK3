@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AE1D0284C922500AF59BE /* UserRepository.swift */; };
 		000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */; };
+		000C24F72859CB440054D679 /* ChattingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F62859CB440054D679 /* ChattingUseCase.swift */; };
 		000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D83252840E23800BA3DFA /* TaxiApp.swift */; };
 		000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D83292840E23A00BA3DFA /* Assets.xcassets */; };
 		000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000D832C2840E23A00BA3DFA /* Preview Assets.xcassets */; };
@@ -103,6 +104,7 @@
 /* Begin PBXFileReference section */
 		000AE1D0284C922500AF59BE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingFirebaseDataSource.swift; sourceTree = "<group>"; };
+		000C24F62859CB440054D679 /* ChattingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingUseCase.swift; sourceTree = "<group>"; };
 		000D83222840E23800BA3DFA /* Taxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		000D83252840E23800BA3DFA /* TaxiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiApp.swift; sourceTree = "<group>"; };
 		000D83292840E23A00BA3DFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				000E545B285321E70085C39E /* GetTaxiPartyUseCase.swift */,
 				000E545D2853622D0085C39E /* AuthenticateUseCase.swift */,
 				00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */,
+				000C24F62859CB440054D679 /* ChattingUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				00A5705A2851826A008B220E /* ColorExtension.swift in Sources */,
 				E63C7AA22858B5520080530B /* DateExtension.swift in Sources */,
 				000E545C285321E70085C39E /* GetTaxiPartyUseCase.swift in Sources */,
+				000C24F72859CB440054D679 /* ChattingUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
