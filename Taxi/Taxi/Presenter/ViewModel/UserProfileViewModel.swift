@@ -8,15 +8,13 @@
 import Foundation
 
 final class UserProfileViewModel: ObservableObject {
-    @Published private (set) var membersInfo: [String: User] = [:]
+    @Published private (set) var user: User?
     private let authenticateUseCase: AuthenticateUseCase = AuthenticateUseCase()
 
-    func getMembersInfo(_ members: [String]) {
-        for id in members {
-            authenticateUseCase.login(id) { [weak self] user, error in
-                guard let self = self, let user = user else { return }
-                self.membersInfo.updateValue(user, forKey: id)
-            }
+    func getUser(_ id: String) {
+        authenticateUseCase.login(id) { [weak self] user, error in
+            guard let self = self, error == nil, let user = user else { return }
+            self.user = user
         }
     }
 }
