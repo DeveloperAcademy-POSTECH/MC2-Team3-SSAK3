@@ -9,16 +9,15 @@ import SwiftUI
 
 struct MyPartyView: View {
     @StateObject private var myPartyViewModel: MyPartyViewModel = MyPartyViewModel()
-    // TODO: 현재 로그인한 유저 불러오기
-    private let user: User = User(id: "123456", nickname: "Jerry", profileImage: nil)
+    @EnvironmentObject var userViewModel: Authentication
 
     var body: some View {
         VStack {
             MyPartyTitle()
-            MyPartyList(user: user, myPartyViewModel: myPartyViewModel)
+            MyPartyList(user: userViewModel.user!, myPartyViewModel: myPartyViewModel)
         }
         .onAppear {
-            myPartyViewModel.getMyParties(user: user)
+            myPartyViewModel.getMyParties(user: userViewModel.user!)
         }
     }
 }
@@ -270,7 +269,7 @@ struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             MyPartyView()
-                .navigationBarHidden(true)
+                .environmentObject(Authentication())
         }
     }
 }
