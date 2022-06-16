@@ -13,8 +13,8 @@ import Foundation
 
      func getMyParties(user: User) {
          myPartyUseCase.getMyTaxiParty(user, force: true) { [weak self] taxiParties, error in
-             guard let self = self, let taxiParties = taxiParties else {
-                 print(error ?? "")
+             guard let self = self, let taxiParties = taxiParties, error == nil else {
+                 print(error!)
                  return
              }
              print("Get MyParties, taxiParties: \(taxiParties)")
@@ -24,12 +24,19 @@ import Foundation
 
      func leaveMyParty(user: User, party: TaxiParty) {
          myPartyUseCase.leaveTaxiParty(party, user: user) { [weak self] error in
-             guard let self = self else {
-                 print(error ?? "")
+             guard let self = self, error == nil else {
+                 print(error!)
                  return
              }
              print("Leave Party, user:\(user.id), party:\(party.id)")
-             self.getMyParties(user: user)
+             self.deletePartyInList(party: party)
+         }
+     }
+
+     private func deletePartyInList(party: TaxiParty) {
+         if let index = self.myPartyList.firstIndex(of: party) {
+             self.myPartyList.remove(at: index)
+             print("Delete Party in myPartyList, party:\(party.id)")
          }
      }
  }
