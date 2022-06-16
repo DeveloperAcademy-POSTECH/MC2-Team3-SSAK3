@@ -9,7 +9,9 @@ import SwiftUI
 
 struct TaxiPartyListView: View {
     @State private var showModal = false
+    @State private var renderedDate: Date?
     @StateObject private var taxiPartyListViewModel: TaxiPartyListViewModel = TaxiPartyListViewModel()
+
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -22,15 +24,24 @@ struct TaxiPartyListView: View {
                     }
                 }
                 .padding(.horizontal, 20)
+                ScrollViewReader { proxy in
                 ScrollView {
-                    CellViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
+                        CellViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
+                    }
+                 .onChange(of: renderedDate) { _ in
+                    guard let date = renderedDate else { return } //formattedInt
+                     withAnimation {
+                     proxy.scrollTo(date.formattedInt, anchor: .top)
+                     }
+                    renderedDate = nil
+                }
                 }
                 .refreshable {
                     await fetchSomething()
                 }
                 .background(Color.background)
             }
-            CalendarModal(isShowing: $showModal)
+            CalendarModal(taxiPartyListViewModel: taxiPartyListViewModel, isShowing: $showModal, renderedDate: $renderedDate)
         }
         .onAppear {
             taxiPartyListViewModel.getTaxiParties(id: nil)
@@ -147,13 +158,11 @@ struct CellViewList: View {
             MyProgress()
                 .transition(.scale)
         }
-        ScrollView {
-            LazyVStack(spacing: 16, pinnedViews: [.sectionHeaders]) {
-                ForEach(meetingDates, id: \.self) { date in
-                    Section(header: SectionHeaderView(date: date).id(date)) {
-                        ForEach(partys[date]!, id: \.id) { party in
-                            PatyListCell(party: party)
-                        }
+        LazyVStack(spacing: 16) {
+            ForEach(meetingDates, id: \.self) { date in
+                Section(header: SectionHeaderView(date: date).id(date)) {
+                    ForEach(partys[date]!, id: \.id) { party in
+                        PatyListCell(party: party)
                     }
                 }
             }
