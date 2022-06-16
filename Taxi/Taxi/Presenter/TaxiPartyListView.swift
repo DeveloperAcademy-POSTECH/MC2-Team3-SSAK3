@@ -25,6 +25,7 @@ struct TaxiPartyListView: View {
                     }
                 }
                 .padding(.horizontal)
+                Divider()
                 ScrollViewReader { proxy in
                 ScrollView {
                     CellViewList(selectedIndex: $selectedIndex, taxiParties: taxiPartyListViewModel.taxiPartyList)
@@ -44,6 +45,7 @@ struct TaxiPartyListView: View {
             }
             CalendarModal(isShowing: $showModal, renderedDate: $renderedDate, taxiPartyList: filterCalender())
         }
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             taxiPartyListViewModel.getTaxiParties(id: nil)
         }
@@ -131,12 +133,12 @@ struct DatePickerButton: View {
             }
         } label: {
             Text("날짜 선택")
-                .padding(10)
+                .padding(EdgeInsets(top: 8, leading: 11, bottom: 8, trailing: 11))
                 .foregroundColor(Color.customBlack)
                 .font(.custom("AppleSDGothicNeo-Medium", size: 12))
                 .background {
                     RoundedRectangle(cornerRadius: 7.0)
-                        .fill(Color.customYellow)
+                        .fill(Color.selectYellow)
                 }
         }
     }
@@ -267,9 +269,8 @@ struct ViewOffsetKey: PreferenceKey {
 
 struct SectionHeaderView: View {
     let date: Int
-
     var body: some View {
-        Text("\(date / 100 % 100)월 \(date % 100)일")
+        Text(Date.convertToKoreanDateFormat(from: date))
             .foregroundColor(.charcoal)
             .font(Font.custom("AppleSDGothicNeo-SemiBold", size: 18))
             .frame(maxWidth: .infinity, alignment: .leading)

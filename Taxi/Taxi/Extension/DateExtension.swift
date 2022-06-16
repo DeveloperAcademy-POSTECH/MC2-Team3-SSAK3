@@ -65,9 +65,9 @@ extension Date {
     }
 
     var weekday: String {
-        
+
         guard let weekIndex = self.dateComponents.weekday else { return "" }
-        
+
         switch weekIndex {
         case 1:
             return "일요일"
