@@ -11,14 +11,15 @@ struct TaxiPartyListView: View {
     @State private var showModal = false
     @State private var renderedDate: Date?
     @StateObject private var taxiPartyListViewModel: TaxiPartyListViewModel = TaxiPartyListViewModel()
-
+    @State var selectedIndex: Int = 0
+    
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 VStack {
                     TaxiPartyHeadLine()
                     HStack {
-                        TaxiPartyFiltering()
+                        TaxiPartyFiltering(selectedIndex: $selectedIndex)
                         Spacer()
                         DatePickerButton(showModal: $showModal)
                     }
@@ -26,8 +27,14 @@ struct TaxiPartyListView: View {
                 .padding(.horizontal, 20)
                 ScrollViewReader { proxy in
                 ScrollView {
-                    KtxViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
+                    switch selectedIndex {
+                    case 0: CellViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
+                    case 1: KtxViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
+                    case 2: PostectViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
+                    default:
+                        CellViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
                     }
+                }
                  .onChange(of: renderedDate) { _ in
                     guard let date = renderedDate else { return } //formattedInt
                      withAnimation {
@@ -71,7 +78,7 @@ struct TaxiPartyHeadLine: View {
 
 struct TaxiPartyFiltering: View {
     private let titles: [String] = ["전체", "포항역", "포스텍"]
-    @State var selectedIndex: Int = 0
+    @Binding var selectedIndex: Int
 
     var body: some View {
         SegmentedPicker( // TODO : CellView 목적지 별로 필터링 가능하게 만들기
@@ -194,12 +201,67 @@ struct KtxViewList: View {
     private var partys: [Int: [TaxiParty]] {
         Dictionary.init(grouping: taxiParties, by: {$0.destinationCode})
     }
+
     private var destFilteredParties: [Int: [TaxiParty]] {
         guard let parties = partys[1] else {
+            print(partys[1])
+            return [:]}
+        return Dictionary.init(grouping: parties, by: {$0.meetingDate})
+    }
+
+    private var meetingDates: [Int] {
+        return destFilteredParties.map({$0.key}).sorted()
+    }
+
+    var body: some View {
+        if isRefreshing {
+            MyProgress()
+                .transition(.scale)
+        }
+        LazyVStack(spacing: 16) {
+            ForEach(meetingDates, id: \.self) { date in
+                Section(header: SectionHeaderView(date: date).id(date)) {
+                    ForEach(destFilteredParties[date]!, id: \.id) { party in
+                        PatyListCell(party: party)
+                    }
+                }
+            }
+        }
+        .padding(.top)
+        .animation(.default, value: isRefreshing)
+        .background(GeometryReader {
+            Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+        })
+        .onPreferenceChange(ViewOffsetKey.self) {
+            let heightValueForGesture: CGFloat = 270.0
+            if $0 < -heightValueForGesture && !isRefreshing {
+                isRefreshing = true
+                Task {
+                    await refresh?()
+                    await MainActor.run {
+                        isRefreshing = false
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct PostectViewList: View {
+    @Environment(\.refresh) private var refresh
+    @State private var isRefreshing = false
+    let taxiParties: [TaxiParty]
+    private var partys: [Int: [TaxiParty]] {
+        Dictionary.init(grouping: taxiParties, by: {$0.destinationCode})
+    }
+
+    private var destFilteredParties: [Int: [TaxiParty]] {
+        guard let parties = partys[0] else {
             print(partys[0])
             return [:]}
         return Dictionary.init(grouping: parties, by: {$0.meetingDate})
     }
+
     private var meetingDates: [Int] {
         return destFilteredParties.map({$0.key}).sorted()
     }
