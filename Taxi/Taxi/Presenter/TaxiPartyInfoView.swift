@@ -102,7 +102,7 @@ private extension TaxiPartyInfoView {
 
     var taxiPartyDate: some View {
         HStack {
-            Text("\(meetingMonth)월 \(meetingDay)일") // TODO: 요일 추가하기
+            Text(Date.convertToKoreanDateFormat(from: taxiParty.meetingDate))
                 .foregroundColor(.white)
             Rectangle().frame(width: 1, height: 12).foregroundColor(Color(red: 187 / 255, green: 187 / 255, blue: 187 / 255))
             Text("모집중")
