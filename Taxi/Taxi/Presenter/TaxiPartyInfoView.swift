@@ -15,6 +15,10 @@ struct TaxiPartyInfoView: View {
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 80
     private var remainSeat: Int { taxiParty.maxPersonNumber - taxiParty.members.count }
+    private var meetingMonth: Int { taxiParty.meetingDate / 100 % 100 }
+    private var meetingDay: Int { taxiParty.meetingDate % 100 }
+    private var meetingHour: String { String(format: "%02d", taxiParty.meetingTime / 100 % 100) }
+    private var meetingMinute: String { String(format: "%02d", taxiParty.meetingTime % 100) }
 
     var body: some View {
         VStack {
@@ -51,10 +55,6 @@ struct TaxiPartyInfoView: View {
 // MARK: - 뷰 변수
 
 private extension TaxiPartyInfoView {
-    private var meetingMonth: Int { taxiParty.meetingDate / 100 % 100 }
-    private var meetingDay: Int { taxiParty.meetingDate % 100 }
-    private var meetingHour: String { String(format: "%02d", taxiParty.meetingTime / 100 % 100) }
-    private var meetingMinute: String { String(format: "%02d", taxiParty.meetingTime % 100) }
 
     var dismissButton: some View {
         HStack {
