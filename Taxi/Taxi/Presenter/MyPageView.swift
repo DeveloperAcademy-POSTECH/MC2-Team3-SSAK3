@@ -13,7 +13,7 @@ struct MyPageView: View {
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
     @State private var showProfile: Bool = false
-    @EnvironmentObject var userViewModel: Authentication
+    @EnvironmentObject private var userViewModel: Authentication
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
