@@ -8,40 +8,40 @@
 import Foundation
 
 extension Date {
-    private var formatter: DateFormatter {
+    private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MMM"
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.timeZone = TimeZone(abbreviation: "KST")
         return formatter
-    }
+    }()
 
-    private var monthDayFormatter: DateFormatter {
+    private static let monthDayFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM월 dd일"
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.timeZone = TimeZone(abbreviation: "KST")
         return formatter
-    }
+    }()
 
-    private var intFormatter: DateFormatter {
+    private static let intFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.timeZone = TimeZone(abbreviation: "KST")
         return formatter
-    }
+    }()
 
-    private var messageTimeFormatter: DateFormatter {
+    private static let messageTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMddhhmmss"
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.timeZone = TimeZone(abbreviation: "KST")
         return formatter
-    }
+    }()
 
     private var dateComponents: DateComponents {
-        return Calendar.current.dateComponents([.year, .month, .day], from: self)
+        return Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self)
     }
 
     var day: Int? {
@@ -56,21 +56,29 @@ extension Date {
         return self.dateComponents.year
     }
 
+    var hour: Int? {
+        return self.dateComponents.hour
+    }
+
+    var minute: Int? {
+        return self.dateComponents.minute
+    }
+
     var formattedString: String {
-        return self.formatter.string(from: self)
+        return Date.formatter.string(from: self)
     }
 
     var monthDay: String {
-        return self.monthDayFormatter.string(from: self)
+        return Date.monthDayFormatter.string(from: self)
     }
 
     var messageTime: Int {
-        return Int(self.messageTimeFormatter.string(from: self))!
+        return Int(Date.messageTimeFormatter.string(from: self))!
     }
 
     /// date를 yyyyMMdd의 형태로 바꿈
     var formattedInt: Int? {
-        let formattedStr = self.intFormatter.string(from: self)
+        let formattedStr = Date.intFormatter.string(from: self)
         return Int(formattedStr)
     }
 
@@ -130,5 +138,12 @@ extension Date {
     static func convertToKoreanDateFormat(from date: Int) -> String {
         guard let date = self.convertToDateFormat(from: date), let month = date.month, let day = date.day else { return "" }
         return "\(month)월 \(day)일"
+    }
+
+    static func convertMessageTimeToReadable(from timeStamp: Int) -> String {
+        guard let date = Date.messageTimeFormatter.date(from: String(timeStamp)), let hour = date.hour, let minute = date.minute else {
+            return "알 수 없는 시간"
+        }
+        return "\(hour):\(minute)"
     }
 }
