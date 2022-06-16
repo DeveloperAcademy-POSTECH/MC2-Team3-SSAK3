@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardSecondPage: View {
+struct OnboardSecondPageView: View {
     var body: some View {
         VStack {
             SkippButtonView()
@@ -15,6 +15,9 @@ struct OnboardSecondPage: View {
             SecondPageWordingView()
             Spacer()
             SecondImageView()
+            Spacer()
+            Spacer()
+            Spacer()
             NextButtonView()
         }
     }
@@ -23,24 +26,27 @@ struct OnboardSecondPage: View {
 struct SecondPageWordingView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 9) {
-            Text("택시팟이 없다면")
+            Text("택시팟이 없다면?")
+                .kerning(-0.1)
                 .signUpTitle()
                 .frame(width: UIScreen.main.bounds.width, alignment: .leading)
             HStack(spacing: 0) {
                 Text("직접 ")
+                    .kerning(-0.3)
                     .signUpAgreement()
                 Text("택시팟")
-                    .font(Font.system(size: 16, weight: .medium))
+                    .font(Font.system(size: 16, weight: .bold))
                     .foregroundColor(.customYellow)
                 Image(systemName: "sparkle")
-                    .font(Font.system(size: 16, weight: .medium))
+                    .font(Font.system(size: 16, weight: .semibold))
                     .foregroundColor(.customYellow)
                 Text("을 생성해 파티원을 구해보세요.")
+                    .kerning(-0.3)
                     .signUpAgreement()
             }
             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
         }
-        .padding(.leading, 18)
+        .padding(.leading, 20)
     }
 }
 
@@ -54,13 +60,14 @@ struct SecondImageView: View {
         Image("PeopleImage")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .offset(x: calculateOffset())
+//            .offset(x: calculateOffset())
         }
+        .padding(30)
     }
 }
 
-struct OnboardSecondPage_Previews: PreviewProvider {
+struct OnboardSecondPageView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardSecondPage()
+        OnboardSecondPageView()
     }
 }
