@@ -10,7 +10,6 @@ import SwiftUI
 struct TaxiPartyInfoView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var userViewModel: Authentication
-    @StateObject private var userProfileViewModel: UserProfileViewModel = UserProfileViewModel()
     @StateObject private var joinTaxiPartyViewModel: JoinTaxiPartyViewModel = JoinTaxiPartyViewModel()
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 80
@@ -25,15 +24,11 @@ struct TaxiPartyInfoView: View {
             dismissButton
             Spacer()
             participatingCount
-            if userProfileViewModel.membersInfo.count != 0 { // 데이터 로딩 완료시
-                ForEach(0..<taxiParty.members.count, id: \.self) { index in
-                    partyMemberInfo(taxiParty.members[index], diameter: profileSize)
-                }
-                ForEach(0..<remainSeat, id: \.self) { _ in
-                    emptyProfile
-                }
-            } else { // 데이터 로딩 미완료시
-                placeholder
+            ForEach(0..<taxiParty.members.count, id: \.self) { index in
+                PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
+            }
+            ForEach(0..<remainSeat, id: \.self) { _ in
+                emptyProfile
             }
             Divider()
             taxiPartyDate
@@ -45,9 +40,6 @@ struct TaxiPartyInfoView: View {
                 }
                 // TODO: Move to chatroom
             }
-        }
-        .onAppear {
-            userProfileViewModel.getMembersInfo(taxiParty.members)
         }
     }
 }
@@ -73,20 +65,6 @@ private extension TaxiPartyInfoView {
             Image(systemName: "person.fill")
             Text("\(taxiParty.members.count)/\(taxiParty.maxPersonNumber)")
             Spacer()
-        }
-    }
-
-    @ViewBuilder
-    var placeholder: some View {
-        ForEach(0..<taxiParty.members.count, id: \.self) { _ in
-            HStack {
-                Circle().foregroundColor(.lightGray).frame(width: profileSize, height: profileSize)
-                Rectangle().foregroundColor(.lightGray).frame(width: 80, height: 20)
-                Spacer()
-            }
-        }
-        ForEach(0..<remainSeat, id: \.self) { _ in
-            emptyProfile
         }
     }
 
@@ -132,15 +110,36 @@ private extension TaxiPartyInfoView {
             Text("\(taxiParty.destincation)")
         }
     }
+}
 
-    @ViewBuilder
-    func partyMemberInfo(_ id: String, diameter: CGFloat) -> some View {
-        if let user = userProfileViewModel.membersInfo[id] {
-            HStack {
-                ProfileImage(user, diameter: profileSize)
+// MARK: - 구조체
+
+struct PartyMemberInfo: View {
+    private let id: String
+    private let diameter: CGFloat
+    @StateObject private var userProfileViewModel: UserProfileViewModel = UserProfileViewModel()
+
+    init(_ id: String, diameter: CGFloat) {
+        self.id = id
+        self.diameter = diameter
+    }
+
+    var body: some View {
+        HStack {
+            if let user = userProfileViewModel.user {
+                ProfileImage(user, diameter: diameter)
                 Text(user.nickname)
-                Spacer()
+            } else {
+                HStack {
+                    Circle().foregroundColor(.lightGray).frame(width: diameter, height: diameter)
+                    Rectangle().foregroundColor(.lightGray).frame(width: 80, height: 20)
+                    Spacer()
+                }
             }
+            Spacer()
+        }
+        .onAppear {
+            userProfileViewModel.getUser(id)
         }
     }
 }
