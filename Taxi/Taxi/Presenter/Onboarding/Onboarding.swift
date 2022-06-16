@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @State var index = 0
+    @State private var index = 0
     @Binding var isContentView: Bool
     var body: some View {
         VStack {
@@ -26,20 +26,28 @@ struct OnboardingView: View {
             .onAppear {
                 setupAppearance()
             }
-            RoundedButton("다음") {
+            RoundedButton(index == 2 ? "시작하기" : "다음") {
                 if index == 2 {
                     isContentView = true
                 }
                 index = (index + 1) % 3
             }
-            .animation(.easeInOut(duration: 2))
-            .transition(.slide)
         }
     }
 }
 func setupAppearance() {
     UIPageControl.appearance().currentPageIndicatorTintColor = .black
     UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
+}
+
+struct SkippButtonView: View {
+    var body: some View {
+        HStack {
+            Spacer()
+        Text("건너뛰기")
+                .signUpAgreement()
+        }.padding()
+    }
 }
 
 struct ContentView: View {
