@@ -46,6 +46,11 @@ struct RootView: View {
                     .tag(Tab.setting)
             }
         }
+        .onAppear {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        }
     }
 }
 
