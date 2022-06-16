@@ -44,8 +44,9 @@ extension ChatRoomView {
         }
     }
 }
-extension ChatRoomView {
-    private var messageList: some View {
+// MARK: - 메시지 리스트
+private extension ChatRoomView {
+    var messageList: some View {
         ScrollView(.vertical, showsIndicators: true) {
             LazyVStack(spacing: 20) {
                 ForEach(viewModel.messages, id: \.id) { message in
@@ -62,6 +63,7 @@ extension ChatRoomView {
         .background(Color.addBackground)
     }
 }
+// MARK: - 메시지 UI
 private extension ChatRoomView {
 
     func makeEntranceMessage(_ message: Message) -> some View {
@@ -77,7 +79,7 @@ private extension ChatRoomView {
         case user.id:
             makeMyMessage(message)
         default:
-            makeOpponentMessage(message)
+            OpponentMessage(message: message)
         }
     }
 
@@ -95,18 +97,41 @@ private extension ChatRoomView {
         .padding(.horizontal)
     }
 
-    func makeOpponentMessage(_ message: Message) -> some View {
-        Text(message.body)
-            .chatStyle()
-    }
-}
-// 입장 채팅
-struct EntranceMessage: View {
-    let message: Message
-    var body: some View {
-        HStack(spacing: 2) {
-            Image(systemName: "sparkles")
-            Text(message.body)
+    struct OpponentMessage: View {
+        let message: Message
+        // TODO: user 정보만 가져오는 뷰모델 생성 후 연결하기
+        @StateObject private var authentication: Authentication = Authentication()
+        var body: some View {
+            HStack(alignment: .bottom) {
+                profileImage
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(authentication.user?.nickname ?? "알 수 없음")
+                        .font(.custom("AppleSDGothicNeo-Regular", size: 14))
+                        .foregroundColor(.charcoal)
+                    Text(message.body)
+                        .chatStyle()
+                        .padding(8)
+                        .background(RoundedCorner(radius: 10, corners: [.topRight, .bottomLeft, .bottomRight]).fill(Color.white))
+                }
+                Text(Date.convertMessageTimeToReadable(from: message.timeStamp))
+                    .font(.custom("AppleSDGothicNeo-Light", size: 8))
+                    .foregroundColor(.darkGray)
+                Spacer()
+            }
+            .padding(.horizontal)
+            .onAppear {
+                authentication.login(message.sender)
+            }
+        }
+        @ViewBuilder
+        private var profileImage: some View {
+            if let user = authentication.user {
+                ProfileImage(user, diameter: 40)
+            } else {
+                Circle()
+                    .fill(.white)
+                    .frame(width: 40, height: 40)
+            }
         }
     }
 }
