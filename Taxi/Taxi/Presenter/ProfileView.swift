@@ -55,8 +55,12 @@ private extension ProfileView {
             } label: {
                 Text("취소")
             }
-            Spacer()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            Text("프로필 수정")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .foregroundColor(.customBlack)
             applyChangeButton
+                .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding()
     }
@@ -80,10 +84,9 @@ private extension ProfileView {
     func textProfile(_ diameter: CGFloat) -> some View {
         ZStack {
             Circle()
-                .foregroundColor(.gray)
+                .foregroundColor(.selectYellow)
                 .frame(width: diameter, height: diameter)
             Text(nicknameContainer.prefix(1))
-                .foregroundColor(.white)
                 .font(.system(size: diameter/1.5))
         }
     }

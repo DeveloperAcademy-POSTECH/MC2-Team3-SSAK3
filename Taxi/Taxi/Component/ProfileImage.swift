@@ -24,10 +24,9 @@ struct ProfileImage: View {
         } else {
             ZStack {
                 Circle()
-                    .foregroundColor(.gray)
+                    .foregroundColor(.selectYellow)
                     .frame(width: diameter, height: diameter)
                 Text(user.nickname.prefix(1))
-                    .foregroundColor(.white)
                     .font(.system(size: diameter/1.5))
             }
         }
