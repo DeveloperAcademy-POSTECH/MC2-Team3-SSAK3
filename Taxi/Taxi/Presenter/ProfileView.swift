@@ -142,6 +142,15 @@ private extension ProfileView {
                     .frame(height: 2)
                     .offset(y: 6)
             }
+            if isInValidNickname {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("사용할 수 없는 닉네임입니다.")
+                        .padding(.top)
+                    Text("특수문자와 공백을 제외하고 입력해주세요")
+                }
+                .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
+                .foregroundColor(.signUpYellowGray)
+            }
         }
         .padding(.horizontal)
         .onChange(of: nicknameContainer) { newValue in
