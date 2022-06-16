@@ -54,6 +54,7 @@ struct CalendarModal: View {
                     }
                     renderedDate = selectedDate
                 } else {
+                    renderedDate = nil
                     withAnimation {
                         toastIsShowing = true
                     }
@@ -92,6 +93,7 @@ struct CalendarModal: View {
             } label: {
                 Text("확인")
             }
+            .disabled(renderedDate == nil)
         }
     }
     
