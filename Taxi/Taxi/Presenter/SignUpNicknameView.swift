@@ -25,14 +25,13 @@ struct SignUpNicknameView: View {
                     .focused($focusField)
             }
             .padding(.horizontal)
-            makeMessage(nickname: nickname)
+            makeMessageView(nickname: nickname)
                 .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
                 .foregroundColor(setMessageColor(nickname: nickname))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding([.top, .horizontal])
             Spacer()
-            makeConditionalButton("완료", !String.isValidNickname(nickname: nickname).isValid, focusField) {
-                print("완료버튼 눌림")
+            makeConditionalButton("완료", !nickname.isValidNickname.isValid, focusField) {
                 userViewModel.register(id: deviceUUID, nickname: nickname)
                 // TODO: 유저 환영 화면 연결 or pop to root
                 UserDefaults.standard.set(true, forKey: "isLogined")
@@ -60,8 +59,8 @@ struct SignUpNicknameView: View {
     }
 
     @ViewBuilder
-    private func makeMessage(nickname: String) -> some View {
-        switch String.isValidNickname(nickname: nickname) {
+    private func makeMessageView(nickname: String) -> some View {
+        switch nickname.isValidNickname {
         case .normal, .valid:
             VStack(alignment: .leading, spacing: 5) {
                 Text("아카데미 내에서 사용중인 닉네임을 권장드려요")
@@ -73,7 +72,7 @@ struct SignUpNicknameView: View {
     }
 
     private func setMessageColor(nickname: String) -> Color {
-        switch String.isValidNickname(nickname: nickname) {
+        switch nickname.isValidNickname {
         case .normal, .valid:
             return Color.signUpYellowGray
         case .invalid:

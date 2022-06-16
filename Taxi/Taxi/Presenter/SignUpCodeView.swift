@@ -9,10 +9,10 @@ import SwiftUI
 
 struct SignUpCodeView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var signUpCode: String = ""
+    @State private var codeInput: String = ""
     @State private var codeState: FieldState = .normal
     @State private var isActive: Bool = false
-    private let developerCode: String = "popopot"
+    private let signUpCode: String = "popopot"
     @FocusState private var focusField: Bool
 
     var body: some View {
@@ -21,7 +21,7 @@ struct SignUpCodeView: View {
                 VStack(alignment: .leading, spacing: 80) {
                     Text("가입코드를 입력해주세요")
                         .signUpTitle()
-                    UnderlinedTextField(text: $signUpCode, codeState, "가입코드")
+                    UnderlinedTextField(text: $codeInput, codeState, "가입코드")
                         .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
                         .focused($focusField)
                         .disabled(codeState.isValid)
@@ -50,7 +50,7 @@ struct SignUpCodeView: View {
                 }
             }
             .onSubmit {
-                codeState = (signUpCode == developerCode ? .valid : .invalid)
+                codeState = (codeInput == signUpCode ? .valid : .invalid)
             }
         }
     }
