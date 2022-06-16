@@ -17,6 +17,7 @@ final class ChattingViewModel: ObservableObject {
     private let taxiParty: TaxiParty
     private let chattingUseCase: ChattingUseCase = ChattingUseCase()
     private var listenerRegistration: ListenerRegistration?
+    let updateEvent: PassthroughSubject<Bool, Never> = PassthroughSubject()
 
     init(_ taxiParty: TaxiParty) {
         self.taxiParty = taxiParty
@@ -47,6 +48,9 @@ final class ChattingViewModel: ObservableObject {
                     }
                 }
                 self.messages.append(contentsOf: messagesToAppend)
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                    self.updateEvent.send(true)
+                }
             })
     }
 
