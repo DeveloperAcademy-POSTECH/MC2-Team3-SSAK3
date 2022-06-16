@@ -31,7 +31,7 @@ struct TaxiPartyListView: View {
                  .onChange(of: renderedDate) { _ in
                     guard let date = renderedDate else { return } //formattedInt
                      withAnimation {
-                     proxy.scrollTo(date.formattedInt, anchor: .top)
+                         proxy.scrollTo(date.formattedInt, anchor: .top)
                      }
                     renderedDate = nil
                 }
