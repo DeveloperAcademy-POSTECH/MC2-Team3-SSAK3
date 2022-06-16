@@ -9,7 +9,9 @@ import SwiftUI
 
 struct TaxiPartyInfoView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var userViewModel: Authentication
     @StateObject private var userProfileViewModel: UserProfileViewModel = UserProfileViewModel()
+    @StateObject private var joinTaxiPartyViewModel: JoinTaxiPartyViewModel = JoinTaxiPartyViewModel()
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 80
     private var remainSeat: Int { taxiParty.maxPersonNumber - taxiParty.members.count }
@@ -34,7 +36,10 @@ struct TaxiPartyInfoView: View {
             taxiPartyTime
             taxiPartyPlace
             RoundedButton("시작하기") {
-                // TODO: Add joinTaxiParty Action
+                if let user = userViewModel.user {
+                    joinTaxiPartyViewModel.joinTaxiParty(in: taxiParty, user)
+                }
+                // TODO: Move to chatroom
             }
         }
         .onAppear {
@@ -155,5 +160,6 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
             members: ["123456"],
             isClosed: false
         ))
+        .environmentObject(Authentication())
     }
 }
