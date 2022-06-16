@@ -13,11 +13,20 @@ struct TaxiPartyInfoView: View {
     @StateObject private var joinTaxiPartyViewModel: JoinTaxiPartyViewModel = JoinTaxiPartyViewModel()
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 80
-    private var remainSeat: Int { taxiParty.maxPersonNumber - taxiParty.members.count }
-    private var meetingMonth: Int { taxiParty.meetingDate / 100 % 100 }
-    private var meetingDay: Int { taxiParty.meetingDate % 100 }
-    private var meetingHour: String { String(format: "%02d", taxiParty.meetingTime / 100 % 100) }
-    private var meetingMinute: String { String(format: "%02d", taxiParty.meetingTime % 100) }
+    private let remainSeat: Int
+    private let meetingMonth: Int
+    private let meetingDay: Int
+    private let meetingHour: String
+    private let meetingMinute: String
+
+    init(taxiParty: TaxiParty) {
+        self.taxiParty = taxiParty
+        self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
+        self.meetingMonth = taxiParty.meetingDate / 100 % 100
+        self.meetingDay = taxiParty.meetingDate % 100
+        self.meetingHour = String(format: "%02d", taxiParty.meetingTime / 100 % 100)
+        self.meetingMinute = String(format: "%02d", taxiParty.meetingTime % 100)
+    }
 
     var body: some View {
         VStack {
