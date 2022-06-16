@@ -25,12 +25,9 @@ struct MyPartyView: View {
 struct MyPartyTitle: View {
     var body: some View {
         Text("마이팟")
-            .foregroundColor(.customBlack)
-            .font(Font.custom("AppleSDGothicNeo-Bold", size: 20))
-            .fontWeight(.bold) // TODO: 텍스트 스타일로 변경
+            .font(.custom("AppleSDGothicNeo-Bold", size: 25))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading)
-            .background(Color.white)
     }
 }
 
@@ -39,11 +36,9 @@ struct MyPartySectionHeader: View {
     var body: some View {
         Text("\(date / 100 % 100)월 \(date % 100)일")
             .foregroundColor(.charcoal)
-            .font(Font.custom("AppleSDGothicNeo-Bold", size: 18))
-            .fontWeight(.medium) // TODO: 텍스트 스타일로 변경
+            .font(Font.custom("AppleSDGothicNeo-SemiBold", size: 18))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.leading, .top])
-            .background(Color.lightGray) // TODO: 색상 변경
     }
 }
 
@@ -80,14 +75,14 @@ struct MyPartyList: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [.sectionHeaders]) {
+            LazyVStack(alignment: .leading, spacing: 16) {
                 ForEach(meetingDates, id: \.self) { date in
                     Section(header: MyPartySectionHeader(date: date)) {
                         ForEach(partys[date]!, id: \.id) { party in
                             NavigationLink {
                                 ChatRoomView(party: party)
                             } label: {
-                                CellView(party: party)
+                                PartyListCell(party: party)
                             }
                             .buttonStyle(CellButtonStyle())
                             .disabled(isSwiped) // 스와이프 된 상태일 때 비활성화
@@ -96,15 +91,13 @@ struct MyPartyList: View {
                                 self.selectedParty = party
                             })
                             .cornerRadius(16)
-                            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 0)
-                            .padding(.horizontal)
+                            .cellBackground(destinationCode: party.destinationCode)
                         }
                     }
                 }
             }
         }
         .animation(.default, value: partys)
-        .background(Color.lightGray) // TODO: 색상 변경
         .highPriorityGesture(isSwiped ? cancelSelectDrag : nil) // 스와이프 된 상태일 때 취소 드래그 활성화
         .simultaneousGesture(isSwiped ? cancelSelectTap : nil) // 스와이프 된 상태일 때 취소 탭 활성화
         .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
@@ -200,8 +193,7 @@ struct SwipeDelete: ViewModifier {
                     .offset(x: 95 + swipeState.width)
             }
             content
-                .frame(maxWidth: .infinity)
-                .background(.white)
+                .contentShape(Rectangle())
                 .offset(x: swipeState.width)
                 .highPriorityGesture(swipeAction)
         }
@@ -228,28 +220,6 @@ extension View {
         action: @escaping () -> Void
     ) -> some View {
         modifier(SwipeDelete(isSwiped: isSwiped, action: action))
-    }
-}
-
-// 임시 셀뷰
-// TODO: 구현될 셀뷰와 연결
-struct CellView: View {
-    let party: TaxiParty
-    var body: some View {
-        VStack {
-            HStack {
-                Text("\(party.meetingTime)")
-                Text("\(party.members.count)/\(party.maxPersonNumber)")
-            }
-            HStack {
-                Text("\(party.departure)")
-                Text(">")
-                Text("\(party.destincation)")
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .padding()
-        .background(Color.white)
     }
 }
 

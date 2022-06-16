@@ -6,9 +6,8 @@
 //
 import SwiftUI
 
-struct PatyListCell: View {
+struct PartyListCell: View {
     let party: TaxiParty
-
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             DestinationView(party: party)
@@ -23,23 +22,6 @@ struct PatyListCell: View {
             .padding(.horizontal, 7)
         }
         .padding()
-        .background {
-                if party.destinationCode == 0 {
-                    cellBackground(color: Color.postechPink)
-                } else {
-                    cellBackground(color: Color.ktxBlue)
-                }
-        }
-        .padding(.horizontal)
-    }
-    private func cellBackground(color: Color) -> some View {
-        ZStack {
-        RoundedRectangle(cornerRadius: 18.0)
-            .fill(color.opacity(0.05))
-            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
-        RoundedRectangle(cornerRadius: 16)
-            .stroke(color, lineWidth: 1.5)
-        }
     }
 }
 
@@ -94,12 +76,12 @@ struct DepartureView: View {
     }
     private func departureinfo(departure: String) -> some View {
         VStack(alignment: .center, spacing: 0) {
-            HStack(spacing: 5) {
+            HStack(alignment: .center, spacing: 5) {
                 Text(departure)
                     .font(.custom("AppleSDGothicNeo-Medium", size: 20))
                     .foregroundColor(Color.customBlack)
                 Text("\(party.departure)")
-                    .font(.custom("AppleSDGothicNeo-UltraLight", size: 18))
+                    .font(.custom("AppleSDGothicNeo-Light", size: 18))
                     .foregroundColor(Color.customBlack)
             }
             .padding(5)
@@ -124,13 +106,39 @@ struct UserView: View {
                     .foregroundColor(Color.customBlack)
                 Text("/")
                     .font(.custom("AppleSDGothicNeo-Regular", size: 12))
-                    .foregroundColor(Color.customGray)
+                    .foregroundColor(Color.darkGray)
                 Text("\(party.maxPersonNumber)") // 데이터로 처리 필요
                     .font(.custom("AppleSDGothicNeo-Regular", size: 16))
-                    .foregroundColor(Color.customGray)
+                    .foregroundColor(Color.darkGray)
             }
         }
         .padding(.vertical, 7)
+    }
+}
+
+struct CellBackground: ViewModifier {
+    let destinationCode: Int
+    func body(content: Content) -> some View {
+        let color = destinationCode == 0 ? Color.cellPink  : Color.cellBlue
+        return content
+            .background {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.white, lineWidth: 1.5)
+                        .shadow(color: Color.black.opacity(0.35), radius: 4, x: 0, y: 1)
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(color)
+                }
+            }
+            .padding(.horizontal)
+    }
+}
+
+extension View {
+    func cellBackground(
+        destinationCode: Int
+    ) -> some View {
+        modifier(CellBackground(destinationCode: destinationCode))
     }
 }
 

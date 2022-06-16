@@ -24,7 +24,7 @@ struct TaxiPartyListView: View {
                         DatePickerButton(showModal: $showModal)
                     }
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal)
                 ScrollViewReader { proxy in
                 ScrollView {
                     CellViewList(selectedIndex: $selectedIndex, taxiParties: taxiPartyListViewModel.taxiPartyList)
@@ -204,8 +204,9 @@ struct CellViewList: View {
         LazyVStack(spacing: 16) {
             ForEach(mappingDate(), id: \.self) { date in
                 Section(header: SectionHeaderView(date: date).id(date)) {
-                    ForEach(mappingParties()[date]!, id: \.id) { party in
-                        PatyListCell(party: party)
+                    ForEach(partys[date]!, id: \.id) { party in
+                        PartyListCell(party: party)
+                            .cellBackground(destinationCode: party.destinationCode)
                     }
                 }
             }
@@ -269,11 +270,10 @@ struct SectionHeaderView: View {
 
     var body: some View {
         Text("\(date / 100 % 100)월 \(date % 100)일")
-            .foregroundColor(.black)
-            .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+            .foregroundColor(.charcoal)
+            .font(Font.custom("AppleSDGothicNeo-SemiBold", size: 18))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.leading, .top])
-            .background(Color.background)
     }
 }
 
