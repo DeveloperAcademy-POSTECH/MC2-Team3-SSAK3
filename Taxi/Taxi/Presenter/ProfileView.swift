@@ -18,7 +18,7 @@ struct ProfileView: View {
     @State private var selectedImage: UIImage? // 피커에서 선택한 사진을 담는 변수
     @State private var imageData: Data? // 피커에서 선택한 사진을 Data로 변환한 것을 담는 변수
     @State private var isProfileDeleted: Bool = false
-    private let profileSize: CGFloat = 160
+    private let profileSize: CGFloat = 104
 
     var body: some View {
         VStack {
@@ -31,7 +31,6 @@ struct ProfileView: View {
                 photoPicker
             }
             nicknameTextField
-            applyChangeButton
             Spacer()
         }
         .onAppear {
@@ -50,11 +49,12 @@ private extension ProfileView {
             Button {
                 dismiss()
             } label: {
-                Image(systemName: "xmark")
-                    .imageScale(.large)
+                Text("닫기")
             }
             Spacer()
+            applyChangeButton
         }
+        .padding()
     }
 
     var profileImageEditButton: some View {
@@ -145,7 +145,7 @@ private extension ProfileView {
                 isProfileDeleted = false
             }
         } label: {
-            Text("적용")
+            Text("저장")
         }
         .disabled(nicknameContainer.contains(" ") || nicknameContainer == "") // TODO: 특수문자 불가능하게
     }

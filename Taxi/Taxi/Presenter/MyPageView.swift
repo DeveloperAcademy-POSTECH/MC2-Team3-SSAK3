@@ -26,7 +26,9 @@ struct MyPageView: View {
                         .padding(.leading)
                 }
             profile
-            Rectangle().fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255)).frame(height: 5)
+            Rectangle()
+                .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
+                .frame(height: 5)
             notificationHeader
             notificationSetting("채팅 알림", isOn: $chattingNoti)
             notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
