@@ -29,16 +29,15 @@ final class UserFirebaseDataSource: UserRepository {
             .eraseToAnyPublisher()
     }
 
-    func getUser(_ id: String) -> AnyPublisher<User, Error> {
+    func getUser(_ id: String, force load: Bool) -> AnyPublisher<User, Error> {
         let docRef = fireStore.collection("User").document(id)
         return Future<User, Error> { promise in
-            docRef.getDocument(as: User.self) { result in
-                switch result {
-                case .success(let user):
-                    promise(Result.success(user))
-                case .failure(let error):
-                    promise(Result.failure(error))
+            docRef.getDocument(source: load ? .server: .cache) { result, error in
+                guard let user = try? result?.data(as: User.self), error == nil else {
+                    promise(Result.failure(error!))
+                    return
                 }
+                promise(Result.success(user))
             }
         }
         .receive(on: DispatchQueue.main)
