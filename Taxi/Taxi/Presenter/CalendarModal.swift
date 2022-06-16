@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CalendarModal: View {
-    // @ObservedObject var taxiPartyListViewModel: TaxiPartyListViewModel
     @Binding var isShowing: Bool
     @Binding var renderedDate: Date?
     @State private var storeDate: Date?
