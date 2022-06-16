@@ -9,8 +9,12 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ProfileView: View {
+    enum Field {
+        case nickname
+    }
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var userViewModel: Authentication
+    @FocusState private var focusField: Field?
     @State private var showActionSheet: Bool = false
     @State private var showPicker: Bool = false
     @State private var nicknameContainer: String = "" // User 닉네임을 임시로 담는 변수
@@ -123,13 +127,22 @@ private extension ProfileView {
     }
 
     var nicknameTextField: some View {
-        HStack {
+        VStack(alignment: .leading, spacing: 6) {
             Text("닉네임")
-            Spacer()
-            TextField("", text: $nicknameContainer)
-                .disableAutocorrection(true)
-                .textInputAutocapitalization(.never)
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .foregroundColor(.darkGray)
+            ZStack(alignment: .bottom) {
+                TextField("", text: $nicknameContainer)
+                    .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
+                    .focused($focusField, equals: .nickname)
+                Rectangle()
+                    .foregroundColor(focusField == .nickname ? .customYellow : .charcoal)
+                    .frame(height: 2)
+                    .offset(y: 6)
+            }
         }
+        .padding(.horizontal)
     }
 
     var applyChangeButton: some View {
