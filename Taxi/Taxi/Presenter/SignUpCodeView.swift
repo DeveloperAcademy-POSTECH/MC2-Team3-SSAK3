@@ -35,20 +35,11 @@ struct SignUpCodeView: View {
                 Spacer()
                 NavigationLink(destination: SignUpNicknameView(), isActive: $isActive) {
                 }
-                makeConditionalButton("다음", !codeState.isValid, focusField) {
+                SignUpButton("다음", !codeState.isValid, focusState: focusField) {
                     isActive.toggle()
                 }
             }
             .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                    }
-                }
-            }
             .onSubmit {
                 codeState = (codeInput == signUpCode ? .valid : .invalid)
             }
@@ -72,15 +63,6 @@ struct SignUpCodeView: View {
                 Image(systemName: "checkmark.circle.fill")
                 Text("인증 완료되었습니다")
             }
-        }
-    }
-
-    @ViewBuilder
-    private func makeConditionalButton(_ title: String, _ disabled: Bool = false, _ focusState: Bool, action: @escaping () -> Void) -> some View {
-        if focusState {
-            FlatButton(title, disabled, action: action)
-        } else {
-            RoundedButton(title, disabled, action: action)
         }
     }
 

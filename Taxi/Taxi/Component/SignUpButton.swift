@@ -1,20 +1,22 @@
 //
-//  FlatButton.swift
+//  SignUpButton.swift
 //  Taxi
 //
-//  Created by sanghyo on 2022/06/15.
+//  Created by sanghyo on 2022/06/16.
 //
 
 import SwiftUI
 
-struct FlatButton: View {
+struct SignUpButton: View {
     private let text: String
     private let disabled: Bool
+    private let focusState: Bool
     private let action: () -> Void
 
-    init(_ title: String, _ disabled: Bool = false, action: @escaping () -> Void) {
+    init(_ title: String, _ disabled: Bool = false, focusState: Bool, action: @escaping () -> Void) {
         self.text = title
         self.disabled = disabled
+        self.focusState = focusState
         self.action = action
     }
 
@@ -25,19 +27,16 @@ struct FlatButton: View {
                 .fontWeight(.semibold)
                 .padding(.vertical, 18)
                 .frame(maxWidth: .infinity)
-                .background(Color.customYellow)
+                .background(Color.customYellow, in: RoundedRectangle(cornerRadius: focusState ? 0 : 15))
+                .padding(.horizontal, focusState ? 0 : 16)
         }
         .disabled(disabled)
         .opacity(disabled ? 0.3 : 1)
         .buttonStyle(.plain)
     }
 }
-
-struct FlatButton_Previews: PreviewProvider {
+struct SignUpButton_Previews: PreviewProvider {
     static var previews: some View {
-        FlatButton("다음") {}
-            .previewLayout(.sizeThatFits)
-        FlatButton("다음", true) {}
-            .previewLayout(.sizeThatFits)
+        SignUpButton("다음", focusState: true) {}
     }
 }
