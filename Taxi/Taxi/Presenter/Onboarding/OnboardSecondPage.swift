@@ -18,7 +18,6 @@ struct OnboardSecondPageView: View {
             Spacer()
             Spacer()
             Spacer()
-            NextButtonView()
         }
     }
 }
