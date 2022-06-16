@@ -32,7 +32,7 @@ struct MyPageView: View {
             notificationHeader
             notificationSetting("채팅 알림", isOn: $chattingNoti)
             notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
-            Spacer(minLength: 0)
+            Spacer()
         }
         .sheet(isPresented: $showProfile) {
             ProfileView()

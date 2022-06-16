@@ -53,7 +53,7 @@ private extension ProfileView {
             Button {
                 dismiss()
             } label: {
-                Text("닫기")
+                Text("취소")
             }
             Spacer()
             applyChangeButton
@@ -74,9 +74,6 @@ private extension ProfileView {
             } else { // 프로필 사진이 없는 경우
                 textProfile(profileSize)
             }
-        }
-        .overlay(alignment: .bottom) {
-            Text("편집")
         }
     }
 
@@ -102,7 +99,7 @@ private extension ProfileView {
             selectedImage = nil
             imageData = nil
         }
-        Button("취소", role: .cancel) {
+        Button("닫기", role: .cancel) {
             showActionSheet = false
         }
     }
