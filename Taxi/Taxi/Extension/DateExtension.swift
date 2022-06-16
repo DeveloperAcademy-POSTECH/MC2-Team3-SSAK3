@@ -41,7 +41,7 @@ extension Date {
     }()
 
     private var dateComponents: DateComponents {
-        return Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self)
+        return Calendar.current.dateComponents([.year, .month, .day, .weekday, .hour, .minute], from: self)
     }
 
     var day: Int? {
