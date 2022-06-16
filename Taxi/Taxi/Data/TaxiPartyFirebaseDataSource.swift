@@ -48,12 +48,16 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
             .eraseToAnyPublisher()
     }
 
-    func joinTaxiParty(to taxiParty: TaxiParty) -> AnyPublisher<TaxiParty, Error> {
+    func joinTaxiParty(in taxiParty: TaxiParty, id: String) -> AnyPublisher<TaxiParty, Error> {
         fireStore.collection("TaxiParty")
             .document(taxiParty.id)
-            .setData(from: taxiParty)
+            .updateData([
+                "members": FieldValue.arrayUnion([id])
+            ])
             .map {
-                taxiParty
+                var updatedMembers: [String] = taxiParty.members
+                updatedMembers.append(id)
+                return TaxiParty(id: taxiParty.id, departureCode: taxiParty.departureCode, destinationCode: taxiParty.destinationCode, meetingDate: taxiParty.meetingDate, meetingTime: taxiParty.meetingTime, maxPersonNumber: taxiParty.maxPersonNumber, members: updatedMembers, isClosed: taxiParty.isClosed)
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
