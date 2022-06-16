@@ -65,28 +65,28 @@ extension Date {
     }
 
     var weekday: String {
-            let weekIndex = self.dateComponents.weekday
-            guard let weekIndex = weekIndex else { return "" }
-
-            switch weekIndex {
-            case 1:
-                return "일요일"
-            case 2:
-                return "월요일"
-            case 3:
-                return "화요일"
-            case 4:
-                return "수요일"
-            case 5:
-                return "목요일"
-            case 6:
-                return "금요일"
-            case 7:
-                return "토요일"
-            default:
-                return ""
-            }
+        
+        guard let weekIndex = self.dateComponents.weekday else { return "" }
+        
+        switch weekIndex {
+        case 1:
+            return "일요일"
+        case 2:
+            return "월요일"
+        case 3:
+            return "화요일"
+        case 4:
+            return "수요일"
+        case 5:
+            return "목요일"
+        case 6:
+            return "금요일"
+        case 7:
+            return "토요일"
+        default:
+            return ""
         }
+    }
 
     var formattedString: String {
         return Date.formatter.string(from: self)
