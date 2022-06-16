@@ -55,7 +55,6 @@ struct SecondImageView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
         }
-        .padding(30)
     }
 }
 

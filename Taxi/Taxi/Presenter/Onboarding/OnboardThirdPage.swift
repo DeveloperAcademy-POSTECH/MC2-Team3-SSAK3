@@ -53,7 +53,6 @@ struct ThirdImageView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
         }
-        .padding(30)
     }
 }
 
