@@ -10,7 +10,7 @@ import SwiftUI
 struct SignUpNicknameView: View {
     @EnvironmentObject var userViewModel: Authentication
     @Environment(\.dismiss) private var dismiss
-    @State private var nickname: String = ""
+    @State private var nickname = ""
     @State private var nickFieldState: FieldState = .normal
     @FocusState private var focusField: Bool
     private let deviceUUID = UIDevice.current.identifierForVendor!.uuidString

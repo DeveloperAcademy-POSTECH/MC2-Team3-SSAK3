@@ -9,10 +9,10 @@ import SwiftUI
 
 struct SignUpCodeView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var codeInput: String = ""
+    @State private var codeInput = ""
     @State private var codeState: FieldState = .normal
-    @State private var isActive: Bool = false
-    private let signUpCode: String = "popopot"
+    @State private var isActive = false
+    private let signUpCode = "popopot"
     @FocusState private var focusField: Bool
 
     var body: some View {
