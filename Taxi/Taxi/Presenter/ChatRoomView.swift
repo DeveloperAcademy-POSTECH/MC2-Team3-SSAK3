@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ChatRoomView: View {
     @ObservedObject private var viewModel: ChattingViewModel
-    @EnvironmentObject private var authentication: Authentication
+
+    private let user: User = User(id: "1", nickname: "호종이", profileImage: nil)
     private let taxiParty: TaxiParty
 
     init(party: TaxiParty) {
@@ -45,27 +46,25 @@ extension ChatRoomView {
 }
 extension ChatRoomView {
     private var messageList: some View {
-        LazyVStack(spacing: 10) {
-            ForEach(viewModel.messages, id: \.id) { message in
-                makeMessageRow(message)
+        ScrollView(.vertical, showsIndicators: true) {
+            LazyVStack(spacing: 20) {
+                ForEach(viewModel.messages, id: \.id) { message in
+                    switch message.type {
+                    case .entrance:
+                        makeEntranceMessage(message)
+                    case .normal:
+                        makeNormalMessage(message)
+                    }
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Color.addBackground)
     }
 }
-extension ChatRoomView {
-    @ViewBuilder
-    private func makeMessageRow(_ message: Message) -> some View {
-        switch message.type {
-        case .normal:
-            normalMessage(message)
-        case .entrance:
-            entranceMessage(message)
-        }
-    }
+private extension ChatRoomView {
 
-    private func entranceMessage(_ message: Message) -> some View {
+    func makeEntranceMessage(_ message: Message) -> some View {
         Text("\(Image(systemName: "sparkles"))\(message.body)")
             .inchatNotification()
             .padding(4)
@@ -73,8 +72,32 @@ extension ChatRoomView {
     }
 
     @ViewBuilder
-    private func normalMessage(_ message: Message) -> some View {
+    func makeNormalMessage(_ message: Message) -> some View {
+        switch message.sender {
+        case user.id:
+            makeMyMessage(message)
+        default:
+            makeOpponentMessage(message)
+        }
+    }
+
+    func makeMyMessage(_ message: Message) -> some View {
+        HStack(alignment: .bottom) {
+            Spacer()
+            Text(Date.convertMessageTimeToReadable(from: message.timeStamp))
+                .font(.custom("AppleSDGothicNeo-Light", size: 8))
+                .foregroundColor(.darkGray)
+            Text(message.body)
+                .chatStyle()
+                .padding(8)
+                .background(RoundedCorner(radius: 10, corners: [.topLeft, .bottomLeft, .bottomRight]).fill(Color.clearYellow))
+        }
+        .padding(.horizontal)
+    }
+
+    func makeOpponentMessage(_ message: Message) -> some View {
         Text(message.body)
+            .chatStyle()
     }
 }
 // 입장 채팅
@@ -162,7 +185,6 @@ struct ChatRoom_Previews: PreviewProvider {
         Group {
             NavigationView {
                 ChatRoomView(party: TaxiPartyMockData.mockData.first!)
-                    .environmentObject(Authentication())
             }
         }
     }
