@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyPartyView: View {
     @StateObject private var myPartyViewModel: MyPartyViewModel = MyPartyViewModel()
-    @EnvironmentObject var userViewModel: Authentication
+    @EnvironmentObject private var userViewModel: Authentication
 
     var body: some View {
         VStack {
