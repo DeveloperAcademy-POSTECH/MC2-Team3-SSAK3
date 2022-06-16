@@ -16,6 +16,7 @@ struct MyPartyView: View {
             MyPartyTitle()
             MyPartyList(user: userViewModel.user!, myPartyViewModel: myPartyViewModel)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             myPartyViewModel.getMyParties(user: userViewModel.user!)
         }
@@ -34,7 +35,7 @@ struct MyPartyTitle: View {
 struct MyPartySectionHeader: View {
     let date: Int
     var body: some View {
-        Text("\(date / 100 % 100)월 \(date % 100)일")
+        Text(Date.convertToKoreanDateFormat(from: date))
             .foregroundColor(.charcoal)
             .font(Font.custom("AppleSDGothicNeo-SemiBold", size: 18))
             .frame(maxWidth: .infinity, alignment: .leading)
