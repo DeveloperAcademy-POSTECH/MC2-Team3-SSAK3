@@ -69,10 +69,9 @@ struct DestinationView: View {
 
 struct MeetTimeView: View {
     let meetingTime: Int
-
     var body: some View {
         VStack {
-            Text("\(meetTimeSeparator(meetTime: String(meetingTime)))")
+            Text("\(String(format: "%02d", meetingTime / 100 % 100)):\(String(format: "%02d", meetingTime % 100))")
                 .font(.custom("AppleSDGothicNeo-Bold", size: 28))
                 .foregroundColor(Color.customBlack)
                 .padding(0)
@@ -81,25 +80,26 @@ struct MeetTimeView: View {
                 .foregroundColor(Color.darkGray)
         }
     }
-    func meetTimeSeparator(meetTime: String) -> String {
-        var meet: String = meetTime
-        let crashBlock = -1
-        if crashBlock == -1 {
-            let index1 = meet.index(meet.endIndex, offsetBy: crashBlock)
-            meet.insert(":", at: index1)
-        }
-        return "\(meet)"
-    }
 }
 
 struct DepartureView: View {
     let party: TaxiParty
 
     var body: some View {
+        if party.destinationCode == 0 {
+            departureinfo(departure: "포항역")
+        } else {
+            departureinfo(departure: "포스텍")
+        }
+    }
+    private func departureinfo(departure: String) -> some View {
         VStack(alignment: .center, spacing: 0) {
-            HStack(alignment: .bottom, spacing: 5) {
-                Text("\(party.departure)")
+            HStack(spacing: 5) {
+                Text(departure)
                     .font(.custom("AppleSDGothicNeo-Medium", size: 20))
+                    .foregroundColor(Color.customBlack)
+                Text("\(party.departure)")
+                    .font(.custom("AppleSDGothicNeo-UltraLight", size: 17))
                     .foregroundColor(Color.customBlack)
             }
             .padding(5)
