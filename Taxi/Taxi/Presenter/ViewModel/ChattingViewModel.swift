@@ -12,6 +12,7 @@ import FirebaseFirestoreCombineSwift
 
 final class ChattingViewModel: ObservableObject {
     @Published private (set) var messages: [Message] = []
+    @Published var input: String = ""
     private let fireStore: Firestore = .firestore()
     private let taxiParty: TaxiParty
     private let chattingUseCase: ChattingUseCase = ChattingUseCase()
@@ -21,9 +22,13 @@ final class ChattingViewModel: ObservableObject {
         self.taxiParty = taxiParty
     }
 
-    func sendMessage(_ userId: String, body: String, completion: @escaping (Error?) -> Void) {
-        let message: Message = Message(id: UUID().uuidString, sender: userId, body: body, timeStamp: Date().messageTime, typeCode: Message.MessageType.normal.code)
-        chattingUseCase.sendMessage(message, to: taxiParty, completion: completion)
+    func sendMessage(_ userId: String) {
+        guard !input.isEmpty else {
+            return
+        }
+        let message: Message = Message(id: UUID().uuidString, sender: userId, body: input, timeStamp: Date().messageTime, typeCode: Message.MessageType.normal.code)
+        input = ""
+        chattingUseCase.sendMessage(message, to: taxiParty, completion: { _ in })
     }
 
     func setMessageChangeListener() {

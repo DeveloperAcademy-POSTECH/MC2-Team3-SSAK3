@@ -21,11 +21,19 @@ struct ChatRoomView: View {
     var body: some View {
         VStack {
             messageList
-            Typing()
+            Typing(input: $viewModel.input) {
+                viewModel.sendMessage(user.id)
+            }
         }
         .navigationTitle("\(taxiParty.meetingTime / 100):\(taxiParty.meetingTime % 100) \(taxiParty.destincation)")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(content: toolbar)
+        .onAppear {
+            viewModel.setMessageChangeListener()
+        }
+        .onDisappear {
+            viewModel.removeMessageChangeListener()
+        }
     }
 }
 // MARK: - Toolbar 모음
@@ -138,15 +146,19 @@ private extension ChatRoomView {
 
 // 메시지 입력 영역
 struct Typing: View {
-    @State private var typing: String = ""
-    @State var textEditorHeight: CGFloat = 0
-    init() {
+
+    @Binding private var input: String
+    @State private var textEditorHeight: CGFloat = 0
+
+    init(input: Binding<String>, sendMessage: () -> Void) {
+        _input = input
         UITextView.appearance().backgroundColor = .clear
     }
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             ZStack(alignment: .leading) {
-                Text(typing)
+                Text(input)
                     .lineLimit(3)
                     .foregroundColor(.clear)
                     .padding(.horizontal, 7)
@@ -156,7 +168,7 @@ struct Typing: View {
                         Color.clear.preference(key: ViewHeightKey.self,
                                                value: geo.frame(in: .global).size.height)
                     })
-                TextEditor(text: $typing)
+                TextEditor(text: $input)
                     .disableAutocorrection(true)
                     .lineSpacing(5)
                     .frame(maxHeight: textEditorHeight)
