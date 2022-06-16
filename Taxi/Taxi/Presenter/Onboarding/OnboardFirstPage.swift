@@ -51,13 +51,11 @@ struct WordingView: View {
 
 struct ImageView: View {
     var body: some View {
-        Spacer()
         HStack {
         Image("ClockImage")
             .resizable()
             .aspectRatio(contentMode: .fit)
         }
-        .padding(15)
     }
 }
 
