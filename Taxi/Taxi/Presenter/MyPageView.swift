@@ -17,14 +17,7 @@ struct MyPageView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Rectangle()
-                .foregroundColor(.white)
-                .frame(height: 60)
-                .overlay(alignment: .bottomLeading) {
-                    Text("설정")
-                        .mainTitle()
-                        .padding(.leading)
-                }
+            navigationBar
             profile
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
@@ -41,6 +34,17 @@ struct MyPageView: View {
 }
 
 private extension MyPageView {
+    
+    var navigationBar: some View {
+        Rectangle()
+            .foregroundColor(.white)
+            .frame(height: 60)
+            .overlay(alignment: .bottomLeading) {
+                Text("설정")
+                    .mainTitle()
+                    .padding(.leading)
+            }
+    }
 
     var profile: some View {
         HStack(spacing: 13) {
