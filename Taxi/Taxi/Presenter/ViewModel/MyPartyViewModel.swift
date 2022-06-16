@@ -17,7 +17,6 @@ import Foundation
                  print(error!)
                  return
              }
-             print("Get MyParties, taxiParties: \(taxiParties)")
              self.myPartyList = taxiParties
          }
      }
@@ -28,7 +27,6 @@ import Foundation
                  print(error!)
                  return
              }
-             print("Leave Party, user:\(user.id), party:\(party.id)")
              self.deletePartyInList(party: party)
          }
      }
@@ -36,7 +34,6 @@ import Foundation
      private func deletePartyInList(party: TaxiParty) {
          if let index = self.myPartyList.firstIndex(of: party) {
              self.myPartyList.remove(at: index)
-             print("Delete Party in myPartyList, party:\(party.id)")
          }
      }
  }
