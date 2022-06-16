@@ -150,7 +150,7 @@ struct CellViewList: View {
         ScrollView {
             LazyVStack(spacing: 16, pinnedViews: [.sectionHeaders]) {
                 ForEach(meetingDates, id: \.self) { date in
-                    Section(header: SectionHeaderView(date: date)) {
+                    Section(header: SectionHeaderView(date: date).id(date)) {
                         ForEach(partys[date]!, id: \.id) { party in
                             PatyListCell(party: party)
                         }
