@@ -402,6 +402,10 @@
 				A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */,
 				A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */,
 				A8BD8114285A3543003D744B /* Onboarding.swift */,
+				A8BD8114285A3543003D744B /* Onboarding.swift */,
+				A87934CB2859FC5400FDCDBA /* OnboardFirstPage.swift */,
+				A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */,
+				A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */,
 				A8982EC4285AF63F000D11D0 /* Onboarding */,
 			);
 			path = Presenter;
@@ -466,10 +470,6 @@
 		A8982EC4285AF63F000D11D0 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				A8BD8114285A3543003D744B /* Onboarding.swift */,
-				A87934CB2859FC5400FDCDBA /* OnboardFirstPage.swift */,
-				A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */,
-				A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
