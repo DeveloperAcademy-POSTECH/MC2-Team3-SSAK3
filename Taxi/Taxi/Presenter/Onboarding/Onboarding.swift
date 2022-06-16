@@ -27,7 +27,6 @@ struct OnboardingView: View {
             .onAppear {
                 setupAppearance()
             }
-//            NextButtonView()
             Button(action: {
                 if index == 2 {
                     isContentView = true
@@ -47,7 +46,6 @@ struct OnboardingView: View {
             .transition(.slide)
             }
         }
-//        .preferredColorScheme(.light)
     }
     func setupAppearance() {
         UIPageControl.appearance().currentPageIndicatorTintColor = .black
@@ -113,4 +111,3 @@ struct ContentView_Previews: PreviewProvider {
         OnboardingView(isContentView: .constant(false))
     }
 }
-

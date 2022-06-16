@@ -49,16 +49,11 @@ struct ThirdPageWordingView: View {
 }
 
 struct ThirdImageView: View {
-//    private func calculateOffset() -> CGFloat {
-//        let deviceWidth: CGFloat = UIScreen.main.bounds.width
-//        return deviceWidth * (53 / 375)
-//    }
     var body: some View {
         HStack {
         Image("TaxiImage")
             .resizable()
             .aspectRatio(contentMode: .fit)
-//            .offset(x: calculateOffset())
         }
         .padding(30)
     }

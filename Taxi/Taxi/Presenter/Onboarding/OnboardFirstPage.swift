@@ -61,17 +61,12 @@ struct WordingView: View {
 }
 
 struct ImageView: View {
-    private func calculateOffset() -> CGFloat {
-        let deviceWidth: CGFloat = UIScreen.main.bounds.width
-        return deviceWidth * (1 / 375)
-    }
     var body: some View {
         Spacer()
         HStack {
         Image("ClockImage")
             .resizable()
             .aspectRatio(contentMode: .fit)
-//            .offset(x: calculateOffset())
         }
         .padding(15)
     }
