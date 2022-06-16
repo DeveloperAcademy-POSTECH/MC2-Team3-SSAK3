@@ -8,20 +8,17 @@
 import SwiftUI
 
 struct MyPartyView: View {
-    // Dummy Data
-    @State private var myParties: [TaxiParty] = [
-        TaxiParty(id: "1", departureCode: 0, destinationCode: 1, meetingDate: 20220610, meetingTime: 1315, maxPersonNumber: 4, members: ["1", "2", "3", "4"], isClosed: true),
-        TaxiParty(id: "2", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1330, maxPersonNumber: 3, members: ["1", "3"], isClosed: false),
-        TaxiParty(id: "3", departureCode: 0, destinationCode: 1, meetingDate: 20220611, meetingTime: 1440, maxPersonNumber: 3, members: ["1", "2", "3"], isClosed: false),
-        TaxiParty(id: "4", departureCode: 0, destinationCode: 1, meetingDate: 20220612, meetingTime: 1734, maxPersonNumber: 3, members: ["1", "2"], isClosed: false),
-        TaxiParty(id: "5", departureCode: 0, destinationCode: 1, meetingDate: 20220612, meetingTime: 2005, maxPersonNumber: 2, members: ["1"], isClosed: false),
-        TaxiParty(id: "6", departureCode: 0, destinationCode: 1, meetingDate: 20220617, meetingTime: 1340, maxPersonNumber: 4, members: ["1", "3"], isClosed: false)
-    ]
+    @StateObject private var myPartyViewModel: MyPartyViewModel = MyPartyViewModel()
+    // TODO: 현재 로그인한 유저 불러오기
+    private let user: User = User(id: "123456", nickname: "Jerry", profileImage: nil)
 
     var body: some View {
         VStack {
             MyPartyTitle()
-            MyPartyList(myParties: $myParties)
+            MyPartyList(user: user, myPartyViewModel: myPartyViewModel)
+        }
+        .onAppear {
+            myPartyViewModel.getMyParties(user: user)
         }
     }
 }
@@ -52,13 +49,14 @@ struct MyPartySectionHeader: View {
 }
 
 struct MyPartyList: View {
-    @Binding var myParties: [TaxiParty]
+    let user: User
+    @ObservedObject var myPartyViewModel: MyPartyViewModel
     @State private var isSwiped: Bool = false
     @State private var showAlert: Bool = false
     @State private var selectedParty: TaxiParty?
 
     private var partys: [Int: [TaxiParty]] {
-        Dictionary.init(grouping: myParties, by: {$0.meetingDate})
+        Dictionary.init(grouping: myPartyViewModel.myPartyList, by: {$0.meetingDate})
     }
     private var meetingDates: [Int] {
         partys.map({$0.key}).sorted()
@@ -106,14 +104,13 @@ struct MyPartyList: View {
                 }
             }
         }
+        .animation(.default, value: partys)
         .background(Color.lightGray) // TODO: 색상 변경
         .highPriorityGesture(isSwiped ? cancelSelectDrag : nil) // 스와이프 된 상태일 때 취소 드래그 활성화
         .simultaneousGesture(isSwiped ? cancelSelectTap : nil) // 스와이프 된 상태일 때 취소 탭 활성화
         .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
             Button("나가기", role: .destructive) {
-                withAnimation(.spring()) {
-                    delete(object: selectedParty!)
-                }
+                delete(object: selectedParty!)
             }
             Button("취소", role: .cancel) {}
         } message: {
@@ -121,10 +118,12 @@ struct MyPartyList: View {
         }
     }
 
-    private func delete(object: TaxiParty) {
-        if let index = myParties.firstIndex(of: object) {
-            myParties.remove(at: index)
+    private func delete(object: TaxiParty?) {
+        guard let party = object else {
+            print("No selectedParty in \(#file)")
+            return
         }
+        myPartyViewModel.leaveMyParty(user: user, party: party)
     }
 }
 
@@ -258,6 +257,15 @@ struct CellView: View {
     }
 }
 
+// TODO: 비어있을 때 보여 줄 뷰 구성
+struct EmptyPartyView: View {
+    var body: some View {
+        VStack {
+            Text("현재 참여중인 채팅 방이 없어요")
+            Text("택시팟에서 생성된 팟을 검색하거나 새로 만들 수 있어요")
+        }
+    }
+}
 struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
