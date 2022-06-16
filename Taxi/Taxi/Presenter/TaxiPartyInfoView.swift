@@ -40,25 +40,12 @@ struct TaxiPartyInfoView: View {
                 ForEach(0..<remainSeat, id: \.self) { _ in
                     emptyProfile
                 }
-                Rectangle().foregroundColor(Color(red: 151 / 255, green: 151 / 255, blue: 151 / 255)).frame(height: 1)
+                divider
                 taxiPartyDate
                 taxiPartyTime
             }
             taxiPartyPlace
-            Button {
-                if let user = userViewModel.user {
-                    joinTaxiPartyViewModel.joinTaxiParty(in: taxiParty, user)
-                }
-                // TODO: Move to chatroom
-            } label: {
-                Text("시작하기")
-                    .font(.system(size: 18))
-                    .fontWeight(.semibold)
-                    .padding(.vertical, 18)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
-                    .padding(.top)
-            }
+            roundedButton
         }
         .padding()
         .background(Color.black) // TODO: Delete and Apply Material Modal
@@ -109,6 +96,10 @@ private extension TaxiPartyInfoView {
         }
     }
 
+    var divider: some View {
+        Rectangle().foregroundColor(Color(red: 151 / 255, green: 151 / 255, blue: 151 / 255)).frame(height: 1)
+    }
+
     var taxiPartyDate: some View {
         HStack {
             Text("\(meetingMonth)월 \(meetingDay)일") // TODO: 요일 추가하기
@@ -153,6 +144,23 @@ private extension TaxiPartyInfoView {
             Spacer()
         }
         .foregroundColor(.customGray)
+    }
+
+    var roundedButton: some View {
+        Button {
+            if let user = userViewModel.user {
+                joinTaxiPartyViewModel.joinTaxiParty(in: taxiParty, user)
+            }
+            // TODO: Move to chatroom
+        } label: {
+            Text("시작하기")
+                .font(.system(size: 18))
+                .fontWeight(.semibold)
+                .padding(.vertical, 18)
+                .frame(maxWidth: .infinity)
+                .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
+                .padding(.top)
+        }
     }
 }
 
