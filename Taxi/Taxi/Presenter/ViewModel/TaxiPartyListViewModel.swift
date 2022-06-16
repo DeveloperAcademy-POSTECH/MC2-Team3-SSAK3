@@ -17,7 +17,6 @@ final class TaxiPartyListViewModel: ObservableObject {
                 print(error ?? "")
                 return
             }
-            print("Get TaxiPartyList, taxiParties: \(taxiParties)")
             self.taxiPartyList = taxiParties
         }
     }
