@@ -16,11 +16,11 @@ final class JoinTaxiPartyUseCase {
     }
 
     func joinTaxiParty(in taxiParty: TaxiParty, _ user: User) -> AnyPublisher<TaxiParty, Error> {
-        return taxiPartyRepository.joinTaxiParty(in: taxiParty, id: user.id)
+        return taxiPartyRepository.joinTaxiParty(in: taxiParty, user: user)
     }
 
     func joinTaxiParty(in taxiParty: TaxiParty, _ user: User, completion: @escaping (TaxiParty?, Error?) -> Void) {
-        taxiPartyRepository.joinTaxiParty(in: taxiParty, id: user.id)
+        taxiPartyRepository.joinTaxiParty(in: taxiParty, user: user)
             .sink { result in
                 if case let .failure(error) = result {
                     completion(nil, error)
