@@ -26,7 +26,7 @@ struct TaxiPartyListView: View {
                 .padding(.horizontal, 20)
                 ScrollViewReader { proxy in
                 ScrollView {
-                        CellViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
+                    KtxViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
                     }
                  .onChange(of: renderedDate) { _ in
                     guard let date = renderedDate else { return } //formattedInt
@@ -162,6 +162,57 @@ struct CellViewList: View {
             ForEach(meetingDates, id: \.self) { date in
                 Section(header: SectionHeaderView(date: date).id(date)) {
                     ForEach(partys[date]!, id: \.id) { party in
+                        PatyListCell(party: party)
+                    }
+                }
+            }
+        }
+        .padding(.top)
+        .animation(.default, value: isRefreshing)
+        .background(GeometryReader {
+            Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+        })
+        .onPreferenceChange(ViewOffsetKey.self) {
+            let heightValueForGesture: CGFloat = 270.0
+            if $0 < -heightValueForGesture && !isRefreshing {
+                isRefreshing = true
+                Task {
+                    await refresh?()
+                    await MainActor.run {
+                        isRefreshing = false
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct KtxViewList: View {
+    @Environment(\.refresh) private var refresh
+    @State private var isRefreshing = false
+    let taxiParties: [TaxiParty]
+    private var partys: [Int: [TaxiParty]] {
+        Dictionary.init(grouping: taxiParties, by: {$0.destinationCode})
+    }
+    private var destFilteredParties: [Int: [TaxiParty]] {
+        guard let parties = partys[1] else {
+            print(partys[0])
+            return [:]}
+        return Dictionary.init(grouping: parties, by: {$0.meetingDate})
+    }
+    private var meetingDates: [Int] {
+        return destFilteredParties.map({$0.key}).sorted()
+    }
+
+    var body: some View {
+        if isRefreshing {
+            MyProgress()
+                .transition(.scale)
+        }
+        LazyVStack(spacing: 16) {
+            ForEach(meetingDates, id: \.self) { date in
+                Section(header: SectionHeaderView(date: date).id(date)) {
+                    ForEach(destFilteredParties[date]!, id: \.id) { party in
                         PatyListCell(party: party)
                     }
                 }
