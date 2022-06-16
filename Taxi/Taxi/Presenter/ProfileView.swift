@@ -22,6 +22,7 @@ struct ProfileView: View {
     @State private var selectedImage: UIImage? // 피커에서 선택한 사진을 담는 변수
     @State private var imageData: Data? // 피커에서 선택한 사진을 Data로 변환한 것을 담는 변수
     @State private var isProfileDeleted: Bool = false
+    @State private var isInValidNickname: Bool = true
     private let profileSize: CGFloat = 104
 
     var body: some View {
@@ -143,15 +144,18 @@ private extension ProfileView {
             }
         }
         .padding(.horizontal)
+        .onChange(of: nicknameContainer) { newValue in
+            isInValidNickname = newValue.isInValidNickname
+        }
     }
 
     var applyChangeButton: some View {
         Button {
             guard let user = userViewModel.user else { return }
-            if nicknameContainer != user.nickname { // 닉네임 바꿨으면 변경
+            if nicknameContainer != user.nickname {
                 userViewModel.updateNickname(nicknameContainer)
             }
-            if let newImage = imageData { //
+            if let newImage = imageData {
                 userViewModel.updateProfileImage(newImage)
             } else if isProfileDeleted {
                 userViewModel.deleteProfileImage()
@@ -160,6 +164,6 @@ private extension ProfileView {
         } label: {
             Text("저장")
         }
-        .disabled(nicknameContainer.contains(" ") || nicknameContainer == "") // TODO: 특수문자 불가능하게
+        .disabled(isInValidNickname)
     }
 }
