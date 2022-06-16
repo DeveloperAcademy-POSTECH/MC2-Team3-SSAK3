@@ -12,7 +12,7 @@ struct TaxiPartyListView: View {
     @State private var renderedDate: Date?
     @StateObject private var taxiPartyListViewModel: TaxiPartyListViewModel = TaxiPartyListViewModel()
     @State var selectedIndex: Int = 0
-    
+
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -27,16 +27,10 @@ struct TaxiPartyListView: View {
                 .padding(.horizontal, 20)
                 ScrollViewReader { proxy in
                 ScrollView {
-                    switch selectedIndex {
-                    case 0: CellViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
-                    case 1: KtxViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
-                    case 2: PostectViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
-                    default:
-                        CellViewList(taxiParties: taxiPartyListViewModel.taxiPartyList)
-                    }
+                    CellViewList(selectedIndex: $selectedIndex, taxiParties: taxiPartyListViewModel.taxiPartyList)
                 }
                  .onChange(of: renderedDate) { _ in
-                    guard let date = renderedDate else { return } //formattedInt
+                    guard let date = renderedDate else { return }
                      withAnimation {
                          proxy.scrollTo(date.formattedInt, anchor: .top)
                      }
@@ -48,7 +42,7 @@ struct TaxiPartyListView: View {
                 }
                 .background(Color.background)
             }
-            CalendarModal(taxiPartyListViewModel: taxiPartyListViewModel, isShowing: $showModal, renderedDate: $renderedDate)
+            CalendarModal(isShowing: $showModal, renderedDate: $renderedDate, taxiPartyList: filterCalender())
         }
         .onAppear {
             taxiPartyListViewModel.getTaxiParties(id: nil)
@@ -56,6 +50,23 @@ struct TaxiPartyListView: View {
     }
     func fetchSomething() async {
         try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
+    }
+
+    private func filterCalender() -> [TaxiParty] {
+        switch selectedIndex {
+        case 0:
+            return taxiPartyListViewModel.taxiPartyList
+        case 1:
+            return taxiPartyListViewModel.taxiPartyList.filter({ taxiParty in
+                return taxiParty.destinationCode == 1
+            })
+        case 2:
+        return taxiPartyListViewModel.taxiPartyList.filter({ taxiParty in
+            return taxiParty.destinationCode == 0
+        })
+        default:
+            return taxiPartyListViewModel.taxiPartyList
+        }
     }
 }
 
@@ -152,118 +163,37 @@ struct MyProgress: View {
 struct CellViewList: View {
     @Environment(\.refresh) private var refresh
     @State private var isRefreshing = false
+    @Binding var selectedIndex: Int
+
     let taxiParties: [TaxiParty]
-    private var partys: [Int: [TaxiParty]] {
+    private var totalParties: [Int: [TaxiParty]] {
         Dictionary.init(grouping: taxiParties, by: {$0.meetingDate})
     }
-    private var meetingDates: [Int] {
-        partys.map({$0.key}).sorted()
-    }
-
-    var body: some View {
-        if isRefreshing {
-            MyProgress()
-                .transition(.scale)
-        }
-        LazyVStack(spacing: 16) {
-            ForEach(meetingDates, id: \.self) { date in
-                Section(header: SectionHeaderView(date: date).id(date)) {
-                    ForEach(partys[date]!, id: \.id) { party in
-                        PatyListCell(party: party)
-                    }
-                }
-            }
-        }
-        .padding(.top)
-        .animation(.default, value: isRefreshing)
-        .background(GeometryReader {
-            Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
-        })
-        .onPreferenceChange(ViewOffsetKey.self) {
-            let heightValueForGesture: CGFloat = 270.0
-            if $0 < -heightValueForGesture && !isRefreshing {
-                isRefreshing = true
-                Task {
-                    await refresh?()
-                    await MainActor.run {
-                        isRefreshing = false
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct KtxViewList: View {
-    @Environment(\.refresh) private var refresh
-    @State private var isRefreshing = false
-    let taxiParties: [TaxiParty]
-    private var partys: [Int: [TaxiParty]] {
+    private var destFilteredParties: [Int: [TaxiParty]] {
         Dictionary.init(grouping: taxiParties, by: {$0.destinationCode})
     }
+    private var totalMeetingDates: [Int] {
+        totalParties.map({$0.key}).sorted()
+    }
 
-    private var destFilteredParties: [Int: [TaxiParty]] {
-        guard let parties = partys[1] else {
-            print(partys[1])
+    private var ktxFilteredParties: [Int: [TaxiParty]] {
+        guard let parties = destFilteredParties[1] else {
             return [:]}
         return Dictionary.init(grouping: parties, by: {$0.meetingDate})
     }
 
-    private var meetingDates: [Int] {
-        return destFilteredParties.map({$0.key}).sorted()
+    private var ktxMeetingDates: [Int] {
+        return ktxFilteredParties.map({$0.key}).sorted()
     }
 
-    var body: some View {
-        if isRefreshing {
-            MyProgress()
-                .transition(.scale)
-        }
-        LazyVStack(spacing: 16) {
-            ForEach(meetingDates, id: \.self) { date in
-                Section(header: SectionHeaderView(date: date).id(date)) {
-                    ForEach(destFilteredParties[date]!, id: \.id) { party in
-                        PatyListCell(party: party)
-                    }
-                }
-            }
-        }
-        .padding(.top)
-        .animation(.default, value: isRefreshing)
-        .background(GeometryReader {
-            Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
-        })
-        .onPreferenceChange(ViewOffsetKey.self) {
-            let heightValueForGesture: CGFloat = 270.0
-            if $0 < -heightValueForGesture && !isRefreshing {
-                isRefreshing = true
-                Task {
-                    await refresh?()
-                    await MainActor.run {
-                        isRefreshing = false
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct PostectViewList: View {
-    @Environment(\.refresh) private var refresh
-    @State private var isRefreshing = false
-    let taxiParties: [TaxiParty]
-    private var partys: [Int: [TaxiParty]] {
-        Dictionary.init(grouping: taxiParties, by: {$0.destinationCode})
-    }
-
-    private var destFilteredParties: [Int: [TaxiParty]] {
-        guard let parties = partys[0] else {
-            print(partys[0])
+    private var postechFilteredParties: [Int: [TaxiParty]] {
+        guard let parties = destFilteredParties[0] else {
             return [:]}
         return Dictionary.init(grouping: parties, by: {$0.meetingDate})
     }
 
-    private var meetingDates: [Int] {
-        return destFilteredParties.map({$0.key}).sorted()
+    private var postechMeetingDates: [Int] {
+        return postechFilteredParties.map({$0.key}).sorted()
     }
 
     var body: some View {
@@ -272,9 +202,9 @@ struct PostectViewList: View {
                 .transition(.scale)
         }
         LazyVStack(spacing: 16) {
-            ForEach(meetingDates, id: \.self) { date in
+            ForEach(mappingDate(), id: \.self) { date in
                 Section(header: SectionHeaderView(date: date).id(date)) {
-                    ForEach(destFilteredParties[date]!, id: \.id) { party in
+                    ForEach(mappingParties()[date]!, id: \.id) { party in
                         PatyListCell(party: party)
                     }
                 }
@@ -296,6 +226,32 @@ struct PostectViewList: View {
                     }
                 }
             }
+        }
+    }
+
+    private func mappingDate() -> [Int] {
+        switch selectedIndex {
+        case 0:
+            return totalMeetingDates
+        case 1:
+            return ktxMeetingDates
+        case 2:
+            return postechMeetingDates
+        default:
+            return totalMeetingDates
+        }
+    }
+
+    private func mappingParties() -> [Int: [TaxiParty]] {
+        switch selectedIndex {
+        case 0:
+            return totalParties
+        case 1:
+            return ktxFilteredParties
+        case 2:
+            return postechFilteredParties
+        default:
+            return totalParties
         }
     }
 }

@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct CalendarModal: View {
-    @ObservedObject var taxiPartyListViewModel: TaxiPartyListViewModel
+    // @ObservedObject var taxiPartyListViewModel: TaxiPartyListViewModel
     @Binding var isShowing: Bool
     @Binding var renderedDate: Date?
     @State private var storeDate: Date?
     @State private var toastIsShowing = false
     @State private var isPresented = false
     @State private var curHeight: CGFloat = 400
+    let taxiPartyList: [TaxiParty]
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -43,7 +44,7 @@ struct CalendarModal: View {
         VStack {
             sheetHeader
                 .padding([.bottom, .top], 15)
-            CalendarView(taxiParties: taxiPartyListViewModel.taxiPartyList) {isTaxiParty, selectedDate in
+            CalendarView(taxiParties: taxiPartyList) {isTaxiParty, selectedDate in
                 if isTaxiParty {
                     withAnimation {
                         toastIsShowing = false
