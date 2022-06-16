@@ -10,7 +10,6 @@ import SwiftUI
 struct OnboardThirdPageView: View {
     var body: some View {
     VStack {
-        SkippButtonView()
         Spacer()
         ThirdPageWordingView()
         Spacer()

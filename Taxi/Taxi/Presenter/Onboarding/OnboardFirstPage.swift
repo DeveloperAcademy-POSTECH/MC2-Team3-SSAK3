@@ -10,7 +10,6 @@ import SwiftUI
 struct OnboardFirstPageView: View {
     var body: some View {
         VStack {
-            SkippButtonView()
             Spacer()
             WordingView()
             Spacer()
@@ -19,15 +18,6 @@ struct OnboardFirstPageView: View {
             Spacer()
             Spacer()
         }
-    }
-}
-
-struct SkippButtonView: View {
-    var body: some View {
-        HStack {
-            Spacer()
-        Text("건너뛰기")
-        }.padding()
     }
 }
 
