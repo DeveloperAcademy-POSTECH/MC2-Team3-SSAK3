@@ -84,7 +84,7 @@ private extension TaxiPartyInfoView {
     }
 
     var emptyProfile: some View {
-        HStack {
+        HStack(spacing: 20) {
             Circle()
                 .stroke(.white)
                 .frame(width: profileSize, height: profileSize)
@@ -177,12 +177,13 @@ struct PartyMemberInfo: View {
     }
 
     var body: some View {
-        HStack {
+        HStack(spacing: 20) {
             if let user = userProfileViewModel.user {
                 ProfileImage(user, diameter: diameter)
                 Text(user.nickname)
+                    .foregroundColor(.white)
             } else {
-                HStack {
+                HStack(spacing: 20) {
                     Circle().foregroundColor(.lightGray).frame(width: diameter, height: diameter)
                     Rectangle().foregroundColor(.lightGray).frame(width: 80, height: 20)
                     Spacer()
