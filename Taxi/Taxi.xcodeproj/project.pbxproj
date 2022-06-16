@@ -398,14 +398,7 @@
 				AFFA12582857BCFE0076CB2F /* CalendarModal.swift */,
 				E63C7AAF2858C2380080530B /* SignUpCodeView.swift */,
 				E63C7AB12858C2520080530B /* SignUpNicknameView.swift */,
-				A87934CB2859FC5400FDCDBA /* OnboardFirstPage.swift */,
-				A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */,
-				A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */,
-				A8BD8114285A3543003D744B /* Onboarding.swift */,
-				A8BD8114285A3543003D744B /* Onboarding.swift */,
-				A87934CB2859FC5400FDCDBA /* OnboardFirstPage.swift */,
-				A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */,
-				A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */,
+				A8982EC5285B4F8D000D11D0 /* OnboardGroup */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -464,6 +457,17 @@
 				374E059D285A18EC00215533 /* MyPartyViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A8982EC5285B4F8D000D11D0 /* OnboardGroup */ = {
+			isa = PBXGroup;
+			children = (
+				A8BD8114285A3543003D744B /* Onboarding.swift */,
+				A87934CB2859FC5400FDCDBA /* OnboardFirstPage.swift */,
+				A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */,
+				A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */,
+			);
+			path = OnboardGroup;
 			sourceTree = "<group>";
 		};
 		E63C7AA32858B5930080530B /* MockData */ = {
@@ -675,7 +679,6 @@
 				508AE80F285A6E5500D111D3 /* UserProfileViewModel.swift in Sources */,
 				00A570642851E993008B220E /* ImageName.swift in Sources */,
 				A8C146A7285A4A5E00F6D37F /* OnboardSecondPage.swift in Sources */,
-				E622D8F428503A53005A68F3 /* SignUpView.swift in Sources */,
 				E63C7AA52858B5B50080530B /* TaxiPartyMockData.swift in Sources */,
 				E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */,
 				E6C93733285AD52600464D37 /* SignUpButton.swift in Sources */,
