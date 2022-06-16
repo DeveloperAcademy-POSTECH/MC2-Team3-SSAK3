@@ -9,9 +9,9 @@ import Foundation
 
 extension String {
     var isValidNickname: FieldState {
-        guard !nickname.isEmpty else { return .normal }
+        guard !self.isEmpty else { return .normal }
         let pattern = "^[ㄱ-하-ㅣ가-힣A-Za-z0-9]*$"
-        guard nickname.range(of: pattern, options: .regularExpression) != nil else { return .invalid }
+        guard self.range(of: pattern, options: .regularExpression) != nil else { return .invalid }
         return .valid
     }
 }

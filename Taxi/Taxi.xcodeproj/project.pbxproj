@@ -85,8 +85,8 @@
 		E63C7AB02858C2380080530B /* SignUpCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AAF2858C2380080530B /* SignUpCodeView.swift */; };
 		E63C7AB22858C2520080530B /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AB12858C2520080530B /* SignUpNicknameView.swift */; };
 		E63C7AB42858C2650080530B /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AB32858C2650080530B /* UnderlinedTextField.swift */; };
+		E6C93733285AD52600464D37 /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C93732285AD52600464D37 /* SignUpButton.swift */; };
 		E6E0E06F285A15B1001BAF6F /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E0E06E285A15B1001BAF6F /* StringExtension.swift */; };
-		E6F231502859AA3F0094EE03 /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2314F2859AA3F0094EE03 /* FlatButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,8 +177,8 @@
 		E63C7AAF2858C2380080530B /* SignUpCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCodeView.swift; sourceTree = "<group>"; };
 		E63C7AB12858C2520080530B /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		E63C7AB32858C2650080530B /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
+		E6C93732285AD52600464D37 /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		E6E0E06E285A15B1001BAF6F /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		E6F2314F2859AA3F0094EE03 /* FlatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,7 +345,7 @@
 				00A5705B285182E1008B220E /* RoundedButton.swift */,
 				50DA19622856065200DEC46E /* ProfileImage.swift */,
 				E63C7AB32858C2650080530B /* UnderlinedTextField.swift */,
-				E6F2314F2859AA3F0094EE03 /* FlatButton.swift */,
+				E6C93732285AD52600464D37 /* SignUpButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -626,7 +626,6 @@
 				50459E2F28542E4E00287371 /* PhotoPicker.swift in Sources */,
 				00F6B72F2859C00E00DACA06 /* AddTaxiPartyViewModel.swift in Sources */,
 				002F89EB284CA10800D7E51B /* UserFirebaseDataSource.swift in Sources */,
-				E6F231502859AA3F0094EE03 /* FlatButton.swift in Sources */,
 				00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */,
 				00F6B72728596EEF00DACA06 /* PatyListCell.swift in Sources */,
 				E63C7AA72858B5DE0080530B /* CalendarHelper.swift in Sources */,
@@ -639,6 +638,7 @@
 				00A570642851E993008B220E /* ImageName.swift in Sources */,
 				E63C7AA52858B5B50080530B /* TaxiPartyMockData.swift in Sources */,
 				E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */,
+				E6C93733285AD52600464D37 /* SignUpButton.swift in Sources */,
 				AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */,
 				000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */,
 				37F698852855FB910008C022 /* MyPartyView.swift in Sources */,

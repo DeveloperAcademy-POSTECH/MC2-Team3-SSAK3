@@ -31,7 +31,7 @@ struct SignUpNicknameView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding([.top, .horizontal])
             Spacer()
-            makeConditionalButton("완료", !nickname.isValidNickname.isValid, focusField) {
+            SignUpButton("완료", !nickname.isValidNickname.isValid, focusState: focusField) {
                 userViewModel.register(id: deviceUUID, nickname: nickname)
                 // TODO: 유저 환영 화면 연결 or pop to root
                 UserDefaults.standard.set(true, forKey: "isLogined")
@@ -46,15 +46,6 @@ struct SignUpNicknameView: View {
                     Image(systemName: "chevron.backward")
                 }
             }
-        }
-    }
-
-    @ViewBuilder
-    private func makeConditionalButton(_ title: String, _ disabled: Bool = false, _ focusState: Bool, action: @escaping () -> Void) -> some View {
-        if focusState {
-            FlatButton(title, disabled, action: action)
-        } else {
-            RoundedButton(title, disabled, action: action)
         }
     }
 
