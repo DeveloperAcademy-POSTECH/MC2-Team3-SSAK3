@@ -81,7 +81,7 @@ struct TaxiApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TaxiPartyListView()
+            RootView()
                 .environmentObject(userViewModel)
         }
     }
