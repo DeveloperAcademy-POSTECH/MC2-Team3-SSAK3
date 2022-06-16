@@ -24,5 +24,5 @@ protocol TaxiPartyRepository {
     /// 택시파티에 참가하는 함수
     /// - Parameter taxiParty: 참가할 택시파티
     /// - Returns: TaxParty 혹은 Error 를 발행하는 Publihser
-    func joinTaxiParty(in taxiParty: TaxiParty, id: String) -> AnyPublisher<TaxiParty, Error>
+    func joinTaxiParty(in taxiParty: TaxiParty, user: User) -> AnyPublisher<TaxiParty, Error>
 }
