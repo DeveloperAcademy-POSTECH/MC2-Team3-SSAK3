@@ -24,7 +24,7 @@ struct PatyListCell: View {
         }
         .padding()
         .background {
-                if party.departure == "포스텍" {
+                if party.destinationCode == 0 {
                     cellBackground(color: Color.postechPink)
                 } else {
                     cellBackground(color: Color.ktxBlue)
@@ -47,7 +47,7 @@ struct DestinationView: View {
     let party: TaxiParty
 
     var body: some View {
-        if party.departure == "포스텍" {
+        if party.destinationCode == 0 {
             cellHeader(image: "graduationcap.fill", color: Color.postechPink)
         } else {
             cellHeader(image: "train.side.front.car", color: Color.ktxBlue)
