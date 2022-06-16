@@ -20,7 +20,7 @@ protocol UserRepository {
     /// 회원정보를 가져오는 함수
     /// - Parameter id: 유저의 고유 아이디 -> 고유 아이디를 기반으로 유저 정보를 가져온다
     /// - Returns: User 혹은 Error 를 발행하는 Publisher
-    func getUser(_ id: String) -> AnyPublisher<User, Error>
+    func getUser(_ id: String, force load: Bool) -> AnyPublisher<User, Error>
 
     /// 프로필 이미지를 업데이트 하는 함수
     /// - Parameters:

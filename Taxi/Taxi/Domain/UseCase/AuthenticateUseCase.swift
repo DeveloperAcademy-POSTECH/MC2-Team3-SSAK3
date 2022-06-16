@@ -19,8 +19,8 @@ final class AuthenticateUseCase {
     /// 기기 고유아이디로 로그인 요청 시 해당 User 정보를 반환하는 함수
     /// - Parameter id: 기기 고유아이디
     /// - Returns: User 혹은 Error 를 발행하는 Publisher
-    func login(_ id: String) -> AnyPublisher<User, Error> {
-        return userRepository.getUser(id)
+    func login(_ id: String, force load: Bool = false) -> AnyPublisher<User, Error> {
+        return userRepository.getUser(id, force: load)
     }
 
     /// 닉네임을 변경하는 함수, 닉네임 변경 성공 시 닉네임이 변경된 User 정보를 반환한다.
@@ -50,8 +50,8 @@ final class AuthenticateUseCase {
         return userRepository.setUser(id, nickname)
     }
 
-    func login(_ id: String, completion: @escaping (User?, Error?) -> Void) {
-        userRepository.getUser(id)
+    func login(_ id: String, force load: Bool = false, completion: @escaping (User?, Error?) -> Void) {
+        userRepository.getUser(id, force: load)
             .sink { result in
                 if case let .failure(error) = result {
                     completion(nil, error)
