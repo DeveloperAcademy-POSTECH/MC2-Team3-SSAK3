@@ -18,7 +18,6 @@ struct OnboardThirdPageView: View {
         Spacer()
         Spacer()
         Spacer()
-        NextButtonView()
         }
     }
 }

@@ -11,7 +11,6 @@ struct OnboardingView: View {
     @State var index = 0
     @Binding var isContentView: Bool
     var body: some View {
-
         VStack {
             SkippButtonView()
             TabView(selection: $index) {
@@ -27,30 +26,21 @@ struct OnboardingView: View {
             .onAppear {
                 setupAppearance()
             }
-            Button(action: {
+            RoundedButton("다음") {
                 if index == 2 {
                     isContentView = true
                 }
                 index = (index + 1) % 3
-            }) {
-                Text("다음")
-                    .font(.system(size: 18))
-                    .fontWeight(.semibold)
-                    .padding(.vertical, 18)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.customBlack)
-                    .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
-                    .padding(.horizontal)
-                    }
+            }
             .animation(.easeInOut(duration: 2))
             .transition(.slide)
-            }
         }
     }
-    func setupAppearance() {
-        UIPageControl.appearance().currentPageIndicatorTintColor = .black
-        UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
-      }
+}
+func setupAppearance() {
+    UIPageControl.appearance().currentPageIndicatorTintColor = .black
+    UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
+}
 
 struct ContentView: View {
     var body: some View {

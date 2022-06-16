@@ -18,7 +18,6 @@ struct OnboardFirstPageView: View {
             Spacer()
             Spacer()
             Spacer()
-            NextButtonView()
         }
     }
 }
@@ -69,14 +68,6 @@ struct ImageView: View {
             .aspectRatio(contentMode: .fit)
         }
         .padding(15)
-    }
-}
-
-struct NextButtonView: View {
-    var body: some View {
-        RoundedButton("다음") {
-            print("hello")
-        }
     }
 }
 
