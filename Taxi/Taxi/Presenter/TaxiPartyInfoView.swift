@@ -12,7 +12,7 @@ struct TaxiPartyInfoView: View {
     @EnvironmentObject private var userViewModel: Authentication
     @StateObject private var joinTaxiPartyViewModel: JoinTaxiPartyViewModel = JoinTaxiPartyViewModel()
     let taxiParty: TaxiParty
-    private let profileSize: CGFloat = 80
+    private let profileSize: CGFloat = 62
     private let remainSeat: Int
     private let meetingMonth: Int
     private let meetingDay: Int
@@ -29,27 +29,39 @@ struct TaxiPartyInfoView: View {
     }
 
     var body: some View {
-        VStack {
-            dismissButton
-            Spacer()
-            participatingCount
-            ForEach(0..<taxiParty.members.count, id: \.self) { index in
-                PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
+        VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 16) {
+                dismissButton
+                Spacer()
+                participatingCount
+                ForEach(0..<taxiParty.members.count, id: \.self) { index in
+                    PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
+                }
+                ForEach(0..<remainSeat, id: \.self) { _ in
+                    emptyProfile
+                }
+                Rectangle().foregroundColor(Color(red: 151 / 255, green: 151 / 255, blue: 151 / 255)).frame(height: 1)
+                taxiPartyDate
+                taxiPartyTime
             }
-            ForEach(0..<remainSeat, id: \.self) { _ in
-                emptyProfile
-            }
-            Divider()
-            taxiPartyDate
-            taxiPartyTime
             taxiPartyPlace
-            RoundedButton("시작하기") {
+            Button {
                 if let user = userViewModel.user {
                     joinTaxiPartyViewModel.joinTaxiParty(in: taxiParty, user)
                 }
                 // TODO: Move to chatroom
+            } label: {
+                Text("시작하기")
+                    .font(.system(size: 18))
+                    .fontWeight(.semibold)
+                    .padding(.vertical, 18)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
+                    .padding(.top)
             }
         }
+        .padding()
+        .background(Color.black) // TODO: Delete and Apply Material Modal
     }
 }
 
@@ -63,7 +75,9 @@ private extension TaxiPartyInfoView {
                 dismiss()
             } label: {
                 Image(systemName: "xmark")
+                    .imageScale(.large)
             }
+            .tint(.white)
             Spacer()
         }
     }
@@ -71,8 +85,13 @@ private extension TaxiPartyInfoView {
     var participatingCount: some View {
         HStack {
             Text("참여중인 멤버")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
+                .foregroundColor(.white)
+            Rectangle().frame(width: 1, height: 12).foregroundColor(Color(red: 187 / 255, green: 187 / 255, blue: 187 / 255))
             Image(systemName: "person.fill")
-            Text("\(taxiParty.members.count)/\(taxiParty.maxPersonNumber)")
+                .foregroundColor(.customYellow)
+            Text("\(taxiParty.members.count) / \(taxiParty.maxPersonNumber)")
+                .foregroundColor(.customYellow)
             Spacer()
         }
     }
@@ -80,17 +99,23 @@ private extension TaxiPartyInfoView {
     var emptyProfile: some View {
         HStack {
             Circle()
-                .stroke(style: StrokeStyle(lineWidth: 1, dash: [10]))
+                .stroke(.white)
                 .frame(width: profileSize, height: profileSize)
-            Text("Username")
+                .overlay(Image(systemName: "person.fill").font(.system(size: 30)).foregroundColor(.white))
+                .background(Circle().fill(Color.gray))
+            Text("택시팟에 참여해보세요!")
+                .foregroundColor(.white)
             Spacer()
         }
     }
 
     var taxiPartyDate: some View {
         HStack {
-            Text("\(meetingMonth)월 \(meetingDay)일")
+            Text("\(meetingMonth)월 \(meetingDay)일") // TODO: 요일 추가하기
+                .foregroundColor(.white)
+            Rectangle().frame(width: 1, height: 12).foregroundColor(Color(red: 187 / 255, green: 187 / 255, blue: 187 / 255))
             Text("모집중")
+                .foregroundColor(.customYellow)
             Spacer()
         }
     }
@@ -98,6 +123,8 @@ private extension TaxiPartyInfoView {
     var taxiPartyTime: some View {
         HStack {
             Text("\(meetingHour):\(meetingMinute)")
+                .font(Font.custom("AppleSDGothicNeo-Bold", size: 50))
+                .foregroundColor(.white)
             Spacer()
         }
     }
@@ -108,16 +135,24 @@ private extension TaxiPartyInfoView {
             switch taxiParty.destinationCode {
             case 0:
                 Text("포항역")
+                    .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
             case 1:
                 Text("포스텍")
+                    .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
             default:
                 fatalError()
             }
             Text("\(taxiParty.departure)")
+                .font(Font.custom("AppleSDGothicNeo-UltraLight", size: 20))
             Image(systemName: "chevron.forward")
+                .font(.system(size: 20))
+                .padding(.horizontal, 10)
             Image(ImageName.train)
             Text("\(taxiParty.destincation)")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
+            Spacer()
         }
+        .foregroundColor(.customGray)
     }
 }
 
