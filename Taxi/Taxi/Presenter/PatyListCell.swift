@@ -19,8 +19,8 @@ struct PatyListCell: View {
                 Spacer()
                 UserView(party: party)
             }
-            .padding(.vertical, 8)
-            .padding(.horizontal, 18)
+            .padding(.vertical, 7)
+            .padding(.horizontal, 7)
         }
         .padding()
         .background {
@@ -99,7 +99,7 @@ struct DepartureView: View {
                     .font(.custom("AppleSDGothicNeo-Medium", size: 20))
                     .foregroundColor(Color.customBlack)
                 Text("\(party.departure)")
-                    .font(.custom("AppleSDGothicNeo-UltraLight", size: 17))
+                    .font(.custom("AppleSDGothicNeo-UltraLight", size: 18))
                     .foregroundColor(Color.customBlack)
             }
             .padding(5)

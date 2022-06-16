@@ -13,8 +13,8 @@ enum Place: String {
     case c5 = "C5"
     case jigok = "지곡회관"
     case fromChatting = "추후협의"
-    case taxi = "택시 승강장"
-    case cafebene = "카페베네 앞"
+    case taxi = "택시승강장"
+    case cafebene = "카페베네"
 }
 // MARK: - 코드 처리
 extension Place {
