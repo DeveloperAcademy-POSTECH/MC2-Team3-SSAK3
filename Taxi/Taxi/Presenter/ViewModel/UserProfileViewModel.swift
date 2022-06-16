@@ -13,8 +13,8 @@ final class UserProfileViewModel: ObservableObject {
 
     func getMembersInfo(_ members: [String]) {
         for id in members {
-            authenticateUseCase.login(id) { user, error in
-                guard let user = user, error == nil else { return }
+            authenticateUseCase.login(id) { [weak self] user, error in
+                guard let self = self, let user = user else { return }
                 self.membersInfo.updateValue(user, forKey: id)
             }
         }
