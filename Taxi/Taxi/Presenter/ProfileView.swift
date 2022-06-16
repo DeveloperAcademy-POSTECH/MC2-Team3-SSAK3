@@ -28,14 +28,14 @@ struct ProfileView: View {
         VStack {
             navigationBar
             profileImageEditButton
-            .confirmationDialog("프로필 사진 설정", isPresented: $showActionSheet) {
-                actionSheetButtons
-            }
-            .fullScreenCover(isPresented: $showPicker) {
-                photoPicker
-            }
             nicknameTextField
             Spacer()
+        }
+        .confirmationDialog("프로필 사진 설정", isPresented: $showActionSheet) {
+            actionSheetButtons
+        }
+        .fullScreenCover(isPresented: $showPicker) {
+            photoPicker
         }
         .onAppear {
             if let user = userViewModel.user {
