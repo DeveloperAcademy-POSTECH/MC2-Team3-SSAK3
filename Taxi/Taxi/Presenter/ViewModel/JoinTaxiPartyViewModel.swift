@@ -12,8 +12,8 @@ final class JoinTaxiPartyViewModel: ObservableObject {
     private let joinTaxiPartyUseCase: JoinTaxiPartyUseCase = JoinTaxiPartyUseCase()
     
     func joinTaxiParty(in taxiParty: TaxiParty, _ user: User) {
-        joinTaxiPartyUseCase.joinTaxiParty(in: taxiParty, user) { taxiParty, error in
-            guard let taxiParty = taxiParty, error == nil else { return }
+        joinTaxiPartyUseCase.joinTaxiParty(in: taxiParty, user) { [weak self] taxiParty, error in
+            guard let self = self, let taxiParty = taxiParty else { return }
             self.taxiParty = taxiParty
         }
     }
