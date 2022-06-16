@@ -51,16 +51,11 @@ struct SecondPageWordingView: View {
 }
 
 struct SecondImageView: View {
-    private func calculateOffset() -> CGFloat {
-        let deviceWidth: CGFloat = UIScreen.main.bounds.width
-        return deviceWidth * ( 20 / 375)
-    }
     var body: some View {
         HStack {
         Image("PeopleImage")
             .resizable()
             .aspectRatio(contentMode: .fit)
-//            .offset(x: calculateOffset())
         }
         .padding(30)
     }
