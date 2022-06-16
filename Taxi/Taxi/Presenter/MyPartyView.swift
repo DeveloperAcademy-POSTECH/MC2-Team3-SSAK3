@@ -118,10 +118,7 @@ struct MyPartyList: View {
     }
 
     private func delete(object: TaxiParty?) {
-        guard let party = object else {
-            print("No selectedParty in \(#file)")
-            return
-        }
+        guard let party = object else { return }
         myPartyViewModel.leaveMyParty(user: user, party: party)
     }
 }
