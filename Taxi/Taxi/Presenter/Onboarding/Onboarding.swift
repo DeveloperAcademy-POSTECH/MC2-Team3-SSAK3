@@ -22,6 +22,7 @@ struct OnboardingView: View {
                 Page3()
                     .tag(2)
             }
+            .padding(10)
             .tabViewStyle(.page)
             .onAppear {
                 setupAppearance()
@@ -34,13 +35,17 @@ struct OnboardingView: View {
                 index = (index + 1) % 3
             }) {
                 Text("다음")
-                    .frame(width: 300, height: 50, alignment: .center)
+                    .font(.system(size: 18))
+                    .fontWeight(.semibold)
+                    .padding(.vertical, 18)
+                    .frame(maxWidth: .infinity)
                     .foregroundColor(.customBlack)
-                    .background {
-                        Color.yellow
+                    .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
+                    .padding(.horizontal)
                     }
+            .animation(.easeInOut(duration: 2))
+            .transition(.slide)
             }
-
         }
 //        .preferredColorScheme(.light)
     }
@@ -48,7 +53,6 @@ struct OnboardingView: View {
         UIPageControl.appearance().currentPageIndicatorTintColor = .black
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
       }
-}
 
 struct ContentView: View {
     var body: some View {
@@ -107,12 +111,6 @@ struct Finish: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView(isContentView: .constant(false))
-        OnboardingView(isContentView: .constant(false))
-            .previewDevice("iPhone 13")
-        OnboardingView(isContentView: .constant(false))
-            .previewDevice("iPhone 13 Pro Max")
-        OnboardingView(isContentView: .constant(false))
-            .previewDevice("iPhone SE (3rd generation)")
     }
 }
 

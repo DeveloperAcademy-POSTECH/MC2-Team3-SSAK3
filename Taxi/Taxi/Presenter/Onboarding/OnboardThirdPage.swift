@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardThirdPage: View {
+struct OnboardThirdPageView: View {
     var body: some View {
     VStack {
         SkippButtonView()
@@ -15,6 +15,9 @@ struct OnboardThirdPage: View {
         ThirdPageWordingView()
         Spacer()
         ThirdImageView()
+        Spacer()
+        Spacer()
+        Spacer()
         NextButtonView()
         }
     }
@@ -24,41 +27,45 @@ struct ThirdPageWordingView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 9) {
             Text("준비되셨나요?")
+                .kerning(-0.1)
                 .signUpTitle()
                 .frame(width: UIScreen.main.bounds.width, alignment: .leading)
             HStack(spacing: 0) {
                 Text("포포팟")
-                    .font(Font.system(size: 16, weight: .medium))
+                    .kerning(-0.3)
+                    .font(Font.system(size: 16, weight: .bold))
                     .foregroundColor(.customYellow)
                 Image(systemName: "sparkle")
-                    .font(Font.system(size: 16, weight: .medium))
+                    .font(Font.system(size: 16, weight: .semibold))
                     .foregroundColor(.customYellow)
-                Text("과 함께 쉽고 빠르게 택시비를 아껴봅시다.")
+                Text("으로 편하게 택시팟을 이용해보세요.")
+                    .kerning(-0.3)
                     .signUpAgreement()
             }
             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
         }
-        .padding(.leading, 18)
+        .padding(.leading, 20)
     }
 }
 
 struct ThirdImageView: View {
-    private func calculateOffset() -> CGFloat {
-        let deviceWidth: CGFloat = UIScreen.main.bounds.width
-        return deviceWidth * (53 / 375)
-    }
+//    private func calculateOffset() -> CGFloat {
+//        let deviceWidth: CGFloat = UIScreen.main.bounds.width
+//        return deviceWidth * (53 / 375)
+//    }
     var body: some View {
         HStack {
         Image("TaxiImage")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .offset(x: calculateOffset())
+//            .offset(x: calculateOffset())
         }
+        .padding(30)
     }
 }
 
-struct OnboardThirdPage_Previews: PreviewProvider {
+struct OnboardThirdPageView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardThirdPage()
+        OnboardThirdPageView()
     }
 }
