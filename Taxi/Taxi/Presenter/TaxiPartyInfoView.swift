@@ -6,26 +6,28 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct TaxiPartyInfoView: View {
     @Environment(\.dismiss) private var dismiss
+    @StateObject private var userProfileViewModel: UserProfileViewModel = UserProfileViewModel()
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 80
-    private var remainSeat: Int {
-        taxiParty.maxPersonNumber - taxiParty.members.count
-    }
+    private var remainSeat: Int { taxiParty.maxPersonNumber - taxiParty.members.count }
 
     var body: some View {
         VStack {
             dismissButton
             Spacer()
             participatingCount
-            ForEach(0..<taxiParty.members.count, id: \.self) { index in
-                PartyMemberInfo(id: taxiParty.members[index], diameter: profileSize)
-            }
-            ForEach(0..<remainSeat, id: \.self) { _ in
-                emptyProfile
+            if userProfileViewModel.membersInfo.count != 0 { // 데이터 로딩 완료시
+                ForEach(0..<taxiParty.members.count, id: \.self) { index in
+                    partyMemberInfo(taxiParty.members[index], diameter: profileSize)
+                }
+                ForEach(0..<remainSeat, id: \.self) { _ in
+                    emptyProfile
+                }
+            } else { // 데이터 로딩 미완료시
+                placeholder
             }
             Divider()
             taxiPartyDate
@@ -35,14 +37,21 @@ struct TaxiPartyInfoView: View {
                 // TODO: Add joinTaxiParty Action
             }
         }
+        .onAppear {
+            userProfileViewModel.getMembersInfo(taxiParty.members)
+        }
     }
 }
 
 // MARK: - 뷰 변수
 
-extension TaxiPartyInfoView {
+private extension TaxiPartyInfoView {
+    private var meetingMonth: Int { taxiParty.meetingDate / 100 % 100 }
+    private var meetingDay: Int { taxiParty.meetingDate % 100 }
+    private var meetingHour: String { String(format: "%02d", taxiParty.meetingTime / 100 % 100) }
+    private var meetingMinute: String { String(format: "%02d", taxiParty.meetingTime % 100) }
 
-    private var dismissButton: some View {
+    var dismissButton: some View {
         HStack {
             Button {
                 dismiss()
@@ -53,7 +62,7 @@ extension TaxiPartyInfoView {
         }
     }
 
-    private var participatingCount: some View {
+    var participatingCount: some View {
         HStack {
             Text("참여중인 멤버")
             Image(systemName: "person.fill")
@@ -62,32 +71,46 @@ extension TaxiPartyInfoView {
         }
     }
 
-    private var emptyProfile: some View {
+    @ViewBuilder
+    var placeholder: some View {
+        ForEach(0..<taxiParty.members.count, id: \.self) { _ in
+            HStack {
+                Circle().foregroundColor(.lightGray).frame(width: profileSize, height: profileSize)
+                Rectangle().foregroundColor(.lightGray).frame(width: 80, height: 20)
+                Spacer()
+            }
+        }
+        ForEach(0..<remainSeat, id: \.self) { _ in
+            emptyProfile
+        }
+    }
+
+    var emptyProfile: some View {
         HStack {
             Circle()
                 .stroke(style: StrokeStyle(lineWidth: 1, dash: [10]))
-                .frame(width: 80, height: 80)
+                .frame(width: profileSize, height: profileSize)
             Text("Username")
             Spacer()
         }
     }
 
-    private var taxiPartyDate: some View {
+    var taxiPartyDate: some View {
         HStack {
-            Text("\(taxiParty.meetingDate / 100 % 100)월 \(taxiParty.meetingDate % 100)일")
+            Text("\(meetingMonth)월 \(meetingDay)일")
             Text("모집중")
             Spacer()
         }
     }
 
-    private var taxiPartyTime: some View {
+    var taxiPartyTime: some View {
         HStack {
-            Text("\(taxiParty.meetingTime / 100 % 100):\(taxiParty.meetingTime % 100)")
+            Text("\(meetingHour):\(meetingMinute)")
             Spacer()
         }
     }
 
-    private var taxiPartyPlace: some View {
+    var taxiPartyPlace: some View {
         HStack {
             Image(ImageName.taxi)
             switch taxiParty.destinationCode {
@@ -104,28 +127,15 @@ extension TaxiPartyInfoView {
             Text("\(taxiParty.destincation)")
         }
     }
-}
 
-// MARK: - PartyMemberInfo 구조체
-
-struct PartyMemberInfo: View {
-    private let diameter: CGFloat
-    private let user: User = User(
-        id: "id1",
-        nickname: "아보",
-        profileImage: "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f202fce4-a5b6-4e40-9f5e-f22eaf4edd87/ProfileDummy.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220611%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220611T030635Z&X-Amz-Expires=86400&X-Amz-Signature=8756de2e65dc2b6f616fb7a697bbebbaf8f779b53e3481e52fb183b4b5709821&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22ProfileDummy.png%22&x-id=GetObject"
-    )
-
-    init(id: String, diameter: CGFloat) {
-        self.diameter = diameter
-        // TODO: id와 유즈케이스를 통해 유저 정보 가져오고 user 변수에 넣기
-    }
-
-    var body: some View {
-        HStack {
-            ProfileImage(user, diameter: 80)
-            Text(user.nickname)
-            Spacer()
+    @ViewBuilder
+    func partyMemberInfo(_ id: String, diameter: CGFloat) -> some View {
+        if let user = userProfileViewModel.membersInfo[id] {
+            HStack {
+                ProfileImage(user, diameter: profileSize)
+                Text(user.nickname)
+                Spacer()
+            }
         }
     }
 }
@@ -136,13 +146,13 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
 
     static var previews: some View {
         TaxiPartyInfoView(taxiParty: TaxiParty(
-            id: "0",
+            id: "121F9EBC-1607-4D23-ACCD-660DDBC3CB77",
             departureCode: 2,
             destinationCode: 1,
-            meetingDate: 20220617,
-            meetingTime: 1330,
-            maxPersonNumber: 4,
-            members: ["id1", "id2", "id3"],
+            meetingDate: 20220616,
+            meetingTime: 1610,
+            maxPersonNumber: 2,
+            members: ["123456"],
             isClosed: false
         ))
     }
