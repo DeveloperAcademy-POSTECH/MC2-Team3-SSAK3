@@ -11,26 +11,36 @@ struct RoundedButton: View {
     private let text: String
     private let disabled: Bool
     private let action: () -> Void
+    private let loading: Bool
 
-    init(_ title: String, _ disabled: Bool = false, action: @escaping () -> Void) {
+    init(_ title: String, _ disabled: Bool = false, loading: Bool = false, action: @escaping () -> Void) {
         self.text = title
         self.disabled = disabled
         self.action = action
+        self.loading = loading
     }
 
     var body: some View {
         Button(action: action) {
-            Text(text)
-                .font(.system(size: 18))
-                .fontWeight(.semibold)
-                .padding(.vertical, 18)
-                .frame(maxWidth: .infinity)
-                .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
-                .padding(.horizontal)
+            if loading {
+                ProgressView()
+            } else {
+                Text(text)
+                    .font(.system(size: 18))
+                    .fontWeight(.semibold)
+            }
         }
-        .disabled(disabled)
-        .opacity(disabled ? 0.3 : 1)
+        .padding(.vertical, 18)
+        .frame(maxWidth: .infinity)
+        .background(background)
+        .padding(.horizontal)
+        .disabled(disabled || loading)
+        .opacity(disabled || loading ? 0.6 : 1)
         .buttonStyle(.plain)
+    }
+
+    private var background: some View {
+        RoundedRectangle(cornerRadius: 15).fill(Color.customYellow)
     }
 }
 
@@ -40,5 +50,9 @@ struct RoundedButton_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
         RoundedButton("택시팟 생성", true) {}
             .previewLayout(.sizeThatFits)
+        RoundedButton("택시팟 생성", loading: true) {
+
+        }
+        .previewLayout(.sizeThatFits)
     }
 }
