@@ -12,7 +12,7 @@ struct SignUpCodeView: View {
     @State private var codeInput = ""
     @State private var codeState: FieldState = .normal
     @State private var isActive = false
-    private let signUpCode = "popopot"
+    private let signUpCode = "Popopot"
     @FocusState private var focusField: Bool
 
     var body: some View {
