@@ -14,6 +14,13 @@ enum Tab {
 }
 struct RootView: View {
     @State private var currentTab: Tab = .taxiParty
+
+    init() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+    }
+
     var body: some View {
         NavigationView {
             TabView(selection: $currentTab) {
@@ -45,11 +52,6 @@ struct RootView: View {
                     }
                     .tag(Tab.setting)
             }
-        }
-        .onAppear {
-            let tabBarAppearance = UITabBarAppearance()
-            tabBarAppearance.configureWithOpaqueBackground()
-            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         }
     }
 }
