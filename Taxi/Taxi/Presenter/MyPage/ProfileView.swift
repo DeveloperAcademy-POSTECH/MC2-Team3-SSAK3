@@ -170,6 +170,7 @@ private extension ProfileView {
                 userViewModel.deleteProfileImage()
                 isProfileDeleted = false
             }
+            dismiss()
         } label: {
             Text("저장")
         }
