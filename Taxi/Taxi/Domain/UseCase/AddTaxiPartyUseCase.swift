@@ -14,12 +14,12 @@ final class AddTaxiPartyUseCase {
         self.taxiPartyRepository = taxiPartyRepository
     }
 
-    func addTaxiParty(_ taxiParty: TaxiParty) -> AnyPublisher<TaxiParty, Error> {
-        return taxiPartyRepository.addTaxiParty(taxiParty)
+    func addTaxiParty(_ taxiParty: TaxiParty, user: User) -> AnyPublisher<TaxiParty, Error> {
+        return taxiPartyRepository.addTaxiParty(taxiParty, user: user)
     }
 
-    func addTaxiParty(_ taxiParty: TaxiParty, completion: @escaping (TaxiParty?, Error?) -> Void) {
-        taxiPartyRepository.addTaxiParty(taxiParty)
+    func addTaxiParty(_ taxiParty: TaxiParty, user: User, completion: @escaping (TaxiParty?, Error?) -> Void) {
+        taxiPartyRepository.addTaxiParty(taxiParty, user: user)
             .sink { result in
                 if case let .failure(error) = result {
                     completion(nil, error)

@@ -61,7 +61,7 @@ struct AddTaxiParty: View {
             }
             RoundedButton("택시팟 생성", !checkAllInfoSelected(), loading: viewModel.isAdding) {
                 let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: (startHour! * 100) + startMinute!, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
-                viewModel.addTaxiParty(taxiParty) { taxiParty in
+                viewModel.addTaxiParty(taxiParty, user: user) { taxiParty in
                     print(taxiParty)
                     dismiss()
                 } onError: { error in
