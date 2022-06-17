@@ -117,7 +117,7 @@ private extension ProfileView {
                 if let images = imagesOrNil {
                     if let first = images.first {
                         selectedImage = first
-                        if let data = first.jpegData(compressionQuality: 1) {
+                        if let data = first.jpegData(compressionQuality: 0.1) {
                             imageData = data
                         }
                     }
