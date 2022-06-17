@@ -135,7 +135,6 @@ private extension ProfileView {
             ZStack(alignment: .bottom) {
                 TextField("", text: $nicknameContainer)
                     .disableAutocorrection(true)
-                    .textInputAutocapitalization(.never)
                     .focused($focusField, equals: .nickname)
                 Rectangle()
                     .foregroundColor(focusField == .nickname ? .customYellow : .charcoal)
