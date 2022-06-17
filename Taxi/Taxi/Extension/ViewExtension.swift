@@ -14,7 +14,7 @@ extension View {
         self
             .overlay(Rectangle().frame(height: 2).foregroundColor(.gray.opacity(0.3)).padding(.top, 50).padding(.bottom, 20))
     }
-    
+
     func clearBackground() -> some View {
         self
             .modifier(ClearBackground())

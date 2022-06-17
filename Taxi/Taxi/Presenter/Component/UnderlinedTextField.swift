@@ -32,7 +32,6 @@ struct UnderlinedTextField: View {
 
     var body: some View {
         TextField(placeholder, text: inputString)
-            .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
             .overlay(
                 Rectangle()
