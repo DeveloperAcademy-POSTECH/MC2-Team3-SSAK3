@@ -22,7 +22,7 @@ extension WebImage {
     func profileCircle(_ diameter: CGFloat) -> some View {
         self
             .placeholder {
-                Circle().stroke().foregroundColor(.lightGray)
+                Circle().foregroundColor(.lightGray)
             }
             .resizable()
             .aspectRatio(contentMode: .fill)
