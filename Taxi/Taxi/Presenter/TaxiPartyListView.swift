@@ -204,9 +204,9 @@ struct CellViewList: View {
                 .transition(.scale)
         }
         LazyVStack(spacing: 10) {
-            ForEach(meetingDates, id: \.self) { date in
+            ForEach(mappingDate(), id: \.self) { date in
                 Section(header: SectionHeaderView(date: date).id(date)) {
-                    ForEach(partys[date]!, id: \.id) { party in
+                    ForEach(mappingParties()[date]!, id: \.id) { party in
                         PartyListCell(party: party)
                             .cellBackground()
                     }
