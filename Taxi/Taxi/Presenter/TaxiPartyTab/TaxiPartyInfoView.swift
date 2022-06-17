@@ -29,26 +29,29 @@ struct TaxiPartyInfoView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 16) {
-                dismissButton
-                Spacer()
-                participatingCount
-                ForEach(0..<taxiParty.members.count, id: \.self) { index in
-                    PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
+        ZStack {
+            Color.black.opacity(0.8).ignoresSafeArea()
+            VStack(spacing: 0) {
+                VStack(alignment: .leading, spacing: 16) {
+                    dismissButton
+                    Spacer()
+                    participatingCount
+                    ForEach(0..<taxiParty.members.count, id: \.self) { index in
+                        PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
+                    }
+                    ForEach(0..<remainSeat, id: \.self) { _ in
+                        emptyProfile
+                    }
+                    divider
+                    taxiPartyDate
+                    taxiPartyTime
                 }
-                ForEach(0..<remainSeat, id: \.self) { _ in
-                    emptyProfile
-                }
-                divider
-                taxiPartyDate
-                taxiPartyTime
+                taxiPartyPlace
+                roundedButton
             }
-            taxiPartyPlace
-            roundedButton
+            .padding()
         }
-        .padding()
-        .background(Color.black) // TODO: Delete and Apply Material Modal
+        .clearBackground()
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct TaxiPartyListView: View {
     @State private var showModal = false
     @State private var renderedDate: Date?
+    @State private var showInfo: Bool = false
     @StateObject private var taxiPartyListViewModel: TaxiPartyListViewModel = TaxiPartyListViewModel()
     @EnvironmentObject private var authentication: Authentication
     @State var selectedIndex: Int = 0
@@ -30,7 +31,7 @@ struct TaxiPartyListView: View {
                 Divider()
                 ScrollViewReader { proxy in
                 ScrollView {
-                    CellViewList(selectedIndex: $selectedIndex, taxiParties: taxiPartyListViewModel.taxiPartyList)
+                    CellViewList(selectedIndex: $selectedIndex, showInfo: $showInfo, taxiParties: taxiPartyListViewModel.taxiPartyList)
                 }
                  .onChange(of: renderedDate) { _ in
                     guard let date = renderedDate else { return }
@@ -47,6 +48,8 @@ struct TaxiPartyListView: View {
             }
             CalendarModal(isShowing: $showModal, renderedDate: $renderedDate, taxiPartyList: filterCalender())
         }
+        .blur(radius: showInfo ? 10 : 0)
+        .animation(.easeOut, value: showInfo)
         .fullScreenCover(isPresented: $showAddTaxiParty, content: {
             AddTaxiParty()
         })
@@ -170,6 +173,7 @@ struct CellViewList: View {
     @Environment(\.refresh) private var refresh
     @State private var isRefreshing = false
     @Binding var selectedIndex: Int
+    @Binding var showInfo: Bool
 
     let taxiParties: [TaxiParty]
     private var totalParties: [Int: [TaxiParty]] {
@@ -211,7 +215,7 @@ struct CellViewList: View {
             ForEach(mappingDate(), id: \.self) { date in
                 Section(header: SectionHeaderView(date: date).id(date)) {
                     ForEach(mappingParties()[date]!, id: \.id) { party in
-                        Cell(party: party)
+                        Cell(party: party, showInfo: $showInfo)
                     }
                 }
             }
@@ -264,7 +268,7 @@ struct CellViewList: View {
 
 struct Cell: View {
     let party: TaxiParty
-    @State private var showInfo: Bool = false
+    @Binding var showInfo: Bool
     var body: some View {
         Button {
             showInfo = true
