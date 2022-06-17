@@ -20,7 +20,7 @@ extension AddTaxiParty {
 }
 struct AddTaxiParty: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var step: AddTaxiParty.Step = .none // 현재 정보 입력 단계
+    @State private var step: AddTaxiParty.Step = .destination // 현재 정보 입력 단계
     @State private var destination: Place? // 목적지
     @State private var startDate: Date? // 출발 날짜
     @State private var startHour: Int? // 출발 시간
@@ -28,6 +28,9 @@ struct AddTaxiParty: View {
     @State private var departure: Place? // 출발 장소
     @State private var maxNumber: Int? // 정원
     @StateObject private var viewModel: AddTaxiPartyViewModel = AddTaxiPartyViewModel()
+
+    let user: User
+
     private let columns: [GridItem] = [GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200))]
 
     private var hourRange: Range<Int> {
@@ -56,20 +59,14 @@ struct AddTaxiParty: View {
             if checkAllInfoSelected() {
                 guideText
             }
-            RoundedButton("택시팟 생성", !checkAllInfoSelected()) {
-                let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: (startHour! * 100) + startMinute!, maxPersonNumber: maxNumber!, members: [], isClosed: false)
-                // TODO: User 정보 연결해서 member 에 넣어야함
+            RoundedButton("택시팟 생성", !checkAllInfoSelected(), loading: viewModel.isAdding) {
+                let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: (startHour! * 100) + startMinute!, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
                 viewModel.addTaxiParty(taxiParty) { taxiParty in
                     print(taxiParty)
                     dismiss()
                 } onError: { error in
                     print(error)
                 }
-            }
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                step = .destination
             }
         }
     }
@@ -378,6 +375,6 @@ private extension AddTaxiParty {
 // MARK: - 프리뷰
 struct AddTaxiParty_Previews: PreviewProvider {
     static var previews: some View {
-        AddTaxiParty()
+        AddTaxiParty(user: User(id: "하이", nickname: "하이", profileImage: ""))
     }
 }
