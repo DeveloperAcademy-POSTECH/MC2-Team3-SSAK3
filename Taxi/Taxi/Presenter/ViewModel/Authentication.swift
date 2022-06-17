@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
 final class Authentication: ObservableObject {
     @Published private (set) var user: User?
     private let authenticateUseCase: AuthenticateUseCase = AuthenticateUseCase()
+
+    init() {
+        login(UIDevice.current.identifierForVendor!.uuidString)
+    }
 
     func login(_ id: String) {
         authenticateUseCase.login(id) { user, error in

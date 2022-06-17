@@ -13,6 +13,7 @@ struct SignUpNicknameView: View {
     @State private var nickname = ""
     @State private var nickFieldState: FieldState = .normal
     @FocusState private var focusField: Bool
+    @AppStorage("isLogined") private var isLogined: Bool = false
     private let deviceUUID = UIDevice.current.identifierForVendor!.uuidString
 
     var body: some View {
@@ -34,19 +35,10 @@ struct SignUpNicknameView: View {
             SignUpButton("완료", !nickname.isValidNickname.isValid, focusState: focusField) {
                 userViewModel.register(id: deviceUUID, nickname: nickname)
                 // TODO: 유저 환영 화면 연결 or pop to root
-                UserDefaults.standard.set(true, forKey: "isLogined")
+                isLogined = true
             }
         }
         .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.backward")
-                }
-            }
-        }
     }
 
     @ViewBuilder

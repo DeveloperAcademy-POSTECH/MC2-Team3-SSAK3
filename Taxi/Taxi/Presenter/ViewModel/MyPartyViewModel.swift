@@ -11,6 +11,10 @@ import Foundation
      @Published private (set) var myPartyList: [TaxiParty] = []
      private let myPartyUseCase: MyTaxiPartyUseCase = MyTaxiPartyUseCase()
 
+     init(_ user: User) {
+         getMyParties(user: user)
+     }
+
      func getMyParties(user: User) {
          myPartyUseCase.getMyTaxiParty(user, force: true) { [weak self] taxiParties, error in
              guard let self = self, let taxiParties = taxiParties, error == nil else {

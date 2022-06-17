@@ -11,13 +11,15 @@ struct TaxiPartyListView: View {
     @State private var showModal = false
     @State private var renderedDate: Date?
     @StateObject private var taxiPartyListViewModel: TaxiPartyListViewModel = TaxiPartyListViewModel()
+    @EnvironmentObject private var authentication: Authentication
     @State var selectedIndex: Int = 0
+    @State private var showAddTaxiParty: Bool = false
 
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 VStack {
-                    TaxiPartyHeadLine()
+                    headline
                     HStack {
                         TaxiPartyFiltering(selectedIndex: $selectedIndex)
                         Spacer()
@@ -39,19 +41,22 @@ struct TaxiPartyListView: View {
                 }
                 }
                 .refreshable {
-                    await fetchSomething()
+                    reload()
                 }
                 .background(Color.background)
             }
             CalendarModal(isShowing: $showModal, renderedDate: $renderedDate, taxiPartyList: filterCalender())
         }
+        .fullScreenCover(isPresented: $showAddTaxiParty, content: {
+            AddTaxiParty()
+        })
+        .onAppear(perform: {
+            reload()
+        })
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            taxiPartyListViewModel.getTaxiParties(id: nil)
-        }
     }
-    func fetchSomething() async {
-        try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
+    private func reload() {
+        taxiPartyListViewModel.getTaxiParties(id: authentication.user!.id)
     }
 
     private func filterCalender() -> [TaxiParty] {
@@ -71,15 +76,14 @@ struct TaxiPartyListView: View {
         }
     }
 }
-
-struct TaxiPartyHeadLine: View {
-    var body: some View {
+private extension TaxiPartyListView {
+    var headline: some View {
         HStack {
             Text("택시팟")
                 .font(.custom("AppleSDGothicNeo-Bold", size: 25))
             Spacer()
-            Button { // TODO: 채팅방 생성 View로 전환
-                print("+ tapped!")
+            Button {
+                showAddTaxiParty = true
             } label: {
                 Image(systemName: "plus")
                     .imageScale(.large)
@@ -94,7 +98,7 @@ struct TaxiPartyFiltering: View {
     @Binding var selectedIndex: Int
 
     var body: some View {
-        SegmentedPicker( // TODO : CellView 목적지 별로 필터링 가능하게 만들기
+        SegmentedPicker(
             titles,
             selectedIndex: Binding(
                 get: { selectedIndex },
@@ -207,8 +211,7 @@ struct CellViewList: View {
             ForEach(mappingDate(), id: \.self) { date in
                 Section(header: SectionHeaderView(date: date).id(date)) {
                     ForEach(mappingParties()[date]!, id: \.id) { party in
-                        PartyListCell(party: party)
-                            .cellBackground()
+                        Cell(party: party)
                     }
                 }
             }
@@ -255,6 +258,22 @@ struct CellViewList: View {
             return postechFilteredParties
         default:
             return totalParties
+        }
+    }
+}
+
+struct Cell: View {
+    let party: TaxiParty
+    @State private var showInfo: Bool = false
+    var body: some View {
+        Button {
+            showInfo = true
+        } label: {
+            PartyListCell(party: party)
+                .cellBackground()
+                .fullScreenCover(isPresented: $showInfo) {
+                    TaxiPartyInfoView(taxiParty: party)
+                }
         }
     }
 }

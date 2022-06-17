@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct MyPartyView: View {
-    @StateObject private var myPartyViewModel: MyPartyViewModel = MyPartyViewModel()
+    @ObservedObject private var myPartyViewModel: MyPartyViewModel
     @EnvironmentObject private var userViewModel: Authentication
+
+    init(_ viewModel: MyPartyViewModel) {
+        self._myPartyViewModel = ObservedObject(initialValue: viewModel)
+    }
 
     var body: some View {
         VStack {
@@ -17,9 +21,6 @@ struct MyPartyView: View {
             MyPartyList(user: userViewModel.user!, myPartyViewModel: myPartyViewModel)
         }
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            myPartyViewModel.getMyParties(user: userViewModel.user!)
-        }
     }
 }
 
@@ -237,7 +238,7 @@ struct EmptyPartyView: View {
 struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MyPartyView()
+            MyPartyView(MyPartyViewModel(User(id: "", nickname: "", profileImage: "")))
                 .environmentObject(Authentication())
         }
     }

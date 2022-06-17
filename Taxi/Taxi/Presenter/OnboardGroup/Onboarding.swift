@@ -9,50 +9,65 @@ import SwiftUI
 
 struct OnboardingView: View {
     @State private var index = 0
-    @Binding var isContentView: Bool
+    @AppStorage("skipOnboarding") private var skipOnboarding: Bool = false
+
+    init() {
+        setupAppearance()
+    }
     var body: some View {
-        VStack {
-            SkippButtonView()
-            TabView(selection: $index) {
-                Page1()
-                    .tag(0)
-                Page2()
-                    .tag(1)
-                Page3()
-                    .tag(2)
-            }
-            .padding(10)
-            .tabViewStyle(.page)
-            .onAppear {
-                setupAppearance()
-            }
-            RoundedButton(index == 2 ? "시작하기" : "다음") {
-                if index == 2 {
-                    isContentView = true
+        NavigationView {
+            ZStack {
+                VStack {
+                    TabView(selection: $index) {
+                        Page1()
+                            .tag(0)
+                        Page2()
+                            .tag(1)
+                        Page3()
+                            .tag(2)
+                    }
+                    .padding(10)
+                    .tabViewStyle(.page)
+                    RoundedButton(index == 2 ? "시작하기" : "다음") {
+                        if index == 2 {
+                            skipOnboarding = true
+                        } else {
+                            index += 1
+                        }
+                    }
                 }
-                index = (index + 1) % 3
+                NavigationLink(isActive: $skipOnboarding, destination: {
+                    SignUpCodeView()
+                }) {
+                    EmptyView()
+                }
             }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(content: toolbar)
+
         }
     }
-}
-func setupAppearance() {
-    UIPageControl.appearance().currentPageIndicatorTintColor = .black
-    UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
-}
 
-struct SkippButtonView: View {
-    var body: some View {
-        HStack {
-            Spacer()
-        Text("건너뛰기")
-                .signUpAgreement()
-        }.padding()
+    private func setupAppearance() {
+        UIPageControl.appearance().currentPageIndicatorTintColor = .black
+        UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
     }
-}
 
-struct ContentView: View {
-    var body: some View {
-        Text("ContentView")
+}
+private extension OnboardingView {
+    @ToolbarContentBuilder
+    func toolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .primaryAction) {
+            skipButton
+        }
+    }
+    var skipButton: some View {
+        Button {
+            skipOnboarding = true
+        } label: {
+            Text("건너뛰기")
+                .signUpAgreement()
+        }
     }
 }
 
@@ -104,8 +119,8 @@ struct Finish: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct Onboarding_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(isContentView: .constant(false))
+        OnboardingView()
     }
 }

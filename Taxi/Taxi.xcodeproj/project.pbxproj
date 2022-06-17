@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0007A742285C069900B7EF1F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007A741285C069900B7EF1F /* RootView.swift */; };
 		000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AE1D0284C922500AF59BE /* UserRepository.swift */; };
 		000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */; };
 		000C24F72859CB440054D679 /* ChattingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F62859CB440054D679 /* ChattingUseCase.swift */; };
@@ -40,7 +41,7 @@
 		00A5705A2851826A008B220E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570592851826A008B220E /* ColorExtension.swift */; };
 		00A5705C285182E1008B220E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5705B285182E1008B220E /* RoundedButton.swift */; };
 		00A570642851E993008B220E /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570632851E993008B220E /* ImageName.swift */; };
-		00A570662851EA33008B220E /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570652851EA33008B220E /* RootView.swift */; };
+		00A570662851EA33008B220E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570652851EA33008B220E /* MainView.swift */; };
 		00BC473F28581E740055CB6A /* AddTaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC473E28581E740055CB6A /* AddTaxiParty.swift */; };
 		00BC474128581E860055CB6A /* InfoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC474028581E860055CB6A /* InfoContainer.swift */; };
 		00BC47472858CAF80055CB6A /* AddTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545728531C510085C39E /* AddTaxiPartyUseCase.swift */; };
@@ -118,6 +119,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0007A741285C069900B7EF1F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		000AE1D0284C922500AF59BE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingFirebaseDataSource.swift; sourceTree = "<group>"; };
 		000C24F62859CB440054D679 /* ChattingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingUseCase.swift; sourceTree = "<group>"; };
@@ -156,7 +158,7 @@
 		00A570592851826A008B220E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		00A5705B285182E1008B220E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		00A570632851E993008B220E /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
-		00A570652851EA33008B220E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		00A570652851EA33008B220E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		00BC473E28581E740055CB6A /* AddTaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiParty.swift; sourceTree = "<group>"; };
 		00BC474028581E860055CB6A /* InfoContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoContainer.swift; sourceTree = "<group>"; };
 		00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepository.swift; sourceTree = "<group>"; };
@@ -241,6 +243,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0007A743285C06E000B7EF1F /* TaxiPartyTab */ = {
+			isa = PBXGroup;
+			children = (
+				AF174B252851859300BCF680 /* TaxiPartyListView.swift */,
+				AFFA12582857BCFE0076CB2F /* CalendarModal.swift */,
+				50459E34285490CC00287371 /* TaxiPartyInfoView.swift */,
+			);
+			path = TaxiPartyTab;
+			sourceTree = "<group>";
+		};
+		0007A744285C070400B7EF1F /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				505955962850BF46001DA44C /* ProfileView.swift */,
+				50595594285037AE001DA44C /* MyPageView.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		0007A746285C071E00B7EF1F /* MyParty */ = {
+			isa = PBXGroup;
+			children = (
+				37F698842855FB910008C022 /* MyPartyView.swift */,
+			);
+			path = MyParty;
+			sourceTree = "<group>";
+		};
+		0007A747285C072E00B7EF1F /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				E63C7AAF2858C2380080530B /* SignUpCodeView.swift */,
+				E63C7AB12858C2520080530B /* SignUpNicknameView.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		000AE1CD284C8FE700AF59BE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,7 +343,6 @@
 		000D83242840E23800BA3DFA /* Taxi */ = {
 			isa = PBXGroup;
 			children = (
-				00A5705628518200008B220E /* Component */,
 				004A833C28470DCC00E07EA0 /* Info.plist */,
 				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
 				00F85695284492BC008E2E2F /* Extension */,
@@ -365,6 +402,10 @@
 		00A5705628518200008B220E /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				E63C7AA62858B5DE0080530B /* CalendarHelper.swift */,
+				E63C7AA82858B6130080530B /* CalendarView.swift */,
+				50459E2E28542E4E00287371 /* PhotoPicker.swift */,
+				00F6B72628596EEF00DACA06 /* PatyListCell.swift */,
 				00A5705B285182E1008B220E /* RoundedButton.swift */,
 				50DA19622856065200DEC46E /* ProfileImage.swift */,
 				E63C7AB32858C2650080530B /* UnderlinedTextField.swift */,
@@ -385,23 +426,17 @@
 		00F856912844927A008E2E2F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				00F6B72628596EEF00DACA06 /* PatyListCell.swift */,
+				00A5705628518200008B220E /* Component */,
+				0007A747285C072E00B7EF1F /* SignUp */,
+				0007A746285C071E00B7EF1F /* MyParty */,
+				0007A744285C070400B7EF1F /* MyPage */,
+				0007A743285C06E000B7EF1F /* TaxiPartyTab */,
 				50F8003C285882DA00FA1063 /* ViewModel */,
 				00BC473D28581E530055CB6A /* AddTaxiParty */,
-				00A570652851EA33008B220E /* RootView.swift */,
-				50595594285037AE001DA44C /* MyPageView.swift */,
-				505955962850BF46001DA44C /* ProfileView.swift */,
-				50459E2E28542E4E00287371 /* PhotoPicker.swift */,
-				50459E34285490CC00287371 /* TaxiPartyInfoView.swift */,
-				37F698842855FB910008C022 /* MyPartyView.swift */,
+				00A570652851EA33008B220E /* MainView.swift */,
 				37D4D1F02856D285002E787B /* ChatRoomView.swift */,
-				E63C7AA62858B5DE0080530B /* CalendarHelper.swift */,
-				E63C7AA82858B6130080530B /* CalendarView.swift */,
-				AF174B252851859300BCF680 /* TaxiPartyListView.swift */,
-				AFFA12582857BCFE0076CB2F /* CalendarModal.swift */,
-				E63C7AAF2858C2380080530B /* SignUpCodeView.swift */,
-				E63C7AB12858C2520080530B /* SignUpNicknameView.swift */,
 				A8982EC5285B4F8D000D11D0 /* OnboardGroup */,
+				0007A741285C069900B7EF1F /* RootView.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -674,6 +709,7 @@
 				00F6B72728596EEF00DACA06 /* PatyListCell.swift in Sources */,
 				E63C7AA72858B5DE0080530B /* CalendarHelper.swift in Sources */,
 				50CCA9D7285AC4BE00977338 /* JoinTaxiPartyViewModel.swift in Sources */,
+				0007A742285C069900B7EF1F /* RootView.swift in Sources */,
 				50DA19632856065200DEC46E /* ProfileImage.swift in Sources */,
 				505955972850BF46001DA44C /* ProfileView.swift in Sources */,
 				E63C7AA92858B6130080530B /* CalendarView.swift in Sources */,
@@ -689,7 +725,7 @@
 				AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */,
 				000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */,
 				37F698852855FB910008C022 /* MyPartyView.swift in Sources */,
-				00A570662851EA33008B220E /* RootView.swift in Sources */,
+				00A570662851EA33008B220E /* MainView.swift in Sources */,
 				50595595285037AE001DA44C /* MyPageView.swift in Sources */,
 				00842A96284B287D000292E5 /* Place.swift in Sources */,
 				37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */,

@@ -16,33 +16,31 @@ struct SignUpCodeView: View {
     @FocusState private var focusField: Bool
 
     var body: some View {
-        NavigationView {
-            VStack {
-                VStack(alignment: .leading, spacing: 80) {
-                    Text("가입코드를 입력해주세요")
-                        .signUpTitle()
-                    UnderlinedTextField(text: $codeInput, codeState, "가입코드")
-                        .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
-                        .focused($focusField)
-                        .disabled(codeState.isValid)
-                }
-                .padding(.horizontal)
-                makeMessage(codeState)
-                    .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
-                    .foregroundColor(codeFieldMessageColor(codeState))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.top, .horizontal])
-                Spacer()
-                NavigationLink(destination: SignUpNicknameView(), isActive: $isActive) {
-                }
-                SignUpButton("다음", !codeState.isValid, focusState: focusField) {
-                    isActive.toggle()
-                }
+        VStack {
+            VStack(alignment: .leading, spacing: 80) {
+                Text("가입코드를 입력해주세요")
+                    .signUpTitle()
+                UnderlinedTextField(text: $codeInput, codeState, "가입코드")
+                    .font(Font.custom("AppleSDGothicNeo-Regular", size: 20))
+                    .focused($focusField)
+                    .disabled(codeState.isValid)
+                    .onSubmit {
+                        codeState = (codeInput == signUpCode ? .valid : .invalid)
+                    }
+            }
+            .padding(.horizontal)
+            makeMessage(codeState)
+                .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
+                .foregroundColor(codeFieldMessageColor(codeState))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.top, .horizontal])
+            Spacer()
+            NavigationLink(destination: SignUpNicknameView(), isActive: $isActive) {
+            }
+            SignUpButton("다음", !codeState.isValid, focusState: focusField) {
+                isActive.toggle()
             }
             .navigationBarBackButtonHidden(true)
-            .onSubmit {
-                codeState = (codeInput == signUpCode ? .valid : .invalid)
-            }
         }
     }
 
@@ -77,10 +75,12 @@ struct SignUpCodeView: View {
         }
     }
 
-    }
+}
 
 struct SignUpCodeView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpCodeView()
+        NavigationView {
+            SignUpCodeView()
+        }
     }
 }
