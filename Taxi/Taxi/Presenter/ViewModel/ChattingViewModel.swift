@@ -56,6 +56,7 @@ final class ChattingViewModel: ObservableObject {
 
     func removeMessageChangeListener() {
         listenerRegistration?.remove()
+        messages.removeAll()
     }
 
     deinit {

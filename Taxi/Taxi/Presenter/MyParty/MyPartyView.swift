@@ -82,7 +82,7 @@ struct MyPartyList: View {
                     Section(header: MyPartySectionHeader(date: date)) {
                         ForEach(partys[date]!, id: \.id) { party in
                             NavigationLink {
-                                ChatRoomView(party: party)
+                                ChatRoomView(party: party, user: user)
                             } label: {
                                 PartyListCell(party: party)
                             }
