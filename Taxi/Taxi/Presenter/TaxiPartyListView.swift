@@ -203,12 +203,12 @@ struct CellViewList: View {
             MyProgress()
                 .transition(.scale)
         }
-        LazyVStack(spacing: 16) {
-            ForEach(mappingDate(), id: \.self) { date in
+        LazyVStack(spacing: 10) {
+            ForEach(meetingDates, id: \.self) { date in
                 Section(header: SectionHeaderView(date: date).id(date)) {
                     ForEach(partys[date]!, id: \.id) { party in
                         PartyListCell(party: party)
-                            .cellBackground(destinationCode: party.destinationCode)
+                            .cellBackground()
                     }
                 }
             }
@@ -272,7 +272,7 @@ struct SectionHeaderView: View {
     var body: some View {
         Text(Date.convertToKoreanDateFormat(from: date))
             .foregroundColor(.charcoal)
-            .font(Font.custom("AppleSDGothicNeo-SemiBold", size: 18))
+            .font(Font.custom("AppleSDGothicNeo-SemiBold", size: 16))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.leading, .top])
     }
