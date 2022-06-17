@@ -117,28 +117,18 @@ struct UserView: View {
 }
 
 struct CellBackground: ViewModifier {
-    let destinationCode: Int
     func body(content: Content) -> some View {
-        let color = destinationCode == 0 ? Color.cellPink  : Color.cellBlue
         return content
-            .background {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(.white, lineWidth: 1.5)
-                        .shadow(color: Color.black.opacity(0.35), radius: 4, x: 0, y: 1)
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(color)
-                }
-            }
+            .background(.white)
+            .cornerRadius(16)
+            .shadow(color: Color.black.opacity(0.06), radius: 15, x: 1, y: 2)
             .padding(.horizontal)
     }
 }
 
 extension View {
-    func cellBackground(
-        destinationCode: Int
-    ) -> some View {
-        modifier(CellBackground(destinationCode: destinationCode))
+    func cellBackground() -> some View {
+        modifier(CellBackground())
     }
 }
 

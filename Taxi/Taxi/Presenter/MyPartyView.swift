@@ -37,7 +37,7 @@ struct MyPartySectionHeader: View {
     var body: some View {
         Text(Date.convertToKoreanDateFormat(from: date))
             .foregroundColor(.charcoal)
-            .font(Font.custom("AppleSDGothicNeo-SemiBold", size: 18))
+            .font(Font.custom("AppleSDGothicNeo-SemiBold", size: 16))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.leading, .top])
     }
@@ -76,7 +76,7 @@ struct MyPartyList: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 16) {
+            LazyVStack(alignment: .leading, spacing: 10) {
                 ForEach(meetingDates, id: \.self) { date in
                     Section(header: MyPartySectionHeader(date: date)) {
                         ForEach(partys[date]!, id: \.id) { party in
@@ -92,7 +92,7 @@ struct MyPartyList: View {
                                 self.selectedParty = party
                             })
                             .cornerRadius(16)
-                            .cellBackground(destinationCode: party.destinationCode)
+                            .cellBackground()
                         }
                     }
                 }
@@ -194,7 +194,8 @@ struct SwipeDelete: ViewModifier {
                     .offset(x: 95 + swipeState.width)
             }
             content
-                .contentShape(Rectangle())
+                .frame(maxWidth: .infinity)
+                .background(.white)
                 .offset(x: swipeState.width)
                 .highPriorityGesture(swipeAction)
         }
