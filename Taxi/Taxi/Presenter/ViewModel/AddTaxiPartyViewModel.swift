@@ -18,9 +18,9 @@ final class AddTaxiPartyViewModel: ObservableObject {
         self.addTaxiPartyUseCase = addTaxiPartyUseCase
     }
 
-    func addTaxiParty(_ taxiParty: TaxiParty, onSuccess: @escaping (TaxiParty) -> Void = { _ in }, onError: @escaping (Error) -> Void = { _ in }) {
+    func addTaxiParty(_ taxiParty: TaxiParty, user: User, onSuccess: @escaping (TaxiParty) -> Void = { _ in }, onError: @escaping (Error) -> Void = { _ in }) {
         isAdding = true
-        addTaxiPartyUseCase.addTaxiParty(taxiParty)
+        addTaxiPartyUseCase.addTaxiParty(taxiParty, user: user)
             .sink { [weak self] completion in
                 guard let self = self else {
                     return

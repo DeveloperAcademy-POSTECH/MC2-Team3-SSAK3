@@ -38,10 +38,18 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
             .eraseToAnyPublisher()
     }
 
-    func addTaxiParty(_ taxiParty: TaxiParty) -> AnyPublisher<TaxiParty, Error> {
+    func addTaxiParty(_ taxiParty: TaxiParty, user: User) -> AnyPublisher<TaxiParty, Error> {
         fireStore.collection("TaxiParty")
             .document(taxiParty.id)
             .setData(from: taxiParty)
+            .flatMap { [weak self] () -> (AnyPublisher<Void, Error>) in
+                guard let self = self else {
+                    return Fail<Void, Error>(error: FirestoreDecodingError.decodingIsNotSupported(""))
+                        .eraseToAnyPublisher()
+                }
+                let message: Message = Message(id: UUID().uuidString, sender: user.id, body: "\(user.nickname)님이 택시팟에 참가했습니다.", timeStamp: Date().messageTime, typeCode: Message.MessageType.entrance.code)
+                return self.chattingUseCase.sendMessage(message, to: taxiParty)
+            }
             .map {
                 taxiParty
             }
