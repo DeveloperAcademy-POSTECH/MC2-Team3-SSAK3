@@ -51,7 +51,7 @@ struct TaxiPartyListView: View {
         .blur(radius: showInfo ? 10 : 0)
         .animation(.easeOut, value: showInfo)
         .fullScreenCover(isPresented: $showAddTaxiParty, content: {
-            AddTaxiParty()
+            AddTaxiParty(user: authentication.user!)
         })
         .onAppear(perform: {
             reload()

@@ -12,17 +12,23 @@ final class AddTaxiPartyViewModel: ObservableObject {
 
     private var cancelBag: Set<AnyCancellable> = []
     private let addTaxiPartyUseCase: AddTaxiPartyUseCase
+    @Published private (set) var isAdding: Bool = false
 
     init(_ addTaxiPartyUseCase: AddTaxiPartyUseCase = AddTaxiPartyUseCase()) {
         self.addTaxiPartyUseCase = addTaxiPartyUseCase
     }
 
     func addTaxiParty(_ taxiParty: TaxiParty, onSuccess: @escaping (TaxiParty) -> Void = { _ in }, onError: @escaping (Error) -> Void = { _ in }) {
+        isAdding = true
         addTaxiPartyUseCase.addTaxiParty(taxiParty)
-            .sink { completion in
+            .sink { [weak self] completion in
+                guard let self = self else {
+                    return
+                }
                 if case let .failure(error) = completion {
                     onError(error)
                 }
+                self.isAdding = false
             } receiveValue: { taxiParty in
                 onSuccess(taxiParty)
             }.store(in: &cancelBag)
