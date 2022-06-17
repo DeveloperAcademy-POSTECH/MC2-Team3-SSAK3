@@ -9,47 +9,67 @@ import SwiftUI
 
 struct ChatRoomView: View {
     @ObservedObject private var viewModel: ChattingViewModel
-
-    private let user: User = User(id: "2", nickname: "호종이", profileImage: nil)
+    @Environment(\.dismiss) private var dismiss
+    private let user: User
     private let taxiParty: TaxiParty
 
-    init(party: TaxiParty) {
+    init(party: TaxiParty, user: User) {
         self.taxiParty = party
+        self.user = user
         _viewModel = ObservedObject(initialValue: ChattingViewModel(party))
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            header
+                .zIndex(1)
             messageList
+            Spacer()
             Typing(input: $viewModel.input) {
                 viewModel.sendMessage(user.id)
             }
         }
-        .navigationTitle("\(taxiParty.meetingTime / 100):\(taxiParty.meetingTime % 100) \(taxiParty.destincation)")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar(content: toolbar)
+        .background(Color.addBackground)
         .onAppear {
             viewModel.setMessageChangeListener()
         }
         .onDisappear {
             viewModel.removeMessageChangeListener()
         }
+        .navigationBarHidden(true)
     }
 }
-// MARK: - Toolbar 모음
-extension ChatRoomView {
-    @ToolbarContentBuilder
-    private func toolbar() -> some ToolbarContent {
-        ToolbarItem(placement: .primaryAction) {
+// MARK: - 헤더
+private extension ChatRoomView {
+    var header: some View {
+        HStack {
             Button {
-                // TODO: 채팅방 나가기 유즈케이스 연결
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.left")
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .contentShape(Rectangle())
+
+            Text(chattingRoomTitle)
+                .frame(maxWidth: .infinity, alignment: .center)
+
+            Button {
+                // TODO: 나가기 유즈케이스 연결
             } label: {
                 Text("나가기")
                     .foregroundColor(.customRed)
                     .font(.custom("AppleSDGothicNeo-Bold", size: 14))
             }
-
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
+        .background(Color.addBackground.ignoresSafeArea().shadow(radius: 1))
+    }
+
+    var chattingRoomTitle: String {
+        "\(taxiParty.destincation)행 \(taxiParty.meetingTime / 100):\(taxiParty.meetingTime % 100)"
     }
 }
 // MARK: - 메시지 리스트
@@ -78,8 +98,6 @@ private extension ChatRoomView {
                     proxy.scrollTo(message.id, anchor: .bottom)
                 }
             })
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .background(Color.addBackground)
         }
     }
 }
@@ -119,7 +137,6 @@ private extension ChatRoomView {
 
     struct OpponentMessage: View {
         let message: Message
-        // TODO: user 정보만 가져오는 뷰모델 생성 후 연결하기
         @StateObject private var profileViewModel: UserProfileViewModel = UserProfileViewModel()
 
         init(message: Message) {
@@ -240,7 +257,7 @@ struct ChatRoom_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                ChatRoomView(party: TaxiPartyMockData.mockData.first!)
+                ChatRoomView(party: TaxiPartyMockData.mockData.first!, user: User(id: "", nickname: "", profileImage: ""))
             }
         }
     }
