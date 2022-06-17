@@ -11,7 +11,9 @@ final class ChattingUseCase {
     private let chattingRepository: ChattingRepository
     private var cancelBag: Set<AnyCancellable> = []
 
-    init(_ chattingRepository: ChattingRepository = ChattingFirebaseDataSource.shared) {
+    static let shared: ChattingUseCase = ChattingUseCase()
+
+    private init(_ chattingRepository: ChattingRepository = ChattingFirebaseDataSource.shared) {
         self.chattingRepository = chattingRepository
     }
 

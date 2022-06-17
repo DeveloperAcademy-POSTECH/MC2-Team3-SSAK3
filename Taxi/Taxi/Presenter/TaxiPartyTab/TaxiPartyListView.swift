@@ -10,8 +10,8 @@ import SwiftUI
 struct TaxiPartyListView: View {
     @State private var showModal = false
     @State private var renderedDate: Date?
-    @State private var showInfo: Bool = false
-    @StateObject private var taxiPartyListViewModel: TaxiPartyListViewModel = TaxiPartyListViewModel()
+    @State private var showBlur: Bool = false
+    @EnvironmentObject private var listViewModel: ListViewModel
     @EnvironmentObject private var authentication: Authentication
     @State var selectedIndex: Int = 0
     @State private var showAddTaxiParty: Bool = false
@@ -31,7 +31,7 @@ struct TaxiPartyListView: View {
                 Divider()
                 ScrollViewReader { proxy in
                 ScrollView {
-                    CellViewList(selectedIndex: $selectedIndex, showInfo: $showInfo, taxiParties: taxiPartyListViewModel.taxiPartyList)
+                    CellViewList(selectedIndex: $selectedIndex, showBlur: $showBlur, taxiParties: listViewModel.taxiParties)
                 }
                  .onChange(of: renderedDate) { _ in
                     guard let date = renderedDate else { return }
@@ -48,34 +48,32 @@ struct TaxiPartyListView: View {
             }
             CalendarModal(isShowing: $showModal, renderedDate: $renderedDate, taxiPartyList: filterCalender())
         }
-        .blur(radius: showInfo ? 10 : 0)
-        .animation(.easeOut, value: showInfo)
+        .blur(radius: showBlur ? 10 : 0)
+        .animation(.easeOut, value: showBlur)
         .fullScreenCover(isPresented: $showAddTaxiParty, content: {
             AddTaxiParty(user: authentication.user!)
         })
-        .onAppear(perform: {
-            reload()
-        })
         .navigationBarTitleDisplayMode(.inline)
     }
+
     private func reload() {
-        taxiPartyListViewModel.getTaxiParties(id: authentication.user!.id)
+        listViewModel.getTaxiParties()
     }
 
     private func filterCalender() -> [TaxiParty] {
         switch selectedIndex {
         case 0:
-            return taxiPartyListViewModel.taxiPartyList
+            return listViewModel.taxiParties
         case 1:
-            return taxiPartyListViewModel.taxiPartyList.filter({ taxiParty in
+            return listViewModel.taxiParties.filter({ taxiParty in
                 return taxiParty.destinationCode == 1
             })
         case 2:
-        return taxiPartyListViewModel.taxiPartyList.filter({ taxiParty in
+        return listViewModel.taxiParties.filter({ taxiParty in
             return taxiParty.destinationCode == 0
         })
         default:
-            return taxiPartyListViewModel.taxiPartyList
+            return listViewModel.taxiParties
         }
     }
 }
@@ -173,7 +171,7 @@ struct CellViewList: View {
     @Environment(\.refresh) private var refresh
     @State private var isRefreshing = false
     @Binding var selectedIndex: Int
-    @Binding var showInfo: Bool
+    @Binding var showBlur: Bool
 
     let taxiParties: [TaxiParty]
     private var totalParties: [Int: [TaxiParty]] {
@@ -215,7 +213,7 @@ struct CellViewList: View {
             ForEach(mappingDate(), id: \.self) { date in
                 Section(header: SectionHeaderView(date: date).id(date)) {
                     ForEach(mappingParties()[date]!, id: \.id) { party in
-                        Cell(party: party, showInfo: $showInfo)
+                        Cell(party: party, showBlur: $showBlur)
                     }
                 }
             }
@@ -268,15 +266,17 @@ struct CellViewList: View {
 
 struct Cell: View {
     let party: TaxiParty
-    @Binding var showInfo: Bool
+    @State private var showInfoView: Bool = false
+    @Binding var showBlur: Bool
     var body: some View {
         Button {
-            showInfo = true
+            showInfoView = true
+            showBlur = true
         } label: {
             PartyListCell(party: party)
                 .cellBackground()
-                .fullScreenCover(isPresented: $showInfo) {
-                    TaxiPartyInfoView(taxiParty: party)
+                .fullScreenCover(isPresented: $showInfoView) {
+                    TaxiPartyInfoView(taxiParty: party, showBlur: $showBlur)
                 }
         }
     }

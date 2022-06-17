@@ -10,7 +10,8 @@ import SwiftUI
 struct TaxiPartyInfoView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var userViewModel: Authentication
-    @StateObject private var joinTaxiPartyViewModel: JoinTaxiPartyViewModel = JoinTaxiPartyViewModel()
+    @EnvironmentObject private var listViewModel: ListViewModel
+    @Binding private var showBlur: Bool
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 62
     private let remainSeat: Int
@@ -19,13 +20,14 @@ struct TaxiPartyInfoView: View {
     private let meetingHour: String
     private let meetingMinute: String
 
-    init(taxiParty: TaxiParty) {
+    init(taxiParty: TaxiParty, showBlur: Binding<Bool>) {
         self.taxiParty = taxiParty
         self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
         self.meetingMonth = taxiParty.meetingDate / 100 % 100
         self.meetingDay = taxiParty.meetingDate % 100
         self.meetingHour = String(format: "%02d", taxiParty.meetingTime / 100 % 100)
         self.meetingMinute = String(format: "%02d", taxiParty.meetingTime % 100)
+        self._showBlur = showBlur
     }
 
     var body: some View {
@@ -62,6 +64,7 @@ private extension TaxiPartyInfoView {
     var dismissButton: some View {
         HStack {
             Button {
+                showBlur = false
                 dismiss()
             } label: {
                 Image(systemName: "xmark")
@@ -152,7 +155,9 @@ private extension TaxiPartyInfoView {
     var roundedButton: some View {
         Button {
             if let user = userViewModel.user {
-                joinTaxiPartyViewModel.joinTaxiParty(in: taxiParty, user)
+                listViewModel.joinTaxiParty(in: taxiParty, user) {
+                    showBlur = false
+                }
             }
             // TODO: Move to chatroom
         } label: {
@@ -214,7 +219,7 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
             maxPersonNumber: 2,
             members: ["123456"],
             isClosed: false
-        ))
+        ), showBlur: .constant(false))
         .environmentObject(Authentication())
     }
 }

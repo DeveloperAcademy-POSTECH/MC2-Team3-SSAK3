@@ -8,17 +8,11 @@
 import SwiftUI
 
 struct MyPartyView: View {
-    @ObservedObject private var myPartyViewModel: MyPartyViewModel
-    @EnvironmentObject private var userViewModel: Authentication
-
-    init(_ viewModel: MyPartyViewModel) {
-        self._myPartyViewModel = ObservedObject(initialValue: viewModel)
-    }
 
     var body: some View {
         VStack {
             MyPartyTitle()
-            MyPartyList(user: userViewModel.user!, myPartyViewModel: myPartyViewModel)
+            MyPartyList()
         }
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -45,14 +39,14 @@ struct MyPartySectionHeader: View {
 }
 
 struct MyPartyList: View {
-    let user: User
-    @ObservedObject var myPartyViewModel: MyPartyViewModel
+    @EnvironmentObject private var listViewModel: ListViewModel
+    @EnvironmentObject private var authentication: Authentication
     @State private var isSwiped: Bool = false
     @State private var showAlert: Bool = false
     @State private var selectedParty: TaxiParty?
 
     private var partys: [Int: [TaxiParty]] {
-        Dictionary.init(grouping: myPartyViewModel.myPartyList, by: {$0.meetingDate})
+        Dictionary.init(grouping: listViewModel.myParties, by: {$0.meetingDate})
     }
     private var meetingDates: [Int] {
         partys.map({$0.key}).sorted()
@@ -82,7 +76,7 @@ struct MyPartyList: View {
                     Section(header: MyPartySectionHeader(date: date)) {
                         ForEach(partys[date]!, id: \.id) { party in
                             NavigationLink {
-                                ChatRoomView(party: party, user: user)
+                                ChatRoomView(party: party, user: authentication.user!)
                             } label: {
                                 PartyListCell(party: party)
                             }
@@ -114,7 +108,7 @@ struct MyPartyList: View {
 
     private func delete(object: TaxiParty?) {
         guard let party = object else { return }
-        myPartyViewModel.leaveMyParty(user: user, party: party)
+        listViewModel.leaveMyParty(party: party, user: authentication.user!)
     }
 }
 
@@ -238,8 +232,9 @@ struct EmptyPartyView: View {
 struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MyPartyView(MyPartyViewModel(User(id: "", nickname: "", profileImage: "")))
+            MyPartyView()
                 .environmentObject(Authentication())
+                .environmentObject(ListViewModel(userId: ""))
         }
     }
 }

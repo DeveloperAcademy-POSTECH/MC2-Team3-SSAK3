@@ -15,16 +15,16 @@ final class MyTaxiPartyUseCase {
         self.myTaxiPartyRepository = myTaxiPartyRepository
     }
 
-    func getMyTaxiParty(_ user: User, force load: Bool = false) -> AnyPublisher<[TaxiParty], Error> {
-        return myTaxiPartyRepository.getMyTaxiParty(of: user, force: load)
+    func getMyTaxiParty(_ userId: String, force load: Bool = false) -> AnyPublisher<[TaxiParty], Error> {
+        return myTaxiPartyRepository.getMyTaxiParty(of: userId, force: load)
     }
 
     func leaveTaxiParty(_ taxiParty: TaxiParty, user: User) -> AnyPublisher<Void, Error> {
         return myTaxiPartyRepository.leaveTaxiParty(taxiParty, user: user)
     }
 
-    func getMyTaxiParty(_ user: User, force load: Bool = false, completion: @escaping ([TaxiParty]?, Error?) -> Void) {
-        myTaxiPartyRepository.getMyTaxiParty(of: user, force: load)
+    func getMyTaxiParty(_ userId: String, force load: Bool = false, completion: @escaping ([TaxiParty]?, Error?) -> Void) {
+        myTaxiPartyRepository.getMyTaxiParty(of: userId, force: load)
             .sink { result in
                 if case let .failure(error) = result {
                     completion(nil, error)

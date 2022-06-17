@@ -15,7 +15,7 @@ final class ChattingViewModel: ObservableObject {
     @Published var input: String = ""
     private let fireStore: Firestore = .firestore()
     private let taxiParty: TaxiParty
-    private let chattingUseCase: ChattingUseCase = ChattingUseCase()
+    private let chattingUseCase: ChattingUseCase = ChattingUseCase.shared
     private var listenerRegistration: ListenerRegistration?
     let updateEvent: PassthroughSubject<Bool, Never> = PassthroughSubject()
 

@@ -14,26 +14,40 @@ import FirebaseFirestoreCombineSwift
 final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
 
     private let fireStore: Firestore = .firestore()
-    private let chattingUseCase: ChattingUseCase = ChattingUseCase()
+    private let chattingUseCase: ChattingUseCase = ChattingUseCase.shared
     static let shared: TaxiPartyRepository = TaxiPartyFirebaseDataSource()
 
     private init() {}
 
     func getTaxiParty(exclude id: String?, force load: Bool) -> AnyPublisher<[TaxiParty], Error> {
-        fireStore.collection("TaxiParty")
-            .whereField("isClosed", isEqualTo: false)
+        let date = Date()
+        let day = date.formattedInt!
+
+        return fireStore.collection("TaxiParty")
+            .whereField("meetingDate", isGreaterThanOrEqualTo: day)
             .getDocuments(source: load ? .server: .cache)
             .map(\.documents)
             .tryMap { documents -> [TaxiParty] in
                 var ret: [TaxiParty] = []
                 for document in documents {
                     let taxiParty: TaxiParty = try document.data(as: TaxiParty.self)
-                    if taxiParty.id != id {
+                    if !taxiParty.members.contains(id ?? "") {
                         ret.append(taxiParty)
                     }
                 }
                 return ret
             }
+            .map({ taxiParties in
+                taxiParties.sorted { firstParty, secondParty in
+                    if firstParty.meetingDate < secondParty.meetingDate {
+                        return true
+                    } else if firstParty.meetingDate == secondParty.meetingDate {
+                        return firstParty.meetingTime < secondParty.meetingTime
+                    } else {
+                        return false
+                    }
+                }
+            })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

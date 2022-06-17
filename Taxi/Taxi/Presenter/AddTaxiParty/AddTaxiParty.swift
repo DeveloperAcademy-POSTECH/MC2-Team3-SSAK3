@@ -27,7 +27,7 @@ struct AddTaxiParty: View {
     @State private var startMinute: Int? // 출발 분
     @State private var departure: Place? // 출발 장소
     @State private var maxNumber: Int? // 정원
-    @StateObject private var viewModel: AddTaxiPartyViewModel = AddTaxiPartyViewModel()
+    @EnvironmentObject private var viewModel: ListViewModel
 
     let user: User
 
@@ -376,5 +376,6 @@ private extension AddTaxiParty {
 struct AddTaxiParty_Previews: PreviewProvider {
     static var previews: some View {
         AddTaxiParty(user: User(id: "하이", nickname: "하이", profileImage: ""))
+            .environmentObject(ListViewModel(userId: ""))
     }
 }

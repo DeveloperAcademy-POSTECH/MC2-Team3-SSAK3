@@ -14,12 +14,12 @@ enum Tab {
 }
 struct MainView: View {
     @State private var currentTab: Tab = .taxiParty
-    @StateObject private var myPartyViewModel: MyPartyViewModel
+    @StateObject private var viewModel: ListViewModel
     private let user: User
 
     init(_ user: User) {
         self.user = user
-        self._myPartyViewModel = StateObject(wrappedValue: MyPartyViewModel(user))
+        self._viewModel = StateObject(wrappedValue: ListViewModel(userId: user.id))
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
@@ -37,7 +37,7 @@ struct MainView: View {
                         }
                     }
                     .tag(Tab.taxiParty)
-                MyPartyView(myPartyViewModel)
+                MyPartyView()
                     .tabItem {
                         if currentTab == .myParty {
                             Label("마이팟", image: ImageName.tabMyPartyOn)
@@ -57,6 +57,7 @@ struct MainView: View {
                     .tag(Tab.setting)
             }
         }
+        .environmentObject(viewModel)
     }
 }
 
