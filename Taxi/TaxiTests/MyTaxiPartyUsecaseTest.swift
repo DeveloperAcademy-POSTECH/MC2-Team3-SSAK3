@@ -17,7 +17,7 @@ class MyTaxiPartyUsecaseTest: XCTestCase {
         var error: Error?
         let user: User = User(id: "1", nickname: "호종이", profileImage: nil)
         // when
-        myTaxiPartyUsecase.getMyTaxiParty(user) { taxiParties, err in
+        myTaxiPartyUsecase.getMyTaxiParty(user.id) { taxiParties, err in
             error = err
             if let taxiParties = taxiParties {
                 print(taxiParties)

@@ -60,7 +60,7 @@ class UserRepositoryTest: XCTestCase {
 
         // when
         userRepository
-            .getUser("1")
+            .getUser("1", force: true)
             .sink { _ in
                 promise.fulfill()
             } receiveValue: {

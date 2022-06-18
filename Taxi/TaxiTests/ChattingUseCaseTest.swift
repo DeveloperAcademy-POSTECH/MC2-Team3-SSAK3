@@ -10,7 +10,7 @@ import XCTest
 
 class ChattingUseCaseTest: XCTestCase {
 
-    private let chattingUseCase: ChattingUseCase = ChattingUseCase()
+    private let chattingUseCase: ChattingUseCase = ChattingUseCase.shared
 
     func testSendChattingCompletionHandler() {
         // given
