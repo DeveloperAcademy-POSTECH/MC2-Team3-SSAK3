@@ -33,8 +33,12 @@ final class UserFirebaseDataSource: UserRepository {
         let docRef = fireStore.collection("User").document(id)
         return Future<User, Error> { promise in
             docRef.getDocument(source: load ? .server: .cache) { result, error in
-                guard let user = try? result?.data(as: User.self), error == nil else {
-                    promise(Result.failure(error!))
+                guard let user = try? result?.data(as: User.self) else {
+                    if let error = error {
+                        promise(Result.failure(error))
+                    } else {
+                        promise(Result.failure(FirebaseError.unknownError))
+                    }
                     return
                 }
                 promise(Result.success(user))

@@ -79,7 +79,7 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
             "taxiPartyId": taxiParty.id,
             "userId": user.id
         ])
-        .flatMap { [weak self] (result) -> (AnyPublisher<Void, Error>) in
+        .flatMap { [weak self] (_) -> (AnyPublisher<Void, Error>) in
             guard let self = self else {
                 return Fail<Void, Error>(error: FirestoreDecodingError.decodingIsNotSupported(""))
                     .eraseToAnyPublisher()
