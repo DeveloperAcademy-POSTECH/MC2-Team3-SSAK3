@@ -30,16 +30,16 @@ struct TaxiPartyListView: View {
                 .padding(.horizontal)
                 Divider()
                 ScrollViewReader { proxy in
-                ScrollView {
-                    CellViewList(selectedIndex: $selectedIndex, showBlur: $showBlur, taxiParties: listViewModel.taxiParties)
-                }
-                 .onChange(of: renderedDate) { _ in
-                    guard let date = renderedDate else { return }
-                     withAnimation {
-                         proxy.scrollTo(date.formattedInt, anchor: .top)
-                     }
-                    renderedDate = nil
-                }
+                    ScrollView {
+                        CellViewList(selectedIndex: $selectedIndex, showBlur: $showBlur, taxiParties: listViewModel.taxiParties)
+                    }
+                    .onChange(of: renderedDate) { _ in
+                        guard let date = renderedDate else { return }
+                        withAnimation {
+                            proxy.scrollTo(date.formattedInt, anchor: .top)
+                        }
+                        renderedDate = nil
+                    }
                 }
                 .refreshable {
                     reload()

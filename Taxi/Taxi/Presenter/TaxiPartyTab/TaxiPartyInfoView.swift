@@ -11,6 +11,7 @@ struct TaxiPartyInfoView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var userViewModel: Authentication
     @EnvironmentObject private var listViewModel: ListViewModel
+    @EnvironmentObject private var appState: AppState
     @Binding private var showBlur: Bool
     @State private var isLoading: Bool = false
     let taxiParty: TaxiParty
@@ -158,8 +159,13 @@ private extension TaxiPartyInfoView {
             isLoading = true
             if let user = userViewModel.user {
                 listViewModel.joinTaxiParty(in: taxiParty, user) {
-                    showBlur = false
+//                    showBlur = false
                 }
+            }
+            showBlur = false
+            dismiss()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                appState.showChattingRoom(taxiParty)
             }
             // TODO: Move to chatroom
         } label: {
