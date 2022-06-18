@@ -70,6 +70,7 @@
 		37F698852855FB910008C022 /* MyPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F698842855FB910008C022 /* MyPartyView.swift */; };
 		50305A27285C4BEB00C10C82 /* TranparentBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50305A26285C4BEB00C10C82 /* TranparentBackground.swift */; };
 		50305A2B285DA54900C10C82 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50305A2A285DA54900C10C82 /* AppState.swift */; };
+		50305A2D285DB20D00C10C82 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50305A2C285DB20D00C10C82 /* UINavigationControllerExtension.swift */; };
 		50459E2F28542E4E00287371 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459E2E28542E4E00287371 /* PhotoPicker.swift */; };
 		50459E332854701C00287371 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459E322854701C00287371 /* ImageExtension.swift */; };
 		50459E35285490CC00287371 /* TaxiPartyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459E34285490CC00287371 /* TaxiPartyInfoView.swift */; };
@@ -174,6 +175,7 @@
 		37F698842855FB910008C022 /* MyPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPartyView.swift; sourceTree = "<group>"; };
 		50305A26285C4BEB00C10C82 /* TranparentBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranparentBackground.swift; sourceTree = "<group>"; };
 		50305A2A285DA54900C10C82 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		50305A2C285DB20D00C10C82 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		50459E2E28542E4E00287371 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		50459E322854701C00287371 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		50459E34285490CC00287371 /* TaxiPartyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyInfoView.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				50459E322854701C00287371 /* ImageExtension.swift */,
 				E63C7AA12858B5520080530B /* DateExtension.swift */,
 				E6E0E06E285A15B1001BAF6F /* StringExtension.swift */,
+				50305A2C285DB20D00C10C82 /* UINavigationControllerExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				00A5705A2851826A008B220E /* ColorExtension.swift in Sources */,
 				50305A27285C4BEB00C10C82 /* TranparentBackground.swift in Sources */,
 				E63C7AA22858B5520080530B /* DateExtension.swift in Sources */,
+				50305A2D285DB20D00C10C82 /* UINavigationControllerExtension.swift in Sources */,
 				000E545C285321E70085C39E /* GetTaxiPartyUseCase.swift in Sources */,
 				000C24F72859CB440054D679 /* ChattingUseCase.swift in Sources */,
 			);
