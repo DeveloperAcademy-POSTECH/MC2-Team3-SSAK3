@@ -63,6 +63,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(User(id: "", nickname: "", profileImage: ""))
+        MainView(User(id: "1234", nickname: "", profileImage: ""))
+            .environmentObject(Authentication())
     }
 }

@@ -13,11 +13,11 @@ final class Authentication: ObservableObject {
     private let authenticateUseCase: AuthenticateUseCase = AuthenticateUseCase()
 
     init() {
-        login(UIDevice.current.identifierForVendor!.uuidString)
+        login(UIDevice.current.identifierForVendor!.uuidString, force: true)
     }
 
-    func login(_ id: String) {
-        authenticateUseCase.login(id) { user, error in
+    func login(_ id: String, force load: Bool = false) {
+        authenticateUseCase.login(id, force: load) { user, error in
             guard let user = user, error == nil else { return }
             self.user = user
         }

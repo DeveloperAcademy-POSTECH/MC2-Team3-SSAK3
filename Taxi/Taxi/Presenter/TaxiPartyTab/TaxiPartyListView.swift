@@ -57,7 +57,7 @@ struct TaxiPartyListView: View {
     }
 
     private func reload() {
-        listViewModel.getTaxiParties()
+        listViewModel.getTaxiParties(force: true)
     }
 
     private func filterCalender() -> [TaxiParty] {

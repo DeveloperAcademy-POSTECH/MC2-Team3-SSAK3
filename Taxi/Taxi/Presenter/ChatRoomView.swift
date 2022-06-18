@@ -10,6 +10,7 @@ import SwiftUI
 struct ChatRoomView: View {
     @ObservedObject private var viewModel: ChattingViewModel
     @Environment(\.dismiss) private var dismiss
+    @FocusState private var focusState: Bool
     private let user: User
     private let taxiParty: TaxiParty
 
@@ -25,9 +26,12 @@ struct ChatRoomView: View {
                 .zIndex(1)
             messageList
             Spacer()
-            Typing(input: $viewModel.input) {
+            Typing(input: $viewModel.input, focusState: _focusState) {
                 viewModel.sendMessage(user.id)
             }
+        }
+        .onTapGesture {
+            focusState = false
         }
         .background(Color.addBackground)
         .onAppear {
@@ -184,9 +188,12 @@ struct Typing: View {
 
     @Binding private var input: String
     @State private var textEditorHeight: CGFloat = 0
+    @FocusState private var focusState: Bool
     private let sendMessage: () -> Void
-    init(input: Binding<String>, sendMessage: @escaping () -> Void) {
+
+    init(input: Binding<String>, focusState: FocusState<Bool>, sendMessage: @escaping () -> Void) {
         self._input = input
+        self._focusState = focusState
         self.sendMessage = sendMessage
         UITextView.appearance().backgroundColor = .clear
     }
@@ -210,6 +217,7 @@ struct Typing: View {
                     .frame(maxHeight: textEditorHeight)
                     .padding(.vertical, 5)
                     .mask(Color.lightGray)
+                    .focused($focusState)
             }
             .onPreferenceChange(ViewHeightKey.self) { textEditorHeight = $0 }
             .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 35))
