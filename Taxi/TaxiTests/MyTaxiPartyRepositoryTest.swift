@@ -28,7 +28,7 @@ class MyTaxiPartyRepositoryTest: XCTestCase {
         var error: Error?
         let promise = expectation(description: "Get My Taxi Party Success!")
         // when
-        myTaxiPartyRepository.getMyTaxiParty(of: User(id: "테스트 아이디1", nickname: "테스트 아이디1", profileImage: nil), force: true)
+        myTaxiPartyRepository.getMyTaxiParty(of: "테스트 아이디", force: true)
             .sink { completion in
                 switch completion {
                 case .failure(let err):
