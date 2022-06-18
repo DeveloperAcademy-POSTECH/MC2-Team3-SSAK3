@@ -158,16 +158,16 @@ private extension TaxiPartyInfoView {
         Button {
             isLoading = true
             if let user = userViewModel.user {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    showBlur = false
+                }
                 listViewModel.joinTaxiParty(in: taxiParty, user) {
-//                    showBlur = false
+                    dismiss()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                        appState.showChattingRoom(taxiParty)
+                    }
                 }
             }
-            showBlur = false
-            dismiss()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                appState.showChattingRoom(taxiParty)
-            }
-            // TODO: Move to chatroom
         } label: {
             if loading.wrappedValue {
                 ProgressView()
@@ -205,11 +205,10 @@ struct PartyMemberInfo: View {
                 Text(user.nickname)
                     .foregroundColor(.white)
             } else {
-                HStack(spacing: 20) {
-                    Circle().foregroundColor(.lightGray).frame(width: diameter, height: diameter)
-                    Rectangle().foregroundColor(.lightGray).frame(width: 80, height: 20)
-                    Spacer()
-                }
+                Circle()
+                    .stroke(.white)
+                    .frame(width: diameter, height: diameter)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             Spacer()
         }
