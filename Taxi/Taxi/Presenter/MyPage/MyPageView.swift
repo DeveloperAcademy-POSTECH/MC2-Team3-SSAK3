@@ -50,7 +50,6 @@ private extension MyPageView {
                     .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
             } else {
                 Circle().foregroundColor(.lightGray).frame(width: 46, height: 46)
-                Rectangle().foregroundColor(.lightGray).frame(width: 60, height: 20)
             }
             Spacer()
             Button {
