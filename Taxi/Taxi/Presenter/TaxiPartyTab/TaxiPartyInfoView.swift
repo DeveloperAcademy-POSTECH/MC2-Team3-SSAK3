@@ -12,6 +12,7 @@ struct TaxiPartyInfoView: View {
     @EnvironmentObject private var userViewModel: Authentication
     @EnvironmentObject private var listViewModel: ListViewModel
     @Binding private var showBlur: Bool
+    @State private var isLoading: Bool = false
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 62
     private let remainSeat: Int
@@ -49,7 +50,7 @@ struct TaxiPartyInfoView: View {
                     taxiPartyTime
                 }
                 taxiPartyPlace
-                roundedButton
+                roundedButton("시작하기", loading: $isLoading)
             }
             .padding()
         }
@@ -152,8 +153,9 @@ private extension TaxiPartyInfoView {
         .foregroundColor(.customGray)
     }
 
-    var roundedButton: some View {
+    func roundedButton(_ text: String, loading: Binding<Bool>) -> some View {
         Button {
+            isLoading = true
             if let user = userViewModel.user {
                 listViewModel.joinTaxiParty(in: taxiParty, user) {
                     showBlur = false
@@ -161,14 +163,20 @@ private extension TaxiPartyInfoView {
             }
             // TODO: Move to chatroom
         } label: {
-            Text("시작하기")
-                .font(.system(size: 18))
-                .fontWeight(.semibold)
-                .padding(.vertical, 18)
-                .frame(maxWidth: .infinity)
-                .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
-                .padding(.top)
+            if loading.wrappedValue {
+                ProgressView()
+            } else {
+                Text(text)
+                    .font(.system(size: 18))
+                    .fontWeight(.semibold)
+            }
         }
+        .padding(.vertical, 18)
+        .frame(maxWidth: .infinity)
+        .background(RoundedRectangle(cornerRadius: 15).fill(Color.customYellow))
+        .padding(.top)
+        .disabled(loading.wrappedValue)
+        .buttonStyle(.plain)
     }
 }
 
