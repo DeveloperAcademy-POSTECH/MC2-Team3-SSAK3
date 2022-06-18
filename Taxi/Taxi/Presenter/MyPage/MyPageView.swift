@@ -17,7 +17,7 @@ struct MyPageView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            navigationBar
+            title
             profile
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
@@ -34,16 +34,11 @@ struct MyPageView: View {
 }
 
 private extension MyPageView {
-    
-    var navigationBar: some View {
-        Rectangle()
-            .foregroundColor(.white)
-            .frame(height: 60)
-            .overlay(alignment: .bottomLeading) {
-                Text("설정")
-                    .mainTitle()
-                    .padding(.leading)
-            }
+
+    var title: some View {
+        Text("설정")
+            .font(.custom("AppleSDGothicNeo-Bold", size: 25))
+            .padding(.leading)
     }
 
     var profile: some View {
