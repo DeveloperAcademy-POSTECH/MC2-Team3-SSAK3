@@ -5,14 +5,14 @@
 //  Created by 이윤영 on 2022/06/13.
 //
 
-import SwiftUI
 import Combine
 import Introspect
+import SwiftUI
 
 struct ChatRoomView: View {
     @EnvironmentObject private var listViewModel: ListViewModel
     @ObservedObject private var viewModel: ChattingViewModel
-    @ObservedObject var keyboard = KeyboardResponder()
+    @ObservedObject private var keyboard = KeyboardResponder()
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusState: Bool
     @State private var showAlert: Bool = false
