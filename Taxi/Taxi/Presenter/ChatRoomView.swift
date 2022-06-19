@@ -33,13 +33,13 @@ struct ChatRoomView: View {
             header
             messageList
                 .onTapGesture {
-                    focusState = false
-                    if let scrollView = scrollView {
+                    if let scrollView = scrollView, focusState == true {
                         scrollView.setContentOffset(
                             CGPoint(x: 0, y: max(scrollView.contentOffset.y - keyboardHeight + typingSize, 0)),
                             animated: true
                         )
                     }
+                    focusState = false
                 }
             Typing(input: $viewModel.input, focusState: _focusState) {
                 viewModel.sendMessage(user.id)
