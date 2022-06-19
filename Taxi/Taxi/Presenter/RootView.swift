@@ -14,7 +14,6 @@ struct RootView: View {
         if let user = authentication.user {
             MainView(user)
         } else {
-            // TODO: skipOnBoarding에 따른 처리
             OnboardingView()
         }
     }
