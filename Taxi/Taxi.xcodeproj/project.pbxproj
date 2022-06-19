@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0007A742285C069900B7EF1F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007A741285C069900B7EF1F /* RootView.swift */; };
 		0007A749285CA71600B7EF1F /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007A748285CA71600B7EF1F /* ListViewModel.swift */; };
+		0009F7F3285F561C0058007B /* UserInMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0009F7F2285F561C0058007B /* UserInMemoryCache.swift */; };
 		000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AE1D0284C922500AF59BE /* UserRepository.swift */; };
 		000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */; };
 		000C24F72859CB440054D679 /* ChattingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000C24F62859CB440054D679 /* ChattingUseCase.swift */; };
@@ -122,6 +123,7 @@
 /* Begin PBXFileReference section */
 		0007A741285C069900B7EF1F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		0007A748285CA71600B7EF1F /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		0009F7F2285F561C0058007B /* UserInMemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInMemoryCache.swift; sourceTree = "<group>"; };
 		000AE1D0284C922500AF59BE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingFirebaseDataSource.swift; sourceTree = "<group>"; };
 		000C24F62859CB440054D679 /* ChattingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingUseCase.swift; sourceTree = "<group>"; };
@@ -281,6 +283,14 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		0009F7F1285F56110058007B /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				0009F7F2285F561C0058007B /* UserInMemoryCache.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		000AE1CD284C8FE700AF59BE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +356,7 @@
 		000D83242840E23800BA3DFA /* Taxi */ = {
 			isa = PBXGroup;
 			children = (
+				0009F7F1285F56110058007B /* Utility */,
 				004A833C28470DCC00E07EA0 /* Info.plist */,
 				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
 				00F85695284492BC008E2E2F /* Extension */,
@@ -739,6 +750,7 @@
 				000E545E2853622D0085C39E /* AuthenticateUseCase.swift in Sources */,
 				E63C7AA02858B5170080530B /* DayContainer.swift in Sources */,
 				A87934CC2859FC5400FDCDBA /* OnboardFirstPage.swift in Sources */,
+				0009F7F3285F561C0058007B /* UserInMemoryCache.swift in Sources */,
 				00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */,
 				00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */,
 				E63C7AB42858C2650080530B /* UnderlinedTextField.swift in Sources */,
