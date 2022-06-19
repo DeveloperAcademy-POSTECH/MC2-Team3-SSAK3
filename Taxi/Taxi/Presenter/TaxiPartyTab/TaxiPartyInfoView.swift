@@ -158,12 +158,12 @@ private extension TaxiPartyInfoView {
         Button {
             isLoading = true
             if let user = userViewModel.user {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    showBlur = false
-                }
                 listViewModel.joinTaxiParty(in: taxiParty, user) {
-                    dismiss()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    showBlur = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        dismiss()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                         appState.showChattingRoom(taxiParty)
                     }
                 }
