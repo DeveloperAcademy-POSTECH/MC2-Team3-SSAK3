@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ChatRoomView: View {
+    @EnvironmentObject private var listViewModel: ListViewModel
     @ObservedObject private var viewModel: ChattingViewModel
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusState: Bool
+    @State private var showAlert: Bool = false
     private let user: User
     private let taxiParty: TaxiParty
 
@@ -60,7 +62,7 @@ private extension ChatRoomView {
                 .frame(maxWidth: .infinity, alignment: .center)
 
             Button {
-                // TODO: 나가기 유즈케이스 연결
+                showAlert.toggle()
             } label: {
                 Text("나가기")
                     .foregroundColor(.customRed)
@@ -70,6 +72,15 @@ private extension ChatRoomView {
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .background(Color.addBackground.ignoresSafeArea().shadow(radius: 1))
+        .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
+            Button("나가기", role: .destructive) {
+                dismiss()
+                listViewModel.leaveMyParty(party: taxiParty, user: user)
+            }
+            Button("취소", role: .cancel) {}
+        } message: {
+            Text("지금 나가면 채팅 데이터는 사라져요")
+        }
     }
 
     var chattingRoomTitle: String {
@@ -79,7 +90,7 @@ private extension ChatRoomView {
 // MARK: - 메시지 리스트
 private extension ChatRoomView {
     var messageList: some View {
-        ScrollViewReader { proxy in 
+        ScrollViewReader { proxy in
             ScrollView(.vertical, showsIndicators: true) {
                 LazyVStack(spacing: 20) {
                     ForEach(viewModel.messages, id: \.id) { message in
