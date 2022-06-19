@@ -35,9 +35,11 @@ struct ChatRoomView: View {
                 .padding(.top, headerSize)
                 .padding(.bottom, focusState == true ? 0 : typingSize)
                 .frame(height: messageHeight)
+                .onTapGesture {
+                    focusState = false
+                }
             VStack {
                 header
-                    .zIndex(1)
                     .readSize { size in
                         headerSize = size.height
                     }
@@ -49,9 +51,6 @@ struct ChatRoomView: View {
                     typingSize = size.height
                 }
             }
-        }
-        .onTapGesture {
-            focusState = false
         }
         .background(Color.addBackground)
         .onAppear {
