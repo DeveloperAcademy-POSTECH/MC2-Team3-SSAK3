@@ -15,13 +15,12 @@ enum Tab {
 struct MainView: View {
     @State private var currentTab: Tab = .taxiParty
     @StateObject private var viewModel: ListViewModel
-    @StateObject private var appState: AppState
+    @StateObject private var appState: AppState = AppState()
     private let user: User
 
     init(_ user: User) {
         self.user = user
         self._viewModel = StateObject(wrappedValue: ListViewModel(userId: user.id))
-        self._appState = StateObject(wrappedValue: AppState())
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
