@@ -77,6 +77,8 @@
 		50459E35285490CC00287371 /* TaxiPartyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50459E34285490CC00287371 /* TaxiPartyInfoView.swift */; };
 		50595595285037AE001DA44C /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50595594285037AE001DA44C /* MyPageView.swift */; };
 		505955972850BF46001DA44C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505955962850BF46001DA44C /* ProfileView.swift */; };
+		508A874D285ED63800998595 /* PublisherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508A874C285ED63800998595 /* PublisherExtension.swift */; };
+		508A874F285EDC7D00998595 /* SizeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508A874E285EDC7D00998595 /* SizeReader.swift */; };
 		508AE80F285A6E5500D111D3 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508AE80E285A6E5500D111D3 /* UserProfileViewModel.swift */; };
 		50DA19632856065200DEC46E /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DA19622856065200DEC46E /* ProfileImage.swift */; };
 		50F3D18B28537B110004B5CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */; };
@@ -183,6 +185,8 @@
 		50459E34285490CC00287371 /* TaxiPartyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyInfoView.swift; sourceTree = "<group>"; };
 		50595594285037AE001DA44C /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		505955962850BF46001DA44C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		508A874C285ED63800998595 /* PublisherExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherExtension.swift; sourceTree = "<group>"; };
+		508A874E285EDC7D00998595 /* SizeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeReader.swift; sourceTree = "<group>"; };
 		508AE80E285A6E5500D111D3 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		50DA19622856065200DEC46E /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		50F8003A28586F9200FA1063 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
@@ -414,6 +418,7 @@
 				E63C7AB32858C2650080530B /* UnderlinedTextField.swift */,
 				E6C93732285AD52600464D37 /* SignUpButton.swift */,
 				50305A26285C4BEB00C10C82 /* TranparentBackground.swift */,
+				508A874E285EDC7D00998595 /* SizeReader.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 				E63C7AA12858B5520080530B /* DateExtension.swift */,
 				E6E0E06E285A15B1001BAF6F /* StringExtension.swift */,
 				50305A2C285DB20D00C10C82 /* UINavigationControllerExtension.swift */,
+				508A874C285ED63800998595 /* PublisherExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -726,6 +732,7 @@
 				E6C93733285AD52600464D37 /* SignUpButton.swift in Sources */,
 				AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */,
 				000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */,
+				508A874D285ED63800998595 /* PublisherExtension.swift in Sources */,
 				37F698852855FB910008C022 /* MyPartyView.swift in Sources */,
 				00A570662851EA33008B220E /* MainView.swift in Sources */,
 				50595595285037AE001DA44C /* MyPageView.swift in Sources */,
@@ -738,6 +745,7 @@
 				A8BD8115285A3543003D744B /* Onboarding.swift in Sources */,
 				000E545E2853622D0085C39E /* AuthenticateUseCase.swift in Sources */,
 				E63C7AA02858B5170080530B /* DayContainer.swift in Sources */,
+				508A874F285EDC7D00998595 /* SizeReader.swift in Sources */,
 				A87934CC2859FC5400FDCDBA /* OnboardFirstPage.swift in Sources */,
 				00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */,
 				00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */,

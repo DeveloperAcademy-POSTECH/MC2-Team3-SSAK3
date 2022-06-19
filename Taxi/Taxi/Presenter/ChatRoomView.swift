@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ChatRoomView: View {
     @EnvironmentObject private var listViewModel: ListViewModel
@@ -13,8 +14,14 @@ struct ChatRoomView: View {
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusState: Bool
     @State private var showAlert: Bool = false
+    @State private var keyboardHeight: CGFloat = 0
+    @State private var headerSize: CGFloat = 0
+    @State private var typingSize: CGFloat = 0
     private let user: User
     private let taxiParty: TaxiParty
+    private var messageHeight: CGFloat {
+        UIScreen.main.bounds.height - headerSize - typingSize - keyboardHeight
+    }
 
     init(party: TaxiParty, user: User) {
         self.taxiParty = party
@@ -23,13 +30,24 @@ struct ChatRoomView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            header
-                .zIndex(1)
+        ZStack(alignment: .top) {
             messageList
-            Spacer()
-            Typing(input: $viewModel.input, focusState: _focusState) {
-                viewModel.sendMessage(user.id)
+                .padding(.top, headerSize)
+                .padding(.bottom, focusState == true ? 0 : typingSize)
+                .frame(height: messageHeight)
+            VStack {
+                header
+                    .zIndex(1)
+                    .readSize { size in
+                        headerSize = size.height
+                    }
+                Spacer()
+                Typing(input: $viewModel.input, focusState: _focusState) {
+                    viewModel.sendMessage(user.id)
+                }
+                .readSize { size in
+                    typingSize = size.height
+                }
             }
         }
         .onTapGesture {
@@ -41,6 +59,9 @@ struct ChatRoomView: View {
         }
         .onDisappear {
             viewModel.removeMessageChangeListener()
+        }
+        .onReceive(Publishers.keyboardHeight) {
+            self.keyboardHeight = $0
         }
         .navigationBarHidden(true)
     }
