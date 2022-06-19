@@ -132,6 +132,7 @@ private extension ChatRoomView {
                         }
                     }
                 }
+                .padding(.vertical)
             }
             .onReceive(viewModel.updateEvent, perform: { force in
                 guard let message = viewModel.messages.last else {
@@ -195,14 +196,16 @@ private extension ChatRoomView {
                     Text(profileViewModel.user?.nickname ?? "알 수 없음")
                         .font(.custom("AppleSDGothicNeo-Regular", size: 14))
                         .foregroundColor(.charcoal)
-                    Text(message.body)
-                        .chatStyle()
-                        .padding(8)
-                        .background(RoundedCorner(radius: 10, corners: [.topRight, .bottomLeft, .bottomRight]).fill(Color.white))
+                    HStack(alignment: .bottom) {
+                        Text(message.body)
+                            .chatStyle()
+                            .padding(8)
+                            .background(RoundedCorner(radius: 10, corners: [.topRight, .bottomLeft, .bottomRight]).fill(Color.white))
+                        Text(Date.convertMessageTimeToReadable(from: message.timeStamp))
+                            .font(.custom("AppleSDGothicNeo-Light", size: 8))
+                            .foregroundColor(.darkGray)
+                    }
                 }
-                Text(Date.convertMessageTimeToReadable(from: message.timeStamp))
-                    .font(.custom("AppleSDGothicNeo-Light", size: 8))
-                    .foregroundColor(.darkGray)
                 Spacer()
             }
             .padding(.horizontal)
