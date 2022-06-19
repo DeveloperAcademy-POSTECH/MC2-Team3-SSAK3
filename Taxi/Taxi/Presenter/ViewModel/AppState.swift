@@ -10,8 +10,8 @@ import SwiftUI
 final class AppState: ObservableObject {
     @Published var tab: Tab = .taxiParty
     @Published var showChattingRoom: Bool = false
-    var currentTaxiParty: TaxiParty? = nil
-    
+    var currentTaxiParty: TaxiParty?
+
     func showChattingRoom(_ taxiParty: TaxiParty) {
         tab = .myParty
         currentTaxiParty = taxiParty

@@ -36,9 +36,9 @@ struct OnboardingView: View {
                         }
                     }
                 }
-                NavigationLink(isActive: $skipOnboarding, destination: {
+                NavigationLink(isActive: $skipOnboarding) {
                     SignUpCodeView()
-                }) {
+                } label: {
                     EmptyView()
                 }
             }
