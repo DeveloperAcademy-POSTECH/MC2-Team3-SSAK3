@@ -10,7 +10,7 @@ import SwiftUI
 struct CalendarModal: View {
     @Binding var isShowing: Bool
     @Binding var renderedDate: Date?
-    @State var uiTabarController: UITabBarController?
+    @State private var uiTabarController: UITabBarController?
     @State private var storeDate: Date?
     @State private var toastIsShowing = false
     @State private var isPresented = false
@@ -25,6 +25,7 @@ struct CalendarModal: View {
                     .ignoresSafeArea()
                     .onTapGesture {
                         uiTabarController?.tabBar.isHidden = false
+                        storeDate = nil
                         toastIsShowing = false
                         withAnimation(.easeInOut) {
                             isShowing = false
@@ -42,13 +43,13 @@ struct CalendarModal: View {
         .ignoresSafeArea()
         .introspectTabBarController { (UITabBarController) in
             if isShowing {
-                    UITabBarController.tabBar.isHidden = true
-                    uiTabarController = UITabBarController
+                UITabBarController.tabBar.isHidden = true
+                uiTabarController = UITabBarController
             }
-                }
-        .onDisappear{
-                    uiTabarController?.tabBar.isHidden = false
-                }
+        }
+        .onDisappear {
+            uiTabarController?.tabBar.isHidden = false
+        }
     }
 
     var mainView: some View {
@@ -83,6 +84,7 @@ struct CalendarModal: View {
             Button {
                 uiTabarController?.tabBar.isHidden = false
                 toastIsShowing = false
+                storeDate = nil
                 withAnimation {
                     isShowing.toggle()
                 }
