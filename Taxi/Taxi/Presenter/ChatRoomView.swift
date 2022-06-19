@@ -100,14 +100,14 @@ private extension ChatRoomView {
             }
         }
         .background(Color.addBackground.ignoresSafeArea().shadow(radius: 1))
-        .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
+        .alert("택시팟을 나가시겠어요?", isPresented: $showAlert) {
             Button("나가기", role: .destructive) {
                 dismiss()
                 listViewModel.leaveMyParty(party: taxiParty, user: user)
             }
             Button("취소", role: .cancel) {}
         } message: {
-            Text("지금 나가면 채팅 데이터는 사라져요")
+            Text("나가기를 하면 대화내용이 모두 삭제되고\n마이팟 목록에서도 삭제돼요.")
         }
     }
 
