@@ -10,6 +10,7 @@ import SwiftUI
 struct CalendarModal: View {
     @Binding var isShowing: Bool
     @Binding var renderedDate: Date?
+    @State var uiTabarController: UITabBarController?
     @State private var storeDate: Date?
     @State private var toastIsShowing = false
     @State private var isPresented = false
@@ -23,6 +24,8 @@ struct CalendarModal: View {
                     .opacity(0.3)
                     .ignoresSafeArea()
                     .onTapGesture {
+                        uiTabarController?.tabBar.isHidden = false
+                        toastIsShowing = false
                         withAnimation(.easeInOut) {
                             isShowing = false
                         }
@@ -37,6 +40,15 @@ struct CalendarModal: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .ignoresSafeArea()
+        .introspectTabBarController { (UITabBarController) in
+            if isShowing {
+                    UITabBarController.tabBar.isHidden = true
+                    uiTabarController = UITabBarController
+            }
+                }
+        .onDisappear{
+                    uiTabarController?.tabBar.isHidden = false
+                }
     }
 
     var mainView: some View {
@@ -60,10 +72,8 @@ struct CalendarModal: View {
         .padding()
         .frame(maxWidth: .infinity)
         .background(
-            ZStack {
-                Rectangle()
-                    .cornerRadius(10)
-            }
+            Rectangle()
+                .cornerRadius(10)
                 .foregroundColor(.background)
         )
     }
@@ -71,6 +81,8 @@ struct CalendarModal: View {
     var sheetHeader: some View {
         HStack {
             Button {
+                uiTabarController?.tabBar.isHidden = false
+                toastIsShowing = false
                 withAnimation {
                     isShowing.toggle()
                 }
@@ -81,6 +93,7 @@ struct CalendarModal: View {
             Text("날짜를 선택해주세요")
             Spacer()
             Button {
+                uiTabarController?.tabBar.isHidden = false
                 withAnimation {
                     isShowing.toggle()
                 }
@@ -106,6 +119,6 @@ struct CalendarModal: View {
 
 struct CalendarModalView_Previews: PreviewProvider {
     static var previews: some View {
-        TaxiPartyListView()
+        CalendarModal(isShowing: .constant(true), renderedDate: .constant(Date()), taxiPartyList: [])
     }
 }
