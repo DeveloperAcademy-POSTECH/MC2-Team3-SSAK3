@@ -17,6 +17,7 @@ final class UserFirebaseDataSource: UserRepository {
 
     private let fireStore: Firestore = .firestore()
     private let storage: Storage = Storage.storage()
+    private let cache: UserInMemoryCache = UserInMemoryCache.shared
     static let shared: UserRepository = UserFirebaseDataSource()
 
     private init() {}
@@ -30,22 +31,36 @@ final class UserFirebaseDataSource: UserRepository {
     }
 
     func getUser(_ id: String, force load: Bool) -> AnyPublisher<User, Error> {
-        let docRef = fireStore.collection("User").document(id)
-        return Future<User, Error> { promise in
-            docRef.getDocument(source: load ? .server: .cache) { result, error in
-                guard let user = try? result?.data(as: User.self) else {
-                    if let error = error {
-                        promise(Result.failure(error))
-                    } else {
-                        promise(Result.failure(FirebaseError.unknownError))
+        func returnPublisher() -> AnyPublisher<User, Error> {
+            let docRef = fireStore.collection("User").document(id)
+            return Future<User, Error> { promise in
+                docRef.getDocument { [weak self] result, error in
+                    guard let user = try? result?.data(as: User.self), let self = self else {
+                        if let error = error {
+                            promise(Result.failure(error))
+                        } else {
+                            promise(Result.failure(FirebaseError.unknownError))
+                        }
+                        return
                     }
-                    return
+                    self.cache.saveUser(user)
+                    promise(Result.success(user))
                 }
-                promise(Result.success(user))
             }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
         }
-        .receive(on: DispatchQueue.main)
-        .eraseToAnyPublisher()
+        // 서버에서 유저를 불러와야할 때
+        if load {
+            return returnPublisher()
+        }
+        // 강제로 서버를 활용할 필요가 없는 경우 가능한 캐시에서 유저를 불러온다.
+        else {
+            guard let user = cache.getUser(id) else {
+                return returnPublisher()
+            }
+            return Just(user).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
     }
 
     func updateProfileImage(_ user: User, _ imageData: Data) -> AnyPublisher<User, Error> {
