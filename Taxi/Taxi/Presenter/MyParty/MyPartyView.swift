@@ -230,15 +230,27 @@ extension View {
     }
 }
 
-// TODO: 비어있을 때 보여 줄 뷰 구성
 struct EmptyPartyView: View {
+    let tab: Tab
     var body: some View {
         VStack {
-            Text("현재 참여중인 채팅 방이 없어요")
-            Text("택시팟에서 생성된 팟을 검색하거나 새로 만들 수 있어요")
+            Image("TaxiPartyOff")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 133)
+            if tab == Tab.taxiParty {
+                Text("현재 만들어진 택시팟이 없어요.")
+                Text("+ 를 눌러서 택시팟를 생성해보세요.")
+            } else {
+                Text("현재 참여하고 있는 택시팟이 없어요.")
+            }
+            Spacer()
         }
+        .foregroundColor(.darkGray)
+        .padding(.top, 160)
     }
 }
+
 struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
