@@ -7,21 +7,20 @@
 
 import SwiftUI
 import Combine
+import Introspect
 
 struct ChatRoomView: View {
     @EnvironmentObject private var listViewModel: ListViewModel
     @ObservedObject private var viewModel: ChattingViewModel
+    @ObservedObject var keyboard = KeyboardResponder()
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusState: Bool
     @State private var showAlert: Bool = false
     @State private var keyboardHeight: CGFloat = 0
-    @State private var headerSize: CGFloat = 0
+    @State private var scrollView: UIScrollView?
     @State private var typingSize: CGFloat = 0
     private let user: User
     private let taxiParty: TaxiParty
-    private var messageHeight: CGFloat {
-        UIScreen.main.bounds.height - headerSize - typingSize - keyboardHeight
-    }
 
     init(party: TaxiParty, user: User) {
         self.taxiParty = party
@@ -30,26 +29,23 @@ struct ChatRoomView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .top) {
+        VStack(spacing: 0) {
+            header
             messageList
-                .padding(.top, headerSize)
-                .padding(.bottom, focusState == true ? 0 : typingSize)
-                .frame(height: messageHeight)
                 .onTapGesture {
                     focusState = false
-                }
-            VStack {
-                header
-                    .readSize { size in
-                        headerSize = size.height
+                    if let scrollView = scrollView {
+                        scrollView.setContentOffset(
+                            CGPoint(x: 0, y: max(scrollView.contentOffset.y - keyboardHeight + typingSize, 0)),
+                            animated: true
+                        )
                     }
-                Spacer()
-                Typing(input: $viewModel.input, focusState: _focusState) {
-                    viewModel.sendMessage(user.id)
                 }
-                .readSize { size in
-                    typingSize = size.height
-                }
+            Typing(input: $viewModel.input, focusState: _focusState) {
+                viewModel.sendMessage(user.id)
+            }
+            .readSize { size in
+                typingSize = size.height
             }
         }
         .background(Color.addBackground)
@@ -59,8 +55,16 @@ struct ChatRoomView: View {
         .onDisappear {
             viewModel.removeMessageChangeListener()
         }
-        .onReceive(Publishers.keyboardHeight) {
-            self.keyboardHeight = $0
+        .onReceive(keyboard.$currentHeight) { height in
+            if let scrollView = scrollView {
+                if height > 0 && keyboardHeight == 0 {
+                    scrollView.setContentOffset(
+                        CGPoint(x: 0, y: scrollView.contentOffset.y + height - typingSize),
+                        animated: true
+                    )
+                }
+                keyboardHeight = height
+            }
         }
         .navigationBarHidden(true)
     }
@@ -137,6 +141,9 @@ private extension ChatRoomView {
                     proxy.scrollTo(message.id, anchor: .bottom)
                 }
             })
+            .introspectScrollView {
+                scrollView = $0
+            }
         }
     }
 }
