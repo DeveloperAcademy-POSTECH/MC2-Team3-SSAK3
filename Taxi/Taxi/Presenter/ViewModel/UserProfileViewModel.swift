@@ -12,7 +12,7 @@ final class UserProfileViewModel: ObservableObject {
     private let authenticateUseCase: AuthenticateUseCase = AuthenticateUseCase()
 
     func getUser(_ id: String) {
-        authenticateUseCase.login(id, force: true) { [weak self] user, error in
+        authenticateUseCase.login(id) { [weak self] user, error in
             guard let self = self, error == nil, let user = user else { return }
             self.user = user
         }
