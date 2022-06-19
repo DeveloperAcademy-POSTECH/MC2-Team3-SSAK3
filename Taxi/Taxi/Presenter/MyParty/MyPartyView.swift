@@ -110,13 +110,13 @@ struct MyPartyList: View {
             .animation(.default, value: partys)
             .highPriorityGesture(isSwiped ? cancelSelectDrag : nil) // 스와이프 된 상태일 때 취소 드래그 활성화
             .simultaneousGesture(isSwiped ? cancelSelectTap : nil) // 스와이프 된 상태일 때 취소 탭 활성화
-            .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
+            .alert("택시팟을 나가시겠어요?", isPresented: $showAlert) {
                 Button("나가기", role: .destructive) {
                     delete(object: selectedParty!)
                 }
                 Button("취소", role: .cancel) {}
             } message: {
-                Text("지금 나가면 채팅 데이터는 사라져요")
+                Text("나가기를 하면 대화내용이 모두 삭제되고\n마이팟 목록에서도 삭제돼요.")
             }
         }
     }
