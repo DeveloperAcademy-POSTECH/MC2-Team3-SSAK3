@@ -58,9 +58,6 @@ private extension ChatRoomView {
             .padding()
             .contentShape(Rectangle())
 
-            Text(chattingRoomTitle)
-                .frame(maxWidth: .infinity, alignment: .center)
-
             Button {
                 showAlert.toggle()
             } label: {
@@ -70,6 +67,13 @@ private extension ChatRoomView {
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .trailing)
+        }
+        .overlay {
+            HStack {
+                Text(chattingRoomTitle)
+                Text("\(taxiParty.members.count)명")
+                    .foregroundColor(Color.darkGray)
+            }
         }
         .background(Color.addBackground.ignoresSafeArea().shadow(radius: 1))
         .alert("현재 택시팟을 정말 나가시겠어요?", isPresented: $showAlert) {
@@ -84,7 +88,7 @@ private extension ChatRoomView {
     }
 
     var chattingRoomTitle: String {
-        "\(taxiParty.destincation)행 \(taxiParty.meetingTime / 100):\(taxiParty.meetingTime % 100)"
+        "\(String(format: "%02d", taxiParty.meetingTime / 100)):\(String(format: "%02d", taxiParty.meetingTime % 100)) \(taxiParty.destincation)행"
     }
 }
 // MARK: - 메시지 리스트
