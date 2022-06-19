@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct MyPartyView: View {
+    @EnvironmentObject private var listViewModel: ListViewModel
 
     var body: some View {
         VStack {
             MyPartyTitle()
-            MyPartyList()
+            if listViewModel.myParties.count == 0 {
+                EmptyPartyView(tab: Tab.myParty)
+            } else {
+                MyPartyList()
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
     }
