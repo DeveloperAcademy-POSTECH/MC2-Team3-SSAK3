@@ -210,10 +210,14 @@ struct CellViewList: View {
                 .transition(.scale)
         }
         LazyVStack(spacing: 10) {
-            ForEach(mappingDate(), id: \.self) { date in
-                Section(header: SectionHeaderView(date: date).id(date)) {
-                    ForEach(mappingParties()[date]!, id: \.id) { party in
-                        Cell(party: party, showBlur: $showBlur)
+            if mappingDate().count == 0 {
+                EmptyPartyView(tab: Tab.taxiParty)
+            } else {
+                ForEach(mappingDate(), id: \.self) { date in
+                    Section(header: SectionHeaderView(date: date).id(date)) {
+                        ForEach(mappingParties()[date]!, id: \.id) { party in
+                            Cell(party: party, showBlur: $showBlur)
+                        }
                     }
                 }
             }
