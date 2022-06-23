@@ -44,28 +44,30 @@ struct AddTaxiParty: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            closeButton
-            destinationSelect
-            datePicker
-                .offset(y: -1)
-            timePicker
-                .offset(y: -2)
-            departurePicker
-                .offset(y: -3)
-            personNumberPicker
-                .offset(y: -4)
-            Spacer()
-            if checkAllInfoSelected() {
-                guideText
-            }
-            RoundedButton("택시팟 생성", !checkAllInfoSelected(), loading: viewModel.isAdding) {
-                let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: (startHour! * 100) + startMinute!, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
-                viewModel.addTaxiParty(taxiParty, user: user) { taxiParty in
-                    print(taxiParty)
-                    dismiss()
-                } onError: { error in
-                    print(error)
+        ScrollView([]) {
+            VStack(alignment: .leading, spacing: 0) {
+                closeButton
+                destinationSelect
+                datePicker
+                    .offset(y: -1)
+                timePicker
+                    .offset(y: -2)
+                departurePicker
+                    .offset(y: -3)
+                personNumberPicker
+                    .offset(y: -4)
+                Spacer()
+                if checkAllInfoSelected() {
+                    guideText
+                }
+                RoundedButton("택시팟 생성", !checkAllInfoSelected(), loading: viewModel.isAdding) {
+                    let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: (startHour! * 100) + startMinute!, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
+                    viewModel.addTaxiParty(taxiParty, user: user) { taxiParty in
+                        print(taxiParty)
+                        dismiss()
+                    } onError: { error in
+                        print(error)
+                    }
                 }
             }
         }
