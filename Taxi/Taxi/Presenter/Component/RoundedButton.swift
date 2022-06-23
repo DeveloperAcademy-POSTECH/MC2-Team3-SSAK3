@@ -22,20 +22,21 @@ struct RoundedButton: View {
 
     var body: some View {
         Button(action: action) {
-            if loading {
-                ProgressView()
-            } else {
+            ZStack {
                 Text(text)
                     .font(.system(size: 18))
                     .fontWeight(.semibold)
+                    .padding(.vertical, 18)
+                    .frame(maxWidth: .infinity)
+                    .background(background)
+                    .padding(.horizontal)
+                    .foregroundColor(loading ? .clear : .customBlack)
+                if loading {
+                    ProgressView()
+                }
             }
         }
-        .padding(.vertical, 18)
-        .frame(maxWidth: .infinity)
-        .background(background)
-        .padding(.horizontal)
         .disabled(disabled || loading)
-        .opacity(disabled || loading ? 0.6 : 1)
         .buttonStyle(.plain)
     }
 
