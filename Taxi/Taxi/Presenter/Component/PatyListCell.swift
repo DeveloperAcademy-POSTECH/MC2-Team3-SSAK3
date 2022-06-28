@@ -8,6 +8,7 @@ import SwiftUI
 
 struct PartyListCell: View {
     let party: TaxiParty
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             DestinationView(party: party)
@@ -35,6 +36,7 @@ struct DestinationView: View {
             cellHeader(image: "train.side.front.car", color: Color.ktxBlue)
         }
     }
+
     private func cellHeader(image: String, color: Color) -> some View {
         HStack(spacing: 2) {
             Image(systemName: image)
@@ -51,6 +53,7 @@ struct DestinationView: View {
 
 struct MeetTimeView: View {
     let meetingTime: Int
+
     var body: some View {
         VStack {
             Text("\(String(format: "%02d", meetingTime / 100 % 100)):\(String(format: "%02d", meetingTime % 100))")
