@@ -42,7 +42,7 @@ struct TaxiPartyListView: View {
                     }
                 }
                 .refreshable {
-                    reload()
+                    await reload()
                 }
                 .background(Color.background)
             }
@@ -56,8 +56,9 @@ struct TaxiPartyListView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    private func reload() {
+    private func reload() async {
         listViewModel.getTaxiParties(force: true)
+        try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
     }
 
     private func filterCalender() -> [TaxiParty] {
