@@ -46,7 +46,7 @@ struct CalendarModal: View {
                     uiTabarController = UITabBarController
             }
                 }
-        .onDisappear{
+        .onDisappear {
                     uiTabarController?.tabBar.isHidden = false
                 }
     }

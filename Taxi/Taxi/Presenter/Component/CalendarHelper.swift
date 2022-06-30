@@ -14,6 +14,7 @@ class CalendarHelper {
         let current = changeCurrentMonth(currentMonth)
         let components = calendar.dateComponents([.year, .month], from: current)
         let firstDayIndexOfWeek = calendar.component(.weekday, from: calendar.date(from: components) ?? Date())
+        guard let muteDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else { return [] }
         guard let currentMonthDays = current.monthlyDayCount else { return [] }
 
         var thisMonthDates = current.monthDates.map { date -> DayContainer in
@@ -22,7 +23,7 @@ class CalendarHelper {
         }
 
         for _ in 0..<firstDayIndexOfWeek - 1 {
-            thisMonthDates.insert(DayContainer(day: 0, date: Date(), monthType: .unparticipable), at: 0)
+            thisMonthDates.insert(DayContainer(day: 0, date: muteDate, monthType: .unparticipable), at: 0)
         }
         appendOneWeek(firstDayIndexOfWeek, currentMonthDays, &thisMonthDates)
 
@@ -37,10 +38,11 @@ class CalendarHelper {
 
     // 다섯줄의 달력을 여섯줄로 만들기 위해 임의의 데이터를 넣어주는 작업
     func appendOneWeek(_ firstDayOfWeek: Int, _ monthlyDayCount: Int, _ monthDates: inout [DayContainer]) {
+        guard let muteDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else { return }
         let lastDayIndex = firstDayOfWeek - 1 + monthlyDayCount
-        if lastDayIndex < 36 {
-            for _ in 0..<(36 - lastDayIndex) {
-                monthDates.insert(DayContainer(day: 0, date: Date(), monthType: .unparticipable), at: monthDates.endIndex)
+        if lastDayIndex < 42 {
+            for _ in 0..<(42 - lastDayIndex) {
+                monthDates.insert(DayContainer(day: 0, date: muteDate, monthType: .unparticipable), at: monthDates.endIndex)
             }
         }
     }

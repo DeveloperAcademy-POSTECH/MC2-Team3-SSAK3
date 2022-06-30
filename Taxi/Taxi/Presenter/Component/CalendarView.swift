@@ -41,9 +41,7 @@ struct CalendarView: View {
             Spacer()
             HStack(spacing: 40) {
                 Button {
-                    withAnimation {
                         currentMonth -= 1
-                    }
                 } label: {
                     Image(systemName: "chevron.left")
                         .calendarArrow()
@@ -51,9 +49,7 @@ struct CalendarView: View {
                 }
                 .disabled(currentMonth < 1)
                 Button {
-                    withAnimation {
                         currentMonth += 1
-                    }
                 } label: {
                     Image(systemName: "chevron.right")
                         .calendarArrow()
@@ -70,7 +66,7 @@ struct CalendarView: View {
     }
 
     var dayOfWeek: some View {
-        HStack {
+        HStack(spacing: 1) {
             ForEach(days, id: \.self) {day in
                 Text(day)
                     .calendarDay()
@@ -79,35 +75,41 @@ struct CalendarView: View {
         }
     }
 
+    @ViewBuilder
     var datePicker: some View {
-        let column = Array(repeating: GridItem(.flexible()), count: 7)
-
-        return LazyVGrid(columns: column, spacing: 10) {
-            ForEach(calendarHelper.getExactDates(currentMonth)) {data in
-                makeDayCell(data)
-                    .background(
-                        ZStack {
-                            Capsule()
-                                .fill(data.date.isSameDay(selectedDate) ? Color.selectYellow : .clear)
-                                .aspectRatio(2/3, contentMode: .fit)
-                            Capsule()
-                                .strokeBorder(data.date.isSameDay(selectedDate) ? Color.customYellow : todayCapsuleBorder(data.date, borderColor: Color.darkGray))
-                                .aspectRatio(2/3, contentMode: .fit)
-                        }
-                    )
-                    .onTapGesture {
-                        selectedDate = data.date
-                        guard let selectedDate = selectedDate else { return }
-                        guard taxiParties.first(where: {party in
-                            guard let convertedDate = Date.convertToDateFormat(from: party.meetingDate) else { return false }
-                            return data.date.isSameDay(convertedDate)
-                        }) == nil else {
-                            action(true, selectedDate)
-                            return
-                        }
-                        action(false, selectedDate)
+        let days = calendarHelper.getExactDates(currentMonth)
+        VStack(spacing: 1) {
+            ForEach(0..<6) { row in
+                HStack(spacing: 1) {
+                    ForEach(0..<7) { column in
+                        let nowDay = row*7 + column
+                        let data = days[nowDay]
+                            makeDayCell(data)
+                                .background(
+                                    ZStack {
+                                        Capsule()
+                                            .fill(data.date.isSameDay(selectedDate) ? Color.selectYellow : .clear)
+                                            .aspectRatio(2/3, contentMode: .fit)
+                                        Capsule()
+                                            .strokeBorder(data.date.isSameDay(selectedDate) ? Color.customYellow : todayCapsuleBorder(data.date, borderColor: Color.darkGray))
+                                            .aspectRatio(2/3, contentMode: .fit)
+                                    }
+                                )
+                                .onTapGesture {
+                                    selectedDate = data.date
+                                    guard let selectedDate = selectedDate else { return }
+                                    guard taxiParties.first(where: {party in
+                                        guard let convertedDate = Date.convertToDateFormat(from: party.meetingDate) else { return false }
+                                        return data.date.isSameDay(convertedDate)
+                                    }) == nil else {
+                                        action(true, selectedDate)
+                                        return
+                                    }
+                                    action(false, selectedDate)
+                                }
+                                .disabled(data.monthType == .unparticipable)
                     }
-                    .disabled(data.monthType == .unparticipable)
+                }
             }
         }
     }
@@ -140,6 +142,8 @@ struct CalendarView: View {
                         .frame(maxWidth: .infinity)
                         .foregroundColor(value.date.isOutOfMonth ? .customGray : .charcoal)
                 }
+            } else {
+                Color.clear
             }
         }
         .padding(.top, 10)
