@@ -28,6 +28,7 @@ struct CalendarModal: View {
                             uiTabarController?.tabBar.isHidden = false
                         }
                         toastIsShowing = false
+                        storeDate = nil
                         withAnimation(.easeInOut) {
                             isShowing = false
                         }
@@ -93,6 +94,7 @@ struct CalendarModal: View {
                     uiTabarController?.tabBar.isHidden = false
                 }
                 toastIsShowing = false
+                storeDate = nil
                 withAnimation {
                     isShowing.toggle()
                 }
@@ -108,6 +110,7 @@ struct CalendarModal: View {
                     isShowing.toggle()
                 }
                 renderedDate = storeDate
+                storeDate = nil
             } label: {
                 Text("확인")
             }
