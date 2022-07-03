@@ -16,9 +16,9 @@ struct MainView: View {
     @State private var currentTab: Tab = .taxiParty
     @StateObject private var viewModel: ListViewModel
     @StateObject private var appState: AppState = AppState()
-    private let user: User
+    private let user: UserInfo
 
-    init(_ user: User) {
+    init(_ user: UserInfo) {
         self.user = user
         self._viewModel = StateObject(wrappedValue: ListViewModel(userId: user.id))
         let tabBarAppearance = UITabBarAppearance()
@@ -65,7 +65,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(User(id: "1234", nickname: "", profileImage: ""))
+        MainView(UserInfo(id: "1234", nickname: "", profileImage: ""))
             .environmentObject(Authentication())
     }
 }

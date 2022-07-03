@@ -29,7 +29,7 @@ struct AddTaxiParty: View {
     @State private var maxNumber: Int? // 정원
     @EnvironmentObject private var viewModel: ListViewModel
 
-    let user: User
+    let user: UserInfo
 
     private let columns: [GridItem] = [GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200))]
 
@@ -377,7 +377,7 @@ private extension AddTaxiParty {
 // MARK: - 프리뷰
 struct AddTaxiParty_Previews: PreviewProvider {
     static var previews: some View {
-        AddTaxiParty(user: User(id: "하이", nickname: "하이", profileImage: ""))
+        AddTaxiParty(user: UserInfo(id: "하이", nickname: "하이", profileImage: ""))
             .environmentObject(ListViewModel(userId: ""))
     }
 }

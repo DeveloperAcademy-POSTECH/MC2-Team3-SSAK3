@@ -8,7 +8,7 @@
 import Foundation
 
 final class UserProfileViewModel: ObservableObject {
-    @Published private (set) var user: User?
+    @Published private (set) var user: UserInfo?
     private let authenticateUseCase: AuthenticateUseCase = AuthenticateUseCase()
 
     func getUser(_ id: String) {

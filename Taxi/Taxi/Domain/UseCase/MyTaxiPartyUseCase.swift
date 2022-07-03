@@ -19,7 +19,7 @@ final class MyTaxiPartyUseCase {
         return myTaxiPartyRepository.getMyTaxiParty(of: userId, force: load)
     }
 
-    func leaveTaxiParty(_ taxiParty: TaxiParty, user: User) -> AnyPublisher<Void, Error> {
+    func leaveTaxiParty(_ taxiParty: TaxiParty, user: UserInfo) -> AnyPublisher<Void, Error> {
         return myTaxiPartyRepository.leaveTaxiParty(taxiParty, user: user)
     }
 
@@ -34,7 +34,7 @@ final class MyTaxiPartyUseCase {
             }.store(in: &cancelBag)
     }
 
-    func leaveTaxiParty(_ taxiParty: TaxiParty, user: User, completion: @escaping (Error?) -> Void) {
+    func leaveTaxiParty(_ taxiParty: TaxiParty, user: UserInfo, completion: @escaping (Error?) -> Void) {
         myTaxiPartyRepository.leaveTaxiParty(taxiParty, user: user)
             .sink { result in
                 switch result {

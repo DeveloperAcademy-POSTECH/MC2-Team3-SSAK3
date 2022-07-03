@@ -55,7 +55,7 @@ class UserRepositoryTest: XCTestCase {
     /// 회원정보 로딩 함수를 테스트하는 코드
     func testGetUser() {
         // given
-        var user: User?
+        var user: UserInfo?
         let promise = expectation(description: "User should exist")
 
         // when
@@ -79,7 +79,7 @@ class UserRepositoryTest: XCTestCase {
 
         // when
         userRepository
-            .updateNickname(User(id: "0", nickname: "HojongE", profileImage: nil), "haha!!")
+            .updateNickname(UserInfo(id: "0", nickname: "HojongE", profileImage: nil), "haha!!")
             .sink { completion in
                 switch completion {
                 case .failure(let err):
@@ -103,7 +103,7 @@ class UserRepositoryTest: XCTestCase {
 
         // when
         userRepository
-            .updateNickname(User(id: "1", nickname: "호종이", profileImage: nil), "레이몬드")
+            .updateNickname(UserInfo(id: "1", nickname: "호종이", profileImage: nil), "레이몬드")
             .sink { completion in
                 switch completion {
                 case .failure(let err):
@@ -132,7 +132,7 @@ class UserRepositoryTest: XCTestCase {
         }
         // when
         userRepository
-            .updateProfileImage(User(id: "1", nickname: "호종이", profileImage: nil), data)
+            .updateProfileImage(UserInfo(id: "1", nickname: "호종이", profileImage: nil), data)
             .sink { completion in
                 switch completion {
                 case .failure(let err):

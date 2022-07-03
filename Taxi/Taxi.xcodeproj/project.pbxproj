@@ -54,7 +54,7 @@
 		00D3AE74284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */; };
 		00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */; };
 		00D904B52854A64E0003BA5A /* MyTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */; };
-		00E8F1B9284B213C00D68DF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* User.swift */; };
+		00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* UserInfo.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E92498285A152F0026DD73 /* MessageMockData.swift */; };
 		00F6B72728596EEF00DACA06 /* PatyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B72628596EEF00DACA06 /* PatyListCell.swift */; };
@@ -177,7 +177,7 @@
 		00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
 		00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
 		00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyUseCase.swift; sourceTree = "<group>"; };
-		00E8F1B8284B213C00D68DF0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		00E8F1B8284B213C00D68DF0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		00E92498285A152F0026DD73 /* MessageMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMockData.swift; sourceTree = "<group>"; };
 		00F6B72628596EEF00DACA06 /* PatyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatyListCell.swift; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 		000AE1CD284C8FE700AF59BE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				00E8F1B8284B213C00D68DF0 /* User.swift */,
+				00E8F1B8284B213C00D68DF0 /* UserInfo.swift */,
 				00E8F1BA284B21FE00D68DF0 /* Message.swift */,
 				00842A93284B2682000292E5 /* TaxiParty.swift */,
 				00842A95284B287D000292E5 /* Place.swift */,
@@ -758,7 +758,7 @@
 				50595595285037AE001DA44C /* MyPageView.swift in Sources */,
 				00842A96284B287D000292E5 /* Place.swift in Sources */,
 				37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */,
-				00E8F1B9284B213C00D68DF0 /* User.swift in Sources */,
+				00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */,
 				000C24FB2859E74E0054D679 /* ChattingViewModel.swift in Sources */,
 				00BC474128581E860055CB6A /* InfoContainer.swift in Sources */,
 				E6E0E06F285A15B1001BAF6F /* StringExtension.swift in Sources */,

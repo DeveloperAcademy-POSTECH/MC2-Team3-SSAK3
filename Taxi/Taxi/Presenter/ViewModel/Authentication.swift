@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class Authentication: ObservableObject {
-    @Published private (set) var user: User?
+    @Published private (set) var user: UserInfo?
     private let authenticateUseCase: AuthenticateUseCase = AuthenticateUseCase()
 
     init() {

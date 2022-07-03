@@ -19,5 +19,5 @@ protocol MyTaxiPartyRepository {
     /// - Parameter taxiParty: 참가한 택시파티
     /// - Parameter user: 나
     /// - Returns: Error 를 발행하는 Publisher
-    func leaveTaxiParty(_ taxiParty: TaxiParty, user: User) -> AnyPublisher<Void, Error>
+    func leaveTaxiParty(_ taxiParty: TaxiParty, user: UserInfo) -> AnyPublisher<Void, Error>
 }

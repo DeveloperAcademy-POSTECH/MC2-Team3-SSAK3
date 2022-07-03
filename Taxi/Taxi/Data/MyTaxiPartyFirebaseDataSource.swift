@@ -45,7 +45,7 @@ final class MyTaxiPartyFirebaseSource: MyTaxiPartyRepository {
             .eraseToAnyPublisher()
     }
 
-    func leaveTaxiParty(_ taxiParty: TaxiParty, user: User) -> AnyPublisher<Void, Error> {
+    func leaveTaxiParty(_ taxiParty: TaxiParty, user: UserInfo) -> AnyPublisher<Void, Error> {
         fireStore.collection("TaxiParty").document(taxiParty.id)
             .updateData([
                 "members": FieldValue.arrayRemove([user.id])

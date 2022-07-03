@@ -19,10 +19,10 @@ protocol TaxiPartyRepository {
     /// 택시팟을 추가하는 함수
     /// - Parameter taxiParty: 추가할 택시파티
     /// - Returns: TaxiParty 혹은 Error 를 발행하는 Publisher
-    func addTaxiParty(_ taxiParty: TaxiParty, user: User) -> AnyPublisher<TaxiParty, Error>
+    func addTaxiParty(_ taxiParty: TaxiParty, user: UserInfo) -> AnyPublisher<TaxiParty, Error>
 
     /// 택시파티에 참가하는 함수
     /// - Parameter taxiParty: 참가할 택시파티
     /// - Returns: TaxParty 혹은 Error 를 발행하는 Publihser
-    func joinTaxiParty(in taxiParty: TaxiParty, user: User) -> AnyPublisher<TaxiParty, Error>
+    func joinTaxiParty(in taxiParty: TaxiParty, user: UserInfo) -> AnyPublisher<TaxiParty, Error>
 }

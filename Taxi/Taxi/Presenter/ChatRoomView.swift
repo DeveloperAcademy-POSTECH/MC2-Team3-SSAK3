@@ -19,10 +19,10 @@ struct ChatRoomView: View {
     @State private var keyboardHeight: CGFloat = 0
     @State private var scrollView: UIScrollView?
     @State private var typingSize: CGFloat = 0
-    private let user: User
+    private let user: UserInfo
     private let taxiParty: TaxiParty
 
-    init(party: TaxiParty, user: User) {
+    init(party: TaxiParty, user: UserInfo) {
         self.taxiParty = party
         self.user = user
         _viewModel = ObservedObject(initialValue: ChattingViewModel(party))
@@ -310,7 +310,7 @@ struct ChatRoom_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                ChatRoomView(party: TaxiPartyMockData.mockData.first!, user: User(id: "", nickname: "", profileImage: ""))
+                ChatRoomView(party: TaxiPartyMockData.mockData.first!, user: UserInfo(id: "", nickname: "", profileImage: ""))
             }
         }
     }

@@ -55,7 +55,7 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
             .eraseToAnyPublisher()
     }
 
-    func addTaxiParty(_ taxiParty: TaxiParty, user: User) -> AnyPublisher<TaxiParty, Error> {
+    func addTaxiParty(_ taxiParty: TaxiParty, user: UserInfo) -> AnyPublisher<TaxiParty, Error> {
         fireStore.collection("TaxiParty")
             .document(taxiParty.id)
             .setData(from: taxiParty)
@@ -74,7 +74,7 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
             .eraseToAnyPublisher()
     }
 
-    func joinTaxiParty(in taxiParty: TaxiParty, user: User) -> AnyPublisher<TaxiParty, Error> {
+    func joinTaxiParty(in taxiParty: TaxiParty, user: UserInfo) -> AnyPublisher<TaxiParty, Error> {
         return functions.httpsCallable("joinTaxiParty").call([
             "taxiPartyId": taxiParty.id,
             "userId": user.id

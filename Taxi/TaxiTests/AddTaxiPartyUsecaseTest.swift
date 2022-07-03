@@ -15,7 +15,7 @@ class AddTaxiPartyUsecaseTest: XCTestCase {
         // given
         let taxiParty: TaxiParty = TaxiParty(id: "캐쉰캐샤", departureCode: Place.cafebene.toCode(), destinationCode: Place.pohangStation.toCode(), meetingDate: 1, meetingTime: 1, maxPersonNumber: 3, members: ["1"], isClosed: false)
         let promise = expectation(description: "Add Taxi Party Success!")
-        let user: User = User(id: "테스트 유저", nickname: "", profileImage: "")
+        let user: UserInfo = UserInfo(id: "테스트 유저", nickname: "", profileImage: "")
         var error: Error?
         // when
         addTaxiPartyUsecase.addTaxiParty(taxiParty, user: user) { taxiParty, err in

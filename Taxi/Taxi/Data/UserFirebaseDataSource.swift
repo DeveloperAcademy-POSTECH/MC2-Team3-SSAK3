@@ -24,20 +24,20 @@ final class UserFirebaseDataSource: UserRepository {
 
     private init() {}
 
-    func setUser(_ id: String, _ nickname: String) -> AnyPublisher<User, Error> {
-        let user: User = User(id: id, nickname: nickname, profileImage: nil)
+    func setUser(_ id: String, _ nickname: String) -> AnyPublisher<UserInfo, Error> {
+        let user: UserInfo = UserInfo(id: id, nickname: nickname, profileImage: nil)
         return fireStore.collection("User").document(id).setData(from: user)
             .map { user }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 
-    func getUser(_ id: String, force load: Bool) -> AnyPublisher<User, Error> {
-        func returnPublisher() -> AnyPublisher<User, Error> {
+    func getUser(_ id: String, force load: Bool) -> AnyPublisher<UserInfo, Error> {
+        func returnPublisher() -> AnyPublisher<UserInfo, Error> {
             let docRef = fireStore.collection("User").document(id)
-            return Future<User, Error> { promise in
+            return Future<UserInfo, Error> { promise in
                 docRef.getDocument { [weak self] result, error in
-                    guard let user = try? result?.data(as: User.self), let self = self else {
+                    guard let user = try? result?.data(as: UserInfo.self), let self = self else {
                         if let error = error {
                             promise(Result.failure(error))
                         } else {
@@ -65,7 +65,7 @@ final class UserFirebaseDataSource: UserRepository {
         }
     }
 
-    func updateProfileImage(_ user: User, _ imageData: Data) -> AnyPublisher<User, Error> {
+    func updateProfileImage(_ user: UserInfo, _ imageData: Data) -> AnyPublisher<UserInfo, Error> {
 
         let storageRef = storage.reference()
         let ref = storageRef.child("ProfileImage/\(user.id)Profile.jpg")
@@ -101,33 +101,33 @@ final class UserFirebaseDataSource: UserRepository {
             docRef.updateData(["profileImage": downloadUrl])
         }
         .map {
-            User(id: user.id, nickname: user.nickname, profileImage: downloadUrl)
+            UserInfo(id: user.id, nickname: user.nickname, profileImage: downloadUrl)
         }
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
 
-    func updateNickname(_ user: User, _ nickname: String) -> AnyPublisher<User, Error> {
+    func updateNickname(_ user: UserInfo, _ nickname: String) -> AnyPublisher<UserInfo, Error> {
         let docRef = fireStore.collection("User").document(user.id)
 
         return docRef.updateData([
             "nickname": nickname
         ])
         .map { _ in
-            User(id: user.id, nickname: user.nickname, profileImage: user.profileImage)
+            UserInfo(id: user.id, nickname: user.nickname, profileImage: user.profileImage)
         }
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
 
-    func deleteProfileImage(for user: User) -> AnyPublisher<User, Error> {
+    func deleteProfileImage(for user: UserInfo) -> AnyPublisher<UserInfo, Error> {
         let docRef = fireStore.collection("User").document(user.id)
 
         return docRef.updateData([
             "profileImage": FieldValue.delete()
         ])
         .map {
-            User(id: user.id, nickname: user.nickname, profileImage: nil)
+            UserInfo(id: user.id, nickname: user.nickname, profileImage: nil)
         }
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()

@@ -53,7 +53,7 @@ class MyTaxiPartyRepositoryTest: XCTestCase {
         let promise = expectation(description: "Leave Taxi Party Success!")
         // when
         let taxiParty: TaxiParty = TaxiParty(id: "테스트2", departureCode: 0, destinationCode: 1, meetingDate: 12, meetingTime: 12, maxPersonNumber: 4, members: ["테스트 아이디2"], isClosed: false)
-        myTaxiPartyRepository.leaveTaxiParty(taxiParty, user: User(id: "테스트 아이디2", nickname: "", profileImage: nil))
+        myTaxiPartyRepository.leaveTaxiParty(taxiParty, user: UserInfo(id: "테스트 아이디2", nickname: "", profileImage: nil))
             .sink { completion in
                 switch completion {
                 case .failure(let err):

@@ -52,7 +52,7 @@ class AuthenticateUsecaseTest: XCTestCase {
         // given
         let promise = expectation(description: "nickname Update Success!")
         var error: Error?
-        let user: User = User(id: "캐쉰캐샤", nickname: "21 세비지", profileImage: nil)
+        let user: UserInfo = UserInfo(id: "캐쉰캐샤", nickname: "21 세비지", profileImage: nil)
         let updatedNickname: String = "켄드릭 라마"
         // when
         authenticateUsecase.changeNickname(user, to: updatedNickname) { user, err in
@@ -71,7 +71,7 @@ class AuthenticateUsecaseTest: XCTestCase {
         // given
         let promise = expectation(description: "profile Image upload Success!")
         var error: Error?
-        let user: User = User(id: "캐쉰캐샤", nickname: "켄드릭 라마", profileImage: nil)
+        let user: UserInfo = UserInfo(id: "캐쉰캐샤", nickname: "켄드릭 라마", profileImage: nil)
         let bundle: Bundle = Bundle(for: type(of: self))
         guard let data = try? Data(contentsOf: bundle.url(forResource: "1Profile", withExtension: "jpg")!) else {
             XCTFail("data not exist")
@@ -94,7 +94,7 @@ class AuthenticateUsecaseTest: XCTestCase {
         // given
         let promise = expectation(description: "profile Image delete Success!")
         var error: Error?
-        let user: User = User(id: "1", nickname: "켄드릭 라마", profileImage: nil)
+        let user: UserInfo = UserInfo(id: "1", nickname: "켄드릭 라마", profileImage: nil)
 
         // when
         authenticateUsecase.deleteProfileImage(for: user) { user, err in

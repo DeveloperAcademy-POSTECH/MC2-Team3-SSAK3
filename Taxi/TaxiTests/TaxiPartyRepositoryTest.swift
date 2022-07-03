@@ -50,7 +50,7 @@ class TaxiPartyRepositoryTest: XCTestCase {
         // given
         let promise = expectation(description: "Add Taxi Party Success!")
         let taxiParty: TaxiParty = TaxiParty(id: "테스트2", departureCode: 0, destinationCode: 1, meetingDate: 12, meetingTime: 12, maxPersonNumber: 4, members: ["테스트 아이디2"], isClosed: false)
-        let user: User = User(id: "하이", nickname: "", profileImage: "")
+        let user: UserInfo = UserInfo(id: "하이", nickname: "", profileImage: "")
         var error: Error?
         // when
         taxiPartyRepository.addTaxiParty(taxiParty, user: user)
@@ -73,7 +73,7 @@ class TaxiPartyRepositoryTest: XCTestCase {
         // given
         let promise = expectation(description: "Join Taxi Party Success")
         let taxiParty: TaxiParty = TaxiParty(id: "99E12FAF-3899-4131-99CD-4D054DA98289", departureCode: 0, destinationCode: 1, meetingDate: 0, meetingTime: 0, maxPersonNumber: 0, members: ["테스트 아이디"], isClosed: false)
-        let user: User = User(id: "테스트 유저3", nickname: "하이", profileImage: "")
+        let user: UserInfo = UserInfo(id: "테스트 유저3", nickname: "하이", profileImage: "")
         var error: Error?
         // when
         taxiPartyRepository.joinTaxiParty(in: taxiParty, user: user)

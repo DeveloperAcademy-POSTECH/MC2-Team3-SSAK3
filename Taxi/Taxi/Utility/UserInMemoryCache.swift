@@ -9,14 +9,14 @@ import Foundation
 
 final class UserInMemoryCache {
     static let shared: UserInMemoryCache = UserInMemoryCache()
-    private var cache: [String: User] = [:]
+    private var cache: [String: UserInfo] = [:]
     private init() {}
 
-    func getUser(_ id: String) -> User? {
+    func getUser(_ id: String) -> UserInfo? {
         cache[id]
     }
 
-    func saveUser(_ user: User) {
+    func saveUser(_ user: UserInfo) {
         cache[user.id] = user
     }
 }
