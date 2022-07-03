@@ -51,7 +51,7 @@ struct TaxiPartyListView: View {
         .blur(radius: showBlur ? 10 : 0)
         .animation(.easeOut, value: showBlur)
         .fullScreenCover(isPresented: $showAddTaxiParty, content: {
-            AddTaxiParty(user: authentication.user!)
+            AddTaxiParty(user: authentication.userInfo!)
         })
         .navigationBarTitleDisplayMode(.inline)
     }

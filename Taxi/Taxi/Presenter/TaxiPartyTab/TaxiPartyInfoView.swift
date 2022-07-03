@@ -157,7 +157,7 @@ private extension TaxiPartyInfoView {
     func roundedButton(_ text: String, loading: Binding<Bool>) -> some View {
         Button {
             isLoading = true
-            if let user = userViewModel.user {
+            if let user = userViewModel.userInfo {
                 listViewModel.joinTaxiParty(in: taxiParty, user) {
                     showBlur = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

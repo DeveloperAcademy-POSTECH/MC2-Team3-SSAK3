@@ -43,7 +43,7 @@ private extension MyPageView {
 
     var profile: some View {
         HStack(spacing: 13) {
-            if let user = userViewModel.user {
+            if let user = userViewModel.userInfo {
                 ProfileImage(user, diameter: 46)
                 Text(user.nickname)
                     .foregroundColor(.charcoal)

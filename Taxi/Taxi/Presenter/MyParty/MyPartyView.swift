@@ -79,7 +79,7 @@ struct MyPartyList: View {
         ZStack {
             NavigationLink(isActive: $appState.showChattingRoom) {
                 if let taxiParty = appState.currentTaxiParty {
-                    ChatRoomView(party: taxiParty, user: authentication.user!)
+                    ChatRoomView(party: taxiParty, user: authentication.userInfo!)
                 }
             } label: {
                 EmptyView()
@@ -90,7 +90,7 @@ struct MyPartyList: View {
                         Section(header: MyPartySectionHeader(date: date)) {
                             ForEach(partys[date]!, id: \.id) { party in
                                 NavigationLink {
-                                    ChatRoomView(party: party, user: authentication.user!)
+                                    ChatRoomView(party: party, user: authentication.userInfo!)
                                 } label: {
                                     PartyListCell(party: party)
                                 }
@@ -123,7 +123,7 @@ struct MyPartyList: View {
 
     private func delete(object: TaxiParty?) {
         guard let party = object else { return }
-        listViewModel.leaveMyParty(party: party, user: authentication.user!)
+        listViewModel.leaveMyParty(party: party, user: authentication.userInfo!)
     }
 }
 

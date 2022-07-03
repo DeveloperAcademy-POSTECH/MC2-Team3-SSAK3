@@ -39,7 +39,7 @@ struct ProfileView: View {
             photoPicker
         }
         .onAppear {
-            if let user = userViewModel.user {
+            if let user = userViewModel.userInfo {
                 nicknameContainer = user.nickname
                 imageContainer = user.profileImage
             }
@@ -159,7 +159,7 @@ private extension ProfileView {
 
     var applyChangeButton: some View {
         Button {
-            guard let user = userViewModel.user else { return }
+            guard let user = userViewModel.userInfo else { return }
             if nicknameContainer != user.nickname {
                 userViewModel.updateNickname(nicknameContainer)
             }

@@ -12,7 +12,7 @@ struct RootView: View {
 
     var body: some View {
         if let user = authentication.user {
-            MainView(user)
+            MainView(user.uid)
         } else {
             OnboardingView()
         }

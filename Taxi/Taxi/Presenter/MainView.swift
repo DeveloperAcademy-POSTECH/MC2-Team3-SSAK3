@@ -5,6 +5,7 @@
 //  Created by JongHo Park on 2022/06/09.
 //
 
+import FirebaseAuth
 import SwiftUI
 
 enum Tab {
@@ -16,11 +17,9 @@ struct MainView: View {
     @State private var currentTab: Tab = .taxiParty
     @StateObject private var viewModel: ListViewModel
     @StateObject private var appState: AppState = AppState()
-    private let user: UserInfo
 
-    init(_ user: UserInfo) {
-        self.user = user
-        self._viewModel = StateObject(wrappedValue: ListViewModel(userId: user.id))
+    init(_ userId: String) {
+        self._viewModel = StateObject(wrappedValue: ListViewModel(userId: userId))
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
@@ -65,7 +64,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(UserInfo(id: "1234", nickname: "", profileImage: ""))
+        MainView("")
             .environmentObject(Authentication())
     }
 }
