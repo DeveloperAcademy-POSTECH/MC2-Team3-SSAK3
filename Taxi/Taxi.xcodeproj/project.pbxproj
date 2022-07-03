@@ -41,6 +41,7 @@
 		00731A3F285DA169009D8718 /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731A3E285DA169009D8718 /* FirebaseError.swift */; };
 		00842A94284B2682000292E5 /* TaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A93284B2682000292E5 /* TaxiParty.swift */; };
 		00842A96284B287D000292E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A95284B287D000292E5 /* Place.swift */; };
+		009D1D34287124920073D707 /* SendEmailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009D1D33287124920073D707 /* SendEmailUseCase.swift */; };
 		00A5705A2851826A008B220E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570592851826A008B220E /* ColorExtension.swift */; };
 		00A5705C285182E1008B220E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5705B285182E1008B220E /* RoundedButton.swift */; };
 		00A570642851E993008B220E /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570632851E993008B220E /* ImageName.swift */; };
@@ -163,6 +164,7 @@
 		00731A3E285DA169009D8718 /* FirebaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseError.swift; sourceTree = "<group>"; };
 		00842A93284B2682000292E5 /* TaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiParty.swift; sourceTree = "<group>"; };
 		00842A95284B287D000292E5 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		009D1D33287124920073D707 /* SendEmailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmailUseCase.swift; sourceTree = "<group>"; };
 		00A570592851826A008B220E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		00A5705B285182E1008B220E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		00A570632851E993008B220E /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				000E545D2853622D0085C39E /* AuthenticateUseCase.swift */,
 				00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */,
 				000C24F62859CB440054D679 /* ChattingUseCase.swift */,
+				009D1D33287124920073D707 /* SendEmailUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -761,6 +764,7 @@
 				E63C7AA02858B5170080530B /* DayContainer.swift in Sources */,
 				508A874F285EDC7D00998595 /* SizeReader.swift in Sources */,
 				A87934CC2859FC5400FDCDBA /* OnboardFirstPage.swift in Sources */,
+				009D1D34287124920073D707 /* SendEmailUseCase.swift in Sources */,
 				0009F7F3285F561C0058007B /* UserInMemoryCache.swift in Sources */,
 				00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */,
 				00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */,
