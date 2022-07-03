@@ -17,7 +17,7 @@ class AuthenticateUsecaseTest: XCTestCase {
         var error: Error?
         let id: String = "1"
         // when
-        authenticateUsecase.login(id) { user, err in
+        authenticateUsecase.getUserInfo(id) { user, err in
             error = err
             if let user = user {
                 print(user)

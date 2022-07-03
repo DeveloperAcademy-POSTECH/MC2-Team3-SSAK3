@@ -11,7 +11,7 @@ struct RootView: View {
     @EnvironmentObject private var authentication: Authentication
 
     var body: some View {
-        if let user = authentication.user {
+        if let user = authentication.user, authentication.userInfo != nil {
             MainView(user.uid)
         } else {
             OnboardingView()

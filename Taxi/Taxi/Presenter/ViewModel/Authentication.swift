@@ -17,7 +17,9 @@ final class Authentication: ObservableObject {
 
     init() {
         user = Auth.auth().currentUser
-        login(UIDevice.current.identifierForVendor!.uuidString, force: true)
+        if let user = user {
+            getUserInfo(user.uid, force: true)
+        }
     }
 
     private func addUserStateChangeListener() {
@@ -26,12 +28,12 @@ final class Authentication: ObservableObject {
                 return
             }
             self.user = user
-            self.login(user.uid, force: true)
+            self.getUserInfo(user.uid, force: true)
         }
     }
 
-    func login(_ id: String, force load: Bool = false) {
-        authenticateUseCase.login(id, force: load) { user, error in
+    func getUserInfo(_ id: String, force load: Bool = false) {
+        authenticateUseCase.getUserInfo(id, force: load) { user, error in
             guard let user = user, error == nil else { return }
             self.userInfo = user
         }

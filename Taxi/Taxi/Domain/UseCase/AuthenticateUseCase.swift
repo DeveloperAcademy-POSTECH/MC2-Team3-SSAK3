@@ -19,7 +19,7 @@ final class AuthenticateUseCase {
     /// 기기 고유아이디로 로그인 요청 시 해당 User 정보를 반환하는 함수
     /// - Parameter id: 기기 고유아이디
     /// - Returns: User 혹은 Error 를 발행하는 Publisher
-    func login(_ id: String, force load: Bool = false) -> AnyPublisher<UserInfo, Error> {
+    func getUserInfo(_ id: String, force load: Bool = false) -> AnyPublisher<UserInfo, Error> {
         return userRepository.getUser(id, force: load)
     }
 
@@ -50,7 +50,7 @@ final class AuthenticateUseCase {
         return userRepository.setUser(id, nickname)
     }
 
-    func login(_ id: String, force load: Bool = false, completion: @escaping (UserInfo?, Error?) -> Void) {
+    func getUserInfo(_ id: String, force load: Bool = false, completion: @escaping (UserInfo?, Error?) -> Void) {
         userRepository.getUser(id, force: load)
             .sink { result in
                 if case let .failure(error) = result {
