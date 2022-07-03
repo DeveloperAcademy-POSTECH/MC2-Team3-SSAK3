@@ -23,22 +23,30 @@ struct UnderlinedTextField: View {
     private var inputString: Binding<String>
     private let fieldState: FieldState
     private let placeholder: String
+    private let postfixText: String?
 
-    init(text inputString: Binding<String>, _ fieldState: FieldState, _ placeholder: String) {
+    init(text inputString: Binding<String>, _ fieldState: FieldState, _ placeholder: String, postfixText: String? = nil) {
         self.inputString = inputString
         self.fieldState = fieldState
         self.placeholder = placeholder
+        self.postfixText = postfixText
     }
 
     var body: some View {
-        TextField(placeholder, text: inputString)
-            .disableAutocorrection(true)
-            .overlay(
-                Rectangle()
-                    .frame(height: 2)
-                    .foregroundColor(setUnderlineColor(fieldState))
-                    .padding(.top, 40)
-            )
+        HStack {
+            TextField(placeholder, text: inputString)
+                .disableAutocorrection(true)
+            if let postfixText = postfixText {
+                Text(postfixText)
+                    .foregroundColor(.signUpYellowGray)
+            }
+        }
+        .overlay(
+            Rectangle()
+                .frame(height: 2)
+                .foregroundColor(setUnderlineColor(fieldState))
+                .padding(.top, 40)
+        )
     }
 
     // MARK: - func
@@ -56,6 +64,10 @@ struct UnderlinedTextField: View {
 
 struct UnderlinedTextField_Previews: PreviewProvider {
     static var previews: some View {
-        UnderlinedTextField(text: .constant(""), .normal, "placeholder")
+        Group {
+            UnderlinedTextField(text: .constant(""), .normal, "placeholder")
+            UnderlinedTextField(text: .constant("pjh00098"), .valid, "이메일을 입력해주세요.", postfixText: "@pos.idserve.net")
+                .padding()
+        }
     }
 }
