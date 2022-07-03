@@ -8,6 +8,8 @@
 import Combine
 import Foundation
 
+typealias Email = String
+
 protocol UserRepository {
 
     /// 회원가입 시 호출하는 함수
@@ -40,4 +42,10 @@ protocol UserRepository {
     /// - Parameter user: 프로필 이미지를 삭제할 유저
     /// - Returns: User 혹은 Error 를 발행하는 Publisher, 업데이트에 성공하면 User 를, 실패하면 Error 를 반환한다.
     func deleteProfileImage(for user: User) -> AnyPublisher<User, Error>
+
+
+    /// 인증 이메일을 보내는 함수
+    /// - Parameter email: 인증 이메일을 보낼 이메일
+    /// - Returns: 전송 성공 여부
+    func sendSignInEmail(to email: Email) -> AnyPublisher<Void, Error>
 }
