@@ -10,7 +10,7 @@ import SwiftUI
 struct SignUpCodeView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var codeInput = ""
-    @State private var codeState: FieldState = .normal
+    @State private var codeState: FieldState = .normal(message: "최초 인증 및 가입에 활용됩니다")
     @State private var isActive = false
     private let signUpCode = "Popopot"
     @FocusState private var focusField: Bool
@@ -25,7 +25,7 @@ struct SignUpCodeView: View {
                     .focused($focusField)
                     .disabled(codeState.isValid)
                     .onSubmit {
-                        codeState = (codeInput == signUpCode ? .valid : .invalid)
+                        codeState = (codeInput == signUpCode ? .valid(message: "인증 완료되었습니다") : .invalid(message: "올바른 코드를 입력해주세요"))
                     }
             }
             .padding(.horizontal)
@@ -33,7 +33,7 @@ struct SignUpCodeView: View {
                 .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
                 .foregroundColor(codeFieldMessageColor(codeState))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding([.top, .horizontal])
+                .padding(.horizontal)
             Spacer()
             NavigationLink(destination: SignUpNicknameView(), isActive: $isActive) {
             }
@@ -47,19 +47,19 @@ struct SignUpCodeView: View {
     @ViewBuilder
     private func makeMessage( _ fieldText: FieldState) -> some View {
         switch fieldText {
-        case .normal:
+        case let .normal(message):
             HStack {
-                Text("최초 인증 및 가입에 활용됩니다")
+                Text(message)
             }
-        case .invalid:
+        case let .invalid(message):
             HStack {
                 Image(systemName: "x.circle.fill")
-                Text("올바른 코드를 입력해주세요")
+                Text(message)
             }
-        case .valid:
+        case let .valid(message):
             HStack {
                 Image(systemName: "checkmark.circle.fill")
-                Text("인증 완료되었습니다")
+                Text(message)
             }
         }
     }

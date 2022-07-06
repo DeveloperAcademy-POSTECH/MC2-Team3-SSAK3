@@ -8,7 +8,10 @@
 import SwiftUI
 
 enum FieldState {
-    case normal, invalid, valid
+    case normal(message: String)
+    case invalid(message: String)
+    case valid(message: String)
+
     var isValid: Bool {
         switch self {
         case .valid:
@@ -33,24 +36,24 @@ struct UnderlinedTextField: View {
     }
 
     var body: some View {
-        HStack {
-            TextField(placeholder, text: inputString)
-                .disableAutocorrection(true)
-            if let postfixText = postfixText {
-                Text(postfixText)
-                    .foregroundColor(.signUpYellowGray)
+        ZStack {
+            HStack {
+                TextField(placeholder, text: inputString)
+                    .disableAutocorrection(true)
+                if let postfixText = postfixText {
+                    Text(postfixText)
+                        .foregroundColor(.signUpYellowGray)
+                }
             }
-        }
-        .overlay(
             Rectangle()
                 .frame(height: 2)
-                .foregroundColor(setUnderlineColor(fieldState))
+                .foregroundColor(getUnderlineColor(fieldState))
                 .padding(.top, 40)
-        )
+        }
     }
 
     // MARK: - func
-    private func setUnderlineColor(_ state: FieldState) -> Color {
+    private func getUnderlineColor(_ state: FieldState) -> Color {
         switch state {
         case .normal:
             return Color.charcoal
@@ -65,8 +68,9 @@ struct UnderlinedTextField: View {
 struct UnderlinedTextField_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            UnderlinedTextField(text: .constant(""), .normal, "placeholder")
-            UnderlinedTextField(text: .constant("pjh00098"), .valid, "이메일을 입력해주세요.", postfixText: "@pos.idserve.net")
+            UnderlinedTextField(text: .constant(""), .normal(message: "입력"), "placeholder")
+                .padding()
+            UnderlinedTextField(text: .constant("pjh00098"), .valid(message: "입력"), "이메일을 입력해주세요.", postfixText: "@pos.idserve.net")
                 .padding()
         }
     }

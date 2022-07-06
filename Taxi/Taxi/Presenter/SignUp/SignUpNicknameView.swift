@@ -11,7 +11,7 @@ struct SignUpNicknameView: View {
     @EnvironmentObject var userViewModel: Authentication
     @Environment(\.dismiss) private var dismiss
     @State private var nickname = ""
-    @State private var nickFieldState: FieldState = .normal
+    @State private var nickFieldState: FieldState = .normal(message: "아카데미 내에서 사용중인 닉네임을 권장드려요")
     @FocusState private var focusField: Bool
     @AppStorage("isLogined") private var isLogined: Bool = false
     private let deviceUUID = UIDevice.current.identifierForVendor!.uuidString
@@ -30,11 +30,10 @@ struct SignUpNicknameView: View {
                 .font(Font.custom("AppleSDGothicNeo-Regular", size: 14))
                 .foregroundColor(setMessageColor(nickname: nickname))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding([.top, .horizontal])
+                .padding(.horizontal)
             Spacer()
-            SignUpButton("완료", !nickname.isValidNickname.isValid, focusState: focusField) {
+            SignUpButton("완료", !nickname.isInValidNickname, focusState: focusField) {
                 userViewModel.register(id: deviceUUID, nickname: nickname)
-                // TODO: 유저 환영 화면 연결 or pop to root
                 isLogined = true
             }
         }
@@ -43,24 +42,19 @@ struct SignUpNicknameView: View {
 
     @ViewBuilder
     private func makeMessageView(nickname: String) -> some View {
-        switch nickname.isValidNickname {
-        case .normal, .valid:
+        if nickname.isInValidNickname {
+            Text("형식에 맞지 않은 닉네임입니다.")
+        } else {
             VStack(alignment: .leading, spacing: 5) {
                 Text("아카데미 내에서 사용중인 닉네임을 권장드려요")
                 Text("특수문자와 공백을 제외하고 입력해주세요")
             }
-        case .invalid:
-            Text("형식에 맞지 않은 닉네임입니다.")
         }
     }
 
     private func setMessageColor(nickname: String) -> Color {
-        switch nickname.isValidNickname {
-        case .normal, .valid:
-            return Color.signUpYellowGray
-        case .invalid:
-            return Color.customRed
-        }
+
+        return nickname.isInValidNickname ? Color.customRed : Color.signUpYellowGray
     }
 }
 
