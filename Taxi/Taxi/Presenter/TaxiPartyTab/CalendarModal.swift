@@ -24,7 +24,9 @@ struct CalendarModal: View {
                     .opacity(0.3)
                     .ignoresSafeArea()
                     .onTapGesture {
-                        uiTabarController?.tabBar.isHidden = false
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+                            uiTabarController?.tabBar.isHidden = false
+                        }
                         toastIsShowing = false
                         withAnimation(.easeInOut) {
                             isShowing = false
@@ -36,6 +38,7 @@ struct CalendarModal: View {
                     }
                     mainView
                 }
+                .transition(.move(edge: .bottom))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
@@ -65,6 +68,11 @@ struct CalendarModal: View {
                     storeDate = nil
                     withAnimation {
                         toastIsShowing = true
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.8) {
+                            withAnimation {
+                                toastIsShowing = false
+                            }
+                        }
                     }
                 }
             }
@@ -81,7 +89,9 @@ struct CalendarModal: View {
     var sheetHeader: some View {
         HStack {
             Button {
-                uiTabarController?.tabBar.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+                    uiTabarController?.tabBar.isHidden = false
+                }
                 toastIsShowing = false
                 withAnimation {
                     isShowing.toggle()
