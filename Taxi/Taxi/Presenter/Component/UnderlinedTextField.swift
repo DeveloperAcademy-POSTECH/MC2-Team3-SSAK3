@@ -36,22 +36,50 @@ struct UnderlinedTextField: View {
     }
 
     var body: some View {
-        ZStack {
-            HStack {
-                TextField(placeholder, text: inputString)
-                    .disableAutocorrection(true)
-                if let postfixText = postfixText {
-                    Text(postfixText)
-                        .foregroundColor(.signUpYellowGray)
+        VStack(alignment: .leading) {
+            ZStack {
+                HStack {
+                    TextField(placeholder, text: inputString)
+                        .disableAutocorrection(true)
+                    if let postfixText = postfixText {
+                        Text(postfixText)
+                            .foregroundColor(.signUpYellowGray)
+                    }
                 }
+                Rectangle()
+                    .frame(height: 2)
+                    .foregroundColor(getUnderlineColor(fieldState))
+                    .padding(.top, 40)
             }
-            Rectangle()
-                .frame(height: 2)
-                .foregroundColor(getUnderlineColor(fieldState))
-                .padding(.top, 40)
+            makeStateText(fieldState)
         }
     }
-
+    @ViewBuilder
+    private func makeStateText( _ fieldText: FieldState) -> some View {
+        switch fieldText {
+        case let .normal(message):
+            Text(message)
+                .font(.caption)
+                .fontWeight(.regular)
+                .foregroundColor(.darkGray)
+        case let .invalid(message):
+            HStack {
+                Image(systemName: "x.circle.fill")
+                Text(message)
+                    .fontWeight(.regular)
+            }
+            .font(.caption)
+            .foregroundColor(.customRed)
+        case let .valid(message):
+            HStack {
+                Image(systemName: "checkmark.circle.fill")
+                Text(message)
+                    .fontWeight(.regular)
+            }
+            .font(.caption)
+            .foregroundColor(.customGreen)
+        }
+    }
     // MARK: - func
     private func getUnderlineColor(_ state: FieldState) -> Color {
         switch state {
@@ -68,10 +96,11 @@ struct UnderlinedTextField: View {
 struct UnderlinedTextField_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            UnderlinedTextField(text: .constant(""), .normal(message: "입력"), "placeholder")
+            UnderlinedTextField(text: .constant(""), .normal(message: "하하하하하"), "placeholder")
                 .padding()
             UnderlinedTextField(text: .constant("pjh00098"), .valid(message: "입력"), "이메일을 입력해주세요.", postfixText: "@pos.idserve.net")
                 .padding()
         }
+        .previewLayout(.sizeThatFits)
     }
 }
