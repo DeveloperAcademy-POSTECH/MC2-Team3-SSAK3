@@ -58,6 +58,7 @@
 		00E743562878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */; };
 		00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743572878282A00C37B2E /* LoginUseCase.swift */; };
 		00E7435B2878300300C37B2E /* SignInEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435A2878300300C37B2E /* SignInEmail.swift */; };
+		00E7435E28783B7900C37B2E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 00E7435D28783B7900C37B2E /* Lottie */; };
 		00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* UserInfo.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E92498285A152F0026DD73 /* MessageMockData.swift */; };
@@ -236,6 +237,7 @@
 				00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */,
 				00F856A62844A985008E2E2F /* FirebaseFunctions in Frameworks */,
 				00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */,
+				00E7435E28783B7900C37B2E /* Lottie in Frameworks */,
 				00F856AA2844A985008E2E2F /* FirebaseStorage in Frameworks */,
 				00F856A02844A985008E2E2F /* FirebaseFirestore in Frameworks */,
 				00F8569E2844A985008E2E2F /* FirebaseAuthCombine-Community in Frameworks */,
@@ -605,6 +607,7 @@
 				50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */,
 				00F6B72928596F7D00DACA06 /* SegmentedPicker */,
 				508A8751285F13BD00998595 /* Introspect */,
+				00E7435D28783B7900C37B2E /* Lottie */,
 			);
 			productName = Taxi;
 			productReference = 000D83222840E23800BA3DFA /* Taxi.app */;
@@ -683,6 +686,7 @@
 				50F3D18928537B110004B5CE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				00F6B72828596F7D00DACA06 /* XCRemoteSwiftPackageReference "SwiftySegmentedPicker" */,
 				508A8750285F13BC00998595 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				00E7435C28783B7900C37B2E /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 000D83232840E23800BA3DFA /* Products */;
 			projectDirPath = "";
@@ -1167,6 +1171,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		00E7435C28783B7900C37B2E /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		00F6B72828596F7D00DACA06 /* XCRemoteSwiftPackageReference "SwiftySegmentedPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/KazaiMazai/SwiftySegmentedPicker";
@@ -1206,6 +1218,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		00E7435D28783B7900C37B2E /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00E7435C28783B7900C37B2E /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		00F6B72928596F7D00DACA06 /* SegmentedPicker */ = {
 			isa = XCSwiftPackageProductDependency;
