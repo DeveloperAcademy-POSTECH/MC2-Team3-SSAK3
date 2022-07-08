@@ -109,8 +109,6 @@
 		E63C7AA52858B5B50080530B /* TaxiPartyMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AA42858B5B50080530B /* TaxiPartyMockData.swift */; };
 		E63C7AA72858B5DE0080530B /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AA62858B5DE0080530B /* CalendarHelper.swift */; };
 		E63C7AA92858B6130080530B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AA82858B6130080530B /* CalendarView.swift */; };
-		E63C7AB02858C2380080530B /* SignUpCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AAF2858C2380080530B /* SignUpCodeView.swift */; };
-		E63C7AB22858C2520080530B /* SignUpNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AB12858C2520080530B /* SignUpNicknameView.swift */; };
 		E63C7AB42858C2650080530B /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7AB32858C2650080530B /* UnderlinedTextField.swift */; };
 		E6C93733285AD52600464D37 /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C93732285AD52600464D37 /* SignUpButton.swift */; };
 		E6E0E06F285A15B1001BAF6F /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E0E06E285A15B1001BAF6F /* StringExtension.swift */; };
@@ -226,8 +224,6 @@
 		E63C7AA42858B5B50080530B /* TaxiPartyMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyMockData.swift; sourceTree = "<group>"; };
 		E63C7AA62858B5DE0080530B /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		E63C7AA82858B6130080530B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		E63C7AAF2858C2380080530B /* SignUpCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCodeView.swift; sourceTree = "<group>"; };
-		E63C7AB12858C2520080530B /* SignUpNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNicknameView.swift; sourceTree = "<group>"; };
 		E63C7AB32858C2650080530B /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		E6C93732285AD52600464D37 /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		E6E0E06E285A15B1001BAF6F /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -298,15 +294,6 @@
 				37F698842855FB910008C022 /* MyPartyView.swift */,
 			);
 			path = MyParty;
-			sourceTree = "<group>";
-		};
-		0007A747285C072E00B7EF1F /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				E63C7AAF2858C2380080530B /* SignUpCodeView.swift */,
-				E63C7AB12858C2520080530B /* SignUpNicknameView.swift */,
-			);
-			path = SignUp;
 			sourceTree = "<group>";
 		};
 		0009F7F1285F56110058007B /* Utility */ = {
@@ -494,7 +481,6 @@
 			children = (
 				00E7435928782FC500C37B2E /* SignIn */,
 				00A5705628518200008B220E /* Component */,
-				0007A747285C072E00B7EF1F /* SignUp */,
 				0007A746285C071E00B7EF1F /* MyParty */,
 				0007A744285C070400B7EF1F /* MyPage */,
 				0007A743285C06E000B7EF1F /* TaxiPartyTab */,
@@ -769,7 +755,6 @@
 				00BC47472858CAF80055CB6A /* AddTaxiPartyUseCase.swift in Sources */,
 				00F6B7312859C44D00DACA06 /* ChattingRepository.swift in Sources */,
 				000E545A285321250085C39E /* JoinTaxiPartyUseCase.swift in Sources */,
-				E63C7AB22858C2520080530B /* SignUpNicknameView.swift in Sources */,
 				00E7435328781E2E00C37B2E /* AuthenticateAdapter.swift in Sources */,
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				A8C146A9285A525100F6D37F /* OnboardThirdPage.swift in Sources */,
@@ -787,7 +772,6 @@
 				505955972850BF46001DA44C /* ProfileView.swift in Sources */,
 				E63C7AA92858B6130080530B /* CalendarView.swift in Sources */,
 				AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */,
-				E63C7AB02858C2380080530B /* SignUpCodeView.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
 				00E7436028783BC100C37B2E /* SignInWaitDeepLink.swift in Sources */,
 				0007A749285CA71600B7EF1F /* ListViewModel.swift in Sources */,
