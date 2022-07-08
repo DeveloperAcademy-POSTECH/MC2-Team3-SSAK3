@@ -57,6 +57,7 @@
 		00E7435328781E2E00C37B2E /* AuthenticateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */; };
 		00E743562878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */; };
 		00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743572878282A00C37B2E /* LoginUseCase.swift */; };
+		00E7435B2878300300C37B2E /* SignInEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435A2878300300C37B2E /* SignInEmail.swift */; };
 		00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* UserInfo.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E92498285A152F0026DD73 /* MessageMockData.swift */; };
@@ -183,6 +184,7 @@
 		00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateAdapter.swift; sourceTree = "<group>"; };
 		00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticatorAdapter.swift; sourceTree = "<group>"; };
 		00E743572878282A00C37B2E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		00E7435A2878300300C37B2E /* SignInEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmail.swift; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		00E92498285A152F0026DD73 /* MessageMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMockData.swift; sourceTree = "<group>"; };
@@ -468,9 +470,18 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		00E7435928782FC500C37B2E /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				00E7435A2878300300C37B2E /* SignInEmail.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
 		00F856912844927A008E2E2F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				00E7435928782FC500C37B2E /* SignIn */,
 				00A5705628518200008B220E /* Component */,
 				0007A747285C072E00B7EF1F /* SignUp */,
 				0007A746285C071E00B7EF1F /* MyParty */,
@@ -758,6 +769,7 @@
 				E63C7AA72858B5DE0080530B /* CalendarHelper.swift in Sources */,
 				0007A742285C069900B7EF1F /* RootView.swift in Sources */,
 				50DA19632856065200DEC46E /* ProfileImage.swift in Sources */,
+				00E7435B2878300300C37B2E /* SignInEmail.swift in Sources */,
 				505955972850BF46001DA44C /* ProfileView.swift in Sources */,
 				E63C7AA92858B6130080530B /* CalendarView.swift in Sources */,
 				AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */,

@@ -18,6 +18,7 @@ final class Authentication: ObservableObject {
          loginUseCase: LoginUseCase = LoginUseCase()) {
         self.authenticateUseCase = authenticateUseCase
         self.loginUseCase = loginUseCase
+        login(with: "")
     }
 
     func login(with email: Email) {
