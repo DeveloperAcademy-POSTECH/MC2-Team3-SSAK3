@@ -59,6 +59,9 @@
 		00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743572878282A00C37B2E /* LoginUseCase.swift */; };
 		00E7435B2878300300C37B2E /* SignInEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435A2878300300C37B2E /* SignInEmail.swift */; };
 		00E7435E28783B7900C37B2E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 00E7435D28783B7900C37B2E /* Lottie */; };
+		00E7436028783BC100C37B2E /* SignInWaitDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435F28783BC100C37B2E /* SignInWaitDeepLink.swift */; };
+		00E7436228783C5700C37B2E /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 00E7436128783C5700C37B2E /* loadingAnimation.json */; };
+		00E7436428783C6B00C37B2E /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7436328783C6B00C37B2E /* LottieView.swift */; };
 		00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* UserInfo.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E92498285A152F0026DD73 /* MessageMockData.swift */; };
@@ -186,6 +189,9 @@
 		00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticatorAdapter.swift; sourceTree = "<group>"; };
 		00E743572878282A00C37B2E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		00E7435A2878300300C37B2E /* SignInEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmail.swift; sourceTree = "<group>"; };
+		00E7435F28783BC100C37B2E /* SignInWaitDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWaitDeepLink.swift; sourceTree = "<group>"; };
+		00E7436128783C5700C37B2E /* loadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
+		00E7436328783C6B00C37B2E /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		00E92498285A152F0026DD73 /* MessageMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMockData.swift; sourceTree = "<group>"; };
@@ -379,6 +385,7 @@
 		000D83242840E23800BA3DFA /* Taxi */ = {
 			isa = PBXGroup;
 			children = (
+				00E7436128783C5700C37B2E /* loadingAnimation.json */,
 				0009F7F1285F56110058007B /* Utility */,
 				004A833C28470DCC00E07EA0 /* Info.plist */,
 				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
@@ -451,6 +458,7 @@
 				50305A26285C4BEB00C10C82 /* TranparentBackground.swift */,
 				508A874E285EDC7D00998595 /* SizeReader.swift */,
 				508A8753285F168F00998595 /* KeyboardResponser.swift */,
+				00E7436328783C6B00C37B2E /* LottieView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -476,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				00E7435A2878300300C37B2E /* SignInEmail.swift */,
+				00E7435F28783BC100C37B2E /* SignInWaitDeepLink.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -707,6 +716,7 @@
 				003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */,
 				000E83B4284A2D55000CD5AA /* GoogleService-Info.plist in Resources */,
 				000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */,
+				00E7436228783C5700C37B2E /* loadingAnimation.json in Resources */,
 				A8982EC9285B6780000D11D0 /* Launch Screen.storyboard in Resources */,
 				000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */,
 			);
@@ -779,6 +789,7 @@
 				AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */,
 				E63C7AB02858C2380080530B /* SignUpCodeView.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
+				00E7436028783BC100C37B2E /* SignInWaitDeepLink.swift in Sources */,
 				0007A749285CA71600B7EF1F /* ListViewModel.swift in Sources */,
 				508AE80F285A6E5500D111D3 /* UserProfileViewModel.swift in Sources */,
 				00A570642851E993008B220E /* ImageName.swift in Sources */,
@@ -801,6 +812,7 @@
 				A8BD8115285A3543003D744B /* Onboarding.swift in Sources */,
 				000E545E2853622D0085C39E /* AuthenticateUseCase.swift in Sources */,
 				E63C7AA02858B5170080530B /* DayContainer.swift in Sources */,
+				00E7436428783C6B00C37B2E /* LottieView.swift in Sources */,
 				508A874F285EDC7D00998595 /* SizeReader.swift in Sources */,
 				A87934CC2859FC5400FDCDBA /* OnboardFirstPage.swift in Sources */,
 				009D1D34287124920073D707 /* SendEmailUseCase.swift in Sources */,
