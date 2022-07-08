@@ -67,6 +67,7 @@ private extension ProfileView {
     }
 
     var profileImageEditButton: some View {
+        ZStack {
         Button {
             showActionSheet.toggle()
         } label: {
@@ -80,15 +81,23 @@ private extension ProfileView {
                 textProfile(profileSize)
             }
         }
+            Image("profileImage_plus")
+                .resizable()
+                .frame(width: 48, height: 48)
+                .opacity(0.8)
+    }
     }
 
     func textProfile(_ diameter: CGFloat) -> some View {
         ZStack {
-            Circle()
-                .foregroundColor(.selectYellow)
+            Circle().stroke(Color.customGray)
+                .foregroundColor(.white)
                 .frame(width: diameter, height: diameter)
             Text(nicknameContainer.prefix(1))
                 .font(.system(size: diameter/1.5))
+            Image("default_profileImage")
+                .resizable()
+                .frame(width: 60, height: 59)
         }
     }
 
