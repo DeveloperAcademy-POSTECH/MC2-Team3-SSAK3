@@ -5,38 +5,36 @@
 //  Created by 민채호 on 2022/06/14.
 //
 
-import FirebaseAuth
+import Combine
 import Foundation
-import UIKit
 
 final class Authentication: ObservableObject {
-    @Published private (set) var user: User?
     @Published private (set) var userInfo: UserInfo?
-    private let authenticateUseCase: AuthenticateUseCase = AuthenticateUseCase()
-    private var userListener: AuthStateDidChangeListenerHandle?
+    private let authenticateUseCase: AuthenticateUseCase
+    private let loginUseCase: LoginUseCase
+    private var cancelBag: Set<AnyCancellable> = []
 
-    init() {
-        user = Auth.auth().currentUser
-        if let user = user {
-            getUserInfo(user.uid, force: true)
-        }
+    init(authenticateUseCase: AuthenticateUseCase = AuthenticateUseCase(),
+         loginUseCase: LoginUseCase = LoginUseCase()) {
+        self.authenticateUseCase = authenticateUseCase
+        self.loginUseCase = loginUseCase
     }
 
-    private func addUserStateChangeListener() {
-        userListener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
-            guard let self = self, let user = user else {
-                return
-            }
-            self.user = user
-            self.getUserInfo(user.uid, force: true)
-        }
-    }
-
-    func getUserInfo(_ id: String, force load: Bool = false) {
-        authenticateUseCase.getUserInfo(id, force: load) { user, error in
-            guard let user = user, error == nil else { return }
-            self.userInfo = user
-        }
+    func login(with email: Email) {
+        loginUseCase.login(with: email)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    print("finished")
+                }
+            } receiveValue: { [weak self] userInfo in
+                guard let self = self else {
+                    return
+                }
+                self.userInfo = userInfo
+            }.store(in: &cancelBag)
     }
 
     func updateNickname(_ newName: String) {

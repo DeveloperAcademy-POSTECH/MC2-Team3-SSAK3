@@ -54,6 +54,9 @@
 		00D3AE74284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */; };
 		00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */; };
 		00D904B52854A64E0003BA5A /* MyTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */; };
+		00E7435328781E2E00C37B2E /* AuthenticateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */; };
+		00E743562878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */; };
+		00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743572878282A00C37B2E /* LoginUseCase.swift */; };
 		00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* UserInfo.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E92498285A152F0026DD73 /* MessageMockData.swift */; };
@@ -177,6 +180,9 @@
 		00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
 		00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
 		00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyUseCase.swift; sourceTree = "<group>"; };
+		00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateAdapter.swift; sourceTree = "<group>"; };
+		00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticatorAdapter.swift; sourceTree = "<group>"; };
+		00E743572878282A00C37B2E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		00E92498285A152F0026DD73 /* MessageMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMockData.swift; sourceTree = "<group>"; };
@@ -324,6 +330,7 @@
 				00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */,
 				000C24F62859CB440054D679 /* ChattingUseCase.swift */,
 				009D1D33287124920073D707 /* SendEmailUseCase.swift */,
+				00E743572878282A00C37B2E /* LoginUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -335,6 +342,7 @@
 				00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */,
 				00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */,
 				00F6B7302859C44D00DACA06 /* ChattingRepository.swift */,
+				00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -452,6 +460,14 @@
 			path = AddTaxiParty;
 			sourceTree = "<group>";
 		};
+		00E7435428781EC700C37B2E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		00F856912844927A008E2E2F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +489,7 @@
 		00F85692284492A8008E2E2F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				00E7435428781EC700C37B2E /* Service */,
 				000AE1CF284C920B00AF59BE /* Interface */,
 				000AE1CE284C8FF000AF59BE /* UseCase */,
 				000AE1CD284C8FE700AF59BE /* Model */,
@@ -723,10 +740,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E743562878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift in Sources */,
 				00BC47472858CAF80055CB6A /* AddTaxiPartyUseCase.swift in Sources */,
 				00F6B7312859C44D00DACA06 /* ChattingRepository.swift in Sources */,
 				000E545A285321250085C39E /* JoinTaxiPartyUseCase.swift in Sources */,
 				E63C7AB22858C2520080530B /* SignUpNicknameView.swift in Sources */,
+				00E7435328781E2E00C37B2E /* AuthenticateAdapter.swift in Sources */,
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				A8C146A9285A525100F6D37F /* OnboardThirdPage.swift in Sources */,
 				50459E332854701C00287371 /* ImageExtension.swift in Sources */,
@@ -750,6 +769,7 @@
 				A8C146A7285A4A5E00F6D37F /* OnboardSecondPage.swift in Sources */,
 				E63C7AA52858B5B50080530B /* TaxiPartyMockData.swift in Sources */,
 				E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */,
+				00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */,
 				E6C93733285AD52600464D37 /* SignUpButton.swift in Sources */,
 				AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */,
 				000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */,

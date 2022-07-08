@@ -43,7 +43,6 @@ protocol UserRepository {
     /// - Returns: User 혹은 Error 를 발행하는 Publisher, 업데이트에 성공하면 User 를, 실패하면 Error 를 반환한다.
     func deleteProfileImage(for user: UserInfo) -> AnyPublisher<UserInfo, Error>
 
-
     /// 인증 이메일을 보내는 함수
     /// - Parameter email: 인증 이메일을 보낼 이메일
     /// - Returns: 전송 성공 여부
