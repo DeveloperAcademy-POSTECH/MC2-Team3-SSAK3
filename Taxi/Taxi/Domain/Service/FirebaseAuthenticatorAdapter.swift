@@ -50,4 +50,8 @@ final class FirebaseAuthenticatorAdapter: AuthenticateAdapter {
             }
             .eraseToAnyPublisher()
     }
+
+    func register(_ id: String, nickname: String) -> AnyPublisher<UserInfo, Error> {
+        return userRepository.setUser(id, nickname)
+    }
 }
