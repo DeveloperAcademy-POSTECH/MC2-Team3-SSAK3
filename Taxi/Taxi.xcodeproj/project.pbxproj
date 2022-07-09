@@ -50,6 +50,7 @@
 		00BC473F28581E740055CB6A /* AddTaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC473E28581E740055CB6A /* AddTaxiParty.swift */; };
 		00BC474128581E860055CB6A /* InfoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC474028581E860055CB6A /* InfoContainer.swift */; };
 		00BC47472858CAF80055CB6A /* AddTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545728531C510085C39E /* AddTaxiPartyUseCase.swift */; };
+		00C4D09B287907E30019B8C4 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */; };
 		00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */; };
 		00D3AE74284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */; };
 		00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */; };
@@ -179,6 +180,7 @@
 		00A570652851EA33008B220E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		00BC473E28581E740055CB6A /* AddTaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiParty.swift; sourceTree = "<group>"; };
 		00BC474028581E860055CB6A /* InfoContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoContainer.swift; sourceTree = "<group>"; };
+		00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
 		00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepository.swift; sourceTree = "<group>"; };
 		00D3AE73284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
 		00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				000C24F62859CB440054D679 /* ChattingUseCase.swift */,
 				009D1D33287124920073D707 /* SendEmailUseCase.swift */,
 				00E743572878282A00C37B2E /* LoginUseCase.swift */,
+				00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -812,6 +815,7 @@
 				00D904B52854A64E0003BA5A /* MyTaxiPartyUseCase.swift in Sources */,
 				50305A2B285DA54900C10C82 /* AppState.swift in Sources */,
 				00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */,
+				00C4D09B287907E30019B8C4 /* RegisterUseCase.swift in Sources */,
 				00BC473F28581E740055CB6A /* AddTaxiParty.swift in Sources */,
 				A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */,
 				00A5705A2851826A008B220E /* ColorExtension.swift in Sources */,
