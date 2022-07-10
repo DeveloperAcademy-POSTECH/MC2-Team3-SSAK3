@@ -37,11 +37,12 @@ final class UserFirebaseDataSource: UserRepository {
             let docRef = fireStore.collection("User").document(id)
             return Future<UserInfo, Error> { promise in
                 docRef.getDocument { [weak self] result, error in
+                    print(error)
                     guard let user = try? result?.data(as: UserInfo.self), let self = self else {
                         if let error = error {
                             promise(Result.failure(error))
                         } else {
-                            promise(Result.failure(FirebaseError.unknownError))
+                            promise(Result.failure(FirebaseAuthenticateError.needToRegister))
                         }
                         return
                     }

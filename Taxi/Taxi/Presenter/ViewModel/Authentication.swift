@@ -16,7 +16,6 @@ protocol Authenticate {
 
 final class Authentication: ObservableObject {
     @Published private (set) var userInfo: UserInfo?
-    @Published var needToRegister: Bool = false
     private var cancelBag: Set<AnyCancellable> = []
 
     // MARK: - Dependency
@@ -31,6 +30,8 @@ final class Authentication: ObservableObject {
     // MARK: - State Event
     @Published private (set) var isLoginProcessing: Bool = false
     @Published private (set) var isRegisterProcessing: Bool = false
+    @Published var needToRegister: Bool = false
+    @Published var waitingDeepLink: Bool = false
 
     init(authenticateUseCase: DeleteProfileImageUseCase = DeleteProfileImageUseCase(),
          loginUseCase: LoginUseCase = LoginUseCase(),
@@ -84,7 +85,7 @@ extension Authentication: Authenticate {
                 }
                 switch completion {
                 case .failure(let error):
-                    self.needToRegister = self.checkError(error)
+                    print("\(error.localizedDescription)")
                 case .finished:
                     print("finished")
                 }
@@ -97,9 +98,26 @@ extension Authentication: Authenticate {
             }.store(in: &cancelBag)
     }
 
-    // TODO: Error 비교 후 registerNeed 프로퍼티 변경해야함!
+    func checkRegisterHistory() {
+        loginUseCase.login(with: "")
+            .sink { [weak self] completion in
+                guard let self = self else {
+                    return
+                }
+                if case let .failure(error) = completion {
+                    self.needToRegister = self.checkError(error)
+                }
+            } receiveValue: { [weak self] userInfo in
+                self?.userInfo = userInfo
+            }.store(in: &cancelBag)
+    }
+
     private func checkError(_ error: Error) -> Bool {
-        return true
+        if case FirebaseAuthenticateError.needToRegister = error {
+            return true
+        } else {
+            return false
+        }
     }
 
     func register(_ nickname: String) {

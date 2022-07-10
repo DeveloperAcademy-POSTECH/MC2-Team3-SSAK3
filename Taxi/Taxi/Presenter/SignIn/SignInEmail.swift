@@ -12,7 +12,6 @@ struct SignInEmail: View {
     @State private var email: Email = ""
     private let emailPostfix: String = "@pos.idserve.net"
 
-    @State private var goToNext: Bool = false
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("이메일을 입력해주세요")
@@ -26,13 +25,15 @@ struct SignInEmail: View {
 
             Spacer()
 
-            NavigationLink(isActive: $goToNext) {
+            NavigationLink(isActive: $authentication.waitingDeepLink){
                 SignInWaitingDeepLink(email: email + emailPostfix)
             } label: {
                 RoundedButton("인증 메일 보내기") {
-                    goToNext = true
+                    authentication.sendEmail(email + emailPostfix)
+                    authentication.waitingDeepLink = true
                 }
             }
+            .isDetailLink(false)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
