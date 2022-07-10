@@ -41,6 +41,7 @@ struct OnboardingView: View {
                 } label: {
                     EmptyView()
                 }
+                .isDetailLink(false)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: toolbar)

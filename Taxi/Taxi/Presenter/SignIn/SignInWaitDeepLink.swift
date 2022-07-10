@@ -25,17 +25,16 @@ struct SignInWaitingDeepLink: View {
             } label: {
                 EmptyView()
             }
-
+            .isDetailLink(false)
         }
         .onOpenURL { url in
             handleDeepLink(url.absoluteString)
-            authentication.login(with: email)
         }
     }
 
     private func handleDeepLink(_ url: String) {
         UserDefaults.standard.set(url, forKey: "link")
-        authentication.login(with: email)
+        authentication.checkRegisterHistory()
     }
 }
 

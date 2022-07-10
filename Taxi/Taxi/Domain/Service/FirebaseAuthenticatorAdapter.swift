@@ -12,6 +12,7 @@ import FirebaseAuthCombineSwift
 enum FirebaseAuthenticateError: Error {
     case noEmailLink
     case noFirebaseAuth
+    case needToRegister
 }
 
 extension FirebaseAuthenticateError: LocalizedError {
@@ -21,6 +22,8 @@ extension FirebaseAuthenticateError: LocalizedError {
             return "Email Link is not exist"
         case .noFirebaseAuth:
             return "No Firebase Auth"
+        case .needToRegister:
+            return "아직 회원가입을 안한 유저"
         }
     }
 }
