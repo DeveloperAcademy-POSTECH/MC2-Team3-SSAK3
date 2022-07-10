@@ -9,7 +9,7 @@
 import XCTest
 
 class AuthenticateUsecaseTest: XCTestCase {
-    private let authenticateUsecase: AuthenticateUseCase = AuthenticateUseCase()
+    private let authenticateUsecase: DeleteProfileImageUseCase = DeleteProfileImageUseCase()
 
     func testLoginCompletionHandler() {
         // given

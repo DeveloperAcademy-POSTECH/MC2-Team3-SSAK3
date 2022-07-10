@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SignInWaitingDeepLink: View {
+    @ObservedObject var signManager: SignManager
+    @EnvironmentObject private var authentication: Authentication
+
     var body: some View {
         VStack {
             LottieView(filename: "loadingAnimation")
@@ -20,18 +23,19 @@ struct SignInWaitingDeepLink: View {
         }
         .onOpenURL { url in
             handleDeepLink(url.absoluteString)
+            authentication.login(with: signManager.email)
         }
     }
 
     private func handleDeepLink(_ url: String) {
-
+        
     }
 }
 
 struct SignInWaitingDeepLinkPreview: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SignInWaitingDeepLink()
+            SignInWaitingDeepLink(signManager: SignManager())
         }
     }
 }
