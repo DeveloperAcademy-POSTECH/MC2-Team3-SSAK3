@@ -54,4 +54,21 @@ final class FirebaseAuthenticatorAdapter: AuthenticateAdapter {
     func register(_ id: String, nickname: String) -> AnyPublisher<UserInfo, Error> {
         return userRepository.setUser(id, nickname)
     }
+
+    func sendEmail(to email: Email) -> AnyPublisher<Void, Error> {
+        func makeActionCodeSetting(of email: Email) -> ActionCodeSettings {
+            let actionCodeSettings = ActionCodeSettings()
+            var urlComponent: URLComponents = URLComponents()
+            urlComponent.scheme = "https"
+            urlComponent.host = "ssak3-297ee.firebaseapp.com"
+            urlComponent.queryItems = [URLQueryItem(name: "email", value: email)]
+            actionCodeSettings.url = urlComponent.url
+            actionCodeSettings.handleCodeInApp = true
+            actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+            return actionCodeSettings
+        }
+        return Auth.auth().sendSignInLink(toEmail: email, actionCodeSettings: makeActionCodeSetting(of: email))
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
 }

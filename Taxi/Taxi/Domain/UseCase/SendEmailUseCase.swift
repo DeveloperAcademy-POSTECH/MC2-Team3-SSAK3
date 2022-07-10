@@ -9,15 +9,15 @@ import Combine
 
 final class SendEmailUseCase {
 
-    private let repository: UserRepository
+    private let service: AuthenticateAdapter
     private var cancelBag: Set<AnyCancellable> = []
 
-    init(_ userRepository: UserRepository = UserFirebaseDataSource.shared) {
-        self.repository = userRepository
+    init(service: AuthenticateAdapter = FirebaseAuthenticatorAdapter()) {
+        self.service = service
     }
 
     func sendEmail(to email: Email, completion: @escaping (Error?) -> Void) {
-        repository.sendSignInEmail(to: email)
+        service.sendEmail(to: email)
             .sink { result in
                 switch result {
                 case .failure(let error):

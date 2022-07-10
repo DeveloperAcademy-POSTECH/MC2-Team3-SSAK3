@@ -8,18 +8,29 @@
 import SwiftUI
 
 struct SignInEmail: View {
+    @ObservedObject private var signManager: SignManager = SignManager()
+
+    @State private var goToNext: Bool = false
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("이메일을 입력해주세요")
                 .signUpTitle()
                 .padding()
 
-            UnderlinedTextField(text: .constant("이메일을 입력해주세요"), .normal(message: "인증 및 가입에 활용됩니다."), "", postfixText: "@pos.idserve.net")
-                .padding(.top, 64)
+            UnderlinedTextField(text: $signManager.email, .normal(message: "인증 및 가입에 활용됩니다."), "", postfixText: signManager.emailPostfix)
+                .padding(.top, 48)
                 .padding(.horizontal)
-            Spacer()
-            RoundedButton("다음", false, loading: false) {
+                .textInputAutocapitalization(.never)
 
+            Spacer()
+
+            NavigationLink(isActive: $goToNext) {
+                SignInWaitingDeepLink(signManager: signManager)
+            } label: {
+                RoundedButton("인증 메일 보내기") {
+                    signManager.sendEmail()
+                    goToNext = true
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
