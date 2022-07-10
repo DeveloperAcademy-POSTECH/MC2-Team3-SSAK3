@@ -38,6 +38,7 @@
 		00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */; };
 		00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */; };
 		00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */; };
+		005744B0287AB47E0033E578 /* AuthenticateState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005744AF287AB47E0033E578 /* AuthenticateState.swift */; };
 		00731A3F285DA169009D8718 /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731A3E285DA169009D8718 /* FirebaseError.swift */; };
 		00842A94284B2682000292E5 /* TaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A93284B2682000292E5 /* TaxiParty.swift */; };
 		00842A96284B287D000292E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A95284B287D000292E5 /* Place.swift */; };
@@ -173,6 +174,7 @@
 		00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
 		004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiRelease.entitlements; sourceTree = "<group>"; };
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		005744AF287AB47E0033E578 /* AuthenticateState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateState.swift; sourceTree = "<group>"; };
 		00731A3E285DA169009D8718 /* FirebaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseError.swift; sourceTree = "<group>"; };
 		00842A93284B2682000292E5 /* TaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiParty.swift; sourceTree = "<group>"; };
 		00842A95284B287D000292E5 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 				00E7435A2878300300C37B2E /* SignInEmail.swift */,
 				00E7435F28783BC100C37B2E /* SignInWaitDeepLink.swift */,
 				00C4D09C287909490019B8C4 /* SignUpNickname.swift */,
+				005744AF287AB47E0033E578 /* AuthenticateState.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				37F698852855FB910008C022 /* MyPartyView.swift in Sources */,
 				00A570662851EA33008B220E /* MainView.swift in Sources */,
 				50595595285037AE001DA44C /* MyPageView.swift in Sources */,
+				005744B0287AB47E0033E578 /* AuthenticateState.swift in Sources */,
 				00842A96284B287D000292E5 /* Place.swift in Sources */,
 				37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */,
 				00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */,
