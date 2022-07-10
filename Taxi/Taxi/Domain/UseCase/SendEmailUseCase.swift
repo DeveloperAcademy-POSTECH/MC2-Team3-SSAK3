@@ -16,6 +16,10 @@ final class SendEmailUseCase {
         self.service = service
     }
 
+    func sendEmail(to email: Email) -> AnyPublisher<Void, Error> {
+        return service.sendEmail(to: email)
+    }
+
     func sendEmail(to email: Email, completion: @escaping (Error?) -> Void) {
         service.sendEmail(to: email)
             .sink { result in

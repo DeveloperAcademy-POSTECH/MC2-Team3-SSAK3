@@ -13,7 +13,7 @@ struct MyPageView: View {
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
     @State private var showProfile: Bool = false
-    @EnvironmentObject private var userViewModel: Authentication
+    @EnvironmentObject private var authentication: Authentication
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -43,7 +43,7 @@ private extension MyPageView {
 
     var profile: some View {
         HStack(spacing: 13) {
-            if let user = userViewModel.userInfo {
+            if let user = authentication.userInfo {
                 ProfileImage(user, diameter: 46)
                 Text(user.nickname)
                     .foregroundColor(.charcoal)

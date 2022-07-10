@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct SignUpNickname: View {
-    
+    @EnvironmentObject private var authentication: Authentication
+    @State private var nickname: String = ""
+    let email: Email
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("닉네임을 입력해주세요")
@@ -18,8 +21,8 @@ struct SignUpNickname: View {
                 .padding(.horizontal)
                 .padding(.top, 48)
             Spacer()
-            RoundedButton("회원가입", false, loading: false) {
-                
+            RoundedButton("회원가입", loading: authentication.isRegisterProcessing) {
+                authentication.register(nickname)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -29,7 +32,8 @@ struct SignUpNickname: View {
 struct SignUpNicknamePreview: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SignUpNickname()
+            SignUpNickname(email: "")
         }
+        .environmentObject(Authentication())
     }
 }

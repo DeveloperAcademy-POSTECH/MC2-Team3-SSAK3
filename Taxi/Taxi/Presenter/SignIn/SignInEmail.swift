@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SignInEmail: View {
-    @ObservedObject private var signManager: SignManager = SignManager()
+    @EnvironmentObject private var authentication: Authentication
+    @State private var email: Email = ""
+    private let emailPostfix: String = "@pos.idserve.net"
 
     @State private var goToNext: Bool = false
     var body: some View {
@@ -17,7 +19,7 @@ struct SignInEmail: View {
                 .signUpTitle()
                 .padding()
 
-            UnderlinedTextField(text: $signManager.email, .normal(message: "인증 및 가입에 활용됩니다."), "", postfixText: signManager.emailPostfix)
+            UnderlinedTextField(text: $email, .normal(message: "인증 및 가입에 활용됩니다."), "", postfixText: emailPostfix)
                 .padding(.top, 48)
                 .padding(.horizontal)
                 .textInputAutocapitalization(.never)
@@ -25,10 +27,9 @@ struct SignInEmail: View {
             Spacer()
 
             NavigationLink(isActive: $goToNext) {
-                SignInWaitingDeepLink(signManager: signManager)
+                SignInWaitingDeepLink(email: email + emailPostfix)
             } label: {
                 RoundedButton("인증 메일 보내기") {
-                    signManager.sendEmail()
                     goToNext = true
                 }
             }
@@ -41,6 +42,7 @@ struct SignInEmailPreview: PreviewProvider {
     static var previews: some View {
         NavigationView {
             SignInEmail()
+                .environmentObject(Authentication())
         }
     }
 }

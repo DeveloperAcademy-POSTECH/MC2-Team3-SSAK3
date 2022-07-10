@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SignInWaitingDeepLink: View {
-    @ObservedObject var signManager: SignManager
     @EnvironmentObject private var authentication: Authentication
+    let email: Email
 
     var body: some View {
         VStack {
@@ -20,22 +20,29 @@ struct SignInWaitingDeepLink: View {
                 .foregroundColor(.darkGray)
                 .font(.caption)
                 .offset(y: -40)
+            NavigationLink(isActive: $authentication.needToRegister) {
+                SignUpNickname(email: email)
+            } label: {
+                EmptyView()
+            }
+
         }
         .onOpenURL { url in
             handleDeepLink(url.absoluteString)
-            authentication.login(with: signManager.email)
+            authentication.login(with: email)
         }
     }
 
     private func handleDeepLink(_ url: String) {
-        
+        UserDefaults.standard.set(url, forKey: "link")
+        authentication.login(with: email)
     }
 }
 
 struct SignInWaitingDeepLinkPreview: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SignInWaitingDeepLink(signManager: SignManager())
+            SignInWaitingDeepLink(email: "")
         }
     }
 }
