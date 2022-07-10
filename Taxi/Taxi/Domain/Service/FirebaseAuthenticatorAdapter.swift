@@ -11,6 +11,7 @@ import FirebaseAuthCombineSwift
 
 enum FirebaseAuthenticateError: Error {
     case noEmailLink
+    case noFirebaseAuth
 }
 
 extension FirebaseAuthenticateError: LocalizedError {
@@ -18,6 +19,8 @@ extension FirebaseAuthenticateError: LocalizedError {
         switch self {
         case .noEmailLink:
             return "Email Link is not exist"
+        case .noFirebaseAuth:
+            return "No Firebase Auth"
         }
     }
 }
@@ -51,8 +54,11 @@ final class FirebaseAuthenticatorAdapter: AuthenticateAdapter {
             .eraseToAnyPublisher()
     }
 
-    func register(_ id: String, nickname: String) -> AnyPublisher<UserInfo, Error> {
-        return userRepository.setUser(id, nickname)
+    func register(nickname: String) -> AnyPublisher<UserInfo, Error> {
+        guard let user = firebaseAuth.currentUser else {
+            return Fail(outputType: UserInfo.self, failure: FirebaseAuthenticateError.noFirebaseAuth).eraseToAnyPublisher()
+        }
+        return userRepository.setUser(user.uid, nickname)
     }
 
     func sendEmail(to email: Email) -> AnyPublisher<Void, Error> {
