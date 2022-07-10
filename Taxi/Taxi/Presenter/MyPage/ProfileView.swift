@@ -90,14 +90,11 @@ private extension ProfileView {
 
     func textProfile(_ diameter: CGFloat) -> some View {
         ZStack {
-            Circle().stroke(Color.customGray)
-                .foregroundColor(.white)
+            Circle()
+                .strokeBorder(Color.darkGray, lineWidth: 1)
                 .frame(width: diameter, height: diameter)
             Text(nicknameContainer.prefix(1))
                 .font(.system(size: diameter/1.5))
-            Image("default_profileImage")
-                .resizable()
-                .frame(width: 60, height: 59)
         }
     }
 
