@@ -11,11 +11,10 @@ struct TaxiPartyListView: View {
     @State private var showModal = false
     @State private var renderedDate: Date?
     @State private var showBlur: Bool = false
-    @State private var selectedIndex: Int = 0
-    @State private var showAddTaxiParty: Bool = false
-    @State private var refresh = Refresh(started: false, released: false)
     @EnvironmentObject private var listViewModel: ListViewModel
     @EnvironmentObject private var authentication: Authentication
+    @State var selectedIndex: Int = 0
+    @State private var showAddTaxiParty: Bool = false
 
     var body: some View {
         ZStack {
@@ -30,31 +29,10 @@ struct TaxiPartyListView: View {
                 }
                 .padding(.horizontal)
                 Divider()
-                if refresh.started && refresh.released {
-                    MyProgress()
-                }
                 ScrollViewReader { proxy in
-                    ScrollView(.vertical, showsIndicators: false, content: {
-                        GeometryReader { reader -> AnyView in
-                            print(reader.frame(in: .global).minY)
-                            DispatchQueue.main.async {
-                            if refresh.startOffset == 0 {
-                                refresh.startOffset = reader.frame(in: .global).minY
-                            }
-                                refresh.offset = reader.frame(in: .global).minY
-                            if refresh.offset - refresh.startOffset > 80 && !refresh.started {
-                                refresh.started = true
-                            }
-                            if refresh.startOffset == refresh.offset && refresh.started && !refresh.released {
-                                withAnimation(Animation.linear) {refresh.released = true}
-                                reload()
-                            }
-                        }
-                            return AnyView(Color.black.frame(width: 0, height: 0))
-                    }
-                        .frame(width: 0, height: 0)
+                    ScrollView {
                         CellViewList(selectedIndex: $selectedIndex, showBlur: $showBlur, taxiParties: listViewModel.taxiParties)
-                    })
+                    }
                     .onChange(of: renderedDate) { _ in
                         guard let date = renderedDate else { return }
                         withAnimation {
@@ -62,6 +40,9 @@ struct TaxiPartyListView: View {
                         }
                         renderedDate = nil
                     }
+                }
+                .refreshable {
+                    await reload()
                 }
                 .background(Color.background)
             }
@@ -75,13 +56,9 @@ struct TaxiPartyListView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    private func reload() {
-        print("update Data....")
+    private func reload() async {
         listViewModel.getTaxiParties(force: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-        refresh.released = false
-        refresh.started = false
-        }
+        try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
     }
 
     private func filterCalender() -> [TaxiParty] {
@@ -93,9 +70,9 @@ struct TaxiPartyListView: View {
                 return taxiParty.destinationCode == 1
             })
         case 2:
-        return listViewModel.taxiParties.filter({ taxiParty in
-            return taxiParty.destinationCode == 0
-        })
+            return listViewModel.taxiParties.filter({ taxiParty in
+                return taxiParty.destinationCode == 0
+            })
         default:
             return listViewModel.taxiParties
         }
@@ -103,7 +80,6 @@ struct TaxiPartyListView: View {
 }
 
 private extension TaxiPartyListView {
-
     var headline: some View {
         HStack {
             Text("택시팟")
@@ -118,13 +94,6 @@ private extension TaxiPartyListView {
             }
         }
     }
-}
-
-struct Refresh {
-    var startOffset: CGFloat = 0
-    var offset: CGFloat = 0
-    var started: Bool
-    var released: Bool
 }
 
 struct TaxiPartyFiltering: View {
@@ -187,6 +156,23 @@ struct MyProgress: View {
 
     var body: some View {
         HStack {
+            ForEach(0...4, id: \.self) { _ in
+                Circle()
+                    .frame(width: 10, height: 10)
+                    .foregroundColor(Color.customYellow)
+                    .scaleEffect(self.isProgress ? 1:0.01)
+            }
+        }
+        .onAppear { isProgress = true }
+        .padding()
+    }
+}
+
+struct MyProgressAnimation: View {
+    @State private var isProgress = false
+
+    var body: some View {
+        HStack {
             ForEach(0...4, id: \.self) { index in
                 Circle()
                     .frame(width: 10, height: 10)
@@ -201,8 +187,12 @@ struct MyProgress: View {
 }
 
 struct CellViewList: View {
+    @Environment(\.refresh) private var refresh
+    @State private var isRefreshing = false
+    @State private var isRefreshingAnimaiton = false
     @Binding var selectedIndex: Int
     @Binding var showBlur: Bool
+
     let taxiParties: [TaxiParty]
     private var totalParties: [Int: [TaxiParty]] {
         Dictionary.init(grouping: taxiParties, by: {$0.meetingDate})
@@ -213,24 +203,36 @@ struct CellViewList: View {
     private var totalMeetingDates: [Int] {
         totalParties.map({$0.key}).sorted()
     }
+
     private var ktxFilteredParties: [Int: [TaxiParty]] {
         guard let parties = destFilteredParties[1] else {
             return [:]}
         return Dictionary.init(grouping: parties, by: {$0.meetingDate})
     }
+
     private var ktxMeetingDates: [Int] {
         return ktxFilteredParties.map({$0.key}).sorted()
     }
+
     private var postechFilteredParties: [Int: [TaxiParty]] {
         guard let parties = destFilteredParties[0] else {
             return [:]}
         return Dictionary.init(grouping: parties, by: {$0.meetingDate})
     }
+
     private var postechMeetingDates: [Int] {
         return postechFilteredParties.map({$0.key}).sorted()
     }
 
     var body: some View {
+        if isRefreshing {
+            MyProgress()
+                .transition(.scale)
+        }
+        if isRefreshingAnimaiton {
+            MyProgressAnimation()
+                .transition(.scale)
+        }
         LazyVStack(spacing: 10) {
             if mappingDate().count == 0 {
                 EmptyPartyView(tab: Tab.taxiParty)
@@ -245,6 +247,27 @@ struct CellViewList: View {
             }
         }
         .padding(.top)
+        .animation(.default, value: isRefreshing)
+        .animation(.default, value: isRefreshingAnimaiton)
+        .background(GeometryReader {
+            Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+        })
+        .onPreferenceChange(ViewOffsetKey.self) {
+            let heightValueForGesture: CGFloat = 230.0
+            if $0 < -heightValueForGesture && !isRefreshing {
+                isRefreshing = true
+            }
+            if $0 > -heightValueForGesture && isRefreshing {
+                isRefreshingAnimaiton = true
+                Task {
+                    isRefreshing = false
+                    await refresh?()
+                    await MainActor.run {
+                        isRefreshingAnimaiton = false
+                    }
+                }
+            }
+        }
     }
 
     private func mappingDate() -> [Int] {
@@ -278,7 +301,6 @@ struct Cell: View {
     let party: TaxiParty
     @State private var showInfoView: Bool = false
     @Binding var showBlur: Bool
-
     var body: some View {
         Button {
             showInfoView = true
@@ -293,9 +315,16 @@ struct Cell: View {
     }
 }
 
+struct ViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
+    }
+}
+
 struct SectionHeaderView: View {
     let date: Int
-
     var body: some View {
         Text(Date.convertToKoreanDateFormat(from: date))
             .foregroundColor(.charcoal)
@@ -306,7 +335,6 @@ struct SectionHeaderView: View {
 }
 
 struct TaxiPartyListView_Previews: PreviewProvider {
-
     static var previews: some View {
         TaxiPartyListView()
     }
