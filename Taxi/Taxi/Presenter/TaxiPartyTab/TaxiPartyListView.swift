@@ -337,5 +337,6 @@ struct SectionHeaderView: View {
 struct TaxiPartyListView_Previews: PreviewProvider {
     static var previews: some View {
         TaxiPartyListView()
+            .environmentObject(ListViewModel(userId: ""))
     }
 }
