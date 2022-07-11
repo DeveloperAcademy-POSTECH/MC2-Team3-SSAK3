@@ -253,7 +253,7 @@ struct CellViewList: View {
             Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
         })
         .onPreferenceChange(ViewOffsetKey.self) {
-            let heightValueForGesture: CGFloat = 230.0
+            let heightValueForGesture: CGFloat = 200.0
             if $0 < -heightValueForGesture && !isRefreshing {
                 isRefreshing = true
             }
