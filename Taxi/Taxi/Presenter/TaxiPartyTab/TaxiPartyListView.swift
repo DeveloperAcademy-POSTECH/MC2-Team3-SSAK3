@@ -247,28 +247,28 @@ struct CellViewList: View {
             }
         }
         .padding(.top)
-        .animation(.default, value: isRefreshing)
-        .animation(.default, value: isRefreshingAnimaiton)
-        .background(GeometryReader {
-            Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
-        })
-        .onPreferenceChange(ViewOffsetKey.self) {
-            let heightValueForGesture: CGFloat = 200.0
-            if $0 < -heightValueForGesture && !isRefreshing {
-                isRefreshing = true
-            }
-            if $0 > -heightValueForGesture && isRefreshing {
-                isRefreshingAnimaiton = true
-                Task {
-                    isRefreshing = false
-                    await refresh?()
-                    await MainActor.run {
-                        isRefreshingAnimaiton = false
+                .animation(.default, value: isRefreshing)
+                .animation(.default, value: isRefreshingAnimaiton)
+                .background(GeometryReader {
+                    Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+                })
+                .onPreferenceChange(ViewOffsetKey.self) {
+                    let heightValueForGesture: CGFloat = 230.0
+                    if $0 < -heightValueForGesture && !isRefreshing {
+                        isRefreshing = true
+                    }
+                    if $0 > -heightValueForGesture && isRefreshing {
+                        isRefreshingAnimaiton = true
+                        Task {
+                            isRefreshing = false
+                            await refresh?()
+                            await MainActor.run {
+                                isRefreshingAnimaiton = false
+                            }
+                        }
                     }
                 }
             }
-        }
-    }
 
     private func mappingDate() -> [Int] {
         switch selectedIndex {
