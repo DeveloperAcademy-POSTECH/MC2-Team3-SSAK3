@@ -156,12 +156,18 @@ struct MyProgress: View {
 
     var body: some View {
         HStack {
+            Image("YellowTaxi")
+                .resizable()
+                .frame(width: 25, height: 23)
             ForEach(0...4, id: \.self) { _ in
                 Circle()
-                    .frame(width: 10, height: 10)
+                    .frame(width: 5, height: 5)
                     .foregroundColor(Color.customYellow)
                     .scaleEffect(self.isProgress ? 1:0.01)
             }
+            Image(systemName: "train.side.front.car")
+                .font(Font.system(size: 20, weight: .semibold))
+                .foregroundColor(.customYellow)
         }
         .onAppear { isProgress = true }
         .padding()
@@ -170,19 +176,29 @@ struct MyProgress: View {
 
 struct MyProgressAnimation: View {
     @State private var isProgress = false
-
     var body: some View {
+        VStack {
         HStack {
+            Image("YellowTaxi")
+                .resizable()
+                .frame(width: 25, height: 23)
             ForEach(0...4, id: \.self) { index in
                 Circle()
-                    .frame(width: 10, height: 10)
+                    .frame(width: 5, height: 5)
                     .foregroundColor(Color.customYellow)
                     .scaleEffect(self.isProgress ? 1:0.01)
                     .animation(self.isProgress ? Animation .linear(duration: 0.8) .repeatForever() .delay(0.2*Double(index)) : .default, value: isProgress)
             }
+           Image(systemName: "train.side.front.car")
+               .font(Font.system(size: 20, weight: .semibold))
+               .foregroundColor(.customYellow)
         }
         .onAppear { isProgress = true }
         .padding()
+        }
+        Text("택시팟을 불러오고 있어요")
+            .foregroundColor(.darkGray)
+            .font(.custom("AppleSDGothicNeo-Regular", size: 13))
     }
 }
 
@@ -247,24 +263,23 @@ struct CellViewList: View {
             }
         }
         .padding(.top)
-                .animation(.default, value: isRefreshing)
                 .animation(.default, value: isRefreshingAnimaiton)
                 .background(GeometryReader {
                     Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
                 })
                 .onPreferenceChange(ViewOffsetKey.self) {
-                    let heightValueForGesture: CGFloat = 230.0
-                    if $0 < -heightValueForGesture && !isRefreshing {
+                    let heightValueForGesture: CGFloat = 200.0
+                    if $0 < -heightValueForGesture && !isRefreshing && !isRefreshingAnimaiton {
                         isRefreshing = true
                     }
-                    if $0 > -heightValueForGesture && isRefreshing {
+                    if $0 > -heightValueForGesture && !isRefreshingAnimaiton && isRefreshing {
+                        isRefreshing = false
                         isRefreshingAnimaiton = true
                         Task {
-                            isRefreshing = false
                             await refresh?()
                             await MainActor.run {
-                                isRefreshingAnimaiton = false
                             }
+                            isRefreshingAnimaiton = false
                         }
                     }
                 }
