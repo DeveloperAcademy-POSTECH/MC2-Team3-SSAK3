@@ -98,8 +98,8 @@ extension Authentication: Authenticate {
             }.store(in: &cancelBag)
     }
 
-    func checkRegisterHistory() {
-        loginUseCase.login(with: "")
+    func checkRegisterHistory(_ email: Email) {
+        loginUseCase.login(with: email)
             .sink { [weak self] completion in
                 guard let self = self else {
                     return

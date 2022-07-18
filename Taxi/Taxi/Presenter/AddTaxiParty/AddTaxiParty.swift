@@ -28,6 +28,7 @@ struct AddTaxiParty: View {
     @State private var departure: Place? // 출발 장소
     @State private var maxNumber: Int? // 정원
     @EnvironmentObject private var viewModel: ListViewModel
+    @EnvironmentObject private var appState: AppState
 
     let user: UserInfo
 
@@ -65,6 +66,9 @@ struct AddTaxiParty: View {
                     viewModel.addTaxiParty(taxiParty, user: user) { taxiParty in
                         print(taxiParty)
                         dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                            appState.showChattingRoom(taxiParty)
+                        }
                     } onError: { error in
                         print(error)
                     }

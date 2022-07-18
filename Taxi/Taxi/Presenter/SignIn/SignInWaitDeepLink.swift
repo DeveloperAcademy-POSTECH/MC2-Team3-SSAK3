@@ -34,7 +34,7 @@ struct SignInWaitingDeepLink: View {
 
     private func handleDeepLink(_ url: String) {
         UserDefaults.standard.set(url, forKey: "link")
-        authentication.checkRegisterHistory()
+        authentication.checkRegisterHistory(email)
     }
 }
 
