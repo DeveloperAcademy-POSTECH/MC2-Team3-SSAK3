@@ -24,7 +24,7 @@ struct OnboardSecondPageView: View {
 struct SecondPageWordingView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 9) {
-            Text("택시팟이 없다면?")
+            Text("택시팟이 없나요?")
                 .kerning(-0.1)
                 .signUpTitle()
                 .frame(width: UIScreen.main.bounds.width, alignment: .leading)
@@ -33,17 +33,15 @@ struct SecondPageWordingView: View {
                     .kerning(-0.3)
                     .signUpAgreement()
                 Text("택시팟")
-                    .font(Font.system(size: 16, weight: .bold))
-                    .foregroundColor(.customYellow)
-                Image(systemName: "sparkle")
-                    .font(Font.system(size: 16, weight: .semibold))
-                    .foregroundColor(.customYellow)
+                    .kerning(-0.3)
+                    .signUpAgreement()
                 Text("을 생성해 파티원을 구해보세요.")
                     .kerning(-0.3)
                     .signUpAgreement()
             }
             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
         }
+        .padding(.top, 10)
         .padding(.leading, 20)
     }
 }
@@ -53,8 +51,11 @@ struct SecondImageView: View {
         HStack {
         Image("PeopleImage")
             .resizable()
+            .frame(width: 227.08, height: 186)
             .aspectRatio(contentMode: .fit)
         }
+        .padding(.top, 50)
+        .padding(.trailing, 20)
     }
 }
 

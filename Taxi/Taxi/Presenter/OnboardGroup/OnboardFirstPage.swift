@@ -24,7 +24,7 @@ struct OnboardFirstPageView: View {
 struct WordingView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 9) {
-            Text("택시팟에 참여해보세요")
+            Text("부담 없이 참여해보세요")
                 .kerning(-0.1)
                 .signUpTitle()
                 .frame(width: UIScreen.main.bounds.width, alignment: .leading)
@@ -34,17 +34,14 @@ struct WordingView: View {
                     .signUpAgreement()
                 Text("택시팟")
                     .kerning(-0.3)
-                    .font(Font.system(size: 16, weight: .bold))
-                    .foregroundColor(.customYellow)
-                Image(systemName: "sparkle")
-                    .font(Font.system(size: 16, weight: .semibold))
-                    .foregroundColor(.customYellow)
+                    .signUpAgreement()
                 Text("에 참여해 택시비를 아껴보세요.")
                     .kerning(-0.3)
                     .signUpAgreement()
             }
             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
         }
+        .padding(.top, 10)
         .padding(.leading, 20)
     }
 }
@@ -54,8 +51,11 @@ struct ImageView: View {
         HStack {
         Image("ClockImage")
             .resizable()
+            .frame(width: 200.11, height: 197.36)
             .aspectRatio(contentMode: .fit)
         }
+        .padding(.top, 50)
+        .padding(.trailing, 20)
     }
 }
 
