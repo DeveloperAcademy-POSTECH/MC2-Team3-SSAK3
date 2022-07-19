@@ -138,5 +138,6 @@ extension View {
 struct PatyListCell_Previews: PreviewProvider {
     static var previews: some View {
         TaxiPartyListView()
+            .environmentObject(ListViewModel(userId: ""))
     }
 }
