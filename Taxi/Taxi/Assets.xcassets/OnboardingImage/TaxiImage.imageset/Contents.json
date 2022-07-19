@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "taxi.png",
+      "filename" : "final_taxi.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "final_taxi-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "final_taxi-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

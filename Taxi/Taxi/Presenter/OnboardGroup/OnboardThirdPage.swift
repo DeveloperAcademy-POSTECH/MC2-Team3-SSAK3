@@ -42,6 +42,7 @@ struct ThirdPageWordingView: View {
             }
             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
         }
+        .padding(.top, 10)
         .padding(.leading, 20)
     }
 }
@@ -51,8 +52,11 @@ struct ThirdImageView: View {
         HStack {
         Image("TaxiImage")
             .resizable()
+            .frame(width: 193.43, height: 197.36)
             .aspectRatio(contentMode: .fit)
         }
+        .padding(.top, 50)
+        .padding(.trailing, 20)
     }
 }
 
