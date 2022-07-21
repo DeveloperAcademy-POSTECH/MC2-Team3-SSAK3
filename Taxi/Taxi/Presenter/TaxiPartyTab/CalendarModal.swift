@@ -24,14 +24,7 @@ struct CalendarModal: View {
                     .opacity(0.3)
                     .ignoresSafeArea()
                     .onTapGesture {
-                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
-                            uiTabarController?.tabBar.isHidden = false
-                        }
-                        toastIsShowing = false
-                        storeDate = nil
-                        withAnimation(.easeInOut) {
-                            isShowing = false
-                        }
+                        modalCloseHandling()
                     }
                 VStack {
                     if toastIsShowing {
@@ -90,14 +83,7 @@ struct CalendarModal: View {
     var sheetHeader: some View {
         HStack {
             Button {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
-                    uiTabarController?.tabBar.isHidden = false
-                }
-                toastIsShowing = false
-                storeDate = nil
-                withAnimation {
-                    isShowing.toggle()
-                }
+                modalCloseHandling()
             } label: {
                 Text("닫기")
             }
@@ -127,6 +113,20 @@ struct CalendarModal: View {
                     .fill(.white)
             )
             .padding()
+    }
+
+    // MARK: - Function
+    private func modalCloseHandling() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+            uiTabarController?.tabBar.isHidden = false
+        }
+        uiTabarController?.tabBar.isHidden = false
+        toastIsShowing = false
+        storeDate = nil
+        withAnimation(.easeInOut) {
+            isShowing = false
+        }
+
     }
 }
 
