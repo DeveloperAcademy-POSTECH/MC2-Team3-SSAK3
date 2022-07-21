@@ -25,7 +25,7 @@ struct SignInEmail: View {
 
             Spacer()
 
-            NavigationLink(isActive: $authentication.waitingDeepLink){
+            NavigationLink(isActive: $authentication.waitingDeepLink) {
                 SignInWaitingDeepLink(email: email + emailPostfix)
             } label: {
                 RoundedButton("인증 메일 보내기") {
