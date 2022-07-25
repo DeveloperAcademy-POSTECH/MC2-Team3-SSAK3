@@ -70,32 +70,20 @@ private extension ProfileView {
         Button {
             showActionSheet.toggle()
         } label: {
-            if let newImage = selectedImage { // 프로필 사진을 변경한 경우
-                ZStack {
-                Image(uiImage: newImage)
-                    .profileCircle(profileSize)
-                Image("profileImage_plus")
-                    .resizable()
-                    .frame(width: 48, height: 48)
-                    .opacity(0.8)
+            ZStack {
+                if let newImage = selectedImage { // 프로필 사진을 변경한 경우
+                    Image(uiImage: newImage)
+                        .profileCircle(profileSize)
+                } else if let imageURL = imageContainer { // 프로필 사진이 있는 경우
+                    WebImage(url: URL(string: imageURL))
+                        .profileCircle(profileSize)
+                } else { // 프로필 사진이 없는 경우
+                    textProfile(profileSize)
                 }
-            } else if let imageURL = imageContainer { // 프로필 사진이 있는 경우
-                ZStack {
-                WebImage(url: URL(string: imageURL))
-                    .profileCircle(profileSize)
                 Image("profileImage_plus")
                     .resizable()
                     .frame(width: 48, height: 48)
                     .opacity(0.8)
-                }
-            } else { // 프로필 사진이 없는 경우
-                ZStack {
-                textProfile(profileSize)
-                Image("profileImage_plus")
-                    .resizable()
-                    .frame(width: 48, height: 48)
-                    .opacity(0.8)
-            }
             }
         }
     }
