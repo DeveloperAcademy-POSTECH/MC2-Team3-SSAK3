@@ -73,6 +73,9 @@ final class ListViewModel: ObservableObject {
                 return
             }
             self.taxiParties = taxiParties
+            if self.error == .loadPartiesFail {
+                self.error = nil
+            }
         }
     }
 
@@ -83,6 +86,9 @@ final class ListViewModel: ObservableObject {
                 return
             }
             self.myParties = taxiParties
+            if self.error == .loadPartiesFail {
+                self.error = nil
+            }
         }
     }
 
