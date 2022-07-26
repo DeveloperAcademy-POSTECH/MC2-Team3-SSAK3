@@ -55,6 +55,14 @@ struct TaxiPartyListView: View {
                 Text(error.recoverySuggestion ?? "")
             }
 
+            if listViewModel.isAdding {
+                ProgressView()
+                    .frame(width: 50, height: 50)
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .background(Color.customGray)
+                    .cornerRadius(15)
+            }
+
             CalendarModal(isShowing: $showModal, renderedDate: $renderedDate, taxiPartyList: filterCalender())
         }
         .blur(radius: showBlur ? 10 : 0)
