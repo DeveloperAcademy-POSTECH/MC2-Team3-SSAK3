@@ -75,6 +75,13 @@ struct AddTaxiParty: View {
                 }
                 .padding()
             }
+            .alert(isPresented: .constant(viewModel.error == .addPartyFail), error: viewModel.error) { _ in
+                Button("확인") {
+                    viewModel.error = nil
+                }
+            } message: { error in
+                Text(error.recoverySuggestion ?? "")
+            }
         }
     }
 
