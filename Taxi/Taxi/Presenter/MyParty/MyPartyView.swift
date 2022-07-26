@@ -10,12 +10,19 @@ import SwiftUI
 // MARK: - Content View
 struct MyPartyView: View {
     @EnvironmentObject private var listViewModel: ListViewModel
+    @EnvironmentObject private var appState: AppState
 
     var body: some View {
         VStack {
             MyPartyTitle()
-            if listViewModel.myParties.count == 0 {
-                EmptyPartyView(tab: Tab.myParty)
+            if listViewModel.error == .loadPartiesFail {
+                ErrorView(ListError.loadPartiesFail, description: "다시 불러오기") {
+                    reload()
+                }
+            } else if listViewModel.myParties.count == 0 {
+                ErrorView(ListError.noMyParties, description: "택시팟 참여하러 가기") {
+                    appState.showTaxiParties()
+                }
             } else {
                 MyPartyList()
             }
@@ -28,6 +35,10 @@ struct MyPartyView: View {
             Text(error.recoverySuggestion ?? "")
         }
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func reload() {
+        listViewModel.getMyTaxiParties(force: true)
     }
 }
 
@@ -244,19 +255,33 @@ extension View {
     }
 }
 
-struct EmptyPartyView: View {
-    let tab: Tab
+struct ErrorView: View {
+    private let error: ListError
+    private let actionDescription: String
+    private let action: () -> Void
+
+    init(_ error: ListError, description: String, action: @escaping () -> Void) {
+        self.error = error
+        self.actionDescription = description
+        self.action = action
+    }
     var body: some View {
         VStack {
             Image("TaxiPartyOff")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 133)
-            if tab == Tab.taxiParty {
-                Text("현재 만들어진 택시팟이 없어요.")
-                Text("+ 를 눌러서 택시팟를 생성해보세요.")
-            } else {
-                Text("현재 참여하고 있는 택시팟이 없어요.")
+            Text(error.errorDescription ?? "")
+            Text(error.recoverySuggestion ?? "")
+            Button(action: action) {
+                Text(actionDescription)
+                    .font(.system(size: 16))
+                    .fontWeight(.semibold)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 20)
+                    .foregroundColor(.customBlack)
+                    .background(Color.customYellow)
+                    .cornerRadius(16)
             }
             Spacer()
         }

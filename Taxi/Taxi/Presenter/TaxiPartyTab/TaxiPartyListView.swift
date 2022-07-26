@@ -29,22 +29,32 @@ struct TaxiPartyListView: View {
                 }
                 .padding(.horizontal)
                 Divider()
-                ScrollViewReader { proxy in
-                    ScrollView {
-                        CellViewList(selectedIndex: $selectedIndex, showBlur: $showBlur, taxiParties: listViewModel.taxiParties)
+                if listViewModel.error == .loadPartiesFail {
+                    ErrorView(ListError.loadPartiesFail, description: "다시 불러오기") {
+                        listViewModel.getTaxiParties(force: true)
                     }
-                    .onChange(of: renderedDate) { _ in
-                        guard let date = renderedDate else { return }
-                        withAnimation {
-                            proxy.scrollTo(date.formattedInt, anchor: .top)
+                } else if listViewModel.taxiParties.count == 0 {
+                    ErrorView(ListError.noTaxiParties, description: "택시팟 참여하러 가기") {
+                        showAddTaxiParty = true
+                    }
+                } else {
+                    ScrollViewReader { proxy in
+                        ScrollView {
+                            CellViewList(selectedIndex: $selectedIndex, showBlur: $showBlur, showAddTaxiParty: $showAddTaxiParty, taxiParties: listViewModel.taxiParties)
                         }
-                        renderedDate = nil
+                        .onChange(of: renderedDate) { _ in
+                            guard let date = renderedDate else { return }
+                            withAnimation {
+                                proxy.scrollTo(date.formattedInt, anchor: .top)
+                            }
+                            renderedDate = nil
+                        }
                     }
+                    .refreshable {
+                        await reload()
+                    }
+                    .background(Color.background)
                 }
-                .refreshable {
-                    await reload()
-                }
-                .background(Color.background)
             }
             .alert(isPresented: .constant(listViewModel.error == .outOfMember), error: listViewModel.error) { _ in
                 Button("확인") {
@@ -225,6 +235,7 @@ struct CellViewList: View {
     @State private var isRefreshingAnimaiton = false
     @Binding var selectedIndex: Int
     @Binding var showBlur: Bool
+    @Binding var showAddTaxiParty: Bool
 
     let taxiParties: [TaxiParty]
     private var totalParties: [Int: [TaxiParty]] {
@@ -268,7 +279,9 @@ struct CellViewList: View {
         }
         LazyVStack(spacing: 10) {
             if mappingDate().count == 0 {
-                EmptyPartyView(tab: Tab.taxiParty)
+                ErrorView(ListError.noTaxiParties, description: "택시팟 생성하기") {
+                    showAddTaxiParty = true
+                }
             } else {
                 ForEach(mappingDate(), id: \.self) { date in
                     Section(header: SectionHeaderView(date: date).id(date)) {
