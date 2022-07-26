@@ -46,6 +46,15 @@ struct TaxiPartyListView: View {
                 }
                 .background(Color.background)
             }
+            .alert(isPresented: .constant(listViewModel.error == .outOfMember), error: listViewModel.error) { _ in
+                Button("확인") {
+                    listViewModel.error = nil
+                    listViewModel.getTaxiParties(force: true)
+                }
+            } message: { error in
+                Text(error.recoverySuggestion ?? "")
+            }
+
             CalendarModal(isShowing: $showModal, renderedDate: $renderedDate, taxiPartyList: filterCalender())
         }
         .blur(radius: showBlur ? 10 : 0)
