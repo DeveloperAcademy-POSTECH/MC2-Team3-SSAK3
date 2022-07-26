@@ -136,9 +136,11 @@ final class ListViewModel: ObservableObject {
     }
 
     func joinTaxiParty(in taxiParty: TaxiParty, _ user: UserInfo, completion: @escaping () -> Void) {
+        isAdding = true
         joinTaxiPartyUseCase.joinTaxiParty(in: taxiParty, user) { [weak self] taxiParty, _ in
             guard let self = self, let taxiParty = taxiParty else {
                 self?.error = .outOfMember
+                self?.isAdding = false
                 return
             }
             if let index = self.taxiParties.firstIndex(of: taxiParty) {
@@ -146,6 +148,7 @@ final class ListViewModel: ObservableObject {
                 self.addMyTaxiPartyInList(party: taxiParty)
                 completion()
             }
+            self.isAdding = false
         }
     }
 }
