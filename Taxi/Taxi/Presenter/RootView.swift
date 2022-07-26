@@ -13,8 +13,10 @@ struct RootView: View {
     var body: some View {
         if let userInfo = authentication.userInfo {
             MainView(userInfo.id)
+                .preferredColorScheme(.light)
         } else {
             OnboardingView()
+                .preferredColorScheme(.light)
         }
     }
 }

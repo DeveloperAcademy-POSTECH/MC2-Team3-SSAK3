@@ -93,6 +93,7 @@ struct MyPartyList: View {
                                     ChatRoomView(party: party, user: authentication.userInfo!)
                                 } label: {
                                     PartyListCell(party: party)
+                                        .contentShape(Rectangle())
                                 }
                                 .buttonStyle(CellButtonStyle())
                                 .disabled(isSwiped) // 스와이프 된 상태일 때 비활성화
