@@ -6,11 +6,51 @@
 //
 
 import Combine
+import Foundation
+enum ListError: LocalizedError {
+    case outOfMember
+    case loadPartiesFail
+    case addPartyFail
+    case leavePartyFail
+    case noTaxiParties
+    case noMyParties
+
+    var errorDescription: String? {
+        switch self {
+        case .outOfMember:
+            return "이미 마감된 택시팟이에요"
+        case .loadPartiesFail:
+            return "택시팟을 불러올 수 없어요"
+        case .addPartyFail:
+            return "택시팟을 추가할 수 없어요"
+        case .leavePartyFail:
+            return "택시팟을 나갈 수 없어요"
+        case .noTaxiParties:
+            return "현재 생성된 택시팟이 없어요"
+        case .noMyParties:
+            return "현재 참여하고 있는 택시팟이 없어요"
+        }
+    }
+
+    var recoverySuggestion: String? {
+        switch self {
+        case .outOfMember:
+            return "현재 인원이 모두 찼어요\n다른 택시팟을 찾아보시겠어요?"
+        case .loadPartiesFail, .addPartyFail, .leavePartyFail:
+            return "잠시 후 다시 시도해보세요"
+        case .noTaxiParties:
+            return "택시팟을 만들어보세요"
+        case .noMyParties:
+            return ""
+        }
+    }
+}
 
 final class ListViewModel: ObservableObject {
     @Published private (set) var taxiParties: [TaxiParty] = []
     @Published private (set) var myParties: [TaxiParty] = []
     @Published private (set) var isAdding: Bool = false
+    @Published var error: ListError?
     private var cancelBag: Set<AnyCancellable> = []
 
     // 유즈케이스
@@ -29,7 +69,7 @@ final class ListViewModel: ObservableObject {
     func getTaxiParties(force load: Bool = false) {
         getTaxiPartyUseCase.getTaxiParty(exclude: userId, force: load) { [weak self] taxiParties, error in
             guard let self = self, let taxiParties = taxiParties else {
-                print(error ?? "")
+                self?.error = .loadPartiesFail
                 return
             }
             self.taxiParties = taxiParties
@@ -39,6 +79,7 @@ final class ListViewModel: ObservableObject {
     func getMyTaxiParties(force load: Bool = false) {
         myTaxiPartyUseCase.getMyTaxiParty(userId, force: load) { [weak self] taxiParties, _ in
             guard let taxiParties = taxiParties, let self = self else {
+                self?.error = .loadPartiesFail
                 return
             }
             self.myParties = taxiParties
@@ -54,6 +95,7 @@ final class ListViewModel: ObservableObject {
                 }
                 if case let .failure(error) = completion {
                     onError(error)
+                    self.error = .addPartyFail
                 }
                 self.isAdding = false
             } receiveValue: { taxiParty in
@@ -65,7 +107,7 @@ final class ListViewModel: ObservableObject {
     func leaveMyParty(party: TaxiParty, user: UserInfo) {
         myTaxiPartyUseCase.leaveTaxiParty(party, user: user) { [weak self] error in
             guard let self = self, error == nil else {
-                print(error!)
+                self?.error = .leavePartyFail
                 return
             }
             self.deletePartyInList(party: party)
@@ -95,7 +137,10 @@ final class ListViewModel: ObservableObject {
 
     func joinTaxiParty(in taxiParty: TaxiParty, _ user: UserInfo, completion: @escaping () -> Void) {
         joinTaxiPartyUseCase.joinTaxiParty(in: taxiParty, user) { [weak self] taxiParty, _ in
-            guard let self = self, let taxiParty = taxiParty else { return }
+            guard let self = self, let taxiParty = taxiParty else {
+                self?.error = .outOfMember
+                return
+            }
             if let index = self.taxiParties.firstIndex(of: taxiParty) {
                 self.taxiParties.remove(at: index)
                 self.addMyTaxiPartyInList(party: taxiParty)
