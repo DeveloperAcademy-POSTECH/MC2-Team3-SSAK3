@@ -26,7 +26,7 @@ final class RegisterUseCase {
                     completion(nil, error)
                 }
             } receiveValue: { userInfo in
-                completion(userInfo, nil) 
+                completion(userInfo, nil)
             }.store(in: &cancelBag)
     }
 }

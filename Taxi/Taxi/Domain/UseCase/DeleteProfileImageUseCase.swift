@@ -16,7 +16,6 @@ final class DeleteProfileImageUseCase {
         self.userRepository = userRepository
     }
 
-
     func deleteProfileImage(for user: UserInfo) -> AnyPublisher<UserInfo, Error> {
         return userRepository.deleteProfileImage(for: user)
     }
