@@ -20,6 +20,13 @@ struct MyPartyView: View {
                 MyPartyList()
             }
         }
+        .alert(isPresented: .constant(listViewModel.error == .leavePartyFail), error: listViewModel.error) { _ in
+            Button("확인") {
+                listViewModel.error = nil
+            }
+        } message: { error in
+            Text(error.recoverySuggestion ?? "")
+        }
         .navigationBarTitleDisplayMode(.inline)
     }
 }
