@@ -13,7 +13,7 @@ struct ProfileView: View {
         case nickname
     }
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var userViewModel: Authentication
+    @EnvironmentObject private var userViewModel: UserInfoState
     @FocusState private var focusField: Field?
     @State private var showActionSheet: Bool = false
     @State private var showPicker: Bool = false
@@ -39,10 +39,8 @@ struct ProfileView: View {
             photoPicker
         }
         .onAppear {
-            if let user = userViewModel.userInfo {
-                nicknameContainer = user.nickname
-                imageContainer = user.profileImage
-            }
+            nicknameContainer = userViewModel.userInfo.nickname
+            imageContainer = userViewModel.userInfo.profileImage
         }
     }
 }
@@ -165,8 +163,7 @@ private extension ProfileView {
 
     var applyChangeButton: some View {
         Button {
-            guard let user = userViewModel.userInfo else { return }
-            if nicknameContainer != user.nickname {
+            if nicknameContainer != userViewModel.userInfo.nickname {
                 userViewModel.updateNickname(nicknameContainer)
             }
             if let newImage = imageData {

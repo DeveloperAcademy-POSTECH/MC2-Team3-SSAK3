@@ -20,6 +20,45 @@ enum FieldState {
             return false
         }
     }
+
+    @ViewBuilder
+    var stateText: some View {
+        switch self {
+        case .normal(let message):
+            Text(message)
+                .font(.caption)
+                .fontWeight(.regular)
+                .foregroundColor(.darkGray)
+        case .invalid(let message):
+            HStack {
+                Image(systemName: "x.circle.fill")
+                Text(message)
+                    .fontWeight(.regular)
+            }
+            .font(.caption)
+            .foregroundColor(.customRed)
+        case .valid(let message):
+            HStack {
+                Image(systemName: "checkmark.circle.fill")
+                Text(message)
+                    .fontWeight(.regular)
+            }
+            .font(.caption)
+            .foregroundColor(.customGreen)
+        }
+    }
+
+    // MARK: - func
+    func getUnderlineColor() -> Color {
+        switch self {
+        case .normal:
+            return Color.charcoal
+        case .invalid:
+            return Color.customRed
+        case .valid:
+            return Color.customGreen
+        }
+    }
 }
 
 struct UnderlinedTextField: View {
@@ -48,47 +87,10 @@ struct UnderlinedTextField: View {
                 }
                 Rectangle()
                     .frame(height: 2)
-                    .foregroundColor(getUnderlineColor(fieldState))
+                    .foregroundColor(fieldState.getUnderlineColor())
                     .padding(.top, 40)
             }
-            makeStateText(fieldState)
-        }
-    }
-    @ViewBuilder
-    private func makeStateText( _ fieldText: FieldState) -> some View {
-        switch fieldText {
-        case let .normal(message):
-            Text(message)
-                .font(.caption)
-                .fontWeight(.regular)
-                .foregroundColor(.darkGray)
-        case let .invalid(message):
-            HStack {
-                Image(systemName: "x.circle.fill")
-                Text(message)
-                    .fontWeight(.regular)
-            }
-            .font(.caption)
-            .foregroundColor(.customRed)
-        case let .valid(message):
-            HStack {
-                Image(systemName: "checkmark.circle.fill")
-                Text(message)
-                    .fontWeight(.regular)
-            }
-            .font(.caption)
-            .foregroundColor(.customGreen)
-        }
-    }
-    // MARK: - func
-    private func getUnderlineColor(_ state: FieldState) -> Color {
-        switch state {
-        case .normal:
-            return Color.charcoal
-        case .invalid:
-            return Color.customRed
-        case .valid:
-            return Color.customGreen
+            fieldState.stateText
         }
     }
 }

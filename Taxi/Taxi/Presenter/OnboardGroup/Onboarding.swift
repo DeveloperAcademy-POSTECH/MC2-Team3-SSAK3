@@ -37,7 +37,7 @@ struct OnboardingView: View {
                     }
                 }
                 NavigationLink(isActive: $skipOnboarding) {
-                    SignInEmail()
+                    SignHome()
                 } label: {
                     EmptyView()
                 }

@@ -12,7 +12,7 @@ struct TaxiPartyListView: View {
     @State private var renderedDate: Date?
     @State private var showBlur: Bool = false
     @EnvironmentObject private var listViewModel: ListViewModel
-    @EnvironmentObject private var authentication: Authentication
+    @EnvironmentObject private var appState: AppState
     @State var selectedIndex: Int = 0
     @State private var showAddTaxiParty: Bool = false
 
@@ -51,7 +51,7 @@ struct TaxiPartyListView: View {
         .blur(radius: showBlur ? 10 : 0)
         .animation(.easeOut, value: showBlur)
         .fullScreenCover(isPresented: $showAddTaxiParty, content: {
-            AddTaxiParty(user: authentication.userInfo!)
+            AddTaxiParty(user: appState.currentUserInfo!)
         })
         .navigationBarTitleDisplayMode(.inline)
     }

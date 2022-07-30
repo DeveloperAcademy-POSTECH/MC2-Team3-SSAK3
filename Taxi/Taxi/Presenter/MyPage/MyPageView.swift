@@ -13,7 +13,7 @@ struct MyPageView: View {
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
     @State private var showProfile: Bool = false
-    @EnvironmentObject private var authentication: Authentication
+    @EnvironmentObject private var authentication: UserInfoState
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -90,6 +90,6 @@ private extension MyPageView {
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
         MyPageView()
-            .environmentObject(Authentication())
+            .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
     }
 }

@@ -8,7 +8,6 @@
 import Combine
 
 protocol AuthenticateAdapter {
-    func login(with email: Email) -> AnyPublisher<UserInfo, Error>
-    func register(nickname: String) -> AnyPublisher<UserInfo, Error>
-    func sendEmail(to email: Email) -> AnyPublisher<Void, Error>
+    func login(with email: Email, with password: String) -> AnyPublisher<UserInfo, Error>
+    func register(with email: Email, with password: String, nickname: String) -> AnyPublisher<UserInfo, Error>
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaxiPartyInfoView: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var userViewModel: Authentication
+    @EnvironmentObject private var userViewModel: UserInfoState
     @EnvironmentObject private var listViewModel: ListViewModel
     @EnvironmentObject private var appState: AppState
     @Binding private var showBlur: Bool
@@ -157,15 +157,13 @@ private extension TaxiPartyInfoView {
     func roundedButton(_ text: String, loading: Binding<Bool>) -> some View {
         Button {
             isLoading = true
-            if let user = userViewModel.userInfo {
-                listViewModel.joinTaxiParty(in: taxiParty, user) {
-                    showBlur = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        dismiss()
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        appState.showChattingRoom(taxiParty)
-                    }
+            listViewModel.joinTaxiParty(in: taxiParty, userViewModel.userInfo) {
+                showBlur = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    dismiss()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    appState.showChattingRoom(taxiParty)
                 }
             }
         } label: {
@@ -233,6 +231,6 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
             members: ["123456"],
             isClosed: false
         ), showBlur: .constant(false))
-        .environmentObject(Authentication())
+        .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
     }
 }
