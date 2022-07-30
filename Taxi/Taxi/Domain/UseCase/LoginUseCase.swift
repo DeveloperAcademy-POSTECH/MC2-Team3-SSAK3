@@ -10,11 +10,11 @@ import Combine
 final class LoginUseCase {
     private let authenticator: AuthenticateAdapter
 
-    init(authenticator: AuthenticateAdapter = FirebaseAuthenticatorAdapter()) {
+    init(authenticator: AuthenticateAdapter = FirebaseAuthenticaterAdpater()) {
         self.authenticator = authenticator
     }
 
-    func login(with email: Email) -> AnyPublisher<UserInfo, Error> {
-        return authenticator.login(with: email)
+    func login(with email: Email, password: String) -> AnyPublisher<UserInfo, Error> {
+        return authenticator.login(with: email, with: password)
     }
 }

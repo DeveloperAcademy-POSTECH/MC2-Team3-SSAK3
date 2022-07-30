@@ -27,6 +27,10 @@
 		000E83B4284A2D55000CD5AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 000E83B3284A2D55000CD5AA /* GoogleService-Info.plist */; };
 		000E83B7284A2DBF000CD5AA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 000E83B6284A2DBF000CD5AA /* FirebaseMessaging */; };
 		00102B63284D833C000B8BFF /* 1Profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 00102B62284D833C000B8BFF /* 1Profile.jpg */; };
+		002003522894D8DC00545E2B /* SignHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002003512894D8DC00545E2B /* SignHome.swift */; };
+		002003542894DD4500545E2B /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002003532894DD4500545E2B /* SignIn.swift */; };
+		002003562894DE6300545E2B /* UnderlinedPasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */; };
+		002003582894E2D400545E2B /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002003572894E2D400545E2B /* SignUp.swift */; };
 		002F89EB284CA10800D7E51B /* UserFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F89EA284CA10800D7E51B /* UserFirebaseDataSource.swift */; };
 		002F89EF284CA5FF00D7E51B /* UserRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */; };
 		003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 003ABC0B284749F7000FA7A2 /* .swiftlint.yml */; };
@@ -38,10 +42,8 @@
 		00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */; };
 		00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */; };
 		00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */; };
-		005744B0287AB47E0033E578 /* AuthenticateState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005744AF287AB47E0033E578 /* AuthenticateState.swift */; };
 		00842A94284B2682000292E5 /* TaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A93284B2682000292E5 /* TaxiParty.swift */; };
 		00842A96284B287D000292E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A95284B287D000292E5 /* Place.swift */; };
-		009D1D34287124920073D707 /* SendEmailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009D1D33287124920073D707 /* SendEmailUseCase.swift */; };
 		009D1D38287125DF0073D707 /* SendEmailUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009D1D37287125DF0073D707 /* SendEmailUseCaseTest.swift */; };
 		00A5705A2851826A008B220E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570592851826A008B220E /* ColorExtension.swift */; };
 		00A5705C285182E1008B220E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5705B285182E1008B220E /* RoundedButton.swift */; };
@@ -51,7 +53,6 @@
 		00BC474128581E860055CB6A /* InfoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC474028581E860055CB6A /* InfoContainer.swift */; };
 		00BC47472858CAF80055CB6A /* AddTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545728531C510085C39E /* AddTaxiPartyUseCase.swift */; };
 		00C4D09B287907E30019B8C4 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */; };
-		00C4D09D287909490019B8C4 /* SignUpNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4D09C287909490019B8C4 /* SignUpNickname.swift */; };
 		00CE2336287A72C700931394 /* GetUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CE2335287A72C700931394 /* GetUserInfoUseCase.swift */; };
 		00CE2338287A904800931394 /* ChangeNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CE2337287A904800931394 /* ChangeNicknameUseCase.swift */; };
 		00CE233A287A90C600931394 /* ChangeProfieImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CE2339287A90C600931394 /* ChangeProfieImageUseCase.swift */; };
@@ -62,9 +63,7 @@
 		00E7435328781E2E00C37B2E /* AuthenticateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */; };
 		00E743562878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */; };
 		00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743572878282A00C37B2E /* LoginUseCase.swift */; };
-		00E7435B2878300300C37B2E /* SignInEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435A2878300300C37B2E /* SignInEmail.swift */; };
 		00E7435E28783B7900C37B2E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 00E7435D28783B7900C37B2E /* Lottie */; };
-		00E7436028783BC100C37B2E /* SignInWaitDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435F28783BC100C37B2E /* SignInWaitDeepLink.swift */; };
 		00E7436228783C5700C37B2E /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 00E7436128783C5700C37B2E /* loadingAnimation.json */; };
 		00E7436428783C6B00C37B2E /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7436328783C6B00C37B2E /* LottieView.swift */; };
 		00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* UserInfo.swift */; };
@@ -99,7 +98,7 @@
 		508AE80F285A6E5500D111D3 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508AE80E285A6E5500D111D3 /* UserProfileViewModel.swift */; };
 		50DA19632856065200DEC46E /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DA19622856065200DEC46E /* ProfileImage.swift */; };
 		50F3D18B28537B110004B5CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */; };
-		50F8003B28586F9200FA1063 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F8003A28586F9200FA1063 /* Authentication.swift */; };
+		50F8003B28586F9200FA1063 /* UserInfoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F8003A28586F9200FA1063 /* UserInfoState.swift */; };
 		A87934CC2859FC5400FDCDBA /* OnboardFirstPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87934CB2859FC5400FDCDBA /* OnboardFirstPage.swift */; };
 		A8982EC9285B6780000D11D0 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8982EC8285B6780000D11D0 /* Launch Screen.storyboard */; };
 		A8BD8115285A3543003D744B /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BD8114285A3543003D744B /* Onboarding.swift */; };
@@ -160,6 +159,10 @@
 		000E545D2853622D0085C39E /* DeleteProfileImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileImageUseCase.swift; sourceTree = "<group>"; };
 		000E83B3284A2D55000CD5AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		00102B62284D833C000B8BFF /* 1Profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1Profile.jpg; sourceTree = "<group>"; };
+		002003512894D8DC00545E2B /* SignHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignHome.swift; sourceTree = "<group>"; };
+		002003532894DD4500545E2B /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
+		002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedPasswordTextField.swift; sourceTree = "<group>"; };
+		002003572894E2D400545E2B /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		002F89EA284CA10800D7E51B /* UserFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirebaseDataSource.swift; sourceTree = "<group>"; };
 		002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryTest.swift; sourceTree = "<group>"; };
 		003ABC0B284749F7000FA7A2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -173,10 +176,8 @@
 		00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
 		004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiRelease.entitlements; sourceTree = "<group>"; };
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		005744AF287AB47E0033E578 /* AuthenticateState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateState.swift; sourceTree = "<group>"; };
 		00842A93284B2682000292E5 /* TaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiParty.swift; sourceTree = "<group>"; };
 		00842A95284B287D000292E5 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
-		009D1D33287124920073D707 /* SendEmailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmailUseCase.swift; sourceTree = "<group>"; };
 		009D1D37287125DF0073D707 /* SendEmailUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmailUseCaseTest.swift; sourceTree = "<group>"; };
 		00A570592851826A008B220E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		00A5705B285182E1008B220E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -185,7 +186,6 @@
 		00BC473E28581E740055CB6A /* AddTaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiParty.swift; sourceTree = "<group>"; };
 		00BC474028581E860055CB6A /* InfoContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoContainer.swift; sourceTree = "<group>"; };
 		00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
-		00C4D09C287909490019B8C4 /* SignUpNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNickname.swift; sourceTree = "<group>"; };
 		00CE2335287A72C700931394 /* GetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoUseCase.swift; sourceTree = "<group>"; };
 		00CE2337287A904800931394 /* ChangeNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameUseCase.swift; sourceTree = "<group>"; };
 		00CE2339287A90C600931394 /* ChangeProfieImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfieImageUseCase.swift; sourceTree = "<group>"; };
@@ -196,8 +196,6 @@
 		00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateAdapter.swift; sourceTree = "<group>"; };
 		00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticatorAdapter.swift; sourceTree = "<group>"; };
 		00E743572878282A00C37B2E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
-		00E7435A2878300300C37B2E /* SignInEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmail.swift; sourceTree = "<group>"; };
-		00E7435F28783BC100C37B2E /* SignInWaitDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWaitDeepLink.swift; sourceTree = "<group>"; };
 		00E7436128783C5700C37B2E /* loadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
 		00E7436328783C6B00C37B2E /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -219,7 +217,7 @@
 		508A8753285F168F00998595 /* KeyboardResponser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponser.swift; sourceTree = "<group>"; };
 		508AE80E285A6E5500D111D3 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		50DA19622856065200DEC46E /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
-		50F8003A28586F9200FA1063 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		50F8003A28586F9200FA1063 /* UserInfoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoState.swift; sourceTree = "<group>"; };
 		A87934CB2859FC5400FDCDBA /* OnboardFirstPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardFirstPage.swift; sourceTree = "<group>"; };
 		A8982EC8285B6780000D11D0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A8BD8114285A3543003D744B /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
@@ -335,7 +333,6 @@
 				000E545D2853622D0085C39E /* DeleteProfileImageUseCase.swift */,
 				00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */,
 				000C24F62859CB440054D679 /* ChattingUseCase.swift */,
-				009D1D33287124920073D707 /* SendEmailUseCase.swift */,
 				00E743572878282A00C37B2E /* LoginUseCase.swift */,
 				00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */,
 				00CE2335287A72C700931394 /* GetUserInfoUseCase.swift */,
@@ -459,6 +456,7 @@
 				508A874E285EDC7D00998595 /* SizeReader.swift */,
 				508A8753285F168F00998595 /* KeyboardResponser.swift */,
 				00E7436328783C6B00C37B2E /* LottieView.swift */,
+				002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -483,10 +481,9 @@
 		00E7435928782FC500C37B2E /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				00E7435A2878300300C37B2E /* SignInEmail.swift */,
-				00E7435F28783BC100C37B2E /* SignInWaitDeepLink.swift */,
-				00C4D09C287909490019B8C4 /* SignUpNickname.swift */,
-				005744AF287AB47E0033E578 /* AuthenticateState.swift */,
+				002003512894D8DC00545E2B /* SignHome.swift */,
+				002003532894DD4500545E2B /* SignIn.swift */,
+				002003572894E2D400545E2B /* SignUp.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -556,7 +553,7 @@
 		50F8003C285882DA00FA1063 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				50F8003A28586F9200FA1063 /* Authentication.swift */,
+				50F8003A28586F9200FA1063 /* UserInfoState.swift */,
 				000C24FA2859E74E0054D679 /* ChattingViewModel.swift */,
 				508AE80E285A6E5500D111D3 /* UserProfileViewModel.swift */,
 				0007A748285CA71600B7EF1F /* ListViewModel.swift */,
@@ -768,9 +765,12 @@
 			files = (
 				00E743562878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift in Sources */,
 				00CE2338287A904800931394 /* ChangeNicknameUseCase.swift in Sources */,
+				002003562894DE6300545E2B /* UnderlinedPasswordTextField.swift in Sources */,
 				00BC47472858CAF80055CB6A /* AddTaxiPartyUseCase.swift in Sources */,
+				002003522894D8DC00545E2B /* SignHome.swift in Sources */,
 				00F6B7312859C44D00DACA06 /* ChattingRepository.swift in Sources */,
 				000E545A285321250085C39E /* JoinTaxiPartyUseCase.swift in Sources */,
+				002003542894DD4500545E2B /* SignIn.swift in Sources */,
 				00E7435328781E2E00C37B2E /* AuthenticateAdapter.swift in Sources */,
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				A8C146A9285A525100F6D37F /* OnboardThirdPage.swift in Sources */,
@@ -783,12 +783,10 @@
 				E63C7AA72858B5DE0080530B /* CalendarHelper.swift in Sources */,
 				0007A742285C069900B7EF1F /* RootView.swift in Sources */,
 				50DA19632856065200DEC46E /* ProfileImage.swift in Sources */,
-				00E7435B2878300300C37B2E /* SignInEmail.swift in Sources */,
 				505955972850BF46001DA44C /* ProfileView.swift in Sources */,
 				E63C7AA92858B6130080530B /* CalendarView.swift in Sources */,
 				AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
-				00E7436028783BC100C37B2E /* SignInWaitDeepLink.swift in Sources */,
 				00CE2336287A72C700931394 /* GetUserInfoUseCase.swift in Sources */,
 				0007A749285CA71600B7EF1F /* ListViewModel.swift in Sources */,
 				508AE80F285A6E5500D111D3 /* UserProfileViewModel.swift in Sources */,
@@ -803,7 +801,6 @@
 				37F698852855FB910008C022 /* MyPartyView.swift in Sources */,
 				00A570662851EA33008B220E /* MainView.swift in Sources */,
 				50595595285037AE001DA44C /* MyPageView.swift in Sources */,
-				005744B0287AB47E0033E578 /* AuthenticateState.swift in Sources */,
 				00842A96284B287D000292E5 /* Place.swift in Sources */,
 				37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */,
 				00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */,
@@ -815,14 +812,13 @@
 				E63C7AA02858B5170080530B /* DayContainer.swift in Sources */,
 				00E7436428783C6B00C37B2E /* LottieView.swift in Sources */,
 				508A874F285EDC7D00998595 /* SizeReader.swift in Sources */,
+				002003582894E2D400545E2B /* SignUp.swift in Sources */,
 				A87934CC2859FC5400FDCDBA /* OnboardFirstPage.swift in Sources */,
-				009D1D34287124920073D707 /* SendEmailUseCase.swift in Sources */,
 				0009F7F3285F561C0058007B /* UserInMemoryCache.swift in Sources */,
 				00D3AE76284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift in Sources */,
-				00C4D09D287909490019B8C4 /* SignUpNickname.swift in Sources */,
 				00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */,
 				E63C7AB42858C2650080530B /* UnderlinedTextField.swift in Sources */,
-				50F8003B28586F9200FA1063 /* Authentication.swift in Sources */,
+				50F8003B28586F9200FA1063 /* UserInfoState.swift in Sources */,
 				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
 				000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */,
 				00CE233A287A90C600931394 /* ChangeProfieImageUseCase.swift in Sources */,

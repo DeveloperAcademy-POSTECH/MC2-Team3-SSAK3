@@ -45,7 +45,7 @@ struct MyPartySectionHeader: View {
 
 struct MyPartyList: View {
     @EnvironmentObject private var listViewModel: ListViewModel
-    @EnvironmentObject private var authentication: Authentication
+    @EnvironmentObject private var authentication: UserInfoState
     @EnvironmentObject private var appState: AppState
     @State private var isSwiped: Bool = false
     @State private var showAlert: Bool = false
@@ -79,7 +79,7 @@ struct MyPartyList: View {
         ZStack {
             NavigationLink(isActive: $appState.showChattingRoom) {
                 if let taxiParty = appState.currentTaxiParty {
-                    ChatRoomView(party: taxiParty, user: authentication.userInfo!)
+                    ChatRoomView(party: taxiParty, user: authentication.userInfo)
                 }
             } label: {
                 EmptyView()
@@ -90,7 +90,7 @@ struct MyPartyList: View {
                         Section(header: MyPartySectionHeader(date: date)) {
                             ForEach(partys[date]!, id: \.id) { party in
                                 NavigationLink {
-                                    ChatRoomView(party: party, user: authentication.userInfo!)
+                                    ChatRoomView(party: party, user: authentication.userInfo)
                                 } label: {
                                     PartyListCell(party: party)
                                 }
@@ -123,7 +123,7 @@ struct MyPartyList: View {
 
     private func delete(object: TaxiParty?) {
         guard let party = object else { return }
-        listViewModel.leaveMyParty(party: party, user: authentication.userInfo!)
+        listViewModel.leaveMyParty(party: party, user: authentication.userInfo)
     }
 }
 
@@ -260,7 +260,7 @@ struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             MyPartyView()
-                .environmentObject(Authentication())
+                .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
                 .environmentObject(ListViewModel(userId: ""))
         }
     }

@@ -11,16 +11,16 @@ final class RegisterUseCase {
     private let authenticateAdapter: AuthenticateAdapter
     private var cancelBag: Set<AnyCancellable> = []
 
-    init(authenticateAdapter: AuthenticateAdapter = FirebaseAuthenticatorAdapter()) {
+    init(authenticateAdapter: AuthenticateAdapter = FirebaseAuthenticaterAdpater()) {
         self.authenticateAdapter = authenticateAdapter
     }
 
-    func register(_ nickname: String) -> AnyPublisher<UserInfo, Error> {
-        authenticateAdapter.register(nickname: nickname)
+    func register(with email: Email, _ password: String, _ nickname: String) -> AnyPublisher<UserInfo, Error> {
+        authenticateAdapter.register(with: email, with: password, nickname: nickname)
     }
 
-    func register(_ nickname: String, completion: @escaping (UserInfo?, Error?) -> Void) {
-        authenticateAdapter.register(nickname: nickname)
+    func register(with email: Email, _ password: String, _ nickname: String, completion: @escaping (UserInfo?, Error?) -> Void) {
+        authenticateAdapter.register(with: email, with: password, nickname: nickname)
             .sink { result in
                 if case let .failure(error) = result {
                     completion(nil, error)

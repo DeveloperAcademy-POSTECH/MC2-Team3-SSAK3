@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct RootView: View {
-    @EnvironmentObject private var authentication: Authentication
+    @EnvironmentObject private var appState: AppState
 
     var body: some View {
-        if let userInfo = authentication.userInfo {
+        if let userInfo = appState.currentUserInfo {
             MainView(userInfo.id)
+                .environmentObject(UserInfoState(userInfo))
         } else {
             OnboardingView()
         }
@@ -22,6 +23,6 @@ struct RootView: View {
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView()
-            .environmentObject(Authentication())
+            .environmentObject(AppState())
     }
 }
