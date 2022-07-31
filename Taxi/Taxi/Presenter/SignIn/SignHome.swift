@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SignHome: View {
+
+    @StateObject private var signInViewModel: SignInViewModel = SignInViewModel()
+
     var body: some View {
         VStack(alignment: .leading) {
             title
@@ -65,7 +68,7 @@ private extension SignHome {
                     .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
             }
             NavigationLink {
-                SignIn()
+                SignIn(signInViewModel: signInViewModel)
             } label: {
                 Text("로그인")
                     .padding()

@@ -7,16 +7,13 @@
 
 import SwiftUI
 
-enum FieldState {
-    case normal(message: String)
-    case invalid(message: String)
-    case valid(message: String)
+extension ValidationResult {
 
     var isValid: Bool {
         switch self {
         case .valid:
             return true
-        case .normal, .invalid:
+        case .empty, .invalid:
             return false
         }
     }
@@ -24,7 +21,7 @@ enum FieldState {
     @ViewBuilder
     var stateText: some View {
         switch self {
-        case .normal(let message):
+        case .empty(let message):
             Text(message)
                 .font(.caption)
                 .fontWeight(.regular)
@@ -51,7 +48,7 @@ enum FieldState {
     // MARK: - func
     func getUnderlineColor() -> Color {
         switch self {
-        case .normal:
+        case .empty:
             return Color.charcoal
         case .invalid:
             return Color.customRed
@@ -63,13 +60,13 @@ enum FieldState {
 
 struct UnderlinedTextField: View {
     private var inputString: Binding<String>
-    private let fieldState: FieldState
+    private let validationResult: ValidationResult
     private let placeholder: String
     private let postfixText: String?
 
-    init(text inputString: Binding<String>, _ fieldState: FieldState, _ placeholder: String, postfixText: String? = nil) {
+    init(text inputString: Binding<String>, _ validationResult: ValidationResult, _ placeholder: String, postfixText: String? = nil) {
         self.inputString = inputString
-        self.fieldState = fieldState
+        self.validationResult = validationResult
         self.placeholder = placeholder
         self.postfixText = postfixText
     }
@@ -87,10 +84,10 @@ struct UnderlinedTextField: View {
                 }
                 Rectangle()
                     .frame(height: 2)
-                    .foregroundColor(fieldState.getUnderlineColor())
+                    .foregroundColor(validationResult.getUnderlineColor())
                     .padding(.top, 40)
             }
-            fieldState.stateText
+            validationResult.stateText
         }
     }
 }
@@ -98,7 +95,7 @@ struct UnderlinedTextField: View {
 struct UnderlinedTextField_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            UnderlinedTextField(text: .constant(""), .normal(message: "하하하하하"), "placeholder")
+            UnderlinedTextField(text: .constant(""), .empty(message: "하하하하하"), "placeholder")
                 .padding()
             UnderlinedTextField(text: .constant("pjh00098"), .valid(message: "입력"), "이메일을 입력해주세요.", postfixText: "@pos.idserve.net")
                 .padding()

@@ -14,7 +14,7 @@ final class LoginUseCase {
         self.authenticator = authenticator
     }
 
-    func login(with email: Email, password: String) -> AnyPublisher<UserInfo, Error> {
+    func login(with email: String, password: String) -> AnyPublisher<UserInfo, Error> {
         return authenticator.login(with: email, with: password)
     }
 }

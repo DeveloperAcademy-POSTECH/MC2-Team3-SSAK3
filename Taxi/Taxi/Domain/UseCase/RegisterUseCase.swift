@@ -15,11 +15,11 @@ final class RegisterUseCase {
         self.authenticateAdapter = authenticateAdapter
     }
 
-    func register(with email: Email, _ password: String, _ nickname: String) -> AnyPublisher<UserInfo, Error> {
+    func register(with email: String, _ password: String, _ nickname: String) -> AnyPublisher<UserInfo, Error> {
         authenticateAdapter.register(with: email, with: password, nickname: nickname)
     }
 
-    func register(with email: Email, _ password: String, _ nickname: String, completion: @escaping (UserInfo?, Error?) -> Void) {
+    func register(with email: String, _ password: String, _ nickname: String, completion: @escaping (UserInfo?, Error?) -> Void) {
         authenticateAdapter.register(with: email, with: password, nickname: nickname)
             .sink { result in
                 if case let .failure(error) = result {
