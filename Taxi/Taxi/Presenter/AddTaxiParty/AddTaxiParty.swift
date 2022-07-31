@@ -20,6 +20,7 @@ extension AddTaxiParty {
 }
 struct AddTaxiParty: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var appState: AppState
     @State private var step: AddTaxiParty.Step = .destination // 현재 정보 입력 단계
     @State private var destination: Place? // 목적지
     @State private var startDate: Date? // 출발 날짜
@@ -63,7 +64,7 @@ struct AddTaxiParty: View {
                 RoundedButton("택시팟 생성", !checkAllInfoSelected(), loading: viewModel.isAdding) {
                     let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: (startHour! * 100) + startMinute!, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
                     viewModel.addTaxiParty(taxiParty, user: user) { taxiParty in
-                        print(taxiParty)
+                        appState.showChattingRoom(taxiParty)
                         dismiss()
                     } onError: { error in
                         print(error)
@@ -379,5 +380,6 @@ struct AddTaxiParty_Previews: PreviewProvider {
     static var previews: some View {
         AddTaxiParty(user: UserInfo(id: "하이", nickname: "하이", profileImage: ""))
             .environmentObject(ListViewModel(userId: ""))
+            .environmentObject(AppState())
     }
 }

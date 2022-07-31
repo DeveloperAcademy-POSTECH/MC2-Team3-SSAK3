@@ -18,6 +18,12 @@ struct TaxiParty: Codable {
     let isClosed: Bool
 }
 
+extension TaxiParty {
+    func satisfyCapacity() -> Bool {
+        members.count < maxPersonNumber
+    }
+}
+
 extension TaxiParty: CustomStringConvertible {
     var description: String {
         "출발 날짜: \(meetingDate) 출발 시간: \(meetingTime) 출발지: \(Place.of(departureCode).rawValue) 도착지: \(Place.of(destinationCode).rawValue)"
