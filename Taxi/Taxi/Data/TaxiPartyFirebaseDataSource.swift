@@ -34,7 +34,7 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
                 var ret: [TaxiParty] = []
                 for document in documents {
                     let taxiParty: TaxiParty = try document.data(as: TaxiParty.self)
-                    if !taxiParty.members.contains(id ?? "") {
+                    if !taxiParty.members.contains(id ?? "") && taxiParty.satisfyCapacity() {
                         ret.append(taxiParty)
                     }
                 }

@@ -44,6 +44,8 @@ extension SignInViewModel {
                 self.isLoading = false
             } receiveValue: { [weak self] userInfo in
                 guard let self = self else { return }
+                UserDefaults.standard.set(self.email.value + "@pos.idserve.net", forKey: "email")
+                UserDefaults.standard.set(self.password.value, forKey: "password")
                 self.userInfo = userInfo
             }.store(in: &cancelBag)
     }
