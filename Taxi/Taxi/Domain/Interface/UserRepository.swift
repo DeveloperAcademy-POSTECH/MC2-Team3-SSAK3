@@ -8,8 +8,6 @@
 import Combine
 import Foundation
 
-typealias Email = String
-
 protocol UserRepository {
 
     /// 회원가입 시 호출하는 함수
