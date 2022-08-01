@@ -20,7 +20,7 @@ struct TaxiParty: Codable {
 
 extension TaxiParty {
     func satisfyCapacity() -> Bool {
-        members.count < maxPersonNumber
+        members.count < maxPersonNumber && members.count != 0
     }
 }
 

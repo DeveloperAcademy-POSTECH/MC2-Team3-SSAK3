@@ -30,6 +30,7 @@ struct MyPageView: View {
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
                 .frame(height: 5)
+            logoutButton
             deleteUserButton
             Spacer()
         }
@@ -48,6 +49,15 @@ struct MyPageView: View {
                 .foregroundColor(.customRed)
             Button("취소", role: .cancel) {
                 isTryingDeleteUser = false
+            }
+        }
+        .alert("로그아웃 하시겠습니까?", isPresented: $isTryLogout) {
+            Button("로그아웃", role: .destructive) {
+                appState.logout()
+            }
+            .foregroundColor(.customRed)
+            Button("취소", role: .cancel) {
+                isTryLogout = false
             }
         }
     }
@@ -114,6 +124,17 @@ private extension MyPageView {
                 .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
                 .foregroundColor(.customRed)
                 .padding()
+        }
+    }
+
+    var logoutButton: some View {
+        Button {
+            isTryLogout = true
+        } label: {
+            Text("로그아웃")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .padding(.top)
+                .padding(.horizontal)
         }
     }
 }
