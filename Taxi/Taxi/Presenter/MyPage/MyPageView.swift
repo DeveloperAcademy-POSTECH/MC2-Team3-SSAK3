@@ -13,7 +13,9 @@ struct MyPageView: View {
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
     @State private var showProfile: Bool = false
+    @State private var isTryingDeleteUser: Bool = false
     @EnvironmentObject private var authentication: UserInfoState
+    @EnvironmentObject private var appState: AppState
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -25,10 +27,28 @@ struct MyPageView: View {
             notificationHeader
             notificationSetting("채팅 알림", isOn: $chattingNoti)
             notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
+            Rectangle()
+                .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
+                .frame(height: 5)
+            deleteUserButton
             Spacer()
         }
         .sheet(isPresented: $showProfile) {
             ProfileView()
+        }
+        .onChange(of: authentication.goToHomeEvent) { newValue in
+            if newValue {
+                appState.logout()
+            }
+        }
+        .alert("회원 탈퇴하시겠습니까?", isPresented: $isTryingDeleteUser) {
+            Button("탈퇴", role: .destructive) {
+                authentication.deleteUser()
+            }
+                .foregroundColor(.customRed)
+            Button("취소", role: .cancel) {
+                isTryingDeleteUser = false
+            }
         }
     }
 }
@@ -85,11 +105,23 @@ private extension MyPageView {
         }
         .padding(.horizontal)
     }
+
+    var deleteUserButton: some View {
+        Button {
+            isTryingDeleteUser = true
+        } label: {
+            Text("회원탈퇴")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .foregroundColor(.customRed)
+                .padding()
+        }
+    }
 }
 
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
         MyPageView()
             .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
+            .environmentObject(AppState())
     }
 }

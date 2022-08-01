@@ -14,9 +14,8 @@ enum Tab {
     case setting
 }
 struct MainView: View {
-    @State private var currentTab: Tab = .taxiParty
     @StateObject private var viewModel: ListViewModel
-    @StateObject private var appState: AppState = AppState()
+    @EnvironmentObject private var appState: AppState
 
     init(_ userId: String) {
         self._viewModel = StateObject(wrappedValue: ListViewModel(userId: userId))
@@ -58,7 +57,6 @@ struct MainView: View {
             }
         }
         .environmentObject(viewModel)
-        .environmentObject(appState)
     }
 }
 
@@ -67,5 +65,6 @@ struct MainView_Previews: PreviewProvider {
         MainView("")
             .environmentObject(UserInfoState(
             UserInfo(id: "", nickname: "", profileImage: "")))
+            .environmentObject(AppState())
     }
 }

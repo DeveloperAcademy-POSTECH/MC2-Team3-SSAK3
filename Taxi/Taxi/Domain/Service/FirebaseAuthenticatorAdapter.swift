@@ -49,6 +49,22 @@ final class FirebaseAuthenticaterAdpater: AuthenticateAdapter {
             .eraseToAnyPublisher()
     }
 
+    func deleteUser(with userInfo: UserInfo) -> AnyPublisher<Void, Error> {
+        self.userRepository.deleteUser(userInfo)
+            .flatMap { _ in
+                Future<Void, Error> { promise in
+                    Auth.auth().currentUser?.delete(completion: { error in
+                        if let error = error {
+                            promise(Result.failure(error))
+                        } else {
+                            promise(Result.success(Void()))
+                        }
+                    })
+                }
+            }
+        .eraseToAnyPublisher()
+    }
+
 }
 
 // MARK: - private functions

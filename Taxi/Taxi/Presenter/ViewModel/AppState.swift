@@ -26,8 +26,10 @@ final class AppState: ObservableObject {
 
     func showChattingRoom(_ taxiParty: TaxiParty) {
         tab = .myParty
-        currentTaxiParty = taxiParty
-        showChattingRoom = true
+    }
+
+    func logout() {
+        self.currentUserInfo = nil
     }
 }
 

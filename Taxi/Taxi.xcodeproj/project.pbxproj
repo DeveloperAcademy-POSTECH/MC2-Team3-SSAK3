@@ -42,6 +42,7 @@
 		00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */; };
 		00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */; };
 		00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */; };
+		00662A032897BBE8006266B9 /* DeleteUserUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00662A022897BBE8006266B9 /* DeleteUserUsecase.swift */; };
 		00842A94284B2682000292E5 /* TaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A93284B2682000292E5 /* TaxiParty.swift */; };
 		00842A96284B287D000292E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A95284B287D000292E5 /* Place.swift */; };
 		009164BB289607170076D680 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009164BA289607170076D680 /* Email.swift */; };
@@ -183,6 +184,7 @@
 		00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
 		004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiRelease.entitlements; sourceTree = "<group>"; };
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		00662A022897BBE8006266B9 /* DeleteUserUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserUsecase.swift; sourceTree = "<group>"; };
 		00842A93284B2682000292E5 /* TaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiParty.swift; sourceTree = "<group>"; };
 		00842A95284B287D000292E5 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		009164BA289607170076D680 /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				00CE2335287A72C700931394 /* GetUserInfoUseCase.swift */,
 				00CE2337287A904800931394 /* ChangeNicknameUseCase.swift */,
 				00CE2339287A90C600931394 /* ChangeProfieImageUseCase.swift */,
+				00662A022897BBE8006266B9 /* DeleteUserUsecase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				50F8003B28586F9200FA1063 /* UserInfoState.swift in Sources */,
 				00B5394D2895713E0058D27F /* Validatable.swift in Sources */,
 				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
+				00662A032897BBE8006266B9 /* DeleteUserUsecase.swift in Sources */,
 				000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */,
 				00CE233A287A90C600931394 /* ChangeProfieImageUseCase.swift in Sources */,
 				009164BB289607170076D680 /* Email.swift in Sources */,

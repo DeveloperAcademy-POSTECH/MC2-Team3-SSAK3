@@ -130,4 +130,10 @@ final class UserFirebaseDataSource: UserRepository {
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
+
+    func deleteUser(_ user: UserInfo) -> AnyPublisher<Void, Error> {
+        let docRef = fireStore.collection("User").document(user.id)
+
+        return docRef.delete().eraseToAnyPublisher()
+    }
 }

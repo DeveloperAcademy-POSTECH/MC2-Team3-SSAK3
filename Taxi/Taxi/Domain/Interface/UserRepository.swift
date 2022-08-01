@@ -41,4 +41,9 @@ protocol UserRepository {
     /// - Returns: User 혹은 Error 를 발행하는 Publisher, 업데이트에 성공하면 User 를, 실패하면 Error 를 반환한다.
     func deleteProfileImage(for user: UserInfo) -> AnyPublisher<UserInfo, Error>
 
+    /// 회원 정보를 삭제하는 함수
+    /// - Parameter user: 삭제할 회원정보
+    /// - Returns: 실패 시 Error 를 반환한다.
+    func deleteUser(_ user: UserInfo) -> AnyPublisher<Void, Error>
+
 }

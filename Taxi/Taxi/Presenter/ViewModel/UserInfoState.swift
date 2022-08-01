@@ -10,6 +10,7 @@ import Foundation
 
 final class UserInfoState: ObservableObject {
     @Published private (set) var userInfo: UserInfo
+    @Published private (set) var goToHomeEvent: Bool = false
     private var cancelBag: Set<AnyCancellable> = []
 
     // MARK: - Dependency
@@ -17,17 +18,21 @@ final class UserInfoState: ObservableObject {
     private let changeNicknameUseCase: ChangeNicknameUseCase
     private let changeProfileImageUseCase: ChangeProfileImageUseCase
     private let deleteProfileImageUseCase: DeleteProfileImageUseCase
+    private let deleteUserUsecase: DeleteUserUsecase
 
     init(_ userInfo: UserInfo,
          authenticateUseCase: DeleteProfileImageUseCase = DeleteProfileImageUseCase(),
          changeNicknameUseCase: ChangeNicknameUseCase = ChangeNicknameUseCase(),
          changeProfileImageUseCase: ChangeProfileImageUseCase = ChangeProfileImageUseCase(),
-         deleteProfileImageUseCase: DeleteProfileImageUseCase = DeleteProfileImageUseCase()) {
+         deleteProfileImageUseCase: DeleteProfileImageUseCase = DeleteProfileImageUseCase(),
+         deleteUserUsecase: DeleteUserUsecase = DeleteUserUsecase()
+    ) {
         self.userInfo = userInfo
         self.deleteProfileImageUsecase = authenticateUseCase
         self.changeNicknameUseCase = changeNicknameUseCase
         self.changeProfileImageUseCase = changeProfileImageUseCase
         self.deleteProfileImageUseCase = deleteProfileImageUseCase
+        self.deleteUserUsecase = deleteUserUsecase
     }
 
     func updateNickname(_ newName: String) {
@@ -50,4 +55,19 @@ final class UserInfoState: ObservableObject {
             self.userInfo = user
         }
     }
+
+    func deleteUser() {
+        deleteUserUsecase.deleteUser(userInfo)
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    self.goToHomeEvent = true
+                }
+            } receiveValue: { _ in }
+            .store(in: &cancelBag)
+    }
+
 }
