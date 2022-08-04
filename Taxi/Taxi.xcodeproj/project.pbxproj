@@ -42,6 +42,7 @@
 		00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */; };
 		00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */; };
 		00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */; };
+		0063D7A0289BC6CA00CFD5F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0063D7A2289BC6CA00CFD5F5 /* InfoPlist.strings */; };
 		00662A032897BBE8006266B9 /* DeleteUserUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00662A022897BBE8006266B9 /* DeleteUserUsecase.swift */; };
 		00842A94284B2682000292E5 /* TaxiParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A93284B2682000292E5 /* TaxiParty.swift */; };
 		00842A96284B287D000292E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00842A95284B287D000292E5 /* Place.swift */; };
@@ -71,9 +72,7 @@
 		00E7435328781E2E00C37B2E /* AuthenticateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */; };
 		00E743562878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */; };
 		00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743572878282A00C37B2E /* LoginUseCase.swift */; };
-		00E7435E28783B7900C37B2E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 00E7435D28783B7900C37B2E /* Lottie */; };
 		00E7436228783C5700C37B2E /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 00E7436128783C5700C37B2E /* loadingAnimation.json */; };
-		00E7436428783C6B00C37B2E /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7436328783C6B00C37B2E /* LottieView.swift */; };
 		00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* UserInfo.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E92498285A152F0026DD73 /* MessageMockData.swift */; };
@@ -184,6 +183,8 @@
 		00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
 		004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiRelease.entitlements; sourceTree = "<group>"; };
 		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0063D7A1289BC6CA00CFD5F5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0063D7A3289BC6CC00CFD5F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		00662A022897BBE8006266B9 /* DeleteUserUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserUsecase.swift; sourceTree = "<group>"; };
 		00842A93284B2682000292E5 /* TaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiParty.swift; sourceTree = "<group>"; };
 		00842A95284B287D000292E5 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -213,7 +214,6 @@
 		00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticatorAdapter.swift; sourceTree = "<group>"; };
 		00E743572878282A00C37B2E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		00E7436128783C5700C37B2E /* loadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
-		00E7436328783C6B00C37B2E /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		00E92498285A152F0026DD73 /* MessageMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMockData.swift; sourceTree = "<group>"; };
@@ -263,7 +263,6 @@
 				00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */,
 				00F856A62844A985008E2E2F /* FirebaseFunctions in Frameworks */,
 				00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */,
-				00E7435E28783B7900C37B2E /* Lottie in Frameworks */,
 				00F856AA2844A985008E2E2F /* FirebaseStorage in Frameworks */,
 				00F856A02844A985008E2E2F /* FirebaseFirestore in Frameworks */,
 				00F8569E2844A985008E2E2F /* FirebaseAuthCombine-Community in Frameworks */,
@@ -374,6 +373,7 @@
 		000D83192840E23800BA3DFA = {
 			isa = PBXGroup;
 			children = (
+				0063D7A2289BC6CA00CFD5F5 /* InfoPlist.strings */,
 				A8982EC8285B6780000D11D0 /* Launch Screen.storyboard */,
 				00102B62284D833C000B8BFF /* 1Profile.jpg */,
 				003ABC0B284749F7000FA7A2 /* .swiftlint.yml */,
@@ -472,7 +472,6 @@
 				50305A26285C4BEB00C10C82 /* TranparentBackground.swift */,
 				508A874E285EDC7D00998595 /* SizeReader.swift */,
 				508A8753285F168F00998595 /* KeyboardResponser.swift */,
-				00E7436328783C6B00C37B2E /* LottieView.swift */,
 				002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */,
 			);
 			path = Component;
@@ -646,7 +645,6 @@
 				50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */,
 				00F6B72928596F7D00DACA06 /* SegmentedPicker */,
 				508A8751285F13BD00998595 /* Introspect */,
-				00E7435D28783B7900C37B2E /* Lottie */,
 			);
 			productName = Taxi;
 			productReference = 000D83222840E23800BA3DFA /* Taxi.app */;
@@ -718,6 +716,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 000D83192840E23800BA3DFA;
 			packageReferences = (
@@ -725,7 +724,6 @@
 				50F3D18928537B110004B5CE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				00F6B72828596F7D00DACA06 /* XCRemoteSwiftPackageReference "SwiftySegmentedPicker" */,
 				508A8750285F13BC00998595 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				00E7435C28783B7900C37B2E /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 000D83232840E23800BA3DFA /* Products */;
 			projectDirPath = "";
@@ -744,6 +742,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */,
+				0063D7A0289BC6CA00CFD5F5 /* InfoPlist.strings in Resources */,
 				000E83B4284A2D55000CD5AA /* GoogleService-Info.plist in Resources */,
 				000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */,
 				00E7436228783C5700C37B2E /* loadingAnimation.json in Resources */,
@@ -843,7 +842,6 @@
 				A8BD8115285A3543003D744B /* Onboarding.swift in Sources */,
 				000E545E2853622D0085C39E /* DeleteProfileImageUseCase.swift in Sources */,
 				E63C7AA02858B5170080530B /* DayContainer.swift in Sources */,
-				00E7436428783C6B00C37B2E /* LottieView.swift in Sources */,
 				508A874F285EDC7D00998595 /* SizeReader.swift in Sources */,
 				002003582894E2D400545E2B /* SignUp.swift in Sources */,
 				A87934CC2859FC5400FDCDBA /* OnboardFirstPage.swift in Sources */,
@@ -921,6 +919,18 @@
 			targetProxy = 000D833D2840E23A00BA3DFA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0063D7A2289BC6CA00CFD5F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0063D7A1289BC6CA00CFD5F5 /* ko */,
+				0063D7A3289BC6CC00CFD5F5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		000D83442840E23A00BA3DFA /* Debug */ = {
@@ -1044,7 +1054,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Taxi/TaxiRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
@@ -1078,7 +1088,7 @@
 				CODE_SIGN_ENTITLEMENTS = Taxi/TaxiRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
@@ -1223,14 +1233,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		00E7435C28783B7900C37B2E /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		00F6B72828596F7D00DACA06 /* XCRemoteSwiftPackageReference "SwiftySegmentedPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/KazaiMazai/SwiftySegmentedPicker";
@@ -1270,11 +1272,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		00E7435D28783B7900C37B2E /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 00E7435C28783B7900C37B2E /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 		00F6B72928596F7D00DACA06 /* SegmentedPicker */ = {
 			isa = XCSwiftPackageProductDependency;

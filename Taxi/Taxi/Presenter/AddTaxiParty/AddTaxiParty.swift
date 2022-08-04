@@ -70,6 +70,7 @@ struct AddTaxiParty: View {
                         print(error)
                     }
                 }
+                .padding()
             }
         }
     }

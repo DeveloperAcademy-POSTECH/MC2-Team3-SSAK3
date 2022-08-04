@@ -51,7 +51,8 @@ struct TaxiPartyInfoView: View {
                     taxiPartyTime
                 }
                 taxiPartyPlace
-                roundedButton("시작하기", loading: $isLoading)
+                roundedButton("시작하기", loading: isLoading)
+                    .padding(.top)
             }
             .padding()
         }
@@ -154,8 +155,8 @@ private extension TaxiPartyInfoView {
         .foregroundColor(.customGray)
     }
 
-    func roundedButton(_ text: String, loading: Binding<Bool>) -> some View {
-        Button {
+    func roundedButton(_ text: String, loading: Bool) -> some View {
+        RoundedButton(text, false, loading: loading) {
             isLoading = true
             listViewModel.joinTaxiParty(in: taxiParty, userViewModel.userInfo) {
                 showBlur = false
@@ -166,21 +167,7 @@ private extension TaxiPartyInfoView {
                     appState.showChattingRoom(taxiParty)
                 }
             }
-        } label: {
-            if loading.wrappedValue {
-                ProgressView()
-            } else {
-                Text(text)
-                    .font(.system(size: 18))
-                    .fontWeight(.semibold)
-            }
         }
-        .padding(.vertical, 18)
-        .frame(maxWidth: .infinity)
-        .background(RoundedRectangle(cornerRadius: 15).fill(Color.customYellow))
-        .padding(.top)
-        .disabled(loading.wrappedValue)
-        .buttonStyle(.plain)
     }
 }
 

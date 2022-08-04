@@ -19,7 +19,7 @@ struct SignIn: View {
                 .font(.title3)
                 .bold()
                 .padding(.horizontal)
-            UnderlinedTextField(text: $signInViewModel.email.value, .empty(message: ""), "이메일을 입력해주세요", postfixText: "pos.idserve.net")
+            UnderlinedTextField(text: $signInViewModel.email.value, .empty(message: ""), "이메일을 입력해주세요", postfixText: "@pos.idserve.net")
                 .padding(.horizontal)
             Spacer()
             Text("비밀번호를 입력해주세요")

@@ -28,15 +28,15 @@ struct RoundedButton: View {
                     .fontWeight(.semibold)
                     .padding(.vertical, 18)
                     .frame(maxWidth: .infinity)
-                    .background(background)
-                    .padding(.horizontal)
                     .foregroundColor(loading ? .clear : .customBlack)
                 if loading {
                     ProgressView()
                 }
             }
+            .contentShape(Rectangle())
         }
         .disabled(disabled || loading)
+        .background(background)
         .buttonStyle(.plain)
     }
 

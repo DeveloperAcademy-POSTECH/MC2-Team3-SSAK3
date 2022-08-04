@@ -35,6 +35,7 @@ struct OnboardingView: View {
                             index += 1
                         }
                     }
+                    .padding()
                 }
                 NavigationLink(isActive: $skipOnboarding) {
                     SignHome()

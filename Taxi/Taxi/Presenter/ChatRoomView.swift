@@ -306,6 +306,7 @@ struct RoundedCorner: Shape {
     }
 }
 
+#if DEBUG
 struct ChatRoom_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -315,3 +316,4 @@ struct ChatRoom_Previews: PreviewProvider {
         }
     }
 }
+#endif

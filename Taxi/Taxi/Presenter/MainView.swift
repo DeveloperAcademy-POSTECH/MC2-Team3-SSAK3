@@ -60,6 +60,7 @@ struct MainView: View {
     }
 }
 
+#if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView("")
@@ -68,3 +69,4 @@ struct MainView_Previews: PreviewProvider {
             .environmentObject(AppState())
     }
 }
+#endif

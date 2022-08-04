@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Taxi
+
+  Created by JongHo Park on 2022/08/04.
+  
+*/
+
+"CFBundleDisplayName" = "popopot";
+"CFBundleName" = "popopot";

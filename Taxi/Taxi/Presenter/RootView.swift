@@ -11,12 +11,15 @@ struct RootView: View {
     @EnvironmentObject private var appState: AppState
 
     var body: some View {
-        if let userInfo = appState.currentUserInfo {
-            MainView(userInfo.id)
-                .environmentObject(UserInfoState(userInfo))
-        } else {
-            OnboardingView()
+        Group {
+            if let userInfo = appState.currentUserInfo {
+                MainView(userInfo.id)
+                    .environmentObject(UserInfoState(userInfo))
+            } else {
+                OnboardingView()
+            }
         }
+        .preferredColorScheme(.light)
     }
 }
 
