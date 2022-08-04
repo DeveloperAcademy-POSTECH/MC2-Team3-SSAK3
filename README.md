@@ -16,7 +16,7 @@
 ## 📹 Demo
 |Find Taxi Party|Make Taxi Party|Join Taxi Party|Chat with Taxi Party member|
 |:-:|:-:|:-:|:-:|
-|<img src="https://user-images.githubusercontent.com/58019653/182845424-d2ad9189-97ed-4ce0-8348-3a47565e4286.gif" width="200"/>|<img src="https://user-images.githubusercontent.com/58019653/182845701-9818c20b-17a0-455b-a224-11f4dc4bfac1.gif" width="200"/>|<img src="https://user-images.githubusercontent.com/58019653/182846006-5c3f0d5f-1121-456f-9324-6efd0a264f50.gif" width="200"/>|<img src="https://user-images.githubusercontent.com/58019653/182846337-a215a06c-7bc6-4e80-9522-b917674c8299.gif" width="200"/>|
+|<img src="https://user-images.githubusercontent.com/58019653/182845424-d2ad9189-97ed-4ce0-8348-3a47565e4286.gif"/>|<img src="https://user-images.githubusercontent.com/58019653/182845701-9818c20b-17a0-455b-a224-11f4dc4bfac1.gif"/>|<img src="https://user-images.githubusercontent.com/58019653/182846006-5c3f0d5f-1121-456f-9324-6efd0a264f50.gif"/>|<img src="https://user-images.githubusercontent.com/58019653/182846337-a215a06c-7bc6-4e80-9522-b917674c8299.gif"/>|
 <br>
 
 ## 🎆 Screenshots
