@@ -19,6 +19,7 @@ struct RootView: View {
                 OnboardingView()
             }
         }
+        .toast(isShowing: $appState.showToastMessage, message: appState.toastMessage)
         .preferredColorScheme(.light)
     }
 }

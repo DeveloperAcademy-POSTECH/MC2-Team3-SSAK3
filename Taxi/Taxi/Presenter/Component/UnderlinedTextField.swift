@@ -77,6 +77,7 @@ struct UnderlinedTextField: View {
                 HStack {
                     TextField(placeholder, text: inputString)
                         .disableAutocorrection(true)
+                        .textInputAutocapitalization(.never)
                     if let postfixText = postfixText {
                         Text(postfixText)
                             .foregroundColor(.signUpYellowGray)

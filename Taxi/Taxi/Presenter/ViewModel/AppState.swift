@@ -14,20 +14,32 @@ final class AppState: ObservableObject {
     @Published var tab: Tab = .taxiParty
     @Published var showChattingRoom: Bool = false
     @Published var currentUserInfo: UserInfo?
+    @Published var showToastMessage: Bool = false
 
+    // MARK: - Properties
+    private (set) var toastMessage: String = ""
     private let loginUsecase: LoginUseCase = LoginUseCase()
+    private (set) var currentTaxiParty: TaxiParty?
+    private var cancelBag: Set<AnyCancellable> = []
 
+    // MARK: - Lifecycle
     init() {
         autoLogin()
     }
+}
 
-    private (set) var currentTaxiParty: TaxiParty?
-    private var cancelBag: Set<AnyCancellable> = []
+// MARK: - API
+extension AppState {
 
     func showChattingRoom(_ taxiParty: TaxiParty) {
         tab = .myParty
         currentTaxiParty = taxiParty
         showChattingRoom = true
+    }
+
+    func showToastMessage(_ message: String) {
+        self.toastMessage = message
+        showToastMessage = true
     }
 
     func logout() {
@@ -37,6 +49,7 @@ final class AppState: ObservableObject {
     }
 }
 
+// MARK: - Internal functions
 private extension AppState {
     func autoLogin() {
         let email: String? = UserDefaults.standard.string(forKey: "email")

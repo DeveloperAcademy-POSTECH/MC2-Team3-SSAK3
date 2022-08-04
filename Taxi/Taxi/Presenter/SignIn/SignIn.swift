@@ -34,6 +34,7 @@ struct SignIn: View {
             RoundedButton("로그인", false, loading: signInViewModel.isLoading) {
                 signInViewModel.login()
             }
+            .padding()
         }
         .padding(.top)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

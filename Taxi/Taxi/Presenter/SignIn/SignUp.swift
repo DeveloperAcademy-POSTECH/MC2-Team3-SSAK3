@@ -43,6 +43,7 @@ struct SignUp: View {
             RoundedButton("회원가입", !canRegister(), loading: signUpViewModel.isLoading) {
                 signUpViewModel.register()
             }
+            .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .onChange(of: signUpViewModel.email.value) { _ in

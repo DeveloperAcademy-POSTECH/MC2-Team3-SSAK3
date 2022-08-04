@@ -24,8 +24,10 @@ struct UnderlinedPasswordTextField: View {
                 HStack {
                     if !isShowingPassword {
                         SecureField(placeholder, text: inputString)
+                            .textInputAutocapitalization(.never)
                     } else {
                         TextField(placeholder, text: inputString)
+                            .textInputAutocapitalization(.never)
                     }
                     Spacer()
                     Button {

@@ -63,9 +63,12 @@ struct AddTaxiParty: View {
                 }
                 RoundedButton("택시팟 생성", !checkAllInfoSelected(), loading: viewModel.isAdding) {
                     let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: (startHour! * 100) + startMinute!, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
-                    viewModel.addTaxiParty(taxiParty, user: user) { taxiParty in
-                        appState.showChattingRoom(taxiParty)
+                    viewModel.addTaxiParty(taxiParty, user: user) { _ in
                         dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                            appState.tab = .myParty
+                            appState.showToastMessage("택시팟이 생성되었습니다!")
+                        }
                     } onError: { error in
                         print(error)
                     }
