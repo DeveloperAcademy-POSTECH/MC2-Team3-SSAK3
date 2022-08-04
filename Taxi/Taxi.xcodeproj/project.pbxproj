@@ -72,7 +72,6 @@
 		00E7435328781E2E00C37B2E /* AuthenticateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */; };
 		00E743562878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */; };
 		00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E743572878282A00C37B2E /* LoginUseCase.swift */; };
-		00E7436228783C5700C37B2E /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 00E7436128783C5700C37B2E /* loadingAnimation.json */; };
 		00E8F1B9284B213C00D68DF0 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1B8284B213C00D68DF0 /* UserInfo.swift */; };
 		00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8F1BA284B21FE00D68DF0 /* Message.swift */; };
 		00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E92498285A152F0026DD73 /* MessageMockData.swift */; };
@@ -213,7 +212,6 @@
 		00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateAdapter.swift; sourceTree = "<group>"; };
 		00E743552878225B00C37B2E /* FirebaseAuthenticatorAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticatorAdapter.swift; sourceTree = "<group>"; };
 		00E743572878282A00C37B2E /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
-		00E7436128783C5700C37B2E /* loadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
 		00E8F1B8284B213C00D68DF0 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		00E8F1BA284B21FE00D68DF0 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		00E92498285A152F0026DD73 /* MessageMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMockData.swift; sourceTree = "<group>"; };
@@ -399,7 +397,6 @@
 		000D83242840E23800BA3DFA /* Taxi */ = {
 			isa = PBXGroup;
 			children = (
-				00E7436128783C5700C37B2E /* loadingAnimation.json */,
 				0009F7F1285F56110058007B /* Utility */,
 				004A833C28470DCC00E07EA0 /* Info.plist */,
 				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
@@ -745,7 +742,6 @@
 				0063D7A0289BC6CA00CFD5F5 /* InfoPlist.strings in Resources */,
 				000E83B4284A2D55000CD5AA /* GoogleService-Info.plist in Resources */,
 				000D832D2840E23A00BA3DFA /* Preview Assets.xcassets in Resources */,
-				00E7436228783C5700C37B2E /* loadingAnimation.json in Resources */,
 				A8982EC9285B6780000D11D0 /* Launch Screen.storyboard in Resources */,
 				000D832A2840E23A00BA3DFA /* Assets.xcassets in Resources */,
 			);
