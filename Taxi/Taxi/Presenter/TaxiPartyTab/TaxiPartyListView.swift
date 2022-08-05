@@ -353,7 +353,7 @@ struct Cell: View {
             PartyListCell(party: party)
                 .cellBackground()
                 .fullScreenCover(isPresented: $showInfoView) {
-                    TaxiPartyInfoView(taxiParty: party)
+                    TaxiPartyInfoView(taxiParty: party, showBlur: $showBlur)
                 }
         }
         .onChange(of: showInfoView) { _ in
