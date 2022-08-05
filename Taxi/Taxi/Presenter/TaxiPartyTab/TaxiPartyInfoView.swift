@@ -12,7 +12,6 @@ struct TaxiPartyInfoView: View {
     @EnvironmentObject private var userViewModel: UserInfoState
     @EnvironmentObject private var listViewModel: ListViewModel
     @EnvironmentObject private var appState: AppState
-    @Binding private var showBlur: Bool
     @State private var isLoading: Bool = false
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 62
@@ -22,14 +21,13 @@ struct TaxiPartyInfoView: View {
     private let meetingHour: String
     private let meetingMinute: String
 
-    init(taxiParty: TaxiParty, showBlur: Binding<Bool>) {
+    init(taxiParty: TaxiParty) {
         self.taxiParty = taxiParty
         self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
         self.meetingMonth = taxiParty.meetingDate / 100 % 100
         self.meetingDay = taxiParty.meetingDate % 100
         self.meetingHour = String(format: "%02d", taxiParty.meetingTime / 100 % 100)
         self.meetingMinute = String(format: "%02d", taxiParty.meetingTime % 100)
-        self._showBlur = showBlur
     }
 
     var body: some View {
@@ -215,7 +213,7 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
             maxPersonNumber: 2,
             members: ["123456"],
             isClosed: false
-        ), showBlur: .constant(false))
+        ))
         .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
     }
 }
