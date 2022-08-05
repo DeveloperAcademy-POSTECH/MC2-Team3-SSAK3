@@ -47,6 +47,10 @@ extension AppState {
         UserDefaults.standard.removeObject(forKey: "password")
         self.currentUserInfo = nil
     }
+
+    func showTaxiParties() {
+        tab = .taxiParty
+    }
 }
 
 // MARK: - Internal functions
