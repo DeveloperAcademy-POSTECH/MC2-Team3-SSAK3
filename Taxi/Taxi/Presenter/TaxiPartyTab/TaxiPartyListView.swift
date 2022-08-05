@@ -319,13 +319,15 @@ struct Cell: View {
     var body: some View {
         Button {
             showInfoView = true
-            showBlur = true
         } label: {
             PartyListCell(party: party)
                 .cellBackground()
                 .fullScreenCover(isPresented: $showInfoView) {
                     TaxiPartyInfoView(taxiParty: party, showBlur: $showBlur)
                 }
+        }
+        .onChange(of: showInfoView) { _ in
+            showBlur = showInfoView
         }
     }
 }

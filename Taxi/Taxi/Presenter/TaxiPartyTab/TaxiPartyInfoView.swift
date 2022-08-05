@@ -67,7 +67,6 @@ private extension TaxiPartyInfoView {
     var dismissButton: some View {
         HStack {
             Button {
-                showBlur = false
                 dismiss()
             } label: {
                 Image(systemName: "xmark")
@@ -159,7 +158,6 @@ private extension TaxiPartyInfoView {
         RoundedButton(text, false, loading: loading) {
             isLoading = true
             listViewModel.joinTaxiParty(in: taxiParty, userViewModel.userInfo) {
-                showBlur = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     dismiss()
                 }
