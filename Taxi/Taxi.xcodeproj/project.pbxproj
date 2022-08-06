@@ -182,7 +182,7 @@
 		00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
 		00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
 		004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaxiRelease.entitlements; sourceTree = "<group>"; };
-		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		004A833C28470DCC00E07EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0063D7A1289BC6CA00CFD5F5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0063D7A3289BC6CC00CFD5F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0063D7A4289BCD4600CFD5F5 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
@@ -295,9 +295,8 @@
 		0007A743285C06E000B7EF1F /* TaxiPartyTab */ = {
 			isa = PBXGroup;
 			children = (
-				AF174B252851859300BCF680 /* TaxiPartyListView.swift */,
-				AFFA12582857BCFE0076CB2F /* CalendarModal.swift */,
 				50459E34285490CC00287371 /* TaxiPartyInfoView.swift */,
+				AF174B252851859300BCF680 /* TaxiPartyListView.swift */,
 			);
 			path = TaxiPartyTab;
 			sourceTree = "<group>";
@@ -305,8 +304,8 @@
 		0007A744285C070400B7EF1F /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				505955962850BF46001DA44C /* ProfileView.swift */,
 				50595594285037AE001DA44C /* MyPageView.swift */,
+				505955962850BF46001DA44C /* ProfileView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -330,11 +329,11 @@
 		000AE1CD284C8FE700AF59BE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				00E8F1B8284B213C00D68DF0 /* UserInfo.swift */,
-				00E8F1BA284B21FE00D68DF0 /* Message.swift */,
-				00842A93284B2682000292E5 /* TaxiParty.swift */,
-				00842A95284B287D000292E5 /* Place.swift */,
 				E63C7A9F2858B5170080530B /* DayContainer.swift */,
+				00E8F1BA284B21FE00D68DF0 /* Message.swift */,
+				00842A95284B287D000292E5 /* Place.swift */,
+				00842A93284B2682000292E5 /* TaxiParty.swift */,
+				00E8F1B8284B213C00D68DF0 /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -343,17 +342,17 @@
 			isa = PBXGroup;
 			children = (
 				000E545728531C510085C39E /* AddTaxiPartyUseCase.swift */,
-				000E5459285321250085C39E /* JoinTaxiPartyUseCase.swift */,
-				000E545B285321E70085C39E /* GetTaxiPartyUseCase.swift */,
-				000E545D2853622D0085C39E /* DeleteProfileImageUseCase.swift */,
-				00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */,
-				000C24F62859CB440054D679 /* ChattingUseCase.swift */,
-				00E743572878282A00C37B2E /* LoginUseCase.swift */,
-				00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */,
-				00CE2335287A72C700931394 /* GetUserInfoUseCase.swift */,
 				00CE2337287A904800931394 /* ChangeNicknameUseCase.swift */,
 				00CE2339287A90C600931394 /* ChangeProfieImageUseCase.swift */,
+				000C24F62859CB440054D679 /* ChattingUseCase.swift */,
+				000E545D2853622D0085C39E /* DeleteProfileImageUseCase.swift */,
 				00662A022897BBE8006266B9 /* DeleteUserUsecase.swift */,
+				000E545B285321E70085C39E /* GetTaxiPartyUseCase.swift */,
+				00CE2335287A72C700931394 /* GetUserInfoUseCase.swift */,
+				000E5459285321250085C39E /* JoinTaxiPartyUseCase.swift */,
+				00E743572878282A00C37B2E /* LoginUseCase.swift */,
+				00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */,
+				00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -361,11 +360,11 @@
 		000AE1CF284C920B00AF59BE /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				000AE1D0284C922500AF59BE /* UserRepository.swift */,
-				00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */,
-				00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */,
-				00F6B7302859C44D00DACA06 /* ChattingRepository.swift */,
 				00E7435228781E2E00C37B2E /* AuthenticateAdapter.swift */,
+				00F6B7302859C44D00DACA06 /* ChattingRepository.swift */,
+				00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */,
+				00D3AE71284F8467001E34A0 /* TaxiPartyRepository.swift */,
+				000AE1D0284C922500AF59BE /* UserRepository.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -373,16 +372,13 @@
 		000D83192840E23800BA3DFA = {
 			isa = PBXGroup;
 			children = (
-				0063D7A2289BC6CA00CFD5F5 /* InfoPlist.strings */,
-				A8982EC8285B6780000D11D0 /* Launch Screen.storyboard */,
-				00102B62284D833C000B8BFF /* 1Profile.jpg */,
 				003ABC0B284749F7000FA7A2 /* .swiftlint.yml */,
+				000E83B5284A2DB6000CD5AA /* Frameworks */,
 				000E83B3284A2D55000CD5AA /* GoogleService-Info.plist */,
+				000D83232840E23800BA3DFA /* Products */,
 				000D83242840E23800BA3DFA /* Taxi */,
 				000D83352840E23A00BA3DFA /* TaxiTests */,
 				000D833F2840E23A00BA3DFA /* TaxiUITests */,
-				000D83232840E23800BA3DFA /* Products */,
-				000E83B5284A2DB6000CD5AA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -399,18 +395,14 @@
 		000D83242840E23800BA3DFA /* Taxi */ = {
 			isa = PBXGroup;
 			children = (
-				0009F7F1285F56110058007B /* Utility */,
-				004A833C28470DCC00E07EA0 /* Info.plist */,
-				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
-				00F85695284492BC008E2E2F /* Extension */,
-				E63C7AA32858B5930080530B /* MockData */,
 				00F85694284492B5008E2E2F /* Constant */,
 				00F85693284492AC008E2E2F /* Data */,
 				00F85692284492A8008E2E2F /* Domain */,
+				00F85695284492BC008E2E2F /* Extension */,
 				00F856912844927A008E2E2F /* Presenter */,
-				000D83252840E23800BA3DFA /* TaxiApp.swift */,
-				000D83292840E23A00BA3DFA /* Assets.xcassets */,
-				000D832B2840E23A00BA3DFA /* Preview Content */,
+				00AB673A289EA65300BBA9E9 /* Resources */,
+				00AB673B289EA67C00BBA9E9 /* System */,
+				0009F7F1285F56110058007B /* Utility */,
 			);
 			path = Taxi;
 			sourceTree = "<group>";
@@ -460,31 +452,103 @@
 		00A5705628518200008B220E /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				E63C7AA62858B5DE0080530B /* CalendarHelper.swift */,
-				E63C7AA82858B6130080530B /* CalendarView.swift */,
-				50459E2E28542E4E00287371 /* PhotoPicker.swift */,
-				00F6B72628596EEF00DACA06 /* PatyListCell.swift */,
-				00A5705B285182E1008B220E /* RoundedButton.swift */,
-				50DA19622856065200DEC46E /* ProfileImage.swift */,
-				E63C7AB32858C2650080530B /* UnderlinedTextField.swift */,
-				E6C93732285AD52600464D37 /* SignUpButton.swift */,
-				50305A26285C4BEB00C10C82 /* TranparentBackground.swift */,
-				508A874E285EDC7D00998595 /* SizeReader.swift */,
 				508A8753285F168F00998595 /* KeyboardResponser.swift */,
-				002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */,
+				00F6B72628596EEF00DACA06 /* PatyListCell.swift */,
+				50459E2E28542E4E00287371 /* PhotoPicker.swift */,
+				50DA19622856065200DEC46E /* ProfileImage.swift */,
+				00A5705B285182E1008B220E /* RoundedButton.swift */,
+				E6C93732285AD52600464D37 /* SignUpButton.swift */,
+				508A874E285EDC7D00998595 /* SizeReader.swift */,
 				0063D7A4289BCD4600CFD5F5 /* ToastMessage.swift */,
+				50305A26285C4BEB00C10C82 /* TranparentBackground.swift */,
+				002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */,
+				E63C7AB32858C2650080530B /* UnderlinedTextField.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		00AB673A289EA65300BBA9E9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0063D7A2289BC6CA00CFD5F5 /* InfoPlist.strings */,
+				00102B62284D833C000B8BFF /* 1Profile.jpg */,
+				004A833B28470DAA00E07EA0 /* TaxiRelease.entitlements */,
+				004A833C28470DCC00E07EA0 /* Info.plist */,
+				000D83292840E23A00BA3DFA /* Assets.xcassets */,
+				000D832B2840E23A00BA3DFA /* Preview Content */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		00AB673B289EA67C00BBA9E9 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				000D83252840E23800BA3DFA /* TaxiApp.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		00AB673C289EA75500BBA9E9 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				508AE80E285A6E5500D111D3 /* UserProfileViewModel.swift */,
+				50F8003A28586F9200FA1063 /* UserInfoState.swift */,
+				0007A748285CA71600B7EF1F /* ListViewModel.swift */,
+				50305A2A285DA54900C10C82 /* AppState.swift */,
+				A8982EC8285B6780000D11D0 /* Launch Screen.storyboard */,
+				00A570652851EA33008B220E /* MainView.swift */,
+				0007A741285C069900B7EF1F /* RootView.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		00AB673D289EA75F00BBA9E9 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				000C24FA2859E74E0054D679 /* ChattingViewModel.swift */,
+				37D4D1F02856D285002E787B /* ChatRoomView.swift */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
+		00AB673F289EA84B00BBA9E9 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				00E92498285A152F0026DD73 /* MessageMockData.swift */,
+				E63C7AA42858B5B50080530B /* TaxiPartyMockData.swift */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
+		00AB6740289EA84D00BBA9E9 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */,
+				00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */,
+				00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */,
+				002F89EA284CA10800D7E51B /* UserFirebaseDataSource.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		00AB6741289EA8A700BBA9E9 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				E63C7AA62858B5DE0080530B /* CalendarHelper.swift */,
+				AFFA12582857BCFE0076CB2F /* CalendarModal.swift */,
+				E63C7AA82858B6130080530B /* CalendarView.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		00B5394B2895687F0058D27F /* Validatable */ = {
 			isa = PBXGroup;
 			children = (
+				009164BA289607170076D680 /* Email.swift */,
+				009164BE2896137F0076D680 /* Nickname.swift */,
+				009164BC28960A270076D680 /* Password.swift */,
 				00B5394C2895713E0058D27F /* Validatable.swift */,
 				00B5394E289576C70058D27F /* ValidationResult.swift */,
-				009164BA289607170076D680 /* Email.swift */,
-				009164BC28960A270076D680 /* Password.swift */,
-				009164BE2896137F0076D680 /* Nickname.swift */,
 			);
 			path = Validatable;
 			sourceTree = "<group>";
@@ -511,8 +575,8 @@
 			children = (
 				002003512894D8DC00545E2B /* SignHome.swift */,
 				002003532894DD4500545E2B /* SignIn.swift */,
-				002003572894E2D400545E2B /* SignUp.swift */,
 				009F33E8289644270060D51A /* SignInViewModel.swift */,
+				002003572894E2D400545E2B /* SignUp.swift */,
 				009F33EA2896443E0060D51A /* SignUpViewModel.swift */,
 			);
 			path = SignIn;
@@ -521,17 +585,16 @@
 		00F856912844927A008E2E2F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				00E7435928782FC500C37B2E /* SignIn */,
-				00A5705628518200008B220E /* Component */,
-				0007A746285C071E00B7EF1F /* MyParty */,
-				0007A744285C070400B7EF1F /* MyPage */,
-				0007A743285C06E000B7EF1F /* TaxiPartyTab */,
-				50F8003C285882DA00FA1063 /* ViewModel */,
+				00AB6741289EA8A700BBA9E9 /* Calendar */,
 				00BC473D28581E530055CB6A /* AddTaxiParty */,
-				00A570652851EA33008B220E /* MainView.swift */,
-				37D4D1F02856D285002E787B /* ChatRoomView.swift */,
+				00AB673D289EA75F00BBA9E9 /* Chatting */,
+				00A5705628518200008B220E /* Component */,
+				0007A744285C070400B7EF1F /* MyPage */,
+				0007A746285C071E00B7EF1F /* MyParty */,
 				A8982EC5285B4F8D000D11D0 /* OnboardGroup */,
-				0007A741285C069900B7EF1F /* RootView.swift */,
+				00E7435928782FC500C37B2E /* SignIn */,
+				00AB673C289EA75500BBA9E9 /* System */,
+				0007A743285C06E000B7EF1F /* TaxiPartyTab */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -539,11 +602,11 @@
 		00F85692284492A8008E2E2F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				00B5394B2895687F0058D27F /* Validatable */,
-				00E7435428781EC700C37B2E /* Service */,
 				000AE1CF284C920B00AF59BE /* Interface */,
-				000AE1CE284C8FF000AF59BE /* UseCase */,
 				000AE1CD284C8FE700AF59BE /* Model */,
+				00E7435428781EC700C37B2E /* Service */,
+				000AE1CE284C8FF000AF59BE /* UseCase */,
+				00B5394B2895687F0058D27F /* Validatable */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -551,10 +614,8 @@
 		00F85693284492AC008E2E2F /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				002F89EA284CA10800D7E51B /* UserFirebaseDataSource.swift */,
-				00D3AE75284F8B55001E34A0 /* TaxiPartyFirebaseDataSource.swift */,
-				00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */,
-				000C24F42859C8930054D679 /* ChattingFirebaseDataSource.swift */,
+				00AB6740289EA84D00BBA9E9 /* Repository */,
+				00AB673F289EA84B00BBA9E9 /* MockData */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -571,46 +632,25 @@
 			isa = PBXGroup;
 			children = (
 				00A570592851826A008B220E /* ColorExtension.swift */,
-				A8D578972852F2000059FE49 /* TextStyleExtension.swift */,
-				E622D8F528503D19005A68F3 /* ViewExtension.swift */,
-				50459E322854701C00287371 /* ImageExtension.swift */,
 				E63C7AA12858B5520080530B /* DateExtension.swift */,
+				50459E322854701C00287371 /* ImageExtension.swift */,
 				E6E0E06E285A15B1001BAF6F /* StringExtension.swift */,
+				A8D578972852F2000059FE49 /* TextStyleExtension.swift */,
 				50305A2C285DB20D00C10C82 /* UINavigationControllerExtension.swift */,
+				E622D8F528503D19005A68F3 /* ViewExtension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		50F8003C285882DA00FA1063 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				50F8003A28586F9200FA1063 /* UserInfoState.swift */,
-				000C24FA2859E74E0054D679 /* ChattingViewModel.swift */,
-				508AE80E285A6E5500D111D3 /* UserProfileViewModel.swift */,
-				0007A748285CA71600B7EF1F /* ListViewModel.swift */,
-				50305A2A285DA54900C10C82 /* AppState.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		A8982EC5285B4F8D000D11D0 /* OnboardGroup */ = {
 			isa = PBXGroup;
 			children = (
-				A8BD8114285A3543003D744B /* Onboarding.swift */,
 				A87934CB2859FC5400FDCDBA /* OnboardFirstPage.swift */,
+				A8BD8114285A3543003D744B /* Onboarding.swift */,
 				A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */,
 				A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */,
 			);
 			path = OnboardGroup;
-			sourceTree = "<group>";
-		};
-		E63C7AA32858B5930080530B /* MockData */ = {
-			isa = PBXGroup;
-			children = (
-				E63C7AA42858B5B50080530B /* TaxiPartyMockData.swift */,
-				00E92498285A152F0026DD73 /* MessageMockData.swift */,
-			);
-			path = MockData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1052,14 +1092,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Taxi/TaxiRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Taxi/Resources/TaxiRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20220805;
-				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Taxi/Info.plist;
+				INFOPLIST_FILE = Taxi/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1086,15 +1126,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Taxi/TaxiRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Taxi/Resources/TaxiRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20220805;
-				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Taxi/Info.plist;
+				INFOPLIST_FILE = Taxi/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
