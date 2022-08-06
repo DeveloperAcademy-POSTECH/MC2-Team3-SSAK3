@@ -135,9 +135,11 @@ extension View {
     }
 }
 
+#if DEBUG
 struct PatyListCell_Previews: PreviewProvider {
     static var previews: some View {
-        TaxiPartyListView()
+        PartyListCell(party: TaxiPartyMockData.mockData.first!)
             .environmentObject(ListViewModel(userId: ""))
     }
 }
+#endif

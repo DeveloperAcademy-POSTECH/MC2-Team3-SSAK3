@@ -27,15 +27,15 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             TabView(selection: $appState.tab) {
-                TaxiPartyListView()
-                    .tabItem {
-                        if appState.tab == .taxiParty {
-                            Label("택시팟", image: ImageName.tabTaxiPartyOn)
-                        } else {
-                            Label("택시팟", image: ImageName.tabTaxiPartyOff)
-                        }
-                    }
-                    .tag(Tab.taxiParty)
+//                TaxiPartyList()
+//                    .tabItem {
+//                        if appState.tab == .taxiParty {
+//                            Label("택시팟", image: ImageName.tabTaxiPartyOn)
+//                        } else {
+//                            Label("택시팟", image: ImageName.tabTaxiPartyOff)
+//                        }
+//                    }
+//                    .tag(Tab.taxiParty)
                 MyPartyView()
                     .tabItem {
                         if appState.tab == .myParty {
