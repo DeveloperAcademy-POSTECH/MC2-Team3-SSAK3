@@ -67,7 +67,7 @@ private extension TaxiPartyInfoView {
     var dismissButton: some View {
         HStack {
             Button {
-                dismiss()
+                dismissWithBlurOff()
             } label: {
                 Image(systemName: "xmark")
                     .imageScale(.large)
@@ -159,14 +159,23 @@ private extension TaxiPartyInfoView {
             isLoading = true
             listViewModel.joinTaxiParty(in: taxiParty, userViewModel.userInfo) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    dismiss()
-                    showBlur = false
+                    dismissWithBlurOff()
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     appState.showChattingRoom(taxiParty)
                 }
             }
         }
+    }
+}
+
+// MARK: - 메서드
+
+private extension TaxiPartyInfoView {
+    
+    func dismissWithBlurOff() {
+        dismiss()
+        showBlur = false
     }
 }
 
