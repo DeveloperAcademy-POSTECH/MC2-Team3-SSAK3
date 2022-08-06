@@ -172,7 +172,7 @@ private extension TaxiPartyInfoView {
 // MARK: - 메서드
 
 private extension TaxiPartyInfoView {
-    
+
     func dismissWithBlurOff() {
         dismiss()
         showBlur = false

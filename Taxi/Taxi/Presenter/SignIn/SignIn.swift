@@ -12,7 +12,7 @@ struct SignIn: View {
     @ObservedObject var signInViewModel: SignInViewModel
     @State private var isShowingAlert: Bool = false
     @EnvironmentObject private var appState: AppState
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("가입하신 아카데미 이메일을 입력해주세요")
@@ -41,7 +41,7 @@ struct SignIn: View {
         .onReceive(signInViewModel.$error) { error in
             if error != nil {
                 isShowingAlert = true
-            } 
+            }
         }
         .alert(signInViewModel.error?.localizedDescription ?? "알 수 없는 에러", isPresented: $isShowingAlert) {
             Button("확인", role: .cancel) {
