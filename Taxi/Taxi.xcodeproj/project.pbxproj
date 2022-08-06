@@ -80,7 +80,6 @@
 		00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E92498285A152F0026DD73 /* MessageMockData.swift */; };
 		00F554BF28A375610007B8AD /* MessageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F554BE28A375610007B8AD /* MessageTest.swift */; };
 		00F6B72728596EEF00DACA06 /* PatyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B72628596EEF00DACA06 /* PatyListCell.swift */; };
-		00F6B72A28596F7D00DACA06 /* SegmentedPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 00F6B72928596F7D00DACA06 /* SegmentedPicker */; };
 		00F6B7312859C44D00DACA06 /* ChattingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B7302859C44D00DACA06 /* ChattingRepository.swift */; };
 		00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856992844A985008E2E2F /* FirebaseAnalytics */; };
 		00F8569E2844A985008E2E2F /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F8569D2844A985008E2E2F /* FirebaseAuthCombine-Community */; };
@@ -111,7 +110,6 @@
 		A8C146A7285A4A5E00F6D37F /* OnboardSecondPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */; };
 		A8C146A9285A525100F6D37F /* OnboardThirdPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */; };
 		A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D578972852F2000059FE49 /* TextStyleExtension.swift */; };
-		AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF174B252851859300BCF680 /* TaxiPartyListView.swift */; };
 		AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA12582857BCFE0076CB2F /* CalendarModal.swift */; };
 		E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F528503D19005A68F3 /* ViewExtension.swift */; };
 		E63C7AA02858B5170080530B /* DayContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63C7A9F2858B5170080530B /* DayContainer.swift */; };
@@ -242,7 +240,6 @@
 		A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardSecondPage.swift; sourceTree = "<group>"; };
 		A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardThirdPage.swift; sourceTree = "<group>"; };
 		A8D578972852F2000059FE49 /* TextStyleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleExtension.swift; sourceTree = "<group>"; };
-		AF174B252851859300BCF680 /* TaxiPartyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyListView.swift; sourceTree = "<group>"; };
 		AFFA12582857BCFE0076CB2F /* CalendarModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarModal.swift; sourceTree = "<group>"; };
 		E622D8F528503D19005A68F3 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		E63C7A9F2858B5170080530B /* DayContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayContainer.swift; sourceTree = "<group>"; };
@@ -260,7 +257,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00F6B72A28596F7D00DACA06 /* SegmentedPicker in Frameworks */,
 				50F3D18B28537B110004B5CE /* SDWebImageSwiftUI in Frameworks */,
 				00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */,
 				00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */,
@@ -303,12 +299,12 @@
 			sourceTree = "<group>";
 		};
 		0007A743285C06E000B7EF1F /* TaxiPartyTab */ = {
+		0007A743285C06E000B7EF1F /* TaxiPartyList */ = {
 			isa = PBXGroup;
 			children = (
 				50459E34285490CC00287371 /* TaxiPartyInfoView.swift */,
-				AF174B252851859300BCF680 /* TaxiPartyListView.swift */,
 			);
-			path = TaxiPartyTab;
+			path = TaxiPartyList;
 			sourceTree = "<group>";
 		};
 		0007A744285C070400B7EF1F /* MyPage */ = {
@@ -611,7 +607,7 @@
 				00E7435928782FC500C37B2E /* SignIn */,
 				000103D928A48715004FF7EA /* SignUp */,
 				00AB673C289EA75500BBA9E9 /* System */,
-				0007A743285C06E000B7EF1F /* TaxiPartyTab */,
+				0007A743285C06E000B7EF1F /* TaxiPartyList */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -696,7 +692,6 @@
 				00F856AB2844A985008E2E2F /* FirebaseStorageCombine-Community */,
 				000E83B6284A2DBF000CD5AA /* FirebaseMessaging */,
 				50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */,
-				00F6B72928596F7D00DACA06 /* SegmentedPicker */,
 				508A8751285F13BD00998595 /* Introspect */,
 			);
 			productName = Taxi;
@@ -775,7 +770,6 @@
 			packageReferences = (
 				00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				50F3D18928537B110004B5CE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				00F6B72828596F7D00DACA06 /* XCRemoteSwiftPackageReference "SwiftySegmentedPicker" */,
 				508A8750285F13BC00998595 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 000D83232840E23800BA3DFA /* Products */;
@@ -880,7 +874,6 @@
 				E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */,
 				00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */,
 				E6C93733285AD52600464D37 /* SignUpButton.swift in Sources */,
-				AF174B262851859300BCF680 /* TaxiPartyListView.swift in Sources */,
 				000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */,
 				37F698852855FB910008C022 /* MyPartyView.swift in Sources */,
 				00A570662851EA33008B220E /* MainView.swift in Sources */,
@@ -1291,14 +1284,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		00F6B72828596F7D00DACA06 /* XCRemoteSwiftPackageReference "SwiftySegmentedPicker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/KazaiMazai/SwiftySegmentedPicker";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
-			};
-		};
 		00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1330,11 +1315,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		00F6B72928596F7D00DACA06 /* SegmentedPicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 00F6B72828596F7D00DACA06 /* XCRemoteSwiftPackageReference "SwiftySegmentedPicker" */;
-			productName = SegmentedPicker;
 		};
 		00F856992844A985008E2E2F /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
