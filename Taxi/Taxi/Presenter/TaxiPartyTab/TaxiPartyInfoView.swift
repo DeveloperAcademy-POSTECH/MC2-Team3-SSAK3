@@ -147,7 +147,7 @@ private extension TaxiPartyInfoView {
                 .font(.system(size: 20))
                 .padding(.horizontal, 10)
             Image(ImageName.train)
-            Text("\(taxiParty.destincation)")
+            Text("\(taxiParty.destination)")
                 .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
             Spacer()
         }

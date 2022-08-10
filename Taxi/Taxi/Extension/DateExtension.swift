@@ -32,14 +32,6 @@ extension Date {
         return formatter
     }()
 
-    private static let messageTimeFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMddHHmmss"
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.timeZone = TimeZone(abbreviation: "KST")
-        return formatter
-    }()
-
     private var dateComponents: DateComponents {
         return Calendar.current.dateComponents([.year, .month, .day, .weekday, .hour, .minute], from: self)
     }
@@ -94,10 +86,6 @@ extension Date {
 
     var monthDay: String {
         return Date.monthDayFormatter.string(from: self)
-    }
-
-    var messageTime: Int {
-        return Int(Date.messageTimeFormatter.string(from: self))!
     }
 
     /// date를 yyyyMMdd의 형태로 바꿈
@@ -162,12 +150,5 @@ extension Date {
     static func convertToKoreanDateFormat(from date: Int) -> String {
         guard let date = self.convertToDateFormat(from: date), let month = date.month, let day = date.day else { return "" }
         return "\(month)월 \(day)일 \(date.weekday)"
-    }
-
-    static func convertMessageTimeToReadable(from timeStamp: Int) -> String {
-        guard let date = Date.messageTimeFormatter.date(from: String(timeStamp)), let hour = date.hour, let minute = date.minute else {
-            return "알 수 없는 시간"
-        }
-        return "\(hour):\(minute)"
     }
 }

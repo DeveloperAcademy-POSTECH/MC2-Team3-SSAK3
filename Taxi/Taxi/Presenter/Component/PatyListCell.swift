@@ -44,7 +44,7 @@ struct DestinationView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 17, height: 18)
                 .foregroundColor(color)
-            Text("\(party.destincation)으로")
+            Text("\(party.destination)으로")
                 .font(.custom("AppleSDGothicNeo-Medium", size: 14))
                 .foregroundColor(color)
         }

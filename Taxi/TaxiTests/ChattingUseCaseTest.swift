@@ -16,7 +16,7 @@ class ChattingUseCaseTest: XCTestCase {
         // given
         let promise = expectation(description: "send chatting message success!")
         var error: Error?
-        let message: Message = Message(id: UUID().uuidString, sender: "1", body: "안녕하세요 테스트메시지임", timeStamp: 202203291715, typeCode: 0)
+        let message: Message = Message(sender: "1", body: "안녕하세요 테스트메시지임", messageType: .normal)
         let taxiParty: TaxiParty = TaxiParty(id: "캐쉰캐샤", departureCode: 6, destinationCode: 1, meetingDate: 0, meetingTime: 0, maxPersonNumber: 0, members: [], isClosed: false)
         // when
         chattingUseCase.sendMessage(message, to: taxiParty) { err in

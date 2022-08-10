@@ -11,12 +11,17 @@ import FirebaseFirestoreSwift
 import FirebaseFirestoreCombineSwift
 
 final class ChattingViewModel: ObservableObject {
+
+    // MARK: - States
     @Published private (set) var messages: [Message] = []
     @Published var input: String = ""
+    @Published private (set) var taxiParty: TaxiParty
+
+    // MARK: - Dependency
     private let fireStore: Firestore = .firestore()
-    private let taxiParty: TaxiParty
     private let chattingUseCase: ChattingUseCase = ChattingUseCase.shared
-    private var listenerRegistration: ListenerRegistration?
+    private var messageListenerRegistration: ListenerRegistration?
+    private var taxiPartyListenerRegistration: ListenerRegistration?
     let updateEvent: PassthroughSubject<Bool, Never> = PassthroughSubject()
 
     init(_ taxiParty: TaxiParty) {
@@ -32,8 +37,30 @@ final class ChattingViewModel: ObservableObject {
         chattingUseCase.sendMessage(message, to: taxiParty, completion: { _ in })
     }
 
+    func onAppear() {
+        setMessageChangeListener()
+        setTaxiPartyChangeListener()
+    }
+
+    func onDisAppear() {
+        removeChangeListener()
+    }
+}
+
+// MARK: - 내부 구현
+private extension ChattingViewModel {
+    func setTaxiPartyChangeListener() {
+        taxiPartyListenerRegistration = fireStore.collection("TaxiParty")
+            .document(taxiParty.id)
+            .addSnapshotListener { [weak self] snapshot, error in
+                guard let self = self, error == nil, let snapshot = snapshot else { return }
+                guard let changedTaxiParty = try? snapshot.data(as: TaxiParty.self) else { return }
+                self.taxiParty = changedTaxiParty
+            }
+    }
+
     func setMessageChangeListener() {
-        listenerRegistration = fireStore.collection("TaxiParty")
+        messageListenerRegistration = fireStore.collection("TaxiParty")
             .document(taxiParty.id)
             .collection("messages")
             .order(by: "timeStamp")
@@ -54,12 +81,9 @@ final class ChattingViewModel: ObservableObject {
             })
     }
 
-    func removeMessageChangeListener() {
-        listenerRegistration?.remove()
+    func removeChangeListener() {
+        messageListenerRegistration?.remove()
+        taxiPartyListenerRegistration?.remove()
         messages.removeAll()
-    }
-
-    deinit {
-        listenerRegistration?.remove()
     }
 }
