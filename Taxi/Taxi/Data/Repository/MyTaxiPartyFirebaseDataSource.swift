@@ -55,7 +55,7 @@ final class MyTaxiPartyFirebaseSource: MyTaxiPartyRepository {
                     return Fail<Void, Error>(error: FirestoreDecodingError.decodingIsNotSupported(""))
                         .eraseToAnyPublisher()
                 }
-                let message: Message = Message(id: UUID().uuidString, sender: user.id, body: "\(user.nickname)님이 택시팟에서 나가셨습니다.", timeStamp: Date().messageTime, typeCode: Message.MessageType.entrance.code)
+                let message: Message = Message(sender: user.id, body: "\(user.nickname)님이 택시팟에서 나가셨습니다.", messageType: .entrance)
                 return self.chattingUseCase.sendMessage(message, to: taxiParty)
             }
             .receive(on: DispatchQueue.main)

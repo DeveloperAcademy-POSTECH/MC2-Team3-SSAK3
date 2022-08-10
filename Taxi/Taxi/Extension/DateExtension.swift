@@ -34,7 +34,7 @@ extension Date {
 
     private static let messageTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMddhhmmss"
+        formatter.dateFormat = "yyyyMMddHHmmss"
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.timeZone = TimeZone(abbreviation: "KST")
         return formatter
