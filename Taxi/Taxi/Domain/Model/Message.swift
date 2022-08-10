@@ -13,6 +13,14 @@ struct Message: Codable {
     let body: String // 채팅 메시지
     let timeStamp: Int // (yyyyMMddhhmmss)
     let typeCode: Int // (0 - 일반 채팅, 1 - 입장 채팅)
+
+    init(id: String = UUID().uuidString, sender: String, body: String, timeStamp: Int = Date().messageTime, messageType: MessageType) {
+        self.id = id
+        self.sender = sender
+        self.body = body
+        self.timeStamp = timeStamp
+        self.typeCode = messageType.code
+    }
 }
 
 extension Message: CustomStringConvertible {

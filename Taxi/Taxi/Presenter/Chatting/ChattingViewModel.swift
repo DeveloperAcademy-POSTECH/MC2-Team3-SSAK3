@@ -27,7 +27,7 @@ final class ChattingViewModel: ObservableObject {
         guard !input.isEmpty else {
             return
         }
-        let message: Message = Message(id: UUID().uuidString, sender: userId, body: input, timeStamp: Date().messageTime, typeCode: Message.MessageType.normal.code)
+        let message: Message = Message(sender: userId, body: input, messageType: .normal)
         input = ""
         chattingUseCase.sendMessage(message, to: taxiParty, completion: { _ in })
     }
