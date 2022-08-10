@@ -33,10 +33,6 @@ struct TaxiPartyListView: View {
                     ErrorView(ListError.loadPartiesFail, description: "다시 불러오기") {
                         listViewModel.getTaxiParties(force: true)
                     }
-                } else if listViewModel.taxiParties.count == 0 {
-                    ErrorView(ListError.noTaxiParties, description: "택시팟 참여하러 가기") {
-                        showAddTaxiParty = true
-                    }
                 } else {
                     ScrollViewReader { proxy in
                         ScrollView {
@@ -293,27 +289,27 @@ struct CellViewList: View {
             }
         }
         .padding(.top)
-                .animation(.default, value: isRefreshingAnimaiton)
-                .background(GeometryReader {
-                    Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
-                })
-                .onPreferenceChange(ViewOffsetKey.self) {
-                    let heightValueForGesture: CGFloat = 250.0
-                    if $0 < -heightValueForGesture && !isRefreshing && !isRefreshingAnimaiton {
-                        isRefreshing = true
+        .animation(.default, value: isRefreshingAnimaiton)
+        .background(GeometryReader {
+            Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .global).origin.y)
+        })
+        .onPreferenceChange(ViewOffsetKey.self) {
+            let heightValueForGesture: CGFloat = 250.0
+            if $0 < -heightValueForGesture && !isRefreshing && !isRefreshingAnimaiton {
+                isRefreshing = true
+            }
+            if $0 > -heightValueForGesture && !isRefreshingAnimaiton && isRefreshing {
+                isRefreshing = false
+                isRefreshingAnimaiton = true
+                Task {
+                    await refresh?()
+                    await MainActor.run {
                     }
-                    if $0 > -heightValueForGesture && !isRefreshingAnimaiton && isRefreshing {
-                        isRefreshing = false
-                        isRefreshingAnimaiton = true
-                        Task {
-                            await refresh?()
-                            await MainActor.run {
-                            }
-                            isRefreshingAnimaiton = false
-                        }
-                    }
+                    isRefreshingAnimaiton = false
                 }
             }
+        }
+    }
 
     private func mappingDate() -> [Int] {
         switch selectedIndex {
