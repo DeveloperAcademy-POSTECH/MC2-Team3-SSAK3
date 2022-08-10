@@ -18,9 +18,23 @@ struct TaxiParty: Codable {
     let isClosed: Bool
 }
 
+// MARK: - Public Interface
 extension TaxiParty {
+
     func satisfyCapacity() -> Bool {
         members.count < maxPersonNumber && members.count != 0
+    }
+
+    var departure: String {
+        Place.of(departureCode).rawValue
+    }
+
+    var destination: String {
+        Place.of(destinationCode).rawValue
+    }
+
+    var currentMemeberCount: Int {
+        return members.count
     }
 }
 
@@ -34,15 +48,5 @@ extension TaxiParty: Equatable {
     static func == (lhs: TaxiParty, rhs: TaxiParty) -> Bool {
         return
             lhs.id == rhs.id
-    }
-}
-
-extension TaxiParty {
-    var departure: String {
-        Place.of(departureCode).rawValue
-    }
-
-    var destincation: String {
-        Place.of(destinationCode).rawValue
     }
 }

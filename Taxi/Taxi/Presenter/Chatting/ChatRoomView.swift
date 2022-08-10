@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ChatRoomView: View {
     @EnvironmentObject private var listViewModel: ListViewModel
-    @ObservedObject private var viewModel: ChattingViewModel
+    @StateObject private var viewModel: ChattingViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusState: Bool
@@ -20,12 +20,10 @@ struct ChatRoomView: View {
     @State private var scrollView: UIScrollView?
     @State private var typingSize: CGFloat = 0
     private let user: UserInfo
-    private let taxiParty: TaxiParty
 
     init(party: TaxiParty, user: UserInfo) {
-        self.taxiParty = party
         self.user = user
-        _viewModel = ObservedObject(initialValue: ChattingViewModel(party))
+        _viewModel = StateObject(wrappedValue: ChattingViewModel(party))
     }
 
     var body: some View {
@@ -50,10 +48,10 @@ struct ChatRoomView: View {
         }
         .background(Color.addBackground)
         .onAppear {
-            viewModel.setMessageChangeListener()
+            viewModel.onAppear()
         }
         .onDisappear {
-            viewModel.removeMessageChangeListener()
+            viewModel.onDisAppear()
         }
         .onReceive(keyboard.$currentHeight) { height in
             if let scrollView = scrollView {
@@ -95,7 +93,7 @@ private extension ChatRoomView {
         .overlay {
             HStack {
                 Text(chattingRoomTitle)
-                Text("\(taxiParty.members.count)명")
+                Text("\(viewModel.taxiParty.currentMemeberCount)명")
                     .foregroundColor(Color.darkGray)
             }
         }
@@ -103,7 +101,7 @@ private extension ChatRoomView {
         .alert("택시팟을 나가시겠어요?", isPresented: $showAlert) {
             Button("나가기", role: .destructive) {
                 dismiss()
-                listViewModel.leaveMyParty(party: taxiParty, user: user)
+                listViewModel.leaveMyParty(party: viewModel.taxiParty, user: user)
             }
             Button("취소", role: .cancel) {}
         } message: {
@@ -112,7 +110,7 @@ private extension ChatRoomView {
     }
 
     var chattingRoomTitle: String {
-        "\(String(format: "%02d", taxiParty.meetingTime / 100)):\(String(format: "%02d", taxiParty.meetingTime % 100)) \(taxiParty.destincation)행"
+        "\(String(format: "%02d", viewModel.taxiParty.meetingTime / 100)):\(String(format: "%02d", viewModel.taxiParty.meetingTime % 100)) \(viewModel.taxiParty.destination)행"
     }
 }
 // MARK: - 메시지 리스트
@@ -171,7 +169,7 @@ private extension ChatRoomView {
     func makeMyMessage(_ message: Message) -> some View {
         HStack(alignment: .bottom) {
             Spacer()
-            Text(Date.convertMessageTimeToReadable(from: message.timeStamp))
+            Text(message.sendTime)
                 .font(.custom("AppleSDGothicNeo-Light", size: 8))
                 .foregroundColor(.darkGray)
             Text(message.body)
@@ -201,7 +199,7 @@ private extension ChatRoomView {
                             .chatStyle()
                             .padding(8)
                             .background(RoundedCorner(radius: 10, corners: [.topRight, .bottomLeft, .bottomRight]).fill(Color.white))
-                        Text(Date.convertMessageTimeToReadable(from: message.timeStamp))
+                        Text(message.sendTime)
                             .font(.custom("AppleSDGothicNeo-Light", size: 8))
                             .foregroundColor(.darkGray)
                     }
