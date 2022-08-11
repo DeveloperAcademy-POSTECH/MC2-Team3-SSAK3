@@ -18,16 +18,18 @@ struct UnderlinedPasswordTextField: View {
         self.validationResult = validationResult
         self.placeholder = placeholder
     }
+
     var body: some View {
         VStack(alignment: .leading) {
             ZStack {
                 HStack {
-                    if !isShowingPassword {
+                    ZStack {
                         SecureField(placeholder, text: inputString)
                             .textInputAutocapitalization(.never)
-                    } else {
+                            .opacity(isShowingPassword ? 0 : 1)
                         TextField(placeholder, text: inputString)
                             .textInputAutocapitalization(.never)
+                            .opacity(isShowingPassword ? 1 : 0)
                     }
                     Spacer()
                     Button {

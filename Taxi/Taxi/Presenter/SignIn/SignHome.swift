@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SignHome: View {
 
+    // MARK: - States
     @StateObject private var signInViewModel: SignInViewModel = SignInViewModel()
+    @State private var isSignUpActive: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -59,14 +61,16 @@ private extension SignHome {
 
     var buttons: some View {
         HStack(spacing: 10) {
-            NavigationLink {
-                SignUp()
+            NavigationLink(isActive: $isSignUpActive) {
+                SignUpEmail(isSignUpActive: $isSignUpActive)
             } label: {
                 Text("회원가입")
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 15))
             }
+            .isDetailLink(false)
+
             NavigationLink {
                 SignIn(signInViewModel: signInViewModel)
             } label: {
