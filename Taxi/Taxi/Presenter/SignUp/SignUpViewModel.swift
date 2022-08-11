@@ -19,7 +19,7 @@ final class SignUpViewModel: ObservableObject {
     @Published var password: Validatable = Password()
     @Published var nickname: Validatable = Nickname()
     @Published private (set) var isLoading: Bool = false
-    @Published private (set) var error: Error?
+    @Published var error: Error?
     @Published private (set) var registerCompletionEvent: Bool = false
 
     init(_ registerUsecase: RegisterUseCase = RegisterUseCase()) {
