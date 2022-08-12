@@ -110,7 +110,7 @@ private extension ChatRoomView {
     }
 
     var chattingRoomTitle: String {
-        "\(String(format: "%02d", viewModel.taxiParty.meetingTime / 100)):\(String(format: "%02d", viewModel.taxiParty.meetingTime % 100)) \(viewModel.taxiParty.destination)행"
+        "\(Date.convertToStringTime(from: viewModel.taxiParty.meetingTime)) \(viewModel.taxiParty.destination)행"
     }
 }
 // MARK: - 메시지 리스트

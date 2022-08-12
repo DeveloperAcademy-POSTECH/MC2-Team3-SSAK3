@@ -56,7 +56,7 @@ struct MeetTimeView: View {
 
     var body: some View {
         VStack {
-            Text("\(String(format: "%02d", meetingTime / 100 % 100)):\(String(format: "%02d", meetingTime % 100))")
+            Text("\(Date.convertToStringTime(from: meetingTime))")
                 .font(.custom("AppleSDGothicNeo-Bold", size: 28))
                 .foregroundColor(Color.customBlack)
                 .padding(0)

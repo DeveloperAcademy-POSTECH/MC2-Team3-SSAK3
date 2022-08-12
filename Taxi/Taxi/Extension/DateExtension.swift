@@ -32,6 +32,21 @@ extension Date {
         return formatter
     }()
 
+    private static let hhmmFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HHmm"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+        return formatter
+    }()
+
+    private static let timeColonFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+        return formatter
+    }()
+
     private var dateComponents: DateComponents {
         return Calendar.current.dateComponents([.year, .month, .day, .weekday, .hour, .minute], from: self)
     }
@@ -150,5 +165,11 @@ extension Date {
     static func convertToKoreanDateFormat(from date: Int) -> String {
         guard let date = self.convertToDateFormat(from: date), let month = date.month, let day = date.day else { return "" }
         return "\(month)월 \(day)일 \(date.weekday)"
+    }
+
+    static func convertToStringTime(from time: Int) -> String {
+        let time = String(time)
+        guard let date = hhmmFormatter.date(from: time) else { return "00:00"}
+        return timeColonFormatter.string(from: date)
     }
 }
