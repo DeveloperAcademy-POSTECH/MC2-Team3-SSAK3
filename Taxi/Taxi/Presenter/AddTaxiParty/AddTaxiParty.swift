@@ -32,7 +32,8 @@ struct AddTaxiParty: View {
 
     let user: UserInfo
     var time: Int {
-        startHour! * 100 + startMinute!
+        guard let startHour = startHour, let startMinute = startMinute else { return 9999 }
+        return startHour * 100 + startMinute
     }
 
     private let columns: [GridItem] = [GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200))]
