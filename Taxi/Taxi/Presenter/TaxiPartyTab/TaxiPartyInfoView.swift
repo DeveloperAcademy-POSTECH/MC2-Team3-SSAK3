@@ -17,18 +17,10 @@ struct TaxiPartyInfoView: View {
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 62
     private let remainSeat: Int
-    private let meetingMonth: Int
-    private let meetingDay: Int
-    private let meetingHour: String
-    private let meetingMinute: String
 
     init(taxiParty: TaxiParty, showBlur: Binding<Bool>) {
         self.taxiParty = taxiParty
         self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
-        self.meetingMonth = taxiParty.meetingDate / 100 % 100
-        self.meetingDay = taxiParty.meetingDate % 100
-        self.meetingHour = String(format: "%02d", taxiParty.meetingTime / 100 % 100)
-        self.meetingMinute = String(format: "%02d", taxiParty.meetingTime % 100)
         self._showBlur = showBlur
     }
 
@@ -121,7 +113,7 @@ private extension TaxiPartyInfoView {
 
     var taxiPartyTime: some View {
         HStack {
-            Text("\(meetingHour):\(meetingMinute)")
+            Text("\(Date.convertToStringTime(from: taxiParty.meetingTime))")
                 .font(Font.custom("AppleSDGothicNeo-Bold", size: 50))
                 .foregroundColor(.white)
             Spacer()
