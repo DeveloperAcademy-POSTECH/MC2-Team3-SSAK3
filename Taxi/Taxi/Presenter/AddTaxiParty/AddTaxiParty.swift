@@ -31,8 +31,8 @@ struct AddTaxiParty: View {
     @EnvironmentObject private var viewModel: ListViewModel
 
     let user: UserInfo
-    var time: Int {
-        guard let startHour = startHour, let startMinute = startMinute else { return 9999 }
+    var meetingTime: Int? {
+        guard let startHour = startHour, let startMinute = startMinute else { return nil }
         return startHour * 100 + startMinute
     }
 
@@ -66,7 +66,8 @@ struct AddTaxiParty: View {
                     guideText
                 }
                 RoundedButton("택시팟 생성", !checkAllInfoSelected(), loading: viewModel.isAdding) {
-                    let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: time, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
+                    guard let meetingTime = meetingTime else { return }
+                    let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: meetingTime, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
                     viewModel.addTaxiParty(taxiParty, user: user) { _ in
                         dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
