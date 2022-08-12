@@ -30,9 +30,10 @@ struct SignUpNickname: View {
                 .padding(.horizontal)
                 .focused($nicknameFocusState, equals: true)
             Spacer()
-            SignUpButton("회원가입", !nicknameValidation.isValid, viewModel.isLoading, focusState: nicknameFocusState) {
+            SignUpButton("회원가입", isDisabled: !nicknameValidation.isValid, isLoading: viewModel.isLoading, focusState: nicknameFocusState) {
                 viewModel.register()
             }
+            .padding(.bottom, nicknameFocusState ? 0 : 16)
 
             NavigationLink(isActive: .constant(viewModel.registerCompletionEvent)) {
                 SignUpComplete(viewModel, $isSignUpActive)

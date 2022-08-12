@@ -20,8 +20,8 @@ struct SignUpComplete: View {
 
     var body: some View {
         ZStack {
-            SparkleAnimation(from: 300, from: 50, 0.8)
-            SparkleAnimation(from: 50, from: 650, 0.3)
+            SparkleAnimation(startX: 300, startY: 50, 0.8)
+            SparkleAnimation(startX: 50, startY: 650, 0.3)
             VStack(spacing: 0) {
                 Spacer()
                 Text("포포팟\(Image(systemName: "sparkle")) 가입 완료!")
@@ -63,7 +63,7 @@ private extension SignUpComplete {
         let startYPosition: CGFloat
         let opacity: Double
 
-        init(from startX: CGFloat, from startY: CGFloat, _ opacity: Double) {
+        init(startX: CGFloat, startY: CGFloat, _ opacity: Double) {
             self.startXPosition = startX
             self.startYPosition = startY
             _xPosition = .init(initialValue: startX)

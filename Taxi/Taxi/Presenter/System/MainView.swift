@@ -57,6 +57,7 @@ struct MainView: View {
             }
         }
         .environmentObject(viewModel)
+        .enableCustomNavigationView()
     }
 }
 

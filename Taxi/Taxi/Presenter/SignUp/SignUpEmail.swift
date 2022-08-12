@@ -27,9 +27,10 @@ struct SignUpEmail: View {
                 .padding(.horizontal)
                 .focused($emailFocuseState, equals: true)
             Spacer()
-            SignUpButton("비밀번호 설정", !emailValidation.isValid, focusState: emailFocuseState) {
+            SignUpButton("비밀번호 설정", isDisabled: !emailValidation.isValid, focusState: emailFocuseState) {
                 goToPassword = true
             }
+            .padding(.bottom, emailFocuseState ? 0 : 16)
             NavigationLink(isActive: $goToPassword) {
                 SignUpPassword(viewModel, $isSignUpActive)
             } label: {
