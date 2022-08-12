@@ -16,9 +16,6 @@ struct TaxiParty: Codable {
     let maxPersonNumber: Int
     let members: [String]
     let isClosed: Bool
-    var readableMeetingTime: String {
-        Date.convertToStringTime(from: meetingTime)
-    }
 }
 
 // MARK: - Public Interface
@@ -38,6 +35,10 @@ extension TaxiParty {
 
     var currentMemeberCount: Int {
         return members.count
+    }
+
+    var readableMeetingTime: String {
+        Date.convertToStringTime(from: meetingTime)
     }
 }
 

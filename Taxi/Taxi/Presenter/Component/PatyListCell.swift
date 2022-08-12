@@ -56,7 +56,7 @@ struct MeetTimeView: View {
 
     var body: some View {
         VStack {
-            Text("\(meetingTime)")
+            Text(meetingTime)
                 .font(.custom("AppleSDGothicNeo-Bold", size: 28))
                 .foregroundColor(Color.customBlack)
                 .padding(0)
