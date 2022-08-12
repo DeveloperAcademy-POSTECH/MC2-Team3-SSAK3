@@ -32,9 +32,10 @@ struct SignUpPassword: View {
                 .padding(.horizontal)
                 .focused($passwordFocusState, equals: true)
             Spacer()
-            SignUpButton("닉네임 설정", !passwordValidation.isValid, focusState: passwordFocusState) {
+            SignUpButton("닉네임 설정", isDisabled: !passwordValidation.isValid, focusState: passwordFocusState) {
                 goToNicknmae = true
             }
+            .padding(.bottom, passwordFocusState ? 0 : 16)
 
             NavigationLink(isActive: $goToNicknmae) {
                 SignUpNickname(viewModel, $isSignUpActive)

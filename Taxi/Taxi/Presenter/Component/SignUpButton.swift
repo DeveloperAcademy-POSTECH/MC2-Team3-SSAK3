@@ -9,15 +9,15 @@ import SwiftUI
 
 struct SignUpButton: View {
     private let text: String
-    private let disabled: Bool
+    private let isDisabled: Bool
     private let isLoading: Bool
     private let focusState: Bool
     private let action: () -> Void
 
-    init(_ title: String, _ disabled: Bool = false, _ isLoading: Bool = false, focusState: Bool, action: @escaping () -> Void) {
+    init(_ title: String, isDisabled: Bool = false, isLoading: Bool = false, focusState isFocuesd: Bool, action: @escaping () -> Void) {
         self.text = title
-        self.disabled = disabled
-        self.focusState = focusState
+        self.isDisabled = isDisabled
+        self.focusState = isFocuesd
         self.action = action
         self.isLoading = isLoading
     }
@@ -38,14 +38,19 @@ struct SignUpButton: View {
                 }
             }
         }
-        .disabled(disabled || isLoading)
-        .opacity(disabled ? 0.3 : 1)
+        .disabled(isDisabled || isLoading)
+        .opacity(isDisabled ? 0.3 : 1)
         .buttonStyle(.plain)
     }
 }
+
+#if DEBUG
+// MARK: - Preview
 struct SignUpButton_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpButton("다음", focusState: true) {}
-        SignUpButton("회원가입", true, true, focusState: true) {}
+        SignUpButton("다음", focusState: true) {
+
+        }
     }
 }
+#endif

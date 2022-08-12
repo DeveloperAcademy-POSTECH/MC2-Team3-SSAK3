@@ -46,7 +46,6 @@ struct OnboardingView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: toolbar)
-
         }
     }
 
