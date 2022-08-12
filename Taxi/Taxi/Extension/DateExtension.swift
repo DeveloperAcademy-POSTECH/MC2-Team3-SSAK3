@@ -169,7 +169,7 @@ extension Date {
 
     static func convertToStringTime(from time: Int) -> String {
         let time = String(time)
-        guard let date = hhmmFormatter.date(from: time) else { return "00:00"}
+        guard let date = hhmmFormatter.date(from: time) else { return "00:00" }
         return timeColonFormatter.string(from: date)
     }
 }
