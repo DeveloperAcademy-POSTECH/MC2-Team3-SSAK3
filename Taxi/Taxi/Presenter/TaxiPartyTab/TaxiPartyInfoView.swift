@@ -113,7 +113,7 @@ private extension TaxiPartyInfoView {
 
     var taxiPartyTime: some View {
         HStack {
-            Text("\(Date.convertToStringTime(from: taxiParty.meetingTime))")
+            Text("\(taxiParty.readableMeetingTime)")
                 .font(Font.custom("AppleSDGothicNeo-Bold", size: 50))
                 .foregroundColor(.white)
             Spacer()

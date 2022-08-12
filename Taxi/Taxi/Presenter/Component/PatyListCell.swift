@@ -13,7 +13,7 @@ struct PartyListCell: View {
         VStack(alignment: .leading, spacing: 0) {
             DestinationView(party: party)
             HStack(alignment: .top, spacing: 0) {
-                MeetTimeView(meetingTime: party.meetingTime)
+                MeetTimeView(meetingTime: party.readableMeetingTime)
                 Spacer()
                 DepartureView(party: party)
                 Spacer()
@@ -52,11 +52,11 @@ struct DestinationView: View {
 }
 
 struct MeetTimeView: View {
-    let meetingTime: Int
+    let meetingTime: String
 
     var body: some View {
         VStack {
-            Text("\(Date.convertToStringTime(from: meetingTime))")
+            Text("\(meetingTime)")
                 .font(.custom("AppleSDGothicNeo-Bold", size: 28))
                 .foregroundColor(Color.customBlack)
                 .padding(0)
