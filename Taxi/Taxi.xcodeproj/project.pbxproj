@@ -316,7 +316,6 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		0007A743285C06E000B7EF1F /* TaxiPartyTab */ = {
 		0007A743285C06E000B7EF1F /* TaxiPartyList */ = {
 			isa = PBXGroup;
 			children = (

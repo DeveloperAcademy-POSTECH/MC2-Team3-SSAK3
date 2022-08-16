@@ -10,7 +10,7 @@ import Introspect
 import SwiftUI
 
 struct ChatRoomView: View {
-    @EnvironmentObject private var listViewModel: ListViewModel
+    @EnvironmentObject private var listViewModel: MyPartyView.ViewModel
     @StateObject private var viewModel: ChattingViewModel
     @ObservedObject private var keyboard = KeyboardResponder()
     @Environment(\.dismiss) private var dismiss

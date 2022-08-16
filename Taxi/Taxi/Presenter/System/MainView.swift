@@ -14,12 +14,12 @@ enum Tab {
     case setting
 }
 struct MainView: View {
-    @StateObject private var viewModel: ListViewModel
+    @StateObject private var viewModel: MyPartyView.ViewModel
     @StateObject private var taxiPartyViewModel: TaxiPartyList.ViewModel
     @EnvironmentObject private var appState: AppState
 
     init(_ userId: String) {
-        let listViewModel = ListViewModel(userId: userId)
+        let listViewModel = MyPartyView.ViewModel(userId: userId)
         self._viewModel = StateObject(wrappedValue: listViewModel)
         self._taxiPartyViewModel = StateObject(wrappedValue: TaxiPartyList.ViewModel(addTaxiPartyDelegate: listViewModel, joinTaxiPartyDelegate: listViewModel, exclude: userId))
         let tabBarAppearance = UITabBarAppearance()

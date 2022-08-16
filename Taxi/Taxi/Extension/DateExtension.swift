@@ -168,7 +168,7 @@ extension Date {
     }
 
     static func convertToStringTime(from time: Int) -> String {
-        let time = String(time)
+        let time = String(format: "%04d", time)
         guard let date = hhmmFormatter.date(from: time) else { return "00:00" }
         return timeColonFormatter.string(from: date)
     }
