@@ -9,17 +9,17 @@ import SwiftUI
 
 // MARK: - Content View
 struct MyPartyView: View {
-    @EnvironmentObject private var listViewModel: ListViewModel
+    @EnvironmentObject private var viewModel: ViewModel
     @EnvironmentObject private var appState: AppState
 
     var body: some View {
         VStack {
             MyPartyTitle()
-            if listViewModel.error == .loadPartiesFail {
+            if viewModel.error == .loadPartiesFail {
                 ErrorView(ListError.loadPartiesFail, description: "다시 불러오기") {
                     reload()
                 }
-            } else if listViewModel.myParties.count == 0 {
+            } else if viewModel.myParties.count == 0 {
                 ErrorView(ListError.noMyParties, description: "택시팟 참여하러 가기") {
                     appState.showTaxiParties()
                 }
@@ -27,9 +27,9 @@ struct MyPartyView: View {
                 MyPartyList()
             }
         }
-        .alert(isPresented: .constant(listViewModel.error == .leavePartyFail), error: listViewModel.error) { _ in
+        .alert(isPresented: .constant(viewModel.error == .leavePartyFail), error: viewModel.error) { _ in
             Button("확인") {
-                listViewModel.error = nil
+                viewModel.error = nil
             }
         } message: { error in
             Text(error.recoverySuggestion ?? "")
@@ -38,7 +38,7 @@ struct MyPartyView: View {
     }
 
     private func reload() {
-        listViewModel.getMyTaxiParties(force: true)
+        viewModel.getMyTaxiParties(force: true)
     }
 }
 
@@ -63,7 +63,7 @@ struct MyPartySectionHeader: View {
 }
 
 struct MyPartyList: View {
-    @EnvironmentObject private var listViewModel: ListViewModel
+    @EnvironmentObject private var viewModel: MyPartyView.ViewModel
     @EnvironmentObject private var authentication: UserInfoState
     @EnvironmentObject private var appState: AppState
     @State private var isSwiped: Bool = false
@@ -71,7 +71,7 @@ struct MyPartyList: View {
     @State private var selectedParty: TaxiParty?
 
     private var partys: [Int: [TaxiParty]] {
-        Dictionary.init(grouping: listViewModel.myParties, by: {$0.meetingDate})
+        Dictionary.init(grouping: viewModel.myParties, by: {$0.meetingDate})
     }
     private var meetingDates: [Int] {
         partys.map({$0.key}).sorted()
@@ -122,6 +122,7 @@ struct MyPartyList: View {
                                 })
                                 .cornerRadius(16)
                                 .cellBackground()
+                                .padding(.horizontal)
                             }
                         }
                     }
@@ -143,7 +144,7 @@ struct MyPartyList: View {
 
     private func delete(object: TaxiParty?) {
         guard let party = object else { return }
-        listViewModel.leaveMyParty(party: party, user: authentication.userInfo)
+        viewModel.leaveMyParty(party: party, user: authentication.userInfo)
     }
 }
 
@@ -295,7 +296,7 @@ struct MyPartyView_Previews: PreviewProvider {
         NavigationView {
             MyPartyView()
                 .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
-                .environmentObject(ListViewModel(userId: ""))
+                .environmentObject(MyPartyView.ViewModel(userId: ""))
         }
     }
 }

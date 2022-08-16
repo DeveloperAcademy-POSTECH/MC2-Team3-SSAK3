@@ -54,53 +54,55 @@ protocol JoinTaxiPartyDelegate: AnyObject {
     func joinTaxiParty(_ taxiParty: TaxiParty)
 }
 
-final class ListViewModel: ObservableObject {
-    @Published private (set) var myParties: [TaxiParty] = []
-    @Published var error: ListError?
-    private var cancelBag: Set<AnyCancellable> = []
+extension MyPartyView {
+    final class ViewModel: ObservableObject {
+        @Published private (set) var myParties: [TaxiParty] = []
+        @Published var error: ListError?
+        private var cancelBag: Set<AnyCancellable> = []
 
-    // 유즈케이스
-    private let addTaxiPartyUseCase: AddTaxiPartyUseCase = AddTaxiPartyUseCase()
-    private let joinTaxiPartyUseCase: JoinTaxiPartyUseCase = JoinTaxiPartyUseCase()
-    private let myTaxiPartyUseCase: MyTaxiPartyUseCase = MyTaxiPartyUseCase()
-    private let userId: String
+        // 유즈케이스
+        private let addTaxiPartyUseCase: AddTaxiPartyUseCase = AddTaxiPartyUseCase()
+        private let joinTaxiPartyUseCase: JoinTaxiPartyUseCase = JoinTaxiPartyUseCase()
+        private let myTaxiPartyUseCase: MyTaxiPartyUseCase = MyTaxiPartyUseCase()
+        private let userId: String
 
-    init(userId: String) {
-        self.userId = userId
-        getMyTaxiParties(force: true)
-    }
+        init(userId: String) {
+            self.userId = userId
+            getMyTaxiParties(force: true)
+        }
 
-    func getMyTaxiParties(force load: Bool = false) {
-        myTaxiPartyUseCase.getMyTaxiParty(userId, force: load) { [weak self] taxiParties, _ in
-            guard let taxiParties = taxiParties, let self = self else {
-                self?.error = .loadPartiesFail
-                return
-            }
-            self.myParties = taxiParties
-            if self.error == .loadPartiesFail {
-                self.error = nil
+        func getMyTaxiParties(force load: Bool = false) {
+            myTaxiPartyUseCase.getMyTaxiParty(userId, force: load) { [weak self] taxiParties, _ in
+                guard let taxiParties = taxiParties, let self = self else {
+                    self?.error = .loadPartiesFail
+                    return
+                }
+                self.myParties = taxiParties
+                if self.error == .loadPartiesFail {
+                    self.error = nil
+                }
             }
         }
-    }
 
-    func leaveMyParty(party: TaxiParty, user: UserInfo) {
-        myTaxiPartyUseCase.leaveTaxiParty(party, user: user) { [weak self] error in
-            guard let self = self, error == nil else {
-                self?.error = .leavePartyFail
-                return
+        func leaveMyParty(party: TaxiParty, user: UserInfo) {
+            myTaxiPartyUseCase.leaveTaxiParty(party, user: user) { [weak self] error in
+                guard let self = self, error == nil else {
+                    self?.error = .leavePartyFail
+                    return
+                }
+                self.deletePartyInList(party: party)
             }
-            self.deletePartyInList(party: party)
         }
-    }
 
-    private func deletePartyInList(party: TaxiParty) {
-        if let index = self.myParties.firstIndex(of: party) {
-            self.myParties.remove(at: index)
+        private func deletePartyInList(party: TaxiParty) {
+            if let index = self.myParties.firstIndex(of: party) {
+                self.myParties.remove(at: index)
+            }
         }
     }
 }
 
-extension ListViewModel: AddTaxiPartyDelegete {
+extension MyPartyView.ViewModel: AddTaxiPartyDelegete {
 
     func addTaxiParty(_ taxiParty: TaxiParty) {
         var copyToAdd = myParties
@@ -119,7 +121,7 @@ extension ListViewModel: AddTaxiPartyDelegete {
 
 }
 
-extension ListViewModel: JoinTaxiPartyDelegate {
+extension MyPartyView.ViewModel: JoinTaxiPartyDelegate {
 
     func joinTaxiParty(_ taxiParty: TaxiParty) {
         addTaxiParty(taxiParty)

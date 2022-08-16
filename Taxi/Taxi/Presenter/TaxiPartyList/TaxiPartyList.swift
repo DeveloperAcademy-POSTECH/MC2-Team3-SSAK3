@@ -208,15 +208,15 @@ struct TaxiPartyList_Previews: PreviewProvider {
             TaxiPartyList(TaxiPartyList.ViewModel(.empty))
                 .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
                 .environmentObject(AppState())
-                .environmentObject(ListViewModel(userId: "123"))
+                .environmentObject(MyPartyView.ViewModel(userId: "123"))
             TaxiPartyList(TaxiPartyList.ViewModel(.error(error: NSError())))
                 .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
                 .environmentObject(AppState())
-                .environmentObject(ListViewModel(userId: "123"))
+                .environmentObject(MyPartyView.ViewModel(userId: "123"))
             TaxiPartyList(TaxiPartyList.ViewModel(.empty))
                 .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
                 .environmentObject(AppState())
-                .environmentObject(ListViewModel(userId: "123"))
+                .environmentObject(MyPartyView.ViewModel(userId: "123"))
         }
     }
 }

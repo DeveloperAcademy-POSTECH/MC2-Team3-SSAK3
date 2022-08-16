@@ -139,7 +139,7 @@ extension View {
 struct PatyListCell_Previews: PreviewProvider {
     static var previews: some View {
         PartyListCell(party: TaxiPartyMockData.mockData.first!)
-            .environmentObject(ListViewModel(userId: ""))
+            .environmentObject(MyPartyView.ViewModel(userId: ""))
             .previewLayout(.sizeThatFits)
     }
 }
