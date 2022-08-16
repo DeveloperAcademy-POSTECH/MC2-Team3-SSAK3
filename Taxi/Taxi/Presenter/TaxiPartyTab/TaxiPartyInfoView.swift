@@ -123,36 +123,24 @@ private extension TaxiPartyInfoView {
     var taxiPartyPlace: some View {
           HStack {
               Image(ImageName.taxi)
-              switch taxiParty.destinationCode {
-              case 0:
-                  Text("포항역")
+              Text(taxiParty.destinationCode == 0 ? "포항역" : "포스텍")
                       .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
                   Text("\(taxiParty.departure)")
                            .font(Font.custom("AppleSDGothicNeo-UltraLight", size: 20))
                   Image(systemName: "chevron.forward")
                       .font(.system(size: 20))
                       .padding(.horizontal, 8)
+              if taxiParty.destinationCode == 0 {
                   Image(systemName: "graduationcap.fill")
                       .font(.system(size: 20))
                       .foregroundColor(.darkGray)
-                  Text("\(taxiParty.destination)")
-                      .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
-              case 1:
-                  Text("포스텍")
-                      .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
-                  Text("\(taxiParty.departure)")
-                           .font(Font.custom("AppleSDGothicNeo-UltraLight", size: 20))
-                  Image(systemName: "chevron.forward")
-                      .font(.system(size: 20))
-                      .padding(.horizontal, 8)
+              } else {
                   Image(systemName: "train.side.front.car")
                       .font(.system(size: 20))
                       .foregroundColor(.darkGray)
+              }
                   Text("\(taxiParty.destination)")
                       .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
-              default:
-                  fatalError()
-              }
               Spacer()
           }
           .foregroundColor(.customGray)
@@ -222,7 +210,7 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
     static var previews: some View {
         TaxiPartyInfoView(taxiParty: TaxiParty(
             id: "121F9EBC-1607-4D23-ACCD-660DDBC3CB77",
-            departureCode: 2,
+            departureCode: 4,
             destinationCode: 1,
             meetingDate: 20220616,
             meetingTime: 1610,
