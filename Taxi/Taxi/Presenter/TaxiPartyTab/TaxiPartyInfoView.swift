@@ -130,15 +130,9 @@ private extension TaxiPartyInfoView {
                   Image(systemName: "chevron.forward")
                       .font(.system(size: 20))
                       .padding(.horizontal, 8)
-              if taxiParty.destinationCode == 0 {
-                  Image(systemName: "graduationcap.fill")
+              Image(systemName: taxiParty.destinationCode == 0 ? "graduationcap.fill" : "train.side.front.car")
                       .font(.system(size: 20))
                       .foregroundColor(.darkGray)
-              } else {
-                  Image(systemName: "train.side.front.car")
-                      .font(.system(size: 20))
-                      .foregroundColor(.darkGray)
-              }
                   Text("\(taxiParty.destination)")
                       .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
               Spacer()
