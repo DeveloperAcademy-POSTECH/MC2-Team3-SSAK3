@@ -120,7 +120,6 @@ struct CalendarModal: View {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
             uiTabarController?.tabBar.isHidden = false
         }
-        uiTabarController?.tabBar.isHidden = false
         toastIsShowing = false
         storeDate = nil
         withAnimation(.easeInOut) {

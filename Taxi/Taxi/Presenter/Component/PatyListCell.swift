@@ -23,6 +23,7 @@ struct PartyListCell: View {
             .padding(.horizontal, 7)
         }
         .padding()
+        .cellBackground()
     }
 }
 
@@ -125,7 +126,6 @@ struct CellBackground: ViewModifier {
             .background(.white)
             .cornerRadius(16)
             .shadow(color: Color.black.opacity(0.06), radius: 15, x: 1, y: 2)
-            .padding(.horizontal)
     }
 }
 
@@ -140,6 +140,7 @@ struct PatyListCell_Previews: PreviewProvider {
     static var previews: some View {
         PartyListCell(party: TaxiPartyMockData.mockData.first!)
             .environmentObject(ListViewModel(userId: ""))
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif

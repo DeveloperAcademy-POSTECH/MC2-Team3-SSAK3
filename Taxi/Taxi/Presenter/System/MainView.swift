@@ -15,10 +15,13 @@ enum Tab {
 }
 struct MainView: View {
     @StateObject private var viewModel: ListViewModel
+    @StateObject private var taxiPartyViewModel: TaxiPartyList.ViewModel
     @EnvironmentObject private var appState: AppState
 
     init(_ userId: String) {
-        self._viewModel = StateObject(wrappedValue: ListViewModel(userId: userId))
+        let listViewModel = ListViewModel(userId: userId)
+        self._viewModel = StateObject(wrappedValue: listViewModel)
+        self._taxiPartyViewModel = StateObject(wrappedValue: TaxiPartyList.ViewModel(addTaxiPartyDelegate: listViewModel, joinTaxiPartyDelegate: listViewModel, exclude: userId))
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
@@ -27,15 +30,15 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             TabView(selection: $appState.tab) {
-//                TaxiPartyList()
-//                    .tabItem {
-//                        if appState.tab == .taxiParty {
-//                            Label("택시팟", image: ImageName.tabTaxiPartyOn)
-//                        } else {
-//                            Label("택시팟", image: ImageName.tabTaxiPartyOff)
-//                        }
-//                    }
-//                    .tag(Tab.taxiParty)
+                TaxiPartyList(taxiPartyViewModel)
+                    .tabItem {
+                        if appState.tab == .taxiParty {
+                            Label("택시팟", image: ImageName.tabTaxiPartyOn)
+                        } else {
+                            Label("택시팟", image: ImageName.tabTaxiPartyOff)
+                        }
+                    }
+                    .tag(Tab.taxiParty)
                 MyPartyView()
                     .tabItem {
                         if appState.tab == .myParty {
