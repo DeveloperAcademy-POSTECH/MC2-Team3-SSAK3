@@ -28,8 +28,9 @@ struct AddTaxiParty: View {
     @State private var startMinute: Int? // 출발 분
     @State private var departure: Place? // 출발 장소
     @State private var maxNumber: Int? // 정원
-    @EnvironmentObject private var viewModel: ListViewModel
-
+    @ObservedObject var viewModel: TaxiPartyList.ViewModel
+    @State private var isAdding: Bool = false
+    @State private var error: Error?
     let user: UserInfo
     var meetingTime: Int? {
         guard let startHour = startHour, let startMinute = startMinute else { return nil }
@@ -65,27 +66,22 @@ struct AddTaxiParty: View {
                 if checkAllInfoSelected() {
                     guideText
                 }
-                RoundedButton("택시팟 생성", !checkAllInfoSelected(), loading: viewModel.isAdding) {
-                    guard let meetingTime = meetingTime else { return }
-                    let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: meetingTime, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
+                RoundedButton("택시팟 생성", !checkAllInfoSelected(), loading: isAdding) {
+                    let taxiParty: TaxiParty = TaxiParty(id: UUID().uuidString, departureCode: departure!.toCode(), destinationCode: destination!.toCode(), meetingDate: startDate!.formattedInt!, meetingTime: (startHour! * 100) + startMinute!, maxPersonNumber: maxNumber!, members: [user.id], isClosed: false)
+                    isAdding = true
                     viewModel.addTaxiParty(taxiParty, user: user) { _ in
+                        isAdding = false
                         dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                             appState.tab = .myParty
                             appState.showToastMessage("택시팟이 생성되었습니다!")
                         }
                     } onError: { error in
+                        isAdding = false
                         print(error)
                     }
                 }
                 .padding()
-            }
-            .alert(isPresented: .constant(viewModel.error == .addPartyFail), error: viewModel.error) { _ in
-                Button("확인") {
-                    viewModel.error = nil
-                }
-            } message: { error in
-                Text(error.recoverySuggestion ?? "")
             }
         }
     }
@@ -394,8 +390,8 @@ private extension AddTaxiParty {
 // MARK: - 프리뷰
 struct AddTaxiParty_Previews: PreviewProvider {
     static var previews: some View {
-        AddTaxiParty(user: UserInfo(id: "하이", nickname: "하이", profileImage: ""))
-            .environmentObject(ListViewModel(userId: ""))
+        AddTaxiParty(viewModel: .init(), user: UserInfo(id: "하이", nickname: "하이", profileImage: ""))
+            .environmentObject(TaxiPartyList.ViewModel())
             .environmentObject(AppState())
     }
 }

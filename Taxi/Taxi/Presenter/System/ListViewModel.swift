@@ -46,15 +46,20 @@ enum ListError: LocalizedError {
     }
 }
 
+protocol AddTaxiPartyDelegete: AnyObject {
+    func addTaxiParty(_ taxiParty: TaxiParty)
+}
+
+protocol JoinTaxiPartyDelegate: AnyObject {
+    func joinTaxiParty(_ taxiParty: TaxiParty)
+}
+
 final class ListViewModel: ObservableObject {
-    @Published private (set) var taxiParties: [TaxiParty] = []
     @Published private (set) var myParties: [TaxiParty] = []
-    @Published private (set) var isAdding: Bool = false
     @Published var error: ListError?
     private var cancelBag: Set<AnyCancellable> = []
 
     // 유즈케이스
-    private let getTaxiPartyUseCase: GetTaxiPartyUseCase = GetTaxiPartyUseCase()
     private let addTaxiPartyUseCase: AddTaxiPartyUseCase = AddTaxiPartyUseCase()
     private let joinTaxiPartyUseCase: JoinTaxiPartyUseCase = JoinTaxiPartyUseCase()
     private let myTaxiPartyUseCase: MyTaxiPartyUseCase = MyTaxiPartyUseCase()
@@ -62,21 +67,7 @@ final class ListViewModel: ObservableObject {
 
     init(userId: String) {
         self.userId = userId
-        getTaxiParties(force: true)
         getMyTaxiParties(force: true)
-    }
-
-    func getTaxiParties(force load: Bool = false) {
-        getTaxiPartyUseCase.getTaxiParty(exclude: userId, force: load) { [weak self] taxiParties, error in
-            guard let self = self, let taxiParties = taxiParties else {
-                self?.error = .loadPartiesFail
-                return
-            }
-            self.taxiParties = taxiParties
-            if self.error == .loadPartiesFail {
-                self.error = nil
-            }
-        }
     }
 
     func getMyTaxiParties(force load: Bool = false) {
@@ -90,24 +81,6 @@ final class ListViewModel: ObservableObject {
                 self.error = nil
             }
         }
-    }
-
-    func addTaxiParty(_ taxiParty: TaxiParty, user: UserInfo, onSuccess: @escaping (TaxiParty) -> Void = { _ in }, onError: @escaping (Error) -> Void = { _ in }) {
-        isAdding = true
-        addTaxiPartyUseCase.addTaxiParty(taxiParty, user: user)
-            .sink { [weak self] completion in
-                guard let self = self else {
-                    return
-                }
-                if case let .failure(error) = completion {
-                    onError(error)
-                    self.error = .addPartyFail
-                }
-                self.isAdding = false
-            } receiveValue: { taxiParty in
-                self.addMyTaxiPartyInList(party: taxiParty)
-                onSuccess(taxiParty)
-            }.store(in: &cancelBag)
     }
 
     func leaveMyParty(party: TaxiParty, user: UserInfo) {
@@ -125,10 +98,13 @@ final class ListViewModel: ObservableObject {
             self.myParties.remove(at: index)
         }
     }
+}
 
-    private func addMyTaxiPartyInList(party: TaxiParty) {
+extension ListViewModel: AddTaxiPartyDelegete {
+
+    func addTaxiParty(_ taxiParty: TaxiParty) {
         var copyToAdd = myParties
-        copyToAdd.append(party)
+        copyToAdd.append(taxiParty)
         copyToAdd = copyToAdd.sorted { firstParty, secondParty in
             if firstParty.meetingDate < secondParty.meetingDate {
                 return true
@@ -141,20 +117,12 @@ final class ListViewModel: ObservableObject {
         myParties = copyToAdd
     }
 
-    func joinTaxiParty(in taxiParty: TaxiParty, _ user: UserInfo, completion: @escaping () -> Void) {
-        isAdding = true
-        joinTaxiPartyUseCase.joinTaxiParty(in: taxiParty, user) { [weak self] taxiParty, _ in
-            guard let self = self, let taxiParty = taxiParty else {
-                self?.error = .outOfMember
-                self?.isAdding = false
-                return
-            }
-            if let index = self.taxiParties.firstIndex(of: taxiParty) {
-                self.taxiParties.remove(at: index)
-                self.addMyTaxiPartyInList(party: taxiParty)
-                completion()
-            }
-            self.isAdding = false
-        }
+}
+
+extension ListViewModel: JoinTaxiPartyDelegate {
+
+    func joinTaxiParty(_ taxiParty: TaxiParty) {
+        addTaxiParty(taxiParty)
     }
+
 }
