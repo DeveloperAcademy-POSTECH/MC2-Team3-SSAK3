@@ -8,6 +8,8 @@
 import Combine
 import FirebaseAuth
 import FirebaseAuthCombineSwift
+import FirebaseFirestore
+import FirebaseFirestoreCombineSwift
 
 enum FirebaseAuthenticateError: Error {
     case emailUnVerified
@@ -25,7 +27,7 @@ extension FirebaseAuthenticateError: LocalizedError {
 final class FirebaseAuthenticaterAdpater: AuthenticateAdapter {
 
     private let userRepository: UserRepository
-
+    private let fireStore: Firestore = Firestore.firestore()
     init(_ userRepository: UserRepository = UserFirebaseDataSource.shared) {
         self.userRepository = userRepository
     }
@@ -34,6 +36,14 @@ final class FirebaseAuthenticaterAdpater: AuthenticateAdapter {
         Auth.auth().signIn(withEmail: email, password: password)
             .flatMap { [self] result in
                 self.makeLoginPublisher(user: result.user)
+            }
+            .flatMap { [self] userInfo in
+                fireStore.collection("FcmTokens")
+                    .document(userInfo.id)
+                    .setData(["fcmToken": UserDefaults.standard.string(forKey: "fcmToken")])
+                    .map {
+                        userInfo
+                    }
             }
             .eraseToAnyPublisher()
     }

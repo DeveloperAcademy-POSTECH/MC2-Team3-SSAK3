@@ -70,7 +70,10 @@ extension AppDelegate: MessagingDelegate {
     guard let fcmToken = fcmToken else {
       return
     }
-    print("firebase token is \(fcmToken)")
+      UserDefaults.standard.set(fcmToken, forKey: "fcmToken")
+      #if DEBUG
+      print("firebase token is \(fcmToken)")
+      #endif
   }
 }
 
