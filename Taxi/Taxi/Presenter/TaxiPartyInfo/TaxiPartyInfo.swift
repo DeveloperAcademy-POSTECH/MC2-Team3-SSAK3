@@ -125,24 +125,18 @@ private extension TaxiPartyInfo {
     var taxiPartyPlace: some View {
         HStack {
             Image(ImageName.taxi)
-            switch taxiParty.destinationCode {
-            case 0:
-                Text("포항역")
+            Text(taxiParty.destinationCode == 0 ? "포항역" : "포스텍")
                     .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
-            case 1:
-                Text("포스텍")
+                Text("\(taxiParty.departure)")
+                         .font(Font.custom("AppleSDGothicNeo-UltraLight", size: 20))
+                Image(systemName: "chevron.forward")
+                    .font(.system(size: 20))
+                    .padding(.horizontal, 8)
+            Image(systemName: taxiParty.destinationCode == 0 ? "graduationcap.fill" : "train.side.front.car")
+                    .font(.system(size: 20))
+                    .foregroundColor(.darkGray)
+                Text("\(taxiParty.destination)")
                     .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
-            default:
-                fatalError()
-            }
-            Text("\(taxiParty.departure)")
-                .font(Font.custom("AppleSDGothicNeo-UltraLight", size: 20))
-            Image(systemName: "chevron.forward")
-                .font(.system(size: 20))
-                .padding(.horizontal, 10)
-            Image(ImageName.train)
-            Text("\(taxiParty.destination)")
-                .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
             Spacer()
         }
         .foregroundColor(.customGray)
