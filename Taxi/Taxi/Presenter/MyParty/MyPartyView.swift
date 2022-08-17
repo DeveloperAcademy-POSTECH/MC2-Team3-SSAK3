@@ -291,12 +291,12 @@ struct ErrorView: View {
     }
 }
 
+// MARK: - Preview
 struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             MyPartyView()
-                .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
-                .environmentObject(MyPartyView.ViewModel(userId: ""))
+                .inject()
         }
     }
 }

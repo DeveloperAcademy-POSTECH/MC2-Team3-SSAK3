@@ -206,17 +206,8 @@ struct TaxiPartyList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             TaxiPartyList(TaxiPartyList.ViewModel(.empty))
-                .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
-                .environmentObject(AppState())
-                .environmentObject(MyPartyView.ViewModel(userId: "123"))
             TaxiPartyList(TaxiPartyList.ViewModel(.error(error: NSError())))
-                .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
-                .environmentObject(AppState())
-                .environmentObject(MyPartyView.ViewModel(userId: "123"))
             TaxiPartyList(TaxiPartyList.ViewModel(.empty))
-                .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
-                .environmentObject(AppState())
-                .environmentObject(MyPartyView.ViewModel(userId: "123"))
         }
     }
 }

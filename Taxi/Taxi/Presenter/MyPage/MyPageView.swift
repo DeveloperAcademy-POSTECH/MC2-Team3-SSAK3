@@ -142,7 +142,6 @@ private extension MyPageView {
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
         MyPageView()
-            .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
-            .environmentObject(AppState())
+            .inject()
     }
 }
