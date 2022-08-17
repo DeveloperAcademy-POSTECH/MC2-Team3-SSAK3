@@ -383,7 +383,7 @@ private extension AddTaxiParty {
         }
     }
     // 모든 정보가 정상적으로 입력되있는지 확인하는 함수
-    private func checkAllInfoSelected() -> Bool {
+    func checkAllInfoSelected() -> Bool {
         return destination != .none && destination != nil && startDate != nil && startHour != nil && startMinute != nil && departure != nil && maxNumber != nil
     }
 }
@@ -391,7 +391,6 @@ private extension AddTaxiParty {
 struct AddTaxiParty_Previews: PreviewProvider {
     static var previews: some View {
         AddTaxiParty(viewModel: .init(), user: UserInfo(id: "하이", nickname: "하이", profileImage: ""))
-            .environmentObject(TaxiPartyList.ViewModel())
-            .environmentObject(AppState())
+            .inject()
     }
 }

@@ -18,16 +18,12 @@ struct TaxiPartyInfo: View {
     private let remainSeat: Int
     private let meetingMonth: Int
     private let meetingDay: Int
-    private let meetingHour: String
-    private let meetingMinute: String
 
     init(taxiParty: TaxiParty) {
         self.taxiParty = taxiParty
         self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
         self.meetingMonth = taxiParty.meetingDate / 100 % 100
         self.meetingDay = taxiParty.meetingDate % 100
-        self.meetingHour = String(format: "%02d", taxiParty.meetingTime / 100 % 100)
-        self.meetingMinute = String(format: "%02d", taxiParty.meetingTime % 100)
     }
 
     var body: some View {
@@ -119,7 +115,7 @@ private extension TaxiPartyInfo {
 
     var taxiPartyTime: some View {
         HStack {
-            Text("\(meetingHour):\(meetingMinute)")
+            Text(taxiParty.readableMeetingTime)
                 .font(Font.custom("AppleSDGothicNeo-Bold", size: 50))
                 .foregroundColor(.white)
             Spacer()
@@ -220,12 +216,11 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
             departureCode: 2,
             destinationCode: 1,
             meetingDate: 20220616,
-            meetingTime: 1610,
+            meetingTime: 610,
             maxPersonNumber: 2,
             members: ["123456"],
             isClosed: false
         ))
-        .environmentObject(TaxiPartyList.ViewModel())
-        .environmentObject(UserInfoState(UserInfo(id: "", nickname: "", profileImage: "")))
+        .inject()
     }
 }
