@@ -9,8 +9,12 @@ import SwiftUI
 
 // MARK: - Content View
 struct MyPartyView: View {
-    @EnvironmentObject private var viewModel: ViewModel
+    @ObservedObject private var viewModel: ViewModel
     @EnvironmentObject private var appState: AppState
+
+    init(_ viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         VStack {
@@ -24,7 +28,7 @@ struct MyPartyView: View {
                     appState.showTaxiParties()
                 }
             } else {
-                MyPartyList()
+                MyPartyList(viewModel)
             }
         }
         .alert(isPresented: .constant(viewModel.error == .leavePartyFail), error: viewModel.error) { _ in
@@ -63,12 +67,16 @@ struct MyPartySectionHeader: View {
 }
 
 struct MyPartyList: View {
-    @EnvironmentObject private var viewModel: MyPartyView.ViewModel
+    @ObservedObject private var viewModel: MyPartyView.ViewModel
     @EnvironmentObject private var authentication: UserInfoState
     @EnvironmentObject private var appState: AppState
     @State private var isSwiped: Bool = false
     @State private var showAlert: Bool = false
     @State private var selectedParty: TaxiParty?
+
+    init(_ viewModel: MyPartyView.ViewModel) {
+        self.viewModel = viewModel
+    }
 
     private var partys: [Int: [TaxiParty]] {
         Dictionary.init(grouping: viewModel.myParties, by: {$0.meetingDate})
@@ -295,7 +303,7 @@ struct ErrorView: View {
 struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MyPartyView()
+            MyPartyView(MyPartyView.ViewModel(userId: ""))
                 .inject()
         }
     }

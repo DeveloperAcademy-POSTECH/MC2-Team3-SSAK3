@@ -49,7 +49,6 @@ private extension TaxiPartyList {
         HStack(alignment: .center) {
             Text("택시팟")
                 .font(.custom("AppleSDGothicNeo-Bold", size: 25))
-                .padding(.leading, 16)
             Spacer()
             Button {
                 showAddTaxiParty = true
@@ -57,8 +56,8 @@ private extension TaxiPartyList {
                 Image(systemName: "plus")
                     .imageScale(.large)
             }
-            .padding(EdgeInsets(top: 0, leading: 32, bottom: 16, trailing: 19))
         }
+        .padding(.horizontal)
     }
 }
 
@@ -76,6 +75,8 @@ private extension TaxiPartyList {
             errorIndicator(error)
         case .loaded(let value):
             loadedView(value)
+        case .isLoading:
+            loading()
         }
     }
 }
@@ -132,8 +133,7 @@ private extension TaxiPartyList {
                 .fullScreenCover(isPresented: $isShowTaxiPartyInfo) {
                     showBlur = false
                 } content: {
-                    TaxiPartyInfo(taxiParty: taxiParty)
-                        .environmentObject(viewModel)
+                    TaxiPartyInfo(taxiParty: taxiParty, viewModel: viewModel)
                 }
                 .contentShape(RoundedRectangle(cornerRadius: 16))
                 .listRowSeparator(.hidden)
@@ -195,6 +195,15 @@ private extension TaxiPartyList {
                     .padding(EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24))
                     .background(Color.customYellow, in: RoundedRectangle(cornerRadius: 30))
             }
+            Spacer()
+        }
+    }
+
+    func loading() -> some View {
+        VStack {
+            Spacer()
+            ProgressView()
+                .frame(width: 40, height: 40, alignment: .center)
             Spacer()
         }
     }

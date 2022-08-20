@@ -14,13 +14,13 @@ enum Tab {
     case setting
 }
 struct MainView: View {
-    @StateObject private var viewModel: MyPartyView.ViewModel
+    @StateObject private var myPartyViewModel: MyPartyView.ViewModel
     @StateObject private var taxiPartyViewModel: TaxiPartyList.ViewModel
     @EnvironmentObject private var appState: AppState
 
     init(_ userId: String) {
         let listViewModel = MyPartyView.ViewModel(userId: userId)
-        self._viewModel = StateObject(wrappedValue: listViewModel)
+        self._myPartyViewModel = StateObject(wrappedValue: listViewModel)
         self._taxiPartyViewModel = StateObject(wrappedValue: TaxiPartyList.ViewModel(addTaxiPartyDelegate: listViewModel, joinTaxiPartyDelegate: listViewModel, exclude: userId))
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
@@ -39,7 +39,7 @@ struct MainView: View {
                         }
                     }
                     .tag(Tab.taxiParty)
-                MyPartyView()
+                MyPartyView(myPartyViewModel)
                     .tabItem {
                         if appState.tab == .myParty {
                             Label("마이팟", image: ImageName.tabMyPartyOn)
@@ -59,7 +59,6 @@ struct MainView: View {
                     .tag(Tab.setting)
             }
         }
-        .environmentObject(viewModel)
         .enableCustomNavigationView()
     }
 }

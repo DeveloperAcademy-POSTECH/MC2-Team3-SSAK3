@@ -57,6 +57,7 @@ extension TaxiPartyList {
         #endif
 
         func requestTaxiParties(force load: Bool = false) {
+            self.taxiParties = .isLoading
             getTaxiPartyUsecase.getTaxiParty(exclude: exclude, force: load)
                 .map { taxiParties in
                     self.taxiPartyFilter.filter(taxiParties)
