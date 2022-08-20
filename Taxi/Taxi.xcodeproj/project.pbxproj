@@ -46,7 +46,7 @@
 		00437E3528508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */; };
 		0045BEAE289F4269006A18BC /* TaxiPartyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045BEAD289F4269006A18BC /* TaxiPartyFilter.swift */; };
 		0045BEB1289F42A1006A18BC /* PohangFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045BEB0289F42A1006A18BC /* PohangFilter.swift */; };
-		0045BEB3289F42C6006A18BC /* Postech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045BEB2289F42C6006A18BC /* Postech.swift */; };
+		0045BEB3289F42C6006A18BC /* PostechFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045BEB2289F42C6006A18BC /* PostechFilter.swift */; };
 		0045BEB6289F42F3006A18BC /* DateMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045BEB5289F42F3006A18BC /* DateMapper.swift */; };
 		0045BEB9289F4918006A18BC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045BEB8289F4918006A18BC /* ViewModel.swift */; };
 		0045BEBB289F49DB006A18BC /* EmptyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0045BEBA289F49DB006A18BC /* EmptyFilter.swift */; };
@@ -192,7 +192,7 @@
 		00437E3428508CDB00844821 /* MyTaxiPartyFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyFirebaseDataSource.swift; sourceTree = "<group>"; };
 		0045BEAD289F4269006A18BC /* TaxiPartyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiPartyFilter.swift; sourceTree = "<group>"; };
 		0045BEB0289F42A1006A18BC /* PohangFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PohangFilter.swift; sourceTree = "<group>"; };
-		0045BEB2289F42C6006A18BC /* Postech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postech.swift; sourceTree = "<group>"; };
+		0045BEB2289F42C6006A18BC /* PostechFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostechFilter.swift; sourceTree = "<group>"; };
 		0045BEB5289F42F3006A18BC /* DateMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMapper.swift; sourceTree = "<group>"; };
 		0045BEB8289F4918006A18BC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		0045BEBA289F49DB006A18BC /* EmptyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFilter.swift; sourceTree = "<group>"; };
@@ -485,7 +485,7 @@
 			children = (
 				0045BEAD289F4269006A18BC /* TaxiPartyFilter.swift */,
 				0045BEB0289F42A1006A18BC /* PohangFilter.swift */,
-				0045BEB2289F42C6006A18BC /* Postech.swift */,
+				0045BEB2289F42C6006A18BC /* PostechFilter.swift */,
 				0045BEBA289F49DB006A18BC /* EmptyFilter.swift */,
 			);
 			path = Filter;
@@ -906,7 +906,7 @@
 				00D3AE72284F8467001E34A0 /* TaxiPartyRepository.swift in Sources */,
 				0045BEBF289F8023006A18BC /* FilterBar.swift in Sources */,
 				A8C146A9285A525100F6D37F /* OnboardThirdPage.swift in Sources */,
-				0045BEB3289F42C6006A18BC /* Postech.swift in Sources */,
+				0045BEB3289F42C6006A18BC /* PostechFilter.swift in Sources */,
 				00B5394F289576C70058D27F /* ValidationResult.swift in Sources */,
 				50459E332854701C00287371 /* ImageExtension.swift in Sources */,
 				00E8F1BB284B21FE00D68DF0 /* Message.swift in Sources */,

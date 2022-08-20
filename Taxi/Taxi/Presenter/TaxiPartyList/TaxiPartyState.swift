@@ -8,6 +8,7 @@
 // Taxi Party List 의 5가지 상태를 나타내는 enumeration
 enum TaxiPartyState {
     case notRequested
+    case isLoading
     case loaded([(Int, [TaxiParty])])
     case error(error: Error)
     case empty

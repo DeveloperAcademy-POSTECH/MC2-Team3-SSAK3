@@ -10,7 +10,7 @@ import SwiftUI
 struct TaxiPartyInfo: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var userViewModel: UserInfoState
-    @EnvironmentObject private var viewModel: TaxiPartyList.ViewModel
+    @ObservedObject private var viewModel: TaxiPartyList.ViewModel
     @EnvironmentObject private var appState: AppState
     @State private var isLoading: Bool = false
     let taxiParty: TaxiParty
@@ -19,11 +19,12 @@ struct TaxiPartyInfo: View {
     private let meetingMonth: Int
     private let meetingDay: Int
 
-    init(taxiParty: TaxiParty) {
+    init(taxiParty: TaxiParty, viewModel: TaxiPartyList.ViewModel) {
         self.taxiParty = taxiParty
         self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
         self.meetingMonth = taxiParty.meetingDate / 100 % 100
         self.meetingDay = taxiParty.meetingDate % 100
+        self.viewModel = viewModel
     }
 
     var body: some View {
@@ -214,7 +215,7 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
             maxPersonNumber: 2,
             members: ["123456"],
             isClosed: false
-        ))
+        ), viewModel: TaxiPartyList.ViewModel())
         .inject()
     }
 }

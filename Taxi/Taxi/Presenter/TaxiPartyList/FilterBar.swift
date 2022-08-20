@@ -48,13 +48,12 @@ struct FilterBar: View {
             Rectangle()
                 .fill(Color.lightGray)
                 .frame(height: 1)
-        }
-        .overlay {
-            Rectangle()
-                .fill(Color.black)
-                .frame(width: cgRects[selectedIndex].width, height: 2)
-                .position(x: cgRects[selectedIndex].midX, y: cgRects[selectedIndex].maxY - 1)
-
+                .overlay {
+                    Rectangle()
+                        .fill(Color.black)
+                        .frame(width: cgRects[selectedIndex].width, height: 2)
+                        .position(x: cgRects[selectedIndex].midX)
+                }
         }
         .coordinateSpace(name: "FilterSection")
     }
