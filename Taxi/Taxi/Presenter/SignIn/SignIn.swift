@@ -50,6 +50,7 @@ struct SignIn: View {
         }
         .onReceive(signInViewModel.$userInfo) { userInfo in
             if let userInfo = userInfo {
+                appState.updateUserDefaults()
                 appState.currentUserInfo = userInfo
             }
         }
