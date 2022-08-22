@@ -99,6 +99,7 @@
 		00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856AB2844A985008E2E2F /* FirebaseStorageCombine-Community */; };
 		37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D4D1F02856D285002E787B /* ChatRoomView.swift */; };
 		37F698852855FB910008C022 /* MyPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F698842855FB910008C022 /* MyPartyView.swift */; };
+		5007F6FA28B3C651000A0D01 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5007F6F928B3C651000A0D01 /* Splash.swift */; };
 		50305A27285C4BEB00C10C82 /* TranparentBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50305A26285C4BEB00C10C82 /* TranparentBackground.swift */; };
 		50305A2B285DA54900C10C82 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50305A2A285DA54900C10C82 /* AppState.swift */; };
 		50305A2D285DB20D00C10C82 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50305A2C285DB20D00C10C82 /* UINavigationControllerExtension.swift */; };
@@ -241,6 +242,7 @@
 		00F6B7302859C44D00DACA06 /* ChattingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRepository.swift; sourceTree = "<group>"; };
 		37D4D1F02856D285002E787B /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		37F698842855FB910008C022 /* MyPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPartyView.swift; sourceTree = "<group>"; };
+		5007F6F928B3C651000A0D01 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
 		50305A26285C4BEB00C10C82 /* TranparentBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranparentBackground.swift; sourceTree = "<group>"; };
 		50305A2A285DA54900C10C82 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		50305A2C285DB20D00C10C82 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 		00AB673C289EA75500BBA9E9 /* System */ = {
 			isa = PBXGroup;
 			children = (
+				5007F6F928B3C651000A0D01 /* Splash.swift */,
 				508AE80E285A6E5500D111D3 /* UserProfileViewModel.swift */,
 				50F8003A28586F9200FA1063 /* UserInfoState.swift */,
 				50305A2A285DA54900C10C82 /* AppState.swift */,
@@ -975,6 +978,7 @@
 				00E92499285A152F0026DD73 /* MessageMockData.swift in Sources */,
 				00C4D09B287907E30019B8C4 /* RegisterUseCase.swift in Sources */,
 				0045BEB9289F4918006A18BC /* ViewModel.swift in Sources */,
+				5007F6FA28B3C651000A0D01 /* Splash.swift in Sources */,
 				00BC473F28581E740055CB6A /* AddTaxiParty.swift in Sources */,
 				A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */,
 				00A5705A2851826A008B220E /* ColorExtension.swift in Sources */,
