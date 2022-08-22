@@ -15,4 +15,5 @@ enum ImageName {
     static let tabMyPartyOn: String = "MyPartyOn"
     static let tabMyPageOn: String = "MyPageOn"
     static let taxi: String = "Taxi"
+    static let splashIcon: String = "launchScreenImage"
 }
