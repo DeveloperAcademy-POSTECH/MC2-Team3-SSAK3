@@ -15,6 +15,8 @@ final class AppState: ObservableObject {
     @Published var showChattingRoom: Bool = false
     @Published var currentUserInfo: UserInfo?
     @Published var showToastMessage: Bool = false
+    @Published var email: String?
+    @Published var password: String?
 
     // MARK: - Properties
     private (set) var toastMessage: String = ""
@@ -24,6 +26,7 @@ final class AppState: ObservableObject {
 
     // MARK: - Lifecycle
     init() {
+        updateUserDefaults()
         autoLogin()
     }
 }
@@ -46,21 +49,24 @@ extension AppState {
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         self.currentUserInfo = nil
+        self.email = nil
+        self.password = nil
     }
 
     func showTaxiParties() {
         tab = .taxiParty
+    }
+
+    func updateUserDefaults() {
+        email = UserDefaults.standard.string(forKey: "email")
+        password = UserDefaults.standard.string(forKey: "password")
     }
 }
 
 // MARK: - Internal functions
 private extension AppState {
     func autoLogin() {
-        let email: String? = UserDefaults.standard.string(forKey: "email")
-        let password: String? = UserDefaults.standard.string(forKey: "password")
-        guard let email = email, let password = password else {
-            return
-        }
+        guard let email = email, let password = password else { return }
         loginUsecase.login(with: email, password: password)
             .sink { completion in
                 switch completion {
