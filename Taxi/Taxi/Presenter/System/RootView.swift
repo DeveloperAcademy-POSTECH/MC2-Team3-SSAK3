@@ -12,12 +12,6 @@ struct RootView: View {
 
     var body: some View {
         Group {
-//            if let userInfo = appState.currentUserInfo {
-//                MainView(userInfo.id)
-//                    .environmentObject(UserInfoState(userInfo))
-//            } else {
-//                OnboardingView()
-//            }
             if appState.email == nil && appState.password == nil {
                 OnboardingView()
             } else {
