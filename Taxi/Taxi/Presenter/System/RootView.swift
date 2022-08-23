@@ -26,6 +26,8 @@ struct RootView: View {
                 }
             }
         }
+        .toast(isShowing: $appState.showToastMessage, message: appState.toastMessage)
+        .preferredColorScheme(.light)
     }
 }
 
