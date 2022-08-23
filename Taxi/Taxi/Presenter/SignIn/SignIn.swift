@@ -50,8 +50,7 @@ struct SignIn: View {
         }
         .onReceive(signInViewModel.$userInfo) { userInfo in
             if let userInfo = userInfo {
-                appState.currentUserInfo = userInfo
-                appState.loginState = .succeed
+                appState.loginState = .succeed(userInfo)
             }
         }
     }

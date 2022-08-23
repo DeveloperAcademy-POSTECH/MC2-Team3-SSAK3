@@ -17,8 +17,8 @@ struct RootView: View {
                 OnboardingView()
             case .loading:
                 Splash()
-            case .succeed:
-                if let userInfo = appState.currentUserInfo {
+            case .succeed(let userInfo):
+                if let userInfo = userInfo {
                     MainView(userInfo.id)
                         .environmentObject(UserInfoState(userInfo))
                 } else {
@@ -26,8 +26,6 @@ struct RootView: View {
                 }
             }
         }
-        .toast(isShowing: $appState.showToastMessage, message: appState.toastMessage)
-        .preferredColorScheme(.light)
     }
 }
 

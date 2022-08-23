@@ -14,13 +14,21 @@ final class AppState: ObservableObject {
     enum LoginState {
         case none
         case loading
-        case succeed
+        case succeed(UserInfo)
+
+        var userInfo: UserInfo? {
+            switch self {
+            case .succeed(let userInfo):
+                return userInfo
+            default:
+                return nil
+            }
+        }
     }
 
     // MARK: - States
     @Published var tab: Tab = .taxiParty
     @Published var showChattingRoom: Bool = false
-    @Published var currentUserInfo: UserInfo?
     @Published var showToastMessage: Bool = false
     @Published var loginState: LoginState = .none
 
@@ -53,7 +61,6 @@ extension AppState {
     func logout() {
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
-        self.currentUserInfo = nil
         self.loginState = .none
     }
 
@@ -83,8 +90,7 @@ private extension AppState {
                 }
             } receiveValue: { [weak self] userInfo in
                 guard let self = self else { return }
-                self.currentUserInfo = userInfo
-                self.loginState = .succeed
+                self.loginState = .succeed(userInfo)
             }.store(in: &cancelBag)
     }
 }
