@@ -12,15 +12,14 @@ struct RootView: View {
 
     var body: some View {
         Group {
-            if appState.email == nil && appState.password == nil {
+            switch appState.loginState {
+            case .none:
                 OnboardingView()
-            } else {
-                if let userInfo = appState.currentUserInfo {
-                    MainView(userInfo.id)
-                        .environmentObject(UserInfoState(userInfo))
-                } else {
-                    Splash()
-                }
+            case .loading:
+                Splash()
+            case .succeed:
+                MainView(appState.currentUserInfo!.id)
+                    .environmentObject(UserInfoState(appState.currentUserInfo!))
             }
         }
         .toast(isShowing: $appState.showToastMessage, message: appState.toastMessage)

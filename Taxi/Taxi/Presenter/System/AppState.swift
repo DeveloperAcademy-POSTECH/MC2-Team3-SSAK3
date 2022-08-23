@@ -8,6 +8,12 @@
 import Combine
 import SwiftUI
 
+enum LoginState {
+    case none
+    case loading
+    case succeed
+}
+
 final class AppState: ObservableObject {
 
     // MARK: - States
@@ -15,8 +21,7 @@ final class AppState: ObservableObject {
     @Published var showChattingRoom: Bool = false
     @Published var currentUserInfo: UserInfo?
     @Published var showToastMessage: Bool = false
-    @Published var email: String?
-    @Published var password: String?
+    @Published var loginState: LoginState = .none
 
     // MARK: - Properties
     private (set) var toastMessage: String = ""
@@ -26,7 +31,6 @@ final class AppState: ObservableObject {
 
     // MARK: - Lifecycle
     init() {
-        updateUserDefaults()
         autoLogin()
     }
 }
@@ -49,24 +53,24 @@ extension AppState {
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         self.currentUserInfo = nil
-        self.email = nil
-        self.password = nil
+        self.loginState = .none
     }
 
     func showTaxiParties() {
         tab = .taxiParty
-    }
-
-    func updateUserDefaults() {
-        email = UserDefaults.standard.string(forKey: "email")
-        password = UserDefaults.standard.string(forKey: "password")
     }
 }
 
 // MARK: - Internal functions
 private extension AppState {
     func autoLogin() {
-        guard let email = email, let password = password else { return }
+        let email = UserDefaults.standard.string(forKey: "email")
+        let password = UserDefaults.standard.string(forKey: "password")
+        guard let email = email, let password = password else {
+            self.loginState = .none
+            return
+        }
+        self.loginState = .loading
         loginUsecase.login(with: email, password: password)
             .sink { completion in
                 switch completion {
@@ -74,10 +78,12 @@ private extension AppState {
                     print("finished")
                 case .failure(let error):
                     print(error)
+                    self.loginState = .none
                 }
             } receiveValue: { [weak self] userInfo in
                 guard let self = self else { return }
                 self.currentUserInfo = userInfo
+                self.loginState = .succeed
             }.store(in: &cancelBag)
     }
 }
