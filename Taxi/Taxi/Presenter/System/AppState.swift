@@ -8,13 +8,14 @@
 import Combine
 import SwiftUI
 
-enum LoginState {
-    case none
-    case loading
-    case succeed
-}
-
 final class AppState: ObservableObject {
+
+    // MARK: - Enums
+    enum LoginState {
+        case none
+        case loading
+        case succeed
+    }
 
     // MARK: - States
     @Published var tab: Tab = .taxiParty
