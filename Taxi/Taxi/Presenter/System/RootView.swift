@@ -18,12 +18,8 @@ struct RootView: View {
             case .loading:
                 Splash()
             case .succeed(let userInfo):
-                if let userInfo = userInfo {
-                    MainView(userInfo.id)
-                        .environmentObject(UserInfoState(userInfo))
-                } else {
-                    Splash()
-                }
+                MainView(userInfo.id)
+                    .environmentObject(UserInfoState(userInfo))
             }
         }
         .toast(isShowing: $appState.showToastMessage, message: appState.toastMessage)

@@ -15,15 +15,6 @@ final class AppState: ObservableObject {
         case none
         case loading
         case succeed(UserInfo)
-
-        var userInfo: UserInfo? {
-            switch self {
-            case .succeed(let userInfo):
-                return userInfo
-            default:
-                return nil
-            }
-        }
     }
 
     // MARK: - States
