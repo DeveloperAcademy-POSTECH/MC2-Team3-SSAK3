@@ -118,6 +118,7 @@ struct MyPartyList: View {
                             ForEach(partys[date]!, id: \.id) { party in
                                 NavigationLink {
                                     ChatRoomView(party: party, user: authentication.userInfo)
+                                        .environmentObject(self.viewModel)
                                 } label: {
                                     PartyListCell(party: party)
                                         .contentShape(Rectangle())
