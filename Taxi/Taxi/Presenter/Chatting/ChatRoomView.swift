@@ -16,55 +16,78 @@ struct ChatRoomView: View {
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusState: Bool
     @State private var showAlert: Bool = false
+    @State private var isShowTaxiPartyInfo: Bool = false
     @State private var keyboardHeight: CGFloat = 0
     @State private var scrollView: UIScrollView?
     @State private var typingSize: CGFloat = 0
     private let user: UserInfo
+    private let party: TaxiParty
 
     init(party: TaxiParty, user: UserInfo) {
         self.user = user
+        self.party = party
         _viewModel = StateObject(wrappedValue: ChattingViewModel(party))
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            header
-            messageList
-                .onTapGesture {
-                    if let scrollView = scrollView, focusState == true {
+        let drag = DragGesture()
+            .onEnded {
+                if $0.translation.width > 100 {
+                    withAnimation {
+                        self.isShowTaxiPartyInfo = false
+                    }
+                }
+            }
+        GeometryReader { geometry in
+        ZStack(alignment: .trailing) {
+            VStack(spacing: 0) {
+                header
+                messageList
+                    .onTapGesture {
+                        if let scrollView = scrollView, focusState == true {
+                            scrollView.setContentOffset(
+                                CGPoint(x: 0, y: max(scrollView.contentOffset.y - keyboardHeight + typingSize, 0)),
+                                animated: true
+                            )
+                        }
+                        focusState = false
+                    }
+                Typing(input: $viewModel.input, focusState: _focusState) {
+                    viewModel.sendMessage(user.id)
+                }
+                .readSize { size in
+                    typingSize = size.height
+                }
+            }
+            .background(Color.addBackground)
+            .onAppear {
+                viewModel.onAppear()
+            }
+            .onDisappear {
+                viewModel.onDisAppear()
+            }
+            .onReceive(keyboard.$currentHeight) { height in
+                if let scrollView = scrollView {
+                    if height > 0 && keyboardHeight == 0 {
                         scrollView.setContentOffset(
-                            CGPoint(x: 0, y: max(scrollView.contentOffset.y - keyboardHeight + typingSize, 0)),
+                            CGPoint(x: 0, y: scrollView.contentOffset.y + height - typingSize),
                             animated: true
                         )
                     }
-                    focusState = false
+                    keyboardHeight = height
                 }
-            Typing(input: $viewModel.input, focusState: _focusState) {
-                viewModel.sendMessage(user.id)
             }
-            .readSize { size in
-                typingSize = size.height
+                .disabled(self.isShowTaxiPartyInfo ? true : false)
+            if self.isShowTaxiPartyInfo {
+                ChatRoomInfo(taxiParty: party, user: user)
+                    .frame(width: geometry.size.width/1.2)
+                    .transition(.move(edge: .trailing))
             }
-        }
-        .background(Color.addBackground)
-        .onAppear {
-            viewModel.onAppear()
-        }
-        .onDisappear {
-            viewModel.onDisAppear()
-        }
-        .onReceive(keyboard.$currentHeight) { height in
-            if let scrollView = scrollView {
-                if height > 0 && keyboardHeight == 0 {
-                    scrollView.setContentOffset(
-                        CGPoint(x: 0, y: scrollView.contentOffset.y + height - typingSize),
-                        animated: true
-                    )
-                }
-                keyboardHeight = height
-            }
+
         }
         .navigationBarHidden(true)
+            .gesture(drag)
+        }
     }
 }
 // MARK: - 헤더
@@ -79,7 +102,6 @@ private extension ChatRoomView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
             .contentShape(Rectangle())
-
             Button {
                 showAlert.toggle()
             } label: {
@@ -91,10 +113,14 @@ private extension ChatRoomView {
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .overlay {
-            HStack {
-                Text(chattingRoomTitle)
-                Text("\(viewModel.taxiParty.currentMemeberCount)명")
-                    .foregroundColor(Color.darkGray)
+            Button {
+                isShowTaxiPartyInfo = true
+            } label: {
+                HStack {
+                    Text(chattingRoomTitle)
+                    Text("\(viewModel.taxiParty.currentMemeberCount)명")
+                        .foregroundColor(Color.darkGray)
+                }
             }
         }
         .background(Color.addBackground.ignoresSafeArea().shadow(radius: 1))
