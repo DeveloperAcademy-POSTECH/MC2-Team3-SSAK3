@@ -7,50 +7,33 @@
 import SwiftUI
 
 struct ChatRoomInfo: View {
-    @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var listViewModel: MyPartyView.ViewModel
-    @StateObject private var viewModel: ChattingViewModel
-    let taxiParty: TaxiParty
+    private let taxiParty: TaxiParty
     private let profileSize: CGFloat = 62
-    private let remainSeat: Int
-    private let meetingMonth: Int
-    private let meetingDay: Int
-    let user: UserInfo
 
-    init(taxiParty: TaxiParty, user: UserInfo) {
+    init(_ taxiParty: TaxiParty) {
         self.taxiParty = taxiParty
-        self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
-        self.meetingMonth = taxiParty.meetingDate / 100 % 100
-        self.meetingDay = taxiParty.meetingDate % 100
-        self.user = user
-        _viewModel = StateObject(wrappedValue: ChattingViewModel(taxiParty))
     }
 
     var body: some View {
-        ZStack {
-            Color.deepGray.ignoresSafeArea()
-            VStack(spacing: 0) {
-                VStack(alignment: .leading, spacing: 16) {
-                    Spacer()
-                    taxiPartyDate
-                    taxiPartyTime
-                    taxiPartyPlace
-                    divider
-                        .padding(.vertical)
-                    participatingCount
-                    ForEach(0..<taxiParty.members.count, id: \.self) { index in
-                        PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
-                    }
-                    ForEach(0..<remainSeat, id: \.self) { _ in
-                        emptyProfile
-                    }
-                    Spacer()
+        VStack(alignment: .leading, spacing: 16) {
+            taxiPartyDate
+            taxiPartyTime
+            taxiPartyPlace
+            divider
+                .padding(.vertical)
+            participatingCount
+            ForEach(0..<taxiParty.maxPersonNumber) { index in
+                if index < taxiParty.currentMemeberCount {
+                    PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
+                } else {
+                    emptyProfile
                 }
-                    .padding(.top)
             }
-            .padding()
+            Spacer()
         }
-        .clearBackground()
+        .padding()
+        .background(Rectangle().fill(Color.darkGray)
+            .edgesIgnoringSafeArea(.bottom))
     }
 }
 
@@ -94,7 +77,7 @@ private extension ChatRoomInfo {
             Text(Date.convertToKoreanDateFormat(from: taxiParty.meetingDate))
                 .foregroundColor(.white)
             Rectangle().frame(width: 1, height: 12).foregroundColor(Color(red: 187 / 255, green: 187 / 255, blue: 187 / 255))
-            Text(viewModel.taxiParty.currentMemeberCount == 4 ? "모집완료" : "모집중")
+            Text(taxiParty.currentMemeberCount == taxiParty.maxPersonNumber ? "모집완료" : "모집중")
                 .foregroundColor(.customYellow)
             Spacer()
         }
@@ -112,15 +95,15 @@ private extension ChatRoomInfo {
     var taxiPartyPlace: some View {
         HStack {
             Image(ImageName.taxi)
-                Text("\(taxiParty.departure)")
-                         .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
-                Image(systemName: "chevron.forward")
+            Text("\(taxiParty.departure)")
                 .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
-                    .padding(.horizontal, 8)
+            Image(systemName: "chevron.forward")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
+                .padding(.horizontal, 8)
             Image(systemName: taxiParty.destinationCode == 0 ? "graduationcap.fill" : "train.side.front.car")
-                    .font(.system(size: 20))
-                Text("\(taxiParty.destination)")
-                    .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
+                .font(.system(size: 20))
+            Text("\(taxiParty.destination)")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
             Spacer()
         }
         .foregroundColor(.lightGray)
@@ -164,16 +147,20 @@ struct ChatRoomMemberInfo: View {
 struct ChatRoomInfoView_Previews: PreviewProvider {
 
     static var previews: some View {
-        TaxiPartyInfo(taxiParty: TaxiParty(
-            id: "121F9EBC-1607-4D23-ACCD-660DDBC3CB77",
-            departureCode: 2,
-            destinationCode: 1,
-            meetingDate: 20220616,
-            meetingTime: 610,
-            maxPersonNumber: 2,
-            members: ["123456"],
-            isClosed: false
-        ), viewModel: TaxiPartyList.ViewModel())
-        .inject()
+        Group {
+            ChatRoomInfo(TaxiParty(
+                id: "121F9EBC-1607-4D23-ACCD-660DDBC3CB77",
+                departureCode: 2,
+                destinationCode: 1,
+                meetingDate: 20220616,
+                meetingTime: 610,
+                maxPersonNumber: 4,
+                members: ["123456"],
+                isClosed: false
+            ))
+            .previewDisplayName("모집중인 택시팟")
+            ChatRoomInfo(TaxiParty(id: "121F9EBC", departureCode: 1, destinationCode: 2, meetingDate: 20220814, meetingTime: 1620, maxPersonNumber: 4, members: ["1", "1", "1", "1"], isClosed: false))
+                .previewDisplayName("모집완료된 택시팟")
+        }
     }
 }

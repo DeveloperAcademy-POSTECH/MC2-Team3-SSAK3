@@ -50,7 +50,6 @@ extension TaxiParty: CustomStringConvertible {
 
 extension TaxiParty: Equatable {
     static func == (lhs: TaxiParty, rhs: TaxiParty) -> Bool {
-        return
-            lhs.id == rhs.id
+        lhs.id == rhs.id && lhs.members == rhs.members
     }
 }

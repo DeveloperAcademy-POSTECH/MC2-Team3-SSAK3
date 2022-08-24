@@ -16,27 +16,29 @@ struct ChatRoomView: View {
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusState: Bool
     @State private var showAlert: Bool = false
-    @State private var isShowTaxiPartyInfo: Bool = false
     @State private var keyboardHeight: CGFloat = 0
     @State private var scrollView: UIScrollView?
+    @State private var showTaxiPartyInfo: Bool = false {
+        didSet {
+            if showTaxiPartyInfo {
+                infoXOffset = .zero
+            } else {
+                infoXOffset = infoWidth
+            }
+        }
+    }
     @State private var typingSize: CGFloat = 0
+    @State private var infoXOffset: CGFloat
     private let user: UserInfo
-    private let party: TaxiParty
+    private let infoWidth: CGFloat = UIScreen.main.bounds.width / 1.2
 
     init(party: TaxiParty, user: UserInfo) {
         self.user = user
-        self.party = party
+        self._infoXOffset = State(initialValue: infoWidth)
         _viewModel = StateObject(wrappedValue: ChattingViewModel(party))
     }
 
     var body: some View {
-        let drag = DragGesture()
-            .onEnded {
-                if $0.translation.width > 100 {
-                    self.isShowTaxiPartyInfo = false
-                }
-            }
-        GeometryReader { geometry in
         ZStack(alignment: .trailing) {
             VStack(spacing: 0) {
                 header
@@ -56,7 +58,8 @@ struct ChatRoomView: View {
                 .readSize { size in
                     typingSize = size.height
                 }
-            }.disabled(self.isShowTaxiPartyInfo ? true : false)
+            }
+            .disabled(showTaxiPartyInfo)
             .background(Color.addBackground)
             .onAppear {
                 viewModel.onAppear()
@@ -75,17 +78,49 @@ struct ChatRoomView: View {
                     keyboardHeight = height
                 }
             }
-            if self.isShowTaxiPartyInfo {
-                ChatRoomInfo(taxiParty: party, user: user)
-                    .frame(width: geometry.size.width/1.2)
-                    .transition(.move(edge: .trailing))
+            .overlay {
+                if showTaxiPartyInfo {
+                    Color.black.opacity(0.7)
+                        .ignoresSafeArea()
+                }
             }
+            chattingRoomInfo(viewModel.taxiParty)
         }
         .navigationBarHidden(true)
-            .gesture(drag)
-        }
     }
 }
+
+// MARK: - Chat Room Info
+private extension ChatRoomView {
+
+    var dragGesture: some Gesture {
+        DragGesture(minimumDistance: 0, coordinateSpace: .global)
+            .onChanged { value in
+                withAnimation(.interactiveSpring()) {
+                    if value.translation.width > 0 {
+                        infoXOffset = value.translation.width
+                    }
+                }
+            }
+            .onEnded { value in
+                withAnimation(.easeOut(duration: 0.2)) {
+                    if value.predictedEndTranslation.width > 0 {
+                        showTaxiPartyInfo = false
+                    } else {
+                        infoXOffset = 0
+                    }
+                }
+            }
+    }
+
+    func chattingRoomInfo(_ taxiParty: TaxiParty) -> some View {
+        ChatRoomInfo(taxiParty)
+            .frame(width: infoWidth)
+            .gesture(dragGesture)
+            .offset(x: infoXOffset)
+    }
+}
+
 // MARK: - 헤더
 private extension ChatRoomView {
     var header: some View {
@@ -100,8 +135,8 @@ private extension ChatRoomView {
             .contentShape(Rectangle())
         HStack {
                 Button {
-                    withAnimation(.easeIn(duration: 0.2)) {
-                    self.isShowTaxiPartyInfo = true
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        self.showTaxiPartyInfo = true
                     }
                 } label: {
                     Image(systemName: "person.fill")

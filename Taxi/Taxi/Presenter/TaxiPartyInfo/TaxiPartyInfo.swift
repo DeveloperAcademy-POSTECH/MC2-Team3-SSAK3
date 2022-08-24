@@ -196,9 +196,7 @@ struct PartyMemberInfo: View {
             Spacer()
         }
         .onAppear {
-            withAnimation(Animation.easeIn(duration: 0.3)) {
             userProfileViewModel.getUser(id)
-            }
         }
     }
 }

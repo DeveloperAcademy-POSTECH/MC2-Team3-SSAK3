@@ -55,7 +55,9 @@ private extension ChattingViewModel {
             .addSnapshotListener { [weak self] snapshot, error in
                 guard let self = self, error == nil, let snapshot = snapshot else { return }
                 guard let changedTaxiParty = try? snapshot.data(as: TaxiParty.self) else { return }
-                self.taxiParty = changedTaxiParty
+                DispatchQueue.main.async {
+                    self.taxiParty = changedTaxiParty
+                }
             }
     }
 
@@ -74,7 +76,9 @@ private extension ChattingViewModel {
                         messagesToAppend.append(message)
                     }
                 }
-                self.messages.append(contentsOf: messagesToAppend)
+                DispatchQueue.main.async {
+                    self.messages.append(contentsOf: messagesToAppend)
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
                     self.updateEvent.send(true)
                 }
