@@ -14,19 +14,21 @@ struct TaxiPartyInfo: View {
     @EnvironmentObject private var appState: AppState
     @State private var isLoading: Bool = false
     @Binding var showBlur: Bool
+    @Binding var isShowTaxiPartyInfo: Bool
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 62
     private let remainSeat: Int
     private let meetingMonth: Int
     private let meetingDay: Int
 
-    init(taxiParty: TaxiParty, viewModel: TaxiPartyList.ViewModel, showBlur: Binding<Bool>) {
+    init(taxiParty: TaxiParty, viewModel: TaxiPartyList.ViewModel, showBlur: Binding<Bool>, isShowTaxiPartyInfo: Binding<Bool>) {
         self.taxiParty = taxiParty
         self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
         self.meetingMonth = taxiParty.meetingDate / 100 % 100
         self.meetingDay = taxiParty.meetingDate % 100
         self.viewModel = viewModel
         self._showBlur = showBlur
+        self._isShowTaxiPartyInfo = isShowTaxiPartyInfo
     }
 
     var body: some View {
@@ -150,9 +152,7 @@ private extension TaxiPartyInfo {
         RoundedButton(text, false, loading: loading) {
             isLoading = true
             viewModel.joinTaxiParty(in: taxiParty, userViewModel.userInfo) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    dismissWithBlurOff()
-                }
+                isShowTaxiPartyInfo = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     appState.showChattingRoom(taxiParty)
                 }
@@ -222,7 +222,8 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
                 isClosed: false
             ),
             viewModel: TaxiPartyList.ViewModel(),
-            showBlur: .constant(false)
+            showBlur: .constant(false),
+            isShowTaxiPartyInfo: .constant(false)
         )
         .inject()
     }
