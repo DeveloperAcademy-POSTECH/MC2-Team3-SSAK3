@@ -33,9 +33,7 @@ struct ChatRoomView: View {
         let drag = DragGesture()
             .onEnded {
                 if $0.translation.width > 100 {
-                    withAnimation {
-                        self.isShowTaxiPartyInfo = false
-                    }
+                    self.isShowTaxiPartyInfo = false
                 }
             }
         GeometryReader { geometry in
@@ -58,7 +56,7 @@ struct ChatRoomView: View {
                 .readSize { size in
                     typingSize = size.height
                 }
-            }
+            }.disabled(self.isShowTaxiPartyInfo ? true : false)
             .background(Color.addBackground)
             .onAppear {
                 viewModel.onAppear()
@@ -77,13 +75,11 @@ struct ChatRoomView: View {
                     keyboardHeight = height
                 }
             }
-                .disabled(self.isShowTaxiPartyInfo ? true : false)
             if self.isShowTaxiPartyInfo {
                 ChatRoomInfo(taxiParty: party, user: user)
                     .frame(width: geometry.size.width/1.2)
                     .transition(.move(edge: .trailing))
             }
-
         }
         .navigationBarHidden(true)
             .gesture(drag)
@@ -104,7 +100,9 @@ private extension ChatRoomView {
             .contentShape(Rectangle())
         HStack {
                 Button {
-                    isShowTaxiPartyInfo = true
+                    withAnimation(.easeIn(duration: 0.2)) {
+                    self.isShowTaxiPartyInfo = true
+                    }
                 } label: {
                     Image(systemName: "person.fill")
                         .foregroundColor(.black)
