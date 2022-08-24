@@ -106,7 +106,7 @@ private extension TaxiPartyList {
             .onChange(of: scrollTo) { date in
                 if let date = date {
                     withAnimation(.interactiveSpring()) {
-                        proxy.scrollTo(date.formattedInt, anchor: .bottom)
+                        proxy.scrollTo(date.formattedInt, anchor: .top)
                     }
                     scrollTo = nil
                 }

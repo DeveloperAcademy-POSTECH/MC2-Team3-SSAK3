@@ -33,7 +33,6 @@
 		002003522894D8DC00545E2B /* SignHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002003512894D8DC00545E2B /* SignHome.swift */; };
 		002003542894DD4500545E2B /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002003532894DD4500545E2B /* SignIn.swift */; };
 		002003562894DE6300545E2B /* UnderlinedPasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */; };
-		0022E33928A5E2790003493A /* CustomNavigationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0022E33828A5E2790003493A /* CustomNavigationModifier.swift */; };
 		002F89EB284CA10800D7E51B /* UserFirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F89EA284CA10800D7E51B /* UserFirebaseDataSource.swift */; };
 		002F89EF284CA5FF00D7E51B /* UserRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */; };
 		003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 003ABC0B284749F7000FA7A2 /* .swiftlint.yml */; };
@@ -181,7 +180,6 @@
 		002003512894D8DC00545E2B /* SignHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignHome.swift; sourceTree = "<group>"; };
 		002003532894DD4500545E2B /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedPasswordTextField.swift; sourceTree = "<group>"; };
-		0022E33828A5E2790003493A /* CustomNavigationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationModifier.swift; sourceTree = "<group>"; };
 		002F89EA284CA10800D7E51B /* UserFirebaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirebaseDataSource.swift; sourceTree = "<group>"; };
 		002F89EE284CA5FF00D7E51B /* UserRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryTest.swift; sourceTree = "<group>"; };
 		003ABC0B284749F7000FA7A2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -525,7 +523,6 @@
 				50305A26285C4BEB00C10C82 /* TranparentBackground.swift */,
 				002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */,
 				E63C7AB32858C2650080530B /* UnderlinedTextField.swift */,
-				0022E33828A5E2790003493A /* CustomNavigationModifier.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -951,7 +948,6 @@
 				000C24FB2859E74E0054D679 /* ChattingViewModel.swift in Sources */,
 				00BC474128581E860055CB6A /* InfoContainer.swift in Sources */,
 				000103DD28A48FEA004FF7EA /* SignUpPassword.swift in Sources */,
-				0022E33928A5E2790003493A /* CustomNavigationModifier.swift in Sources */,
 				E6E0E06F285A15B1001BAF6F /* StringExtension.swift in Sources */,
 				A8BD8115285A3543003D744B /* Onboarding.swift in Sources */,
 				000103DB28A48B1C004FF7EA /* SignUpEmail.swift in Sources */,

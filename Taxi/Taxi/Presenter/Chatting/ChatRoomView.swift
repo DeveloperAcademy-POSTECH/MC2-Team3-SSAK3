@@ -39,19 +39,10 @@ struct ChatRoomView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .trailing) {
             VStack(spacing: 0) {
                 header
                 messageList
-                    .onTapGesture {
-                        if let scrollView = scrollView, focusState == true {
-                            scrollView.setContentOffset(
-                                CGPoint(x: 0, y: max(scrollView.contentOffset.y - keyboardHeight + typingSize, 0)),
-                                animated: true
-                            )
-                        }
-                        focusState = false
-                    }
+                    .onTapGesture(perform: hideKeyboard)
                 Typing(input: $viewModel.input, focusState: _focusState) {
                     viewModel.sendMessage(user.id)
                 }
@@ -68,15 +59,7 @@ struct ChatRoomView: View {
                 viewModel.onDisAppear()
             }
             .onReceive(keyboard.$currentHeight) { height in
-                if let scrollView = scrollView {
-                    if height > 0 && keyboardHeight == 0 {
-                        scrollView.setContentOffset(
-                            CGPoint(x: 0, y: scrollView.contentOffset.y + height - typingSize),
-                            animated: true
-                        )
-                    }
-                    keyboardHeight = height
-                }
+                setContentOffsetWhenKeyboardShow(height)
             }
             .overlay {
                 if showTaxiPartyInfo {
@@ -84,9 +67,35 @@ struct ChatRoomView: View {
                         .ignoresSafeArea()
                 }
             }
-            chattingRoomInfo(viewModel.taxiParty)
+            .overlay(alignment: .trailing) {
+                chattingRoomInfo(viewModel.taxiParty)
+            }
+            .navigationBarHidden(true)
+    }
+}
+
+// MARK: - 내부 구현
+private extension ChatRoomView {
+    func hideKeyboard() {
+        if let scrollView = scrollView, focusState == true {
+            scrollView.setContentOffset(
+                CGPoint(x: 0, y: max(scrollView.contentOffset.y - keyboardHeight + typingSize, 0)),
+                animated: true
+            )
         }
-        .navigationBarHidden(true)
+        focusState = false
+    }
+
+    func setContentOffsetWhenKeyboardShow(_ height: CGFloat) {
+        if let scrollView = scrollView {
+            if height > 0 && keyboardHeight == 0 {
+                scrollView.setContentOffset(
+                    CGPoint(x: 0, y: scrollView.contentOffset.y + height - typingSize),
+                    animated: true
+                )
+            }
+            keyboardHeight = height
+        }
     }
 }
 
@@ -136,6 +145,7 @@ private extension ChatRoomView {
         HStack {
                 Button {
                     withAnimation(.easeOut(duration: 0.3)) {
+                        hideKeyboard()
                         self.showTaxiPartyInfo = true
                     }
                 } label: {

@@ -59,7 +59,6 @@ struct MainView: View {
                     .tag(Tab.setting)
             }
         }
-        .enableCustomNavigationView()
     }
 }
 
