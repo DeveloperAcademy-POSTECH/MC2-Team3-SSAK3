@@ -13,18 +13,20 @@ struct TaxiPartyInfo: View {
     @ObservedObject private var viewModel: TaxiPartyList.ViewModel
     @EnvironmentObject private var appState: AppState
     @State private var isLoading: Bool = false
+    @Binding var showBlur: Bool
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 62
     private let remainSeat: Int
     private let meetingMonth: Int
     private let meetingDay: Int
 
-    init(taxiParty: TaxiParty, viewModel: TaxiPartyList.ViewModel) {
+    init(taxiParty: TaxiParty, viewModel: TaxiPartyList.ViewModel, showBlur: Binding<Bool>) {
         self.taxiParty = taxiParty
         self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
         self.meetingMonth = taxiParty.meetingDate / 100 % 100
         self.meetingDay = taxiParty.meetingDate % 100
         self.viewModel = viewModel
+        self._showBlur = showBlur
     }
 
     var body: some View {
@@ -165,6 +167,7 @@ private extension TaxiPartyInfo {
 private extension TaxiPartyInfo {
 
     func dismissWithBlurOff() {
+        showBlur = false
         dismiss()
     }
 }
@@ -206,16 +209,20 @@ struct PartyMemberInfo: View {
 struct TaxiPartyInfoView_Previews: PreviewProvider {
 
     static var previews: some View {
-        TaxiPartyInfo(taxiParty: TaxiParty(
-            id: "121F9EBC-1607-4D23-ACCD-660DDBC3CB77",
-            departureCode: 2,
-            destinationCode: 1,
-            meetingDate: 20220616,
-            meetingTime: 610,
-            maxPersonNumber: 2,
-            members: ["123456"],
-            isClosed: false
-        ), viewModel: TaxiPartyList.ViewModel())
+        TaxiPartyInfo(
+            taxiParty: TaxiParty(
+                id: "121F9EBC-1607-4D23-ACCD-660DDBC3CB77",
+                departureCode: 2,
+                destinationCode: 1,
+                meetingDate: 20220616,
+                meetingTime: 610,
+                maxPersonNumber: 2,
+                members: ["123456"],
+                isClosed: false
+            ),
+            viewModel: TaxiPartyList.ViewModel(),
+            showBlur: .constant(false)
+        )
         .inject()
     }
 }
