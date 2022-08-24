@@ -31,12 +31,12 @@ struct ChatRoomInfo: View {
             Color.deepGray.ignoresSafeArea()
             VStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 16) {
-                   // dismissButton
                     Spacer()
                     taxiPartyDate
                     taxiPartyTime
                     taxiPartyPlace
                     divider
+                        .padding(.vertical)
                     participatingCount
                     ForEach(0..<taxiParty.members.count, id: \.self) { index in
                         PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
@@ -77,7 +77,7 @@ private extension ChatRoomInfo {
             Circle()
                 .stroke(.white)
                 .frame(width: profileSize, height: profileSize)
-                .overlay(Image(systemName: "person.fill").font(.system(size: 30)).foregroundColor(.white))
+                .overlay(Image(systemName: "person.fill") .font(Font.custom("AppleSDGothicNeo-Medium", size: 30)).foregroundColor(.white))
                 .background(Circle().fill(Color.gray))
             Text("모집중")
                 .foregroundColor(.white)
@@ -86,7 +86,7 @@ private extension ChatRoomInfo {
     }
 
     var divider: some View {
-        Rectangle().foregroundColor(Color(red: 151 / 255, green: 151 / 255, blue: 151 / 255)).frame(height: 1)
+        Rectangle().foregroundColor(Color.customGray).frame(height: 1)
     }
 
     var taxiPartyDate: some View {
@@ -113,18 +113,17 @@ private extension ChatRoomInfo {
         HStack {
             Image(ImageName.taxi)
                 Text("\(taxiParty.departure)")
-                         .font(Font.custom("AppleSDGothicNeo-UltraLight", size: 20))
+                         .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
                 Image(systemName: "chevron.forward")
-                    .font(.system(size: 20))
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
                     .padding(.horizontal, 8)
             Image(systemName: taxiParty.destinationCode == 0 ? "graduationcap.fill" : "train.side.front.car")
                     .font(.system(size: 20))
-                    .foregroundColor(.darkGray)
                 Text("\(taxiParty.destination)")
                     .font(Font.custom("AppleSDGothicNeo-Medium", size: 20))
             Spacer()
         }
-        .foregroundColor(.customGray)
+        .foregroundColor(.lightGray)
     }
 }
 
