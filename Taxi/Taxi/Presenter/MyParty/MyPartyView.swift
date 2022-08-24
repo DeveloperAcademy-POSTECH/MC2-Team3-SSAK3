@@ -107,6 +107,7 @@ struct MyPartyList: View {
             NavigationLink(isActive: $appState.showChattingRoom) {
                 if let taxiParty = appState.currentTaxiParty {
                     ChatRoomView(party: taxiParty, user: authentication.userInfo)
+                        .environmentObject(self.viewModel)
                 }
             } label: {
                 EmptyView()
