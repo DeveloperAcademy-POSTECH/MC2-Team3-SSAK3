@@ -24,6 +24,13 @@ struct RootView: View {
         }
         .toast(isShowing: $appState.showToastMessage, message: appState.toastMessage)
         .preferredColorScheme(.light)
+        .alert("자동 로그인에 실패했어요", isPresented: $appState.isLoginFailed) {
+            Button("확인", role: .cancel) {
+                appState.loginState = .none
+            }
+        } message: {
+            Text("다시 로그인해보세요.")
+        }
     }
 }
 

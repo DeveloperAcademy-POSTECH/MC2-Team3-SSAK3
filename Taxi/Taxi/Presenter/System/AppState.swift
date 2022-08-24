@@ -22,6 +22,7 @@ final class AppState: ObservableObject {
     @Published var showChattingRoom: Bool = false
     @Published var showToastMessage: Bool = false
     @Published var loginState: LoginState = .none
+    @Published var isLoginFailed: Bool = false
 
     // MARK: - Properties
     private (set) var toastMessage: String = ""
@@ -77,7 +78,7 @@ private extension AppState {
                     print("finished")
                 case .failure(let error):
                     print(error)
-                    self.loginState = .none
+                    self.isLoginFailed = true
                 }
             } receiveValue: { [weak self] userInfo in
                 guard let self = self else { return }
