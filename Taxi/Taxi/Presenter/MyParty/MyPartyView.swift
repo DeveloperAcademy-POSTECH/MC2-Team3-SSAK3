@@ -129,7 +129,6 @@ struct MyPartyList: View {
                                 self.showAlert = true
                                 self.selectedParty = party
                             })
-                            .contentShape(RoundedRectangle(cornerRadius: 16))
                             .cellBackground()
                         }
                     }
