@@ -126,6 +126,7 @@ private extension TaxiPartyList {
 
         var body: some View {
             PartyListCell(party: taxiParty)
+                .cellBackground()
                 .onTapGesture {
                     showBlur = true
                     isShowTaxiPartyInfo = true

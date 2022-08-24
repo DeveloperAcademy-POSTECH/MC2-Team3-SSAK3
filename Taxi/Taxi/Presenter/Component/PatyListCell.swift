@@ -23,7 +23,6 @@ struct PartyListCell: View {
             .padding(.horizontal, 7)
         }
         .padding()
-        .cellBackground()
     }
 }
 
