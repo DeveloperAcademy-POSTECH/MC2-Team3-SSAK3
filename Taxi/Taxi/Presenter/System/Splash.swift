@@ -8,18 +8,29 @@
 import SwiftUI
 
 struct Splash: View {
+    @State private var isProgressViewShowing = false
+
     var body: some View {
         ZStack {
             Color.customBlack
-            Image(ImageName.splashIcon)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 48)
-            ProgressView()
-                .offset(y: 48)
-                .tint(.white)
+            VStack(spacing: 16) {
+                Image(ImageName.splashIcon)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 48)
+                if isProgressViewShowing {
+                    ProgressView()
+                        .tint(.white)
+                }
+            }
+            .animation(.easeInOut, value: isProgressViewShowing)
         }
         .ignoresSafeArea()
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                isProgressViewShowing = true
+            }
+        }
     }
 }
 
