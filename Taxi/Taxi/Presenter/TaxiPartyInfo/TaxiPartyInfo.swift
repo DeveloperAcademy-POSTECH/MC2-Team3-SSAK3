@@ -56,7 +56,6 @@ struct TaxiPartyInfo: View {
             .padding()
         }
         .clearBackground()
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

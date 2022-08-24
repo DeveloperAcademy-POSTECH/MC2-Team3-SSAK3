@@ -34,6 +34,7 @@ struct MyPageView: View {
             deleteUserButton
             Spacer()
         }
+        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showProfile) {
             ProfileView()
         }
