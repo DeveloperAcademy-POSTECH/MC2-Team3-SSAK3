@@ -102,26 +102,29 @@ private extension ChatRoomView {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
             .contentShape(Rectangle())
-            Button {
-                showAlert.toggle()
-            } label: {
-                Text("나가기")
-                    .foregroundColor(.customRed)
-                    .font(.custom("AppleSDGothicNeo-Bold", size: 14))
+        HStack {
+                Button {
+                    isShowTaxiPartyInfo = true
+                } label: {
+                    Image(systemName: "person.fill")
+                        .foregroundColor(.black)
+                }.frame(maxWidth: .infinity, alignment: .trailing)
+                Button {
+                    showAlert.toggle()
+                } label: {
+                    Text("나가기")
+                        .foregroundColor(.customRed)
+                        .font(.custom("AppleSDGothicNeo-Bold", size: 14))
+                }
+                .padding()
             }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .overlay {
-            Button {
-                isShowTaxiPartyInfo = true
-            } label: {
                 HStack {
                     Text(chattingRoomTitle)
                     Text("\(viewModel.taxiParty.currentMemeberCount)명")
                         .foregroundColor(Color.darkGray)
                 }
-            }
         }
         .background(Color.addBackground.ignoresSafeArea().shadow(radius: 1))
         .alert("택시팟을 나가시겠어요?", isPresented: $showAlert) {

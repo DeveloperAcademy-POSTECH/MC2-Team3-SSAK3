@@ -28,10 +28,10 @@ struct ChatRoomInfo: View {
 
     var body: some View {
         ZStack {
-            Color.black.opacity(1).ignoresSafeArea()
+            Color.deepGray.ignoresSafeArea()
             VStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 16) {
-                    dismissButton
+                   // dismissButton
                     Spacer()
                     taxiPartyDate
                     taxiPartyTime
@@ -57,19 +57,6 @@ struct ChatRoomInfo: View {
 // MARK: - 뷰 변수
 
 private extension ChatRoomInfo {
-
-    var dismissButton: some View {
-        HStack {
-            Button {
-                dismissWithBlurOff()
-            } label: {
-                Image(systemName: "xmark")
-                    .imageScale(.large)
-            }
-            .tint(.white)
-            Spacer()
-        }
-    }
 
     var participatingCount: some View {
         HStack {
@@ -138,15 +125,6 @@ private extension ChatRoomInfo {
             Spacer()
         }
         .foregroundColor(.customGray)
-    }
-}
-
-// MARK: - 메서드
-
-private extension ChatRoomInfo {
-
-    func dismissWithBlurOff() {
-        dismiss()
     }
 }
 
