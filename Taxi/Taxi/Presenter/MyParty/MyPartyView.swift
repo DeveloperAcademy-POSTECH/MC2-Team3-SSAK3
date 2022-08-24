@@ -62,7 +62,6 @@ struct MyPartySectionHeader: View {
             .foregroundColor(.charcoal)
             .font(Font.custom("AppleSDGothicNeo-SemiBold", size: 16))
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.leading, .top])
     }
 }
 
@@ -111,31 +110,36 @@ struct MyPartyList: View {
             } label: {
                 EmptyView()
             }
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 10) {
-                    ForEach(meetingDates, id: \.self) { date in
-                        Section(header: MyPartySectionHeader(date: date)) {
-                            ForEach(partys[date]!, id: \.id) { party in
+            List {
+                ForEach(meetingDates, id: \.self) { date in
+                    Section(header: MyPartySectionHeader(date: date)) {
+                        ForEach(partys[date]!, id: \.id) { party in
+                            ZStack {
+                                PartyListCell(party: party)
                                 NavigationLink {
                                     ChatRoomView(party: party, user: authentication.userInfo)
                                         .environmentObject(self.viewModel)
                                 } label: {
-                                    PartyListCell(party: party)
-                                        .contentShape(Rectangle())
+                                    EmptyView()
                                 }
-                                .buttonStyle(CellButtonStyle())
-                                .disabled(isSwiped) // 스와이프 된 상태일 때 비활성화
-                                .swipeDelete(isSwiped: $isSwiped, action: {
-                                    self.showAlert = true
-                                    self.selectedParty = party
-                                })
-                                .cornerRadius(16)
-                                .cellBackground()
-                                .padding(.horizontal)
+                                .opacity(0)
                             }
+                            .disabled(isSwiped) // 스와이프 된 상태일 때 비활성화
+                            .swipeDelete(isSwiped: $isSwiped, action: {
+                                self.showAlert = true
+                                self.selectedParty = party
+                            })
+                            .contentShape(RoundedRectangle(cornerRadius: 16))
+                            .cellBackground()
                         }
                     }
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 }
+            }
+            .listStyle(.plain)
+            .refreshable {
+                viewModel.getMyTaxiParties(force: true)
             }
             .animation(.default, value: partys)
             .highPriorityGesture(isSwiped ? cancelSelectDrag : nil) // 스와이프 된 상태일 때 취소 드래그 활성화
@@ -154,13 +158,6 @@ struct MyPartyList: View {
     private func delete(object: TaxiParty?) {
         guard let party = object else { return }
         viewModel.leaveMyParty(party: party, user: authentication.userInfo)
-    }
-}
-
-struct CellButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .opacity(configuration.isPressed ? 0.5 : 1)
     }
 }
 
@@ -309,3 +306,4 @@ struct MyPartyView_Previews: PreviewProvider {
         }
     }
 }
+
