@@ -134,7 +134,7 @@ private extension TaxiPartyList {
                 .fullScreenCover(isPresented: $isShowTaxiPartyInfo) {
                     showBlur = false
                 } content: {
-                    TaxiPartyInfo(taxiParty: taxiParty, viewModel: viewModel)
+                    TaxiPartyInfo(taxiParty: taxiParty, viewModel: viewModel, showBlur: $showBlur)
                 }
                 .contentShape(RoundedRectangle(cornerRadius: 16))
                 .listRowSeparator(.hidden)
