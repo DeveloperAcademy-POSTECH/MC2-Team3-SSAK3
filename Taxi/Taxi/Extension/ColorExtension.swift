@@ -22,4 +22,5 @@ extension Color {
     static let signUpYellowGray  = Color("signUpYellowGray")
     static let addBackground = Color("addBackground")
     static let clearYellow = Color("clearYellow")
+    static let deepGray = Color("deepGray")
 }
