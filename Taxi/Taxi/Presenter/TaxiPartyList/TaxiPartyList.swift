@@ -37,6 +37,7 @@ struct TaxiPartyList: View {
         .navigationBarTitleDisplayMode(.inline)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .blur(radius: showBlur ? 10 : 0)
+        .animation(.easeOut, value: showBlur)
         .fullScreenCover(isPresented: $showAddTaxiParty) {
             AddTaxiParty(viewModel: viewModel, user: userState.userInfo)
         }
