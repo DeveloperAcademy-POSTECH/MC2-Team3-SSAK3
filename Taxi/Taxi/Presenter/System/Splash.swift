@@ -15,6 +15,9 @@ struct Splash: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 48)
+            ProgressView()
+                .offset(y: 48)
+                .tint(.white)
         }
         .ignoresSafeArea()
     }
