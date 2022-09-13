@@ -245,6 +245,7 @@ private extension ChatRoomView {
                 .font(.custom("AppleSDGothicNeo-Light", size: 8))
                 .foregroundColor(.darkGray)
             Text(message.body)
+                .textSelection(.enabled)
                 .chatStyle()
                 .padding(8)
                 .background(RoundedCorner(radius: 10, corners: [.topLeft, .bottomLeft, .bottomRight]).fill(Color.clearYellow))
@@ -268,6 +269,7 @@ private extension ChatRoomView {
                         .foregroundColor(.charcoal)
                     HStack(alignment: .bottom) {
                         Text(message.body)
+                            .textSelection(.enabled)
                             .chatStyle()
                             .padding(8)
                             .background(RoundedCorner(radius: 10, corners: [.topRight, .bottomLeft, .bottomRight]).fill(Color.white))
