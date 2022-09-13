@@ -15,15 +15,17 @@ struct RootView: View {
             switch appState.loginState {
             case .none:
                 OnboardingView()
+                    .preferredColorScheme(.light)
             case .loading:
                 Splash()
+                    .preferredColorScheme(.dark)
             case .succeed(let userInfo):
                 MainView(userInfo.id)
                     .environmentObject(UserInfoState(userInfo))
+                    .preferredColorScheme(.light)
             }
         }
         .toast(isShowing: $appState.showToastMessage, message: appState.toastMessage)
-        .preferredColorScheme(.light)
         .alert("자동 로그인에 실패했어요", isPresented: $appState.isLoginFailed) {
             Button("확인", role: .cancel) {
                 appState.loginState = .none
