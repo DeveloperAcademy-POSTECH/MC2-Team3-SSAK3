@@ -31,6 +31,8 @@ struct MainView: View {
         NavigationView {
             TabView(selection: $appState.tab) {
                 TaxiPartyList(taxiPartyViewModel)
+                    .navigationTitle("택시팟")
+                    .navigationBarHidden(true)
                     .tabItem {
                         if appState.tab == .taxiParty {
                             Label("택시팟", image: ImageName.tabTaxiPartyOn)
@@ -40,6 +42,8 @@ struct MainView: View {
                     }
                     .tag(Tab.taxiParty)
                 MyPartyView(myPartyViewModel)
+                    .navigationTitle("마이팟")
+                    .navigationBarHidden(true)
                     .tabItem {
                         if appState.tab == .myParty {
                             Label("마이팟", image: ImageName.tabMyPartyOn)
@@ -49,6 +53,8 @@ struct MainView: View {
                     }
                     .tag(Tab.myParty)
                 MyPageView()
+                    .navigationTitle("설정")
+                    .navigationBarHidden(true)
                     .tabItem {
                         if appState.tab == .setting {
                             Label("설정", image: ImageName.tabMyPageOn)
