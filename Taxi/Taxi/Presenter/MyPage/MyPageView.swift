@@ -19,7 +19,7 @@ struct MyPageView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            TabHeader(.setting)
+            Header(.setting)
             profile
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))

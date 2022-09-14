@@ -18,7 +18,7 @@ struct MyPartyView: View {
 
     var body: some View {
         VStack {
-            TabHeader(.myParty)
+            Header(.myParty)
             if viewModel.error == .loadPartiesFail {
                 ErrorView(ListError.loadPartiesFail, description: "다시 불러오기") {
                     reload()

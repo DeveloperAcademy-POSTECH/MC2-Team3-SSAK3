@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct TabHeader: View {
+struct Header: View {
     private let tab: Tab
-    private let toolbarItem: TabToolbarItem
+    private let toolbarItem: ToolbarItem
     private let action: (() -> Void)?
 
-    enum TabToolbarItem {
+    enum ToolbarItem {
         case add
         case none
 
@@ -32,7 +32,7 @@ struct TabHeader: View {
         self.action = nil
     }
 
-    init(_ tab: Tab, toolbarItem: TabToolbarItem, action: @escaping () -> Void) {
+    init(_ tab: Tab, toolbarItem: ToolbarItem, action: @escaping () -> Void) {
         self.tab = tab
         self.toolbarItem = toolbarItem
         self.action = action
