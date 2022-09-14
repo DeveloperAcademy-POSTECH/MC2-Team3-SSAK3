@@ -178,6 +178,7 @@ private extension TaxiPartyInfo {
             isLoading = true
             viewModel.joinTaxiParty(in: taxiParty, userViewModel.userInfo) {
                 isShowTaxiPartyInfo = false
+                showBlur = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     appState.showChattingRoom(taxiParty)
                 }
