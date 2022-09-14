@@ -306,4 +306,3 @@ struct MyPartyView_Previews: PreviewProvider {
         }
     }
 }
-
