@@ -18,7 +18,7 @@ struct MyPartyView: View {
 
     var body: some View {
         VStack {
-            MyPartyTitle()
+            TabHeader(.myParty)
             if viewModel.error == .loadPartiesFail {
                 ErrorView(ListError.loadPartiesFail, description: "다시 불러오기") {
                     reload()
@@ -42,16 +42,6 @@ struct MyPartyView: View {
 
     private func reload() {
         viewModel.getMyTaxiParties(force: true)
-    }
-}
-
-struct MyPartyTitle: View {
-    var body: some View {
-        Text("마이팟")
-            .font(.custom("AppleSDGothicNeo-Bold", size: 25))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading)
-            .padding(.top, 19)
     }
 }
 

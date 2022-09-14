@@ -24,7 +24,9 @@ struct TaxiPartyList: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                header()
+                TabHeader(.taxiParty, toolbarItem: .add) {
+                    showAddTaxiParty = true
+                }
                 FilterBar($showCalendarModal) {
                     viewModel.changeFilter($0)
                 }
@@ -40,25 +42,6 @@ struct TaxiPartyList: View {
         .fullScreenCover(isPresented: $showAddTaxiParty) {
             AddTaxiParty(viewModel: viewModel, user: userState.userInfo)
         }
-    }
-}
-
-// MARK: - View Header
-private extension TaxiPartyList {
-    func header() -> some View {
-        HStack(alignment: .center) {
-            Text("택시팟")
-                .font(.custom("AppleSDGothicNeo-Bold", size: 25))
-            Spacer()
-            Button {
-                showAddTaxiParty = true
-            } label: {
-                Image(systemName: "plus")
-                    .imageScale(.large)
-            }
-        }
-        .padding(.horizontal)
-        .padding(.top, 19)
     }
 }
 
