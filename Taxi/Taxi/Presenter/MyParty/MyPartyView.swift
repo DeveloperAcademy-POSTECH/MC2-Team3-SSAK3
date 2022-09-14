@@ -51,6 +51,7 @@ struct MyPartyTitle: View {
             .font(.custom("AppleSDGothicNeo-Bold", size: 25))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading)
+            .padding(.top, 19)
     }
 }
 

@@ -58,6 +58,7 @@ private extension TaxiPartyList {
             }
         }
         .padding(.horizontal)
+        .padding(.top, 19)
     }
 }
 
