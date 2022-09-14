@@ -69,6 +69,7 @@ private extension MyPageView {
         Text("설정")
             .font(.custom("AppleSDGothicNeo-Bold", size: 25))
             .padding(.leading)
+            .padding(.top, 19)
     }
 
     var profile: some View {
