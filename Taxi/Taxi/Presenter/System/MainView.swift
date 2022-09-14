@@ -12,6 +12,17 @@ enum Tab {
     case taxiParty
     case myParty
     case setting
+    
+    var title: String {
+        switch self {
+        case .taxiParty:
+            return "택시팟"
+        case .myParty:
+            return "마이팟"
+        case .setting:
+            return "설정"
+        }
+    }
 }
 struct MainView: View {
     @StateObject private var myPartyViewModel: MyPartyView.ViewModel
