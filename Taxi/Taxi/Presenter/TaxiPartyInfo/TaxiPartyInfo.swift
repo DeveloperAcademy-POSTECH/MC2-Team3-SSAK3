@@ -15,6 +15,7 @@ struct TaxiPartyInfo: View {
     @State private var isLoading: Bool = false
     @Binding var showBlur: Bool
     @Binding var isShowTaxiPartyInfo: Bool
+    @State private var infoYOffset: CGFloat = .zero
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 62
     private let remainSeat: Int
@@ -56,6 +57,31 @@ struct TaxiPartyInfo: View {
             .padding()
         }
         .clearBackground()
+        .offset(y: infoYOffset)
+        .gesture(dragGesture)
+    }
+}
+
+// MARK: - drag gesture
+private extension TaxiPartyInfo {
+    var dragGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                withAnimation(.interactiveSpring()) {
+                if value.translation.height > 0 {
+                    showBlur = false
+                    infoYOffset = value.translation.height
+                    }
+                }
+            }
+            .onEnded { value in
+                if value.translation.height > 60 {
+                    isShowTaxiPartyInfo.toggle()
+                } else {
+                    showBlur.toggle()
+                    infoYOffset = .zero
+                }
+            }
     }
 }
 
