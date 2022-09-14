@@ -19,7 +19,7 @@ struct MyPageView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            title
+            TabHeader(.myPage)
             profile
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
@@ -64,13 +64,6 @@ struct MyPageView: View {
 }
 
 private extension MyPageView {
-
-    var title: some View {
-        Text("설정")
-            .font(.custom("AppleSDGothicNeo-Bold", size: 25))
-            .padding(.leading)
-            .padding(.top, 19)
-    }
 
     var profile: some View {
         HStack(spacing: 13) {
