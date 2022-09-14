@@ -38,7 +38,6 @@ struct MyPartyView: View {
         } message: { error in
             Text(error.recoverySuggestion ?? "")
         }
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func reload() {

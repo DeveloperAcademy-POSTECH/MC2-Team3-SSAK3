@@ -34,7 +34,6 @@ struct TaxiPartyList: View {
             CalendarModal(isShowing: $showCalendarModal, renderedDate: $scrollTo, taxiPartyList: viewModel.taxiPartyForCalendar)
 
         }
-        .navigationBarTitleDisplayMode(.inline)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .blur(radius: showBlur ? 10 : 0)
         .animation(.easeOut, value: showBlur)
