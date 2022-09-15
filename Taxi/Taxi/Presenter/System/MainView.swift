@@ -12,7 +12,7 @@ enum Tab {
     case taxiParty
     case myParty
     case setting
-    
+
     var title: String {
         switch self {
         case .taxiParty:
@@ -23,7 +23,7 @@ enum Tab {
             return "설정"
         }
     }
-    
+
     var image: String {
         switch self {
         case .taxiParty:
