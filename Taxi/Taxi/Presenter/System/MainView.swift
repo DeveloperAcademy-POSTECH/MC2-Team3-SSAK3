@@ -42,35 +42,35 @@ struct MainView: View {
         NavigationView {
             TabView(selection: $appState.tab) {
                 TaxiPartyList(taxiPartyViewModel)
-                    .navigationTitle("택시팟")
+                    .navigationTitle(Tab.taxiParty.title)
                     .navigationBarHidden(true)
                     .tabItem {
                         if appState.tab == .taxiParty {
-                            Label("택시팟", image: ImageName.tabTaxiPartyOn)
+                            Label(Tab.taxiParty.title, image: ImageName.tabTaxiPartyOn)
                         } else {
-                            Label("택시팟", image: ImageName.tabTaxiPartyOff)
+                            Label(Tab.taxiParty.title, image: ImageName.tabTaxiPartyOff)
                         }
                     }
                     .tag(Tab.taxiParty)
                 MyPartyView(myPartyViewModel)
-                    .navigationTitle("마이팟")
+                    .navigationTitle(Tab.myParty.title)
                     .navigationBarHidden(true)
                     .tabItem {
                         if appState.tab == .myParty {
-                            Label("마이팟", image: ImageName.tabMyPartyOn)
+                            Label(Tab.myParty.title, image: ImageName.tabMyPartyOn)
                         } else {
-                            Label("마이팟", image: ImageName.tabMyPartyOff)
+                            Label(Tab.myParty.title, image: ImageName.tabMyPartyOff)
                         }
                     }
                     .tag(Tab.myParty)
                 MyPageView()
-                    .navigationTitle("설정")
+                    .navigationTitle(Tab.setting.title)
                     .navigationBarHidden(true)
                     .tabItem {
                         if appState.tab == .setting {
-                            Label("설정", image: ImageName.tabMyPageOn)
+                            Label(Tab.setting.title, image: ImageName.tabMyPageOn)
                         } else {
-                            Label("설정", image: ImageName.tabMyPageOff)
+                            Label(Tab.setting.title, image: ImageName.tabMyPageOff)
                         }
                     }
                     .tag(Tab.setting)
