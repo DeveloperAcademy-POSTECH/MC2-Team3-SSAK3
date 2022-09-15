@@ -24,7 +24,7 @@ struct TaxiPartyList: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                Header(.taxiParty, toolbarItem: .add) {
+                Header(.taxiParty) {
                     showAddTaxiParty = true
                 }
                 FilterBar($showCalendarModal) {

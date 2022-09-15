@@ -9,32 +9,15 @@ import SwiftUI
 
 struct Header: View {
     private let tab: Tab
-    private let toolbarItem: ToolbarItem
     private let action: (() -> Void)?
-
-    enum ToolbarItem {
-        case add
-        case none
-
-        var systemName: String {
-            switch self {
-            case .add:
-                return "plus"
-            case .none:
-                return ""
-            }
-        }
-    }
 
     init(_ tab: Tab) {
         self.tab = tab
-        self.toolbarItem = .none
         self.action = nil
     }
 
-    init(_ tab: Tab, toolbarItem: ToolbarItem, action: @escaping () -> Void) {
+    init(_ tab: Tab, action: @escaping () -> Void) {
         self.tab = tab
-        self.toolbarItem = toolbarItem
         self.action = action
     }
 
@@ -47,7 +30,7 @@ struct Header: View {
                 Button {
                     action()
                 } label: {
-                    Image(systemName: toolbarItem.systemName)
+                    Image(systemName: tab.image)
                         .imageScale(.large)
                 }
             }
