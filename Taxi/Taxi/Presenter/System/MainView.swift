@@ -23,6 +23,15 @@ enum Tab {
             return "설정"
         }
     }
+    
+    var image: String {
+        switch self {
+        case .taxiParty:
+            return "plus"
+        default:
+            return ""
+        }
+    }
 }
 struct MainView: View {
     @StateObject private var myPartyViewModel: MyPartyView.ViewModel
