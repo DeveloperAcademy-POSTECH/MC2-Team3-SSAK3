@@ -328,18 +328,29 @@ struct Typing: View {
                         Color.clear.preference(key: ViewHeightKey.self,
                                                value: geo.frame(in: .global).size.height)
                     })
-                TextEditor(text: $input)
-                    .disableAutocorrection(true)
-                    .lineSpacing(5)
-                    .frame(maxHeight: textEditorHeight)
-                    .padding(.vertical, 5)
-                    .mask(Color.lightGray)
-                    .focused($focusState)
+                if #available(iOS 16.0, *) {
+                    TextEditor(text: $input)
+                        .scrollContentBackground(.hidden)
+                        .disableAutocorrection(true)
+                        .lineSpacing(5)
+                        .frame(maxHeight: textEditorHeight)
+                        .padding(.vertical, 5)
+                        .focused($focusState)
+                } else {
+                    TextEditor(text: $input)
+                        .disableAutocorrection(true)
+                        .lineSpacing(5)
+                        .frame(maxHeight: textEditorHeight)
+                        .padding(.vertical, 5)
+                        .focused($focusState)
+                }
             }
             .onPreferenceChange(ViewHeightKey.self) { textEditorHeight = $0 }
             .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 35))
-            .background(RoundedRectangle(cornerRadius: 17)
-                .fill(Color.lightGray))
+            .background(
+                RoundedRectangle(cornerRadius: 17)
+                    .fill(Color.lightGray)
+            )
 
             Button {
                 sendMessage()
