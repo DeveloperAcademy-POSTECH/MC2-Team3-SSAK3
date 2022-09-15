@@ -329,11 +329,11 @@ struct Typing: View {
                                                value: geo.frame(in: .global).size.height)
                     })
                 TextEditor(text: $input)
+                    .colorMultiply(.lightGray)
                     .disableAutocorrection(true)
                     .lineSpacing(5)
                     .frame(maxHeight: textEditorHeight)
                     .padding(.vertical, 5)
-                    .mask(Color.lightGray)
                     .focused($focusState)
             }
             .onPreferenceChange(ViewHeightKey.self) { textEditorHeight = $0 }
