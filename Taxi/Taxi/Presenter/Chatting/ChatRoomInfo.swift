@@ -23,7 +23,7 @@ struct ChatRoomInfo: View {
                 .padding(.vertical)
             participatingCount
                 .padding(.bottom, 20)
-            ForEach(0..<taxiParty.maxPersonNumber) { index in
+            ForEach(0..<taxiParty.maxPersonNumber, id: \.self) { index in
                 if index < taxiParty.currentMemeberCount {
                     PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
                 } else {
