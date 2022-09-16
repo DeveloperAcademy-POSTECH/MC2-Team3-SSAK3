@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import KeyChainWrapper
 
 final class SignInViewModel: ObservableObject {
     // MARK: - Dependency
@@ -39,13 +40,17 @@ extension SignInViewModel {
                 case .failure(let error):
                     self.error = error
                 case .finished:
-                    print("finished")
+                    break
                 }
                 self.isLoading = false
             } receiveValue: { [weak self] userInfo in
                 guard let self = self else { return }
-                UserDefaults.standard.set(self.email.value + "@pos.idserve.net", forKey: "email")
-                UserDefaults.standard.set(self.password.value, forKey: "password")
+                let email: String = self.email.value + "@pos.idserve.net"
+                UserDefaults.standard.set(email, forKey: "email")
+                if let bundleIdentifier = Bundle.main.bundleIdentifier {
+                    PasswordKeychainManager(service: bundleIdentifier)
+                        .savePassword(self.password.value, for: email)
+                }
                 self.userInfo = userInfo
             }.store(in: &cancelBag)
     }

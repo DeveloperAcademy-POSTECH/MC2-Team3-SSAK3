@@ -36,22 +36,22 @@ final class UserInfoState: ObservableObject {
     }
 
     func updateNickname(_ newName: String) {
-        changeNicknameUseCase.changeNickname(userInfo, to: newName) { user, error in
-            guard let user = user, error == nil else { return }
+        changeNicknameUseCase.changeNickname(userInfo, to: newName) { [weak self] user, error in
+            guard let user = user, error == nil, let self = self else { return }
             self.userInfo = user
         }
     }
 
     func updateProfileImage(_ newImage: Data) {
-        changeProfileImageUseCase.changeProfileImage(userInfo, to: newImage) { user, error in
-            guard let user = user, error == nil else { return }
+        changeProfileImageUseCase.changeProfileImage(userInfo, to: newImage) { [weak self] user, error in
+            guard let user = user, error == nil, let self = self else { return }
             self.userInfo = user
         }
     }
 
     func deleteProfileImage() {
-        deleteProfileImageUseCase.deleteProfileImage(for: userInfo) { user, error in
-            guard let user = user, error == nil else { return }
+        deleteProfileImageUseCase.deleteProfileImage(for: userInfo) { [weak self] user, error in
+            guard let user = user, error == nil, let self = self else { return }
             self.userInfo = user
         }
     }

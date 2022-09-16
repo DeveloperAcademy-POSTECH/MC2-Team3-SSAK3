@@ -6,6 +6,7 @@
 //
 
 import Combine
+import KeyChainWrapper
 import SwiftUI
 
 final class AppState: ObservableObject {
@@ -51,8 +52,12 @@ extension AppState {
     }
 
     func logout() {
+        let email: String? = UserDefaults.standard.string(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "email")
-        UserDefaults.standard.removeObject(forKey: "password")
+        if let email = email, let bundleIdentifier = Bundle.main.bundleIdentifier {
+            PasswordKeychainManager(service: bundleIdentifier)
+                .removePassword(for: email)
+        }
         self.loginState = .none
     }
 
@@ -65,24 +70,38 @@ extension AppState {
 private extension AppState {
     func autoLogin() {
         let email = UserDefaults.standard.string(forKey: "email")
-        let password = UserDefaults.standard.string(forKey: "password")
-        guard let email = email, let password = password else {
+        guard let email = email, let bundleIdentifier = Bundle.main.bundleIdentifier else {
             self.loginState = .none
             return
         }
         self.loginState = .loading
-        loginUsecase.login(with: email, password: password)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    print("finished")
-                case .failure(let error):
-                    print(error)
+        PasswordKeychainManager(service: bundleIdentifier).getPassword(for: email) { [weak self] password, error in
+            guard let self = self else { return }
+            guard error == nil else {
+                DispatchQueue.main.async {
+                    self.loginState = .none
                     self.isLoginFailed = true
                 }
-            } receiveValue: { [weak self] userInfo in
-                guard let self = self else { return }
-                self.loginState = .succeed(userInfo)
-            }.store(in: &cancelBag)
+                return
+            }
+            if let password = password {
+                self.loginUsecase.login(with: email, password: password)
+                    .receive(on: DispatchQueue.main)
+                    .sink { completion in
+                        switch completion {
+                        case .finished:
+                            break
+                        case .failure:
+                            self.loginState = .none
+                            self.isLoginFailed = true
+                        }
+                    } receiveValue: { [weak self] userInfo in
+                        guard let self = self else { return }
+                        self.loginState = .succeed(userInfo)
+                    }.store(in: &self.cancelBag)
+            } else {
+                self.loginState = .none
+            }
+        }
     }
 }

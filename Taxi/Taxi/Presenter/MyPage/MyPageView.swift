@@ -133,9 +133,11 @@ private extension MyPageView {
     }
 }
 
+#if DEBUG
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
         MyPageView()
             .inject()
     }
 }
+#endif

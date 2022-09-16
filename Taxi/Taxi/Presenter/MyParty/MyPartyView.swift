@@ -287,6 +287,7 @@ struct ErrorView: View {
     }
 }
 
+#if DEBUG
 // MARK: - Preview
 struct MyPartyView_Previews: PreviewProvider {
     static var previews: some View {
@@ -296,3 +297,4 @@ struct MyPartyView_Previews: PreviewProvider {
         }
     }
 }
+#endif

@@ -233,6 +233,7 @@ struct PartyMemberInfo: View {
 
 // MARK: - 프리뷰
 
+#if DEBUG
 struct TaxiPartyInfoView_Previews: PreviewProvider {
 
     static var previews: some View {
@@ -254,3 +255,4 @@ struct TaxiPartyInfoView_Previews: PreviewProvider {
         .inject()
     }
 }
+#endif
