@@ -22,6 +22,7 @@ struct ChatRoomInfo: View {
             divider
                 .padding(.vertical)
             participatingCount
+                .padding(.bottom, 20)
             ForEach(0..<taxiParty.maxPersonNumber) { index in
                 if index < taxiParty.currentMemeberCount {
                     PartyMemberInfo(taxiParty.members[index], diameter: profileSize)
@@ -31,9 +32,12 @@ struct ChatRoomInfo: View {
             }
             Spacer()
         }
-        .padding()
-        .background(Rectangle().fill(Color.darkGray)
-            .edgesIgnoringSafeArea(.bottom))
+        .padding([.vertical, .leading], 24)
+        .background {
+            Rectangle()
+                .fill(Color(red: 112 / 255, green: 112 / 255, blue: 112 / 255))
+                .edgesIgnoringSafeArea(.bottom)
+        }
     }
 }
 
