@@ -62,6 +62,8 @@
 		009164BF2896137F0076D680 /* Nickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009164BE2896137F0076D680 /* Nickname.swift */; };
 		009F33E9289644270060D51A /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009F33E8289644270060D51A /* SignInViewModel.swift */; };
 		009F33EB2896443E0060D51A /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009F33EA2896443E0060D51A /* SignUpViewModel.swift */; };
+		00A1160F28C7375E00353CD5 /* KeyChainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 00A1160E28C7375E00353CD5 /* KeyChainWrapper */; };
+		00A4BB2328D0726C004C0479 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 00A4BB2228D0726C004C0479 /* Amplitude */; };
 		00A5705A2851826A008B220E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570592851826A008B220E /* ColorExtension.swift */; };
 		00A5705C285182E1008B220E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5705B285182E1008B220E /* RoundedButton.swift */; };
 		00A570642851E993008B220E /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570632851E993008B220E /* ImageName.swift */; };
@@ -287,8 +289,10 @@
 				00F8569E2844A985008E2E2F /* FirebaseAuthCombine-Community in Frameworks */,
 				00F856A22844A985008E2E2F /* FirebaseFirestoreCombine-Community in Frameworks */,
 				00F856A42844A985008E2E2F /* FirebaseFirestoreSwift in Frameworks */,
+				00A1160F28C7375E00353CD5 /* KeyChainWrapper in Frameworks */,
 				508A8752285F13BD00998595 /* Introspect in Frameworks */,
 				000E83B7284A2DBF000CD5AA /* FirebaseMessaging in Frameworks */,
+				00A4BB2328D0726C004C0479 /* Amplitude in Frameworks */,
 				00F856A82844A985008E2E2F /* FirebaseFunctionsCombine-Community in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -752,6 +756,8 @@
 				000E83B6284A2DBF000CD5AA /* FirebaseMessaging */,
 				50F3D18A28537B110004B5CE /* SDWebImageSwiftUI */,
 				508A8751285F13BD00998595 /* Introspect */,
+				00A1160E28C7375E00353CD5 /* KeyChainWrapper */,
+				00A4BB2228D0726C004C0479 /* Amplitude */,
 			);
 			productName = Taxi;
 			productReference = 000D83222840E23800BA3DFA /* Taxi.app */;
@@ -830,6 +836,8 @@
 				00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				50F3D18928537B110004B5CE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				508A8750285F13BC00998595 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				00A1160D28C7375E00353CD5 /* XCRemoteSwiftPackageReference "KeychainPackage" */,
+				00A4BB2128D0726C004C0479 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */,
 			);
 			productRefGroup = 000D83232840E23800BA3DFA /* Products */;
 			projectDirPath = "";
@@ -1174,7 +1182,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Taxi/Resources/TaxiRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20220824;
+				CURRENT_PROJECT_VERSION = 20220913;
 				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
@@ -1192,7 +1200,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.ssak3.Taxi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1209,7 +1217,7 @@
 				CODE_SIGN_ENTITLEMENTS = Taxi/Resources/TaxiRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20220824;
+				CURRENT_PROJECT_VERSION = 20220913;
 				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
@@ -1227,7 +1235,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.ssak3.Taxi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1355,6 +1363,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		00A1160D28C7375E00353CD5 /* XCRemoteSwiftPackageReference "KeychainPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HoJongE/KeychainPackage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		00A4BB2128D0726C004C0479 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/Amplitude-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1386,6 +1410,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		00A1160E28C7375E00353CD5 /* KeyChainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00A1160D28C7375E00353CD5 /* XCRemoteSwiftPackageReference "KeychainPackage" */;
+			productName = KeyChainWrapper;
+		};
+		00A4BB2228D0726C004C0479 /* Amplitude */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00A4BB2128D0726C004C0479 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */;
+			productName = Amplitude;
 		};
 		00F856992844A985008E2E2F /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

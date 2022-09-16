@@ -72,7 +72,7 @@ extension TaxiPartyList {
                     case .failure(let error):
                         self.taxiParties = .error(error: error)
                     case .finished:
-                        print("taxi Party Loading finished")
+                        break
                     }
                 } receiveValue: { [weak self] value in
                     guard let self = self else { return }
@@ -95,8 +95,8 @@ extension TaxiPartyList {
                     if case let .failure(error) = completion {
                         onError(error)
                     }
-                } receiveValue: { taxiParty in
-                    self.addTaxiPartyDelegate?.addTaxiParty(taxiParty)
+                } receiveValue: { [weak self] taxiParty in
+                    self?.addTaxiPartyDelegate?.addTaxiParty(taxiParty)
                     onSuccess(taxiParty)
                 }.store(in: &cancelBag)
         }
@@ -113,6 +113,10 @@ extension TaxiPartyList {
                 self.joinTaxiPartyDelegate?.joinTaxiParty(taxiParty)
                 self.requestTaxiParties(force: true)
             }
+        }
+
+        deinit {
+            print("TaxiPartyList.ViewModel Deinit")
         }
     }
 }

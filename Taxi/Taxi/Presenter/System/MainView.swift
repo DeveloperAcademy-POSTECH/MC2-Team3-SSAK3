@@ -36,12 +36,14 @@ enum Tab {
 struct MainView: View {
     @StateObject private var myPartyViewModel: MyPartyView.ViewModel
     @StateObject private var taxiPartyViewModel: TaxiPartyList.ViewModel
+    @StateObject private var userInfoState: UserInfoState
     @EnvironmentObject private var appState: AppState
 
-    init(_ userId: String) {
-        let listViewModel = MyPartyView.ViewModel(userId: userId)
+    init(_ userInfo: UserInfo) {
+        let listViewModel = MyPartyView.ViewModel(userId: userInfo.id)
         self._myPartyViewModel = StateObject(wrappedValue: listViewModel)
-        self._taxiPartyViewModel = StateObject(wrappedValue: TaxiPartyList.ViewModel(addTaxiPartyDelegate: listViewModel, joinTaxiPartyDelegate: listViewModel, exclude: userId))
+        self._taxiPartyViewModel = StateObject(wrappedValue: TaxiPartyList.ViewModel(addTaxiPartyDelegate: listViewModel, joinTaxiPartyDelegate: listViewModel, exclude: userInfo.id))
+        self._userInfoState = StateObject(wrappedValue: UserInfoState(userInfo))
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
@@ -85,13 +87,14 @@ struct MainView: View {
                     .tag(Tab.setting)
             }
         }
+        .environmentObject(userInfoState)
     }
 }
 
 #if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView("")
+        MainView(UserInfo(id: "", nickname: "", profileImage: ""))
             .inject()
     }
 }

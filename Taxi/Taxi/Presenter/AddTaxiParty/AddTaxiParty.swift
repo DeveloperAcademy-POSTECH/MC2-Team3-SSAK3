@@ -387,6 +387,8 @@ private extension AddTaxiParty {
         return destination != .none && destination != nil && startDate != nil && startHour != nil && startMinute != nil && departure != nil && maxNumber != nil
     }
 }
+
+#if DEBUG
 // MARK: - 프리뷰
 struct AddTaxiParty_Previews: PreviewProvider {
     static var previews: some View {
@@ -394,3 +396,4 @@ struct AddTaxiParty_Previews: PreviewProvider {
             .inject()
     }
 }
+#endif

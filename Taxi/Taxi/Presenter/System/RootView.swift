@@ -20,8 +20,7 @@ struct RootView: View {
                 Splash()
                     .preferredColorScheme(.dark)
             case .succeed(let userInfo):
-                MainView(userInfo.id)
-                    .environmentObject(UserInfoState(userInfo))
+                MainView(userInfo)
                     .preferredColorScheme(.light)
             }
         }
@@ -36,9 +35,11 @@ struct RootView: View {
     }
 }
 
+#if DEBUG
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView()
             .environmentObject(AppState())
     }
 }
+#endif
