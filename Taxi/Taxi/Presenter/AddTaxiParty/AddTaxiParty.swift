@@ -50,15 +50,28 @@ struct AddTaxiParty: View {
     private let columns: [GridItem] = [GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200))]
 
     private var hourRange: Range<Int> {
+        var todayhour: Int = Calendar.current.component(.hour, from: Date())
         if startDate?.monthDay == Date().monthDay {
-            return Calendar.current.component(.hour, from: Date())..<24
-        } else if selectHalfDay == .morning {
-            return 0..<12
-        } else if selectHalfDay == .afternoon {
-            return 12..<24
+            if selectHalfDay == .afternoon {
+                if todayhour > 12 {
+                return todayhour..<24
+                } else {
+                    return 12..<24 }
+            } else if selectHalfDay == .morning {
+                if todayhour < 12 {
+                return todayhour..<12
+                } else { return 0..<0
+                }
+            }
+            return todayhour..<24
         } else {
-            return 0..<24
-        } // 출발 날짜가 오늘이 아니면, 0시부터 23시까지 모임 시간이 뜬다.
+            if selectHalfDay == .morning {
+                return 0..<12
+            } else if selectHalfDay == .afternoon {
+                return 12..<24
+            }
+        }
+        return todayhour..<24
     }
 
     var body: some View {
