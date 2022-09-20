@@ -55,7 +55,7 @@ struct AddTaxiParty: View {
         } else if selectHalfDay == .morning {
             return 0..<12
         } else if selectHalfDay == .afternoon {
-            return 12..<23
+            return 12..<24
         } else {
             return 0..<24
         } // 출발 날짜가 오늘이 아니면, 0시부터 23시까지 모임 시간이 뜬다.
