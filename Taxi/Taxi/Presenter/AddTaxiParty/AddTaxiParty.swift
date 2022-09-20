@@ -17,6 +17,15 @@ extension AddTaxiParty {
         case departure
         case personNumber
     }
+
+    enum Selectedhalf: String {
+        case morning = "오전"
+        case afternoon = "오후"
+    }
+    static func halfdays() -> [Selectedhalf] {
+        [.morning, .afternoon]
+    }
+
 }
 struct AddTaxiParty: View {
     @Environment(\.dismiss) private var dismiss
@@ -28,6 +37,7 @@ struct AddTaxiParty: View {
     @State private var startMinute: Int? // 출발 분
     @State private var departure: Place? // 출발 장소
     @State private var maxNumber: Int? // 정원
+    @State private var selectHalfDay: Selectedhalf? = .afternoon // 초기값 오후
     @ObservedObject var viewModel: TaxiPartyList.ViewModel
     @State private var isAdding: Bool = false
     @State private var error: Error?
@@ -42,11 +52,13 @@ struct AddTaxiParty: View {
     private var hourRange: Range<Int> {
         if startDate?.monthDay == Date().monthDay {
             return Calendar.current.component(.hour, from: Date())..<24
-        }
-        // 출발 날짜가 오늘이 아니면, 0시부터 23시까지 모임 시간이 뜬다.
-        else {
+        } else if selectHalfDay == .morning {
+            return 0..<12
+        } else if selectHalfDay == .afternoon {
+            return 12..<23
+        } else {
             return 0..<24
-        }
+        } // 출발 날짜가 오늘이 아니면, 0시부터 23시까지 모임 시간이 뜬다.
     }
 
     var body: some View {
@@ -152,9 +164,18 @@ extension AddTaxiParty {
     }
 }
 // MARK: - 시간 선택 뷰
+
 extension AddTaxiParty {
+    
     private var timePicker: some View {
         VStack(spacing: 0) {
+            HStack(spacing: 16) {
+                ForEach(AddTaxiParty.halfdays(), id: \.self) { half in
+                    selectHalfDay(half)
+            }
+            }
+                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+            Divider().background(Color.customGray.opacity(0.3))
             hourSelector
             Divider().background(Color.customGray.opacity(0.3))
             minuteSelector
@@ -162,6 +183,22 @@ extension AddTaxiParty {
         .background(Color.addBackground)
         .toInfoContainer(title: "몇시에 모이고 싶으신가요?", selectedInfo: convertStartTimeToString(), toggle: step == .time) {
             changeStep(to: .time)
+        }
+    }
+    
+    private func selectHalfDay(_ day: Selectedhalf) -> some View {
+        Button {
+            if selectHalfDay != day {
+                selectHalfDay = day
+                toNextStep()
+            }
+                }
+        label: {
+            Text(day.rawValue)
+                .info()
+                .padding()
+                .frame(maxWidth: .infinity)
+                .roundedBackground(selectHalfDay == day)
         }
     }
 
@@ -192,6 +229,17 @@ extension AddTaxiParty {
         .padding()
     }
 
+    private func selectedTime(_ hour: Int) -> String {
+        switch hour {
+        case 0...6: return "moon.stars"
+        case 7: return "sunrise"
+        case 8...17: return "sun.max"
+        case 18: return "sunset"
+        case 19...23: return "moon.stars"
+        default: return ""
+        }
+    }
+
     private func hourItem(_ hour: Int) -> some View {
         Button {
             if startHour != hour {
@@ -199,13 +247,18 @@ extension AddTaxiParty {
                 startMinute = nil
             }
         } label: {
+            VStack {
+                    Image(systemName: selectedTime(hour))
+                        .imageScale(.small)
             Text("\(String(hour))시")
                 .font(.custom("AppleSDGothicNeo-Medium", size: 18))
-                .foregroundColor(startHour == hour ? .customBlack: .charcoal)
-                .frame(width: 48, height: 48)
-                .roundedBackground(startHour == hour)
+            }
+            .foregroundColor(startHour == hour ? .customBlack: .charcoal)
+            .frame(width: 48, height: 48)
+            .roundedBackground(startHour == hour)
         }
     }
+
     @ViewBuilder
     private func minuteItem(_ minute: Int) -> some View {
         if let startHour = startHour {
@@ -313,7 +366,9 @@ extension View {
     }
 }
 // MARK: Step 변경 로직
+
 private extension AddTaxiParty {
+  
     // 사용자가 정보 수정을 위해 임의로 탭을 입력하는 경우
     func changeStep(to step: AddTaxiParty.Step) {
         withAnimation(.easeInOut) {
@@ -382,6 +437,7 @@ private extension AddTaxiParty {
             }
         }
     }
+
     // 모든 정보가 정상적으로 입력되있는지 확인하는 함수
     func checkAllInfoSelected() -> Bool {
         return destination != .none && destination != nil && startDate != nil && startHour != nil && startMinute != nil && departure != nil && maxNumber != nil
