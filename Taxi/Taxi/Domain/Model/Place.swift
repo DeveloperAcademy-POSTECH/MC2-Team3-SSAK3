@@ -14,7 +14,7 @@ enum Place: String {
     case jigok = "지곡회관"
     case fromChatting = "추후협의"
     case taxi = "택시승강장"
-    case cafebene = "카페베네"
+    case toilet = "화장실"
 }
 // MARK: - 코드 처리
 extension Place {
@@ -33,7 +33,7 @@ extension Place {
         case 5:
             return .taxi
         case 6:
-            return .cafebene
+            return .toilet
         default:
             fatalError("정의되지 않은 Place 코드")
         }
@@ -53,7 +53,7 @@ extension Place {
             return 4
         case .taxi:
             return 5
-        case .cafebene:
+        case .toilet:
             return 6
         }
     }
@@ -70,7 +70,7 @@ extension Place {
             return [.c5, .jigok, .fromChatting]
         case .postech:
             // TODO: 포스텍 도착 시 출발 장소를 결정해야함
-            return [.taxi, .cafebene, .fromChatting]
+            return [.taxi, .toilet, .fromChatting]
         default:
             fatalError("Undefined destination")
         }
