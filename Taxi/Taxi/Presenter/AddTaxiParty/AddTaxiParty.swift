@@ -18,11 +18,11 @@ extension AddTaxiParty {
         case personNumber
     }
 
-    enum Selectedhalf: String {
+    enum MorningAfternoon: String {
         case morning = "오전"
         case afternoon = "오후"
     }
-    static func halfdays() -> [Selectedhalf] {
+    static func selectHalfday() -> [MorningAfternoon] {
         [.morning, .afternoon]
     }
 
@@ -37,7 +37,7 @@ struct AddTaxiParty: View {
     @State private var startMinute: Int? // 출발 분
     @State private var departure: Place? // 출발 장소
     @State private var maxNumber: Int? // 정원
-    @State private var selectHalfDay: Selectedhalf? = .afternoon // 초기값 오후
+    @State private var selectHalfDay: MorningAfternoon? = .afternoon // 초기값 오후
     @ObservedObject var viewModel: TaxiPartyList.ViewModel
     @State private var isAdding: Bool = false
     @State private var error: Error?
@@ -184,7 +184,7 @@ extension AddTaxiParty {
     private var timePicker: some View {
         VStack(spacing: 0) {
             HStack(spacing: 16) {
-                ForEach(AddTaxiParty.halfdays(), id: \.self) { half in
+                ForEach(AddTaxiParty.selectHalfday(), id: \.self) { half in
                     selectHalfDay(half)
             }
             }
@@ -200,12 +200,12 @@ extension AddTaxiParty {
         }
     }
 
-    private func selectHalfDay(_ day: Selectedhalf) -> some View {
+    private func selectHalfDay(_ day: MorningAfternoon) -> some View {
         Button {
             if selectHalfDay != day {
                 selectHalfDay = day
-                toNextStep()
-            }
+                startHour = nil
+        }
                 }
         label: {
             Text(day.rawValue)
@@ -380,7 +380,6 @@ extension View {
     }
 }
 // MARK: Step 변경 로직
-
 private extension AddTaxiParty {
     // 사용자가 정보 수정을 위해 임의로 탭을 입력하는 경우
     func changeStep(to step: AddTaxiParty.Step) {
