@@ -56,11 +56,13 @@ struct AddTaxiParty: View {
                 if todayhour > 12 {
                 return todayhour..<24
                 } else {
-                    return 12..<24 }
+                    return 12..<24
+                }
             } else if selectHalfDay == .morning {
                 if todayhour < 12 {
                 return todayhour..<12
-                } else { return 0..<0
+                } else {
+                    return 0..<0
                 }
             }
             return todayhour..<24
@@ -179,7 +181,6 @@ extension AddTaxiParty {
 // MARK: - 시간 선택 뷰
 
 extension AddTaxiParty {
-    
     private var timePicker: some View {
         VStack(spacing: 0) {
             HStack(spacing: 16) {
@@ -198,7 +199,7 @@ extension AddTaxiParty {
             changeStep(to: .time)
         }
     }
-    
+
     private func selectHalfDay(_ day: Selectedhalf) -> some View {
         Button {
             if selectHalfDay != day {
@@ -381,7 +382,6 @@ extension View {
 // MARK: Step 변경 로직
 
 private extension AddTaxiParty {
-  
     // 사용자가 정보 수정을 위해 임의로 탭을 입력하는 경우
     func changeStep(to step: AddTaxiParty.Step) {
         withAnimation(.easeInOut) {
