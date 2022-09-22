@@ -22,10 +22,6 @@ extension AddTaxiParty {
         case morning = "오전"
         case afternoon = "오후"
     }
-    static func selectHalfday() -> [MorningAfternoon] {
-        [.morning, .afternoon]
-    }
-
 }
 struct AddTaxiParty: View {
     @Environment(\.dismiss) private var dismiss
@@ -37,7 +33,7 @@ struct AddTaxiParty: View {
     @State private var startMinute: Int? // 출발 분
     @State private var departure: Place? // 출발 장소
     @State private var maxNumber: Int? // 정원
-    @State private var selectHalfDay: MorningAfternoon? = .afternoon // 초기값 오후
+    @State private var selectedMidDay: MorningAfternoon? = .afternoon // 초기값 오후
     @ObservedObject var viewModel: TaxiPartyList.ViewModel
     @State private var isAdding: Bool = false
     @State private var error: Error?
@@ -50,30 +46,30 @@ struct AddTaxiParty: View {
     private let columns: [GridItem] = [GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200)), GridItem(.flexible(minimum: 60, maximum: 200))]
 
     private var hourRange: Range<Int> {
-        var todayhour: Int = Calendar.current.component(.hour, from: Date())
+        let currentHour: Int = Calendar.current.component(.hour, from: Date())
         if startDate?.monthDay == Date().monthDay {
-            if selectHalfDay == .afternoon {
-                if todayhour > 12 {
-                return todayhour..<24
+            if selectedMidDay == .afternoon {
+                if currentHour > 12 {
+                    return currentHour..<24
                 } else {
                     return 12..<24
                 }
-            } else if selectHalfDay == .morning {
-                if todayhour < 12 {
-                return todayhour..<12
+            } else if selectedMidDay == .morning {
+                if currentHour < 12 {
+                    return currentHour..<12
                 } else {
                     return 0..<0
                 }
             }
-            return todayhour..<24
+            return currentHour..<24
         } else {
-            if selectHalfDay == .morning {
+            if selectedMidDay == .morning {
                 return 0..<12
-            } else if selectHalfDay == .afternoon {
+            } else if selectedMidDay == .afternoon {
                 return 12..<24
             }
         }
-        return todayhour..<24
+        return currentHour..<24
     }
 
     var body: some View {
@@ -184,11 +180,10 @@ extension AddTaxiParty {
     private var timePicker: some View {
         VStack(spacing: 0) {
             HStack(spacing: 16) {
-                ForEach(AddTaxiParty.selectHalfday(), id: \.self) { half in
-                    selectHalfDay(half)
+                midDaySelector(.morning)
+                midDaySelector(.afternoon)
             }
-            }
-                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+            .padding()
             Divider().background(Color.customGray.opacity(0.3))
             hourSelector
             Divider().background(Color.customGray.opacity(0.3))
@@ -200,20 +195,20 @@ extension AddTaxiParty {
         }
     }
 
-    private func selectHalfDay(_ day: MorningAfternoon) -> some View {
+    private func midDaySelector(_ day: MorningAfternoon) -> some View {
         Button {
-            if selectHalfDay != day {
-                selectHalfDay = day
+            if selectedMidDay != day {
+                selectedMidDay = day
                 startHour = nil
+            }
         }
-                }
-        label: {
-            Text(day.rawValue)
-                .info()
-                .padding()
-                .frame(maxWidth: .infinity)
-                .roundedBackground(selectHalfDay == day)
-        }
+    label: {
+        Text(day.rawValue)
+            .info()
+            .padding()
+            .frame(maxWidth: .infinity)
+            .roundedBackground(selectedMidDay == day)
+    }
     }
 
     private func convertStartTimeToString() -> String {
@@ -262,10 +257,10 @@ extension AddTaxiParty {
             }
         } label: {
             VStack {
-                    Image(systemName: selectedTime(hour))
-                        .imageScale(.small)
-            Text("\(String(hour))시")
-                .font(.custom("AppleSDGothicNeo-Medium", size: 18))
+                Image(systemName: selectedTime(hour))
+                    .imageScale(.small)
+                Text("\(String(hour))시")
+                    .font(.custom("AppleSDGothicNeo-Medium", size: 18))
             }
             .foregroundColor(startHour == hour ? .customBlack: .charcoal)
             .frame(width: 48, height: 48)
