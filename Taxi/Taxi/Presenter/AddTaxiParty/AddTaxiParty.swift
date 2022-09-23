@@ -18,7 +18,7 @@ extension AddTaxiParty {
         case personNumber
     }
 
-    enum MorningAfternoon: String {
+    enum MidDay: String {
         case morning = "오전"
         case afternoon = "오후"
     }
@@ -33,7 +33,7 @@ struct AddTaxiParty: View {
     @State private var startMinute: Int? // 출발 분
     @State private var departure: Place? // 출발 장소
     @State private var maxNumber: Int? // 정원
-    @State private var selectedMidDay: MorningAfternoon? = .afternoon // 초기값 오후
+    @State private var selectedMidDay: MidDay? = .afternoon // 초기값 오후
     @ObservedObject var viewModel: TaxiPartyList.ViewModel
     @State private var isAdding: Bool = false
     @State private var error: Error?
@@ -195,11 +195,12 @@ extension AddTaxiParty {
         }
     }
 
-    private func midDaySelector(_ day: MorningAfternoon) -> some View {
+    private func midDaySelector(_ day: MidDay) -> some View {
         Button {
             if selectedMidDay != day {
                 selectedMidDay = day
                 startHour = nil
+                startMinute = nil
             }
         }
     label: {
