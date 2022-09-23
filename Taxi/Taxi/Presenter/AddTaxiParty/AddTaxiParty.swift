@@ -240,11 +240,8 @@ extension AddTaxiParty {
 
     private func selectedTime(_ hour: Int) -> String {
         switch hour {
-        case 0...6: return "moon.stars"
-        case 7: return "sunrise"
-        case 8...17: return "sun.max"
-        case 18: return "sunset"
-        case 19...23: return "moon.stars"
+        case 0...11: return "AM"
+        case 12...23: return "PM"
         default: return ""
         }
     }
@@ -257,8 +254,9 @@ extension AddTaxiParty {
             }
         } label: {
             VStack {
-                Image(systemName: selectedTime(hour))
-                    .imageScale(.small)
+                Text("\(selectedTime(hour))")
+                    .font(.custom("AppleSDGothicNeo-Medium", size: 10))
+                    .foregroundColor(.darkGray)
                 Text("\(String(hour))시")
                     .font(.custom("AppleSDGothicNeo-Medium", size: 18))
             }
