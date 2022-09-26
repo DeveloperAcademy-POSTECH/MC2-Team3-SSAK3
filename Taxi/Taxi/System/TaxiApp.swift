@@ -5,6 +5,7 @@
 //  Created by JongHo Park on 2022/05/27.
 //
 
+import Amplitude
 import Firebase
 import FirebaseMessaging
 import SwiftUI
@@ -30,9 +31,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
       application.registerForRemoteNotifications()
       Messaging.messaging().delegate = self
       UNUserNotificationCenter.current().delegate = self
-
+      setUpAmplitude()
     return true
   }
+
+    private func setUpAmplitude() {
+        let amplitude: Amplitude = Amplitude.instance()
+        amplitude.trackingSessionEvents = true
+        amplitude.initializeApiKey("fdc547de0be26716c9cd120dae96da62")
+    }
 
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

@@ -5,6 +5,7 @@
 //  Created by 민채호 on 2022/06/18.
 //
 
+import Amplitude
 import Combine
 import KeyChainWrapper
 import SwiftUI
@@ -98,6 +99,8 @@ private extension AppState {
                     } receiveValue: { [weak self] userInfo in
                         guard let self = self else { return }
                         self.loginState = .succeed(userInfo)
+                        Amplitude.instance().setUserId(userInfo.nickname)
+                        Amplitude.instance().logEvent("login")
                     }.store(in: &self.cancelBag)
             } else {
                 self.loginState = .none
