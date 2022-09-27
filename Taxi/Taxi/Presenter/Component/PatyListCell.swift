@@ -8,6 +8,12 @@ import SwiftUI
 
 struct PartyListCell: View {
     let party: TaxiParty
+    let isParticipating: Bool
+
+    init(party: TaxiParty, isParticipating: Bool = false) {
+        self.party = party
+        self.isParticipating = isParticipating
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -17,7 +23,7 @@ struct PartyListCell: View {
                 Spacer()
                 DepartureView(party: party)
                 Spacer()
-                UserView(party: party)
+                UserView(party: party, isParticipating: isParticipating)
             }
             .padding(.vertical, 7)
             .padding(.horizontal, 7)
@@ -97,25 +103,35 @@ struct DepartureView: View {
 
 struct UserView: View {
     let party: TaxiParty
+    let isParticipating: Bool
 
     var body: some View {
-        HStack(alignment: .top, spacing: 2) {
-            Image(systemName: "person.fill")
-                .font(.system(size: 15))
-                .foregroundColor(Color.charcoal)
-            HStack(alignment: .center, spacing: 2) {
-                Text("\(party.members.count)") // 데이터로 처리 필요
-                    .font(.custom("AppleSDGothicNeo-Regular", size: 16))
-                    .foregroundColor(Color.customBlack)
-                Text("/")
+        VStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .top, spacing: 2) {
+                Image(systemName: "person.fill")
+                    .font(.system(size: 15))
+                    .foregroundColor(Color.charcoal)
+                HStack(alignment: .center, spacing: 2) {
+                    Text("\(party.members.count)") // 데이터로 처리 필요
+                        .font(.custom("AppleSDGothicNeo-Regular", size: 16))
+                        .foregroundColor(Color.customBlack)
+                    Text("/")
+                        .font(.custom("AppleSDGothicNeo-Regular", size: 12))
+                        .foregroundColor(Color.darkGray)
+                    Text("\(party.maxPersonNumber)") // 데이터로 처리 필요
+                        .font(.custom("AppleSDGothicNeo-Regular", size: 16))
+                        .foregroundColor(Color.darkGray)
+                }
+            }
+            .padding(.vertical, 7)
+            if isParticipating {
+                Text("참여중")
                     .font(.custom("AppleSDGothicNeo-Regular", size: 12))
-                    .foregroundColor(Color.darkGray)
-                Text("\(party.maxPersonNumber)") // 데이터로 처리 필요
-                    .font(.custom("AppleSDGothicNeo-Regular", size: 16))
-                    .foregroundColor(Color.darkGray)
+                    .foregroundColor(Color.customBlack)
+                    .padding(EdgeInsets(top: 2, leading: 11, bottom: 2, trailing: 11))
+                    .background(RoundedRectangle(cornerRadius: 7.5).fill(Color.lightGray))
             }
         }
-        .padding(.vertical, 7)
     }
 }
 
