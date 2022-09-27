@@ -74,7 +74,7 @@ private extension TaxiPartyList {
                 ForEach(taxiParties, id: \.date) { list in
                     Section {
                         ForEach(list.value, id: \.id) {
-                            Cell(of: $0, $showBlur, viewModel)
+                            Cell(of: $0, $showBlur, viewModel, isParticiPating: $0.isParticipating(id: userState.userInfo.id))
                         }
                     } header: {
                         sectionHeader(list.date)
@@ -100,16 +100,18 @@ private extension TaxiPartyList {
     struct Cell: View {
         @State private var isShowTaxiPartyInfo: Bool = false
         @Binding private var showBlur: Bool
+        private var isParticiPating: Bool
         private let taxiParty: TaxiParty
         @ObservedObject private var viewModel: TaxiPartyList.ViewModel
-        init(of taxiParty: TaxiParty, _ showBlur: Binding<Bool>, _ viewModel: ViewModel) {
+        init(of taxiParty: TaxiParty, _ showBlur: Binding<Bool>, _ viewModel: ViewModel, isParticiPating: Bool) {
             self._showBlur = showBlur
             self.taxiParty = taxiParty
             self.viewModel = viewModel
+            self.isParticiPating = isParticiPating
         }
 
         var body: some View {
-            PartyListCell(party: taxiParty)
+            PartyListCell(party: taxiParty, isParticipating: isParticiPating)
                 .cellBackground()
                 .onTapGesture {
                     showBlur = true

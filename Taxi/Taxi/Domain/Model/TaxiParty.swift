@@ -25,6 +25,10 @@ extension TaxiParty {
         members.count < maxPersonNumber && members.count != 0
     }
 
+    func isParticipating(id: String) -> Bool {
+        members.contains(id)
+    }
+
     var departure: String {
         Place.of(departureCode).rawValue
     }
