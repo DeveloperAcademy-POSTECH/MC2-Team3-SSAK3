@@ -42,7 +42,7 @@ struct MainView: View {
     init(_ userInfo: UserInfo) {
         let listViewModel = MyPartyView.ViewModel(userId: userInfo.id)
         self._myPartyViewModel = StateObject(wrappedValue: listViewModel)
-        self._taxiPartyViewModel = StateObject(wrappedValue: TaxiPartyList.ViewModel(addTaxiPartyDelegate: listViewModel, joinTaxiPartyDelegate: listViewModel, exclude: userInfo.id))
+        self._taxiPartyViewModel = StateObject(wrappedValue: TaxiPartyList.ViewModel(addTaxiPartyDelegate: listViewModel, joinTaxiPartyDelegate: listViewModel))
         self._userInfoState = StateObject(wrappedValue: UserInfoState(userInfo))
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithOpaqueBackground()
