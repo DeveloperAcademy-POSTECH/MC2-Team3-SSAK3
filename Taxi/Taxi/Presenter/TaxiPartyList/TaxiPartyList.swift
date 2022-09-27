@@ -103,6 +103,7 @@ private extension TaxiPartyList {
         private var isParticiPating: Bool
         private let taxiParty: TaxiParty
         @ObservedObject private var viewModel: TaxiPartyList.ViewModel
+        @EnvironmentObject private var appState: AppState
         init(of taxiParty: TaxiParty, _ showBlur: Binding<Bool>, _ viewModel: ViewModel, isParticiPating: Bool) {
             self._showBlur = showBlur
             self.taxiParty = taxiParty
@@ -114,8 +115,12 @@ private extension TaxiPartyList {
             PartyListCell(party: taxiParty, isParticipating: isParticiPating)
                 .cellBackground()
                 .onTapGesture {
-                    showBlur = true
-                    isShowTaxiPartyInfo = true
+                    if isParticiPating {
+                        appState.showChattingRoom(taxiParty)
+                    } else {
+                        showBlur = true
+                        isShowTaxiPartyInfo = true
+                    }
                 }
                 .fullScreenCover(isPresented: $isShowTaxiPartyInfo) {
                     showBlur = false
