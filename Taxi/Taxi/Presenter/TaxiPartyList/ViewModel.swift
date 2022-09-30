@@ -96,6 +96,7 @@ extension TaxiPartyList {
                         onError(error)
                     }
                 } receiveValue: { [weak self] taxiParty in
+                    self?.requestTaxiParties(force: true)
                     self?.addTaxiPartyDelegate?.addTaxiParty(taxiParty)
                     onSuccess(taxiParty)
                 }.store(in: &cancelBag)
@@ -113,10 +114,6 @@ extension TaxiPartyList {
                 self.joinTaxiPartyDelegate?.joinTaxiParty(taxiParty)
                 self.requestTaxiParties(force: true)
             }
-        }
-
-        deinit {
-            print("TaxiPartyList.ViewModel Deinit")
         }
     }
 }

@@ -92,7 +92,6 @@
 		00F554BF28A375610007B8AD /* MessageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F554BE28A375610007B8AD /* MessageTest.swift */; };
 		00F6B72728596EEF00DACA06 /* PatyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B72628596EEF00DACA06 /* PatyListCell.swift */; };
 		00F6B7312859C44D00DACA06 /* ChattingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B7302859C44D00DACA06 /* ChattingRepository.swift */; };
-		00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856992844A985008E2E2F /* FirebaseAnalytics */; };
 		00F8569E2844A985008E2E2F /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F8569D2844A985008E2E2F /* FirebaseAuthCombine-Community */; };
 		00F856A22844A985008E2E2F /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A12844A985008E2E2F /* FirebaseFirestoreCombine-Community */; };
 		00F856A42844A985008E2E2F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A32844A985008E2E2F /* FirebaseFirestoreSwift */; };
@@ -284,7 +283,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				50F3D18B28537B110004B5CE /* SDWebImageSwiftUI in Frameworks */,
-				00F8569A2844A985008E2E2F /* FirebaseAnalytics in Frameworks */,
 				00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */,
 				00F8569E2844A985008E2E2F /* FirebaseAuthCombine-Community in Frameworks */,
 				00F856A22844A985008E2E2F /* FirebaseFirestoreCombine-Community in Frameworks */,
@@ -747,7 +745,6 @@
 			);
 			name = Taxi;
 			packageProductDependencies = (
-				00F856992844A985008E2E2F /* FirebaseAnalytics */,
 				00F8569D2844A985008E2E2F /* FirebaseAuthCombine-Community */,
 				00F856A12844A985008E2E2F /* FirebaseFirestoreCombine-Community */,
 				00F856A32844A985008E2E2F /* FirebaseFirestoreSwift */,
@@ -1182,7 +1179,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Taxi/Resources/TaxiRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20220913;
+				CURRENT_PROJECT_VERSION = 20220930;
 				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
@@ -1200,7 +1197,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.ssak3.Taxi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1217,7 +1214,7 @@
 				CODE_SIGN_ENTITLEMENTS = Taxi/Resources/TaxiRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20220913;
+				CURRENT_PROJECT_VERSION = 20220930;
 				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
@@ -1235,7 +1232,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.ssak3.Taxi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1420,11 +1417,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 00A4BB2128D0726C004C0479 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */;
 			productName = Amplitude;
-		};
-		00F856992844A985008E2E2F /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 00F856982844A985008E2E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
 		};
 		00F8569D2844A985008E2E2F /* FirebaseAuthCombine-Community */ = {
 			isa = XCSwiftPackageProductDependency;
