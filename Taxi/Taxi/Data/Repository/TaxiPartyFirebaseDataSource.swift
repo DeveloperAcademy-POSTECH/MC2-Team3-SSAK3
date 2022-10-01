@@ -34,7 +34,7 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
                 var ret: [TaxiParty] = []
                 for document in documents {
                     let taxiParty: TaxiParty = try document.data(as: TaxiParty.self)
-                    if !taxiParty.members.contains(id ?? "") && taxiParty.satisfyCapacity() {
+                    if !taxiParty.isParticipating(id: id ?? "") && taxiParty.isNotEmpty() {
                         ret.append(taxiParty)
                     }
                 }
@@ -51,6 +51,7 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
                     }
                 }
             })
+            .map(filterPassedTaxiParty(_:))
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
@@ -58,7 +59,7 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
     func addTaxiParty(_ taxiParty: TaxiParty, user: UserInfo) -> AnyPublisher<TaxiParty, Error> {
         fireStore.collection("TaxiParty")
             .document(taxiParty.id)
-            .setData(from: taxiParty)
+            .setData(from: taxiParty)            
             .flatMap { [weak self] () -> (AnyPublisher<Void, Error>) in
                 guard let self = self else {
                     return Fail<Void, Error>(error: FirestoreDecodingError.decodingIsNotSupported(""))
@@ -95,5 +96,21 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
+}
 
+private extension TaxiPartyFirebaseDataSource {
+    func filterPassedTaxiParty(_ parties: [TaxiParty]) -> [TaxiParty] {
+        let date = Date()
+        return parties.filter { party in
+            if party.meetingDate == date.formattedInt {
+                guard let hour = date.hour, let minute = date.minute else {
+                    return true
+                }
+                let compareTime = hour * 100 + minute
+
+                return party.meetingTime >= compareTime
+            }
+            return true
+        }
+    }
 }

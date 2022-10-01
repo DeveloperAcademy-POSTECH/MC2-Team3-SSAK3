@@ -21,8 +21,8 @@ struct TaxiParty: Codable {
 // MARK: - Public Interface
 extension TaxiParty {
 
-    func satisfyCapacity() -> Bool {
-        members.count < maxPersonNumber && members.count != 0
+    func isNotEmpty() -> Bool {
+        members.count != 0
     }
 
     func isParticipating(id: String) -> Bool {
@@ -43,6 +43,10 @@ extension TaxiParty {
 
     var readableMeetingTime: String {
         Date.convertToStringTime(from: meetingTime)
+    }
+
+    func isFull() -> Bool {
+        members.count == maxPersonNumber
     }
 }
 
