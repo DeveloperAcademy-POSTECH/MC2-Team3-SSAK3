@@ -186,6 +186,7 @@ private extension TaxiPartyInfo {
                 isLoading = false
             }
         }
+        .disabled(taxiParty.isFull())
     }
 }
 
