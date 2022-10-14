@@ -12,6 +12,26 @@ struct SignIn: View {
     @ObservedObject var signInViewModel: SignInViewModel
     @State private var isShowingAlert: Bool = false
     @EnvironmentObject private var appState: AppState
+    private let signUpEmail: String
+    private let signUpPassword: String
+
+    init(
+        signInViewModel: SignInViewModel
+    ) {
+        self.signInViewModel = signInViewModel
+        self.signUpEmail = ""
+        self.signUpPassword = ""
+    }
+
+    init(
+        signInViewModel: SignInViewModel,
+        signUpEmail: String,
+        signUpPassword: String
+    ) {
+        self.signInViewModel = signInViewModel
+        self.signUpEmail = signUpEmail
+        self.signUpPassword = signUpPassword
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -65,6 +85,10 @@ struct SignIn: View {
             if let userInfo = userInfo {
                 appState.loginState = .succeed(userInfo)
             }
+        }
+        .onAppear {
+            signInViewModel.email.value = signUpEmail
+            signInViewModel.password.value = signUpPassword
         }
     }
 }

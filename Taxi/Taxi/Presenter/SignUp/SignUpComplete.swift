@@ -11,7 +11,9 @@ struct SignUpComplete: View {
 
     // MARK: - States
     @ObservedObject private var viewModel: SignUpViewModel
+    @StateObject var signInViewModel: SignInViewModel = SignInViewModel()
     @Binding private var isSignUpActive: Bool
+    @State private var goToSignIn: Bool = false
 
     init(_ viewModel: SignUpViewModel, _ isSignUpActive: Binding<Bool>) {
         self.viewModel = viewModel
@@ -41,7 +43,16 @@ struct SignUpComplete: View {
                     .padding(.top, 48)
                 Spacer()
                 RoundedButton("시작하기") {
-                    isSignUpActive = false
+                    goToSignIn = true
+                }
+                NavigationLink(isActive: $goToSignIn) {
+                    SignIn(
+                        signInViewModel: signInViewModel,
+                        signUpEmail: viewModel.email.value,
+                        signUpPassword: viewModel.password.value
+                    )
+                } label: {
+                    EmptyView()
                 }
             }
             .padding()
