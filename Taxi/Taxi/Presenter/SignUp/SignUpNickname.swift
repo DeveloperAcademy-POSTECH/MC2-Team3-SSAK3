@@ -13,10 +13,9 @@ struct SignUpNickname: View {
     @State private var nicknameValidation: ValidationResult = .empty(message: "아카데미 내에서 사용중인 닉네임을 권장드려요")
     @FocusState private var nicknameFocusState: Bool
     @ObservedObject private var viewModel: SignUpViewModel
-    @Binding private var isSignUpActive: Bool
-    init(_ viewModel: SignUpViewModel, _ isSignUpActive: Binding<Bool>) {
+
+    init(_ viewModel: SignUpViewModel) {
         self.viewModel = viewModel
-        self._isSignUpActive = isSignUpActive
     }
 
     var body: some View {
@@ -36,7 +35,7 @@ struct SignUpNickname: View {
             .padding(.bottom, nicknameFocusState ? 0 : 16)
 
             NavigationLink(isActive: .constant(viewModel.registerCompletionEvent)) {
-                SignUpComplete(viewModel, $isSignUpActive)
+                SignUpComplete(viewModel)
             } label: {
                 EmptyView()
             }
@@ -64,7 +63,7 @@ struct SignUpNickname: View {
 struct SignUpNickname_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SignUpNickname(SignUpViewModel(), .constant(true))
+            SignUpNickname(SignUpViewModel())
         }
     }
 }
