@@ -13,7 +13,6 @@ struct SignUpEmail: View {
     @State private var emailValidation: ValidationResult = .empty(message: "최초 인증 및 가입에 활용됩니다. (영문 대소문자, 숫자)")
     @StateObject private var viewModel: SignUpViewModel = SignUpViewModel()
     @FocusState private var emailFocuseState: Bool
-    @Binding var isSignUpActive: Bool
     @State private var goToPassword: Bool = false
 
     var body: some View {
@@ -32,7 +31,7 @@ struct SignUpEmail: View {
             }
             .padding(.bottom, emailFocuseState ? 0 : 16)
             NavigationLink(isActive: $goToPassword) {
-                SignUpPassword(viewModel, $isSignUpActive)
+                SignUpPassword(viewModel)
             } label: {
                 EmptyView()
             }
@@ -55,7 +54,7 @@ struct SignUpEmail: View {
 struct SignUpEmail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SignUpEmail(isSignUpActive: .constant(true))
+            SignUpEmail()
         }
     }
 }

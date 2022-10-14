@@ -12,12 +12,10 @@ struct SignUpComplete: View {
     // MARK: - States
     @ObservedObject private var viewModel: SignUpViewModel
     @StateObject var signInViewModel: SignInViewModel = SignInViewModel()
-    @Binding private var isSignUpActive: Bool
     @State private var goToSignIn: Bool = false
 
-    init(_ viewModel: SignUpViewModel, _ isSignUpActive: Binding<Bool>) {
+    init(_ viewModel: SignUpViewModel) {
         self.viewModel = viewModel
-        self._isSignUpActive = isSignUpActive
     }
 
     var body: some View {
@@ -119,7 +117,7 @@ private extension SignUpComplete {
 struct SignUpComplete_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SignUpComplete(SignUpViewModel(), .constant(true))
+            SignUpComplete(SignUpViewModel())
         }
     }
 }

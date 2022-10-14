@@ -11,7 +11,6 @@ struct SignHome: View {
 
     // MARK: - States
     @StateObject private var signInViewModel: SignInViewModel = SignInViewModel()
-    @State private var isSignUpActive: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -61,8 +60,8 @@ private extension SignHome {
 
     var buttons: some View {
         HStack(spacing: 10) {
-            NavigationLink(isActive: $isSignUpActive) {
-                SignUpEmail(isSignUpActive: $isSignUpActive)
+            NavigationLink {
+                SignUpEmail()
             } label: {
                 Text("회원가입")
                     .padding()
