@@ -75,6 +75,11 @@ final class FirebaseAuthenticaterAdpater: AuthenticateAdapter {
         .eraseToAnyPublisher()
     }
 
+    func resetPassword(with email: String) -> AnyPublisher<Void, Error> {
+        Auth.auth().sendPasswordReset(withEmail: email)
+            .eraseToAnyPublisher()
+    }
+
 }
 
 // MARK: - private functions

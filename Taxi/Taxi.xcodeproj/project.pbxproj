@@ -97,6 +97,7 @@
 		00F856A42844A985008E2E2F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A32844A985008E2E2F /* FirebaseFirestoreSwift */; };
 		00F856A82844A985008E2E2F /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A72844A985008E2E2F /* FirebaseFunctionsCombine-Community */; };
 		00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856AB2844A985008E2E2F /* FirebaseStorageCombine-Community */; };
+		3771CFAB28FD5185001942CA /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3771CFAA28FD5185001942CA /* ResetPasswordUseCase.swift */; };
 		37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D4D1F02856D285002E787B /* ChatRoomView.swift */; };
 		37F698852855FB910008C022 /* MyPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F698842855FB910008C022 /* MyPartyView.swift */; };
 		5007F6FA28B3C651000A0D01 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5007F6F928B3C651000A0D01 /* Splash.swift */; };
@@ -241,6 +242,7 @@
 		00F554BE28A375610007B8AD /* MessageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTest.swift; sourceTree = "<group>"; };
 		00F6B72628596EEF00DACA06 /* PatyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatyListCell.swift; sourceTree = "<group>"; };
 		00F6B7302859C44D00DACA06 /* ChattingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRepository.swift; sourceTree = "<group>"; };
+		3771CFAA28FD5185001942CA /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
 		37D4D1F02856D285002E787B /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		37F698842855FB910008C022 /* MyPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPartyView.swift; sourceTree = "<group>"; };
 		5007F6F928B3C651000A0D01 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				00E743572878282A00C37B2E /* LoginUseCase.swift */,
 				00D904B42854A64E0003BA5A /* MyTaxiPartyUseCase.swift */,
 				00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */,
+				3771CFAA28FD5185001942CA /* ResetPasswordUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -974,6 +977,7 @@
 				E63C7AB42858C2650080530B /* UnderlinedTextField.swift in Sources */,
 				50F8003B28586F9200FA1063 /* UserInfoState.swift in Sources */,
 				00B5394D2895713E0058D27F /* Validatable.swift in Sources */,
+				3771CFAB28FD5185001942CA /* ResetPasswordUseCase.swift in Sources */,
 				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
 				00AB6745289EAF4E00BBA9E9 /* TaxiPartyList.swift in Sources */,
 				00662A032897BBE8006266B9 /* DeleteUserUsecase.swift in Sources */,
