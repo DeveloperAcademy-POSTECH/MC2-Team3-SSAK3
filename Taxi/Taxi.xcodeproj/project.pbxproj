@@ -98,6 +98,8 @@
 		00F856A82844A985008E2E2F /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A72844A985008E2E2F /* FirebaseFunctionsCombine-Community */; };
 		00F856AC2844A985008E2E2F /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856AB2844A985008E2E2F /* FirebaseStorageCombine-Community */; };
 		3771CFAB28FD5185001942CA /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3771CFAA28FD5185001942CA /* ResetPasswordUseCase.swift */; };
+		3771CFAD28FD5248001942CA /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3771CFAC28FD5248001942CA /* ResetPasswordViewModel.swift */; };
+		3771CFAF28FD5291001942CA /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3771CFAE28FD5291001942CA /* ResetPassword.swift */; };
 		37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D4D1F02856D285002E787B /* ChatRoomView.swift */; };
 		37F698852855FB910008C022 /* MyPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F698842855FB910008C022 /* MyPartyView.swift */; };
 		5007F6FA28B3C651000A0D01 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5007F6F928B3C651000A0D01 /* Splash.swift */; };
@@ -243,6 +245,8 @@
 		00F6B72628596EEF00DACA06 /* PatyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatyListCell.swift; sourceTree = "<group>"; };
 		00F6B7302859C44D00DACA06 /* ChattingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRepository.swift; sourceTree = "<group>"; };
 		3771CFAA28FD5185001942CA /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
+		3771CFAC28FD5248001942CA /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		3771CFAE28FD5291001942CA /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		37D4D1F02856D285002E787B /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		37F698842855FB910008C022 /* MyPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPartyView.swift; sourceTree = "<group>"; };
 		5007F6F928B3C651000A0D01 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
@@ -645,6 +649,8 @@
 				002003512894D8DC00545E2B /* SignHome.swift */,
 				002003532894DD4500545E2B /* SignIn.swift */,
 				009F33E8289644270060D51A /* SignInViewModel.swift */,
+				3771CFAC28FD5248001942CA /* ResetPasswordViewModel.swift */,
+				3771CFAE28FD5291001942CA /* ResetPassword.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -945,6 +951,7 @@
 				E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */,
 				00E743582878282A00C37B2E /* LoginUseCase.swift in Sources */,
 				E6C93733285AD52600464D37 /* SignUpButton.swift in Sources */,
+				3771CFAD28FD5248001942CA /* ResetPasswordViewModel.swift in Sources */,
 				0045BEAE289F4269006A18BC /* TaxiPartyFilter.swift in Sources */,
 				000AE1D1284C922500AF59BE /* UserRepository.swift in Sources */,
 				37F698852855FB910008C022 /* MyPartyView.swift in Sources */,
@@ -978,6 +985,7 @@
 				50F8003B28586F9200FA1063 /* UserInfoState.swift in Sources */,
 				00B5394D2895713E0058D27F /* Validatable.swift in Sources */,
 				3771CFAB28FD5185001942CA /* ResetPasswordUseCase.swift in Sources */,
+				3771CFAF28FD5291001942CA /* ResetPassword.swift in Sources */,
 				00A5705C285182E1008B220E /* RoundedButton.swift in Sources */,
 				00AB6745289EAF4E00BBA9E9 /* TaxiPartyList.swift in Sources */,
 				00662A032897BBE8006266B9 /* DeleteUserUsecase.swift in Sources */,
