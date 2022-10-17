@@ -14,6 +14,7 @@ struct MyPageView: View {
     @State private var isTryWithdrawal: Bool = false
     @State private var showProfile: Bool = false
     @State private var isTryingDeleteUser: Bool = false
+    @State private var isAccountOff: Bool = false
     @EnvironmentObject private var authentication: UserInfoState
     @EnvironmentObject private var appState: AppState
 
@@ -145,11 +146,14 @@ private extension MyPageView {
 
     var sendToDeveloper: some View {
         Button {
-            EmailHelper.shared.sendEmail(subject: "[popopot]", body: "[제안 내용]", recipient: "qkrdlstj1234@gmail.com")
+            EmailHelper.shared.send(subject: "[popopot]", body: "[제안 내용]", recipient: ["qkrdlstj1234@gmail.com"])
         } label: {
             Text("개발자에게 의견 남기기")
                 .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
                 .padding()
+                .alert(isPresented: $isAccountOff) {
+                                     Alert(title: Text("Title"), message: Text("This is a alert message"), dismissButton: .default(Text("Dismiss")))
+                                 }
         }
     }
 
@@ -164,11 +168,11 @@ private extension MyPageView {
     }
 }
 
-#if DEBUG
-struct MyPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyPageView()
-            .inject()
-    }
-}
-#endif
+//#if DEBUG
+//struct MyPageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MyPageView(isAccountOff: .constant(true))
+//            .inject()
+//    }
+//}
+//#endif
