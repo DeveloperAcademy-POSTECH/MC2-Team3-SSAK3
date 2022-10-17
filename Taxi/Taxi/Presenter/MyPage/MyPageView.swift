@@ -24,14 +24,25 @@ struct MyPageView: View {
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
                 .frame(height: 5)
-            notificationHeader
-            notificationSetting("채팅 알림", isOn: $chattingNoti)
-            notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
+            VStack(alignment: .leading, spacing: 16) {
+                notificationHeader
+                notificationSetting("채팅 알림", isOn: $chattingNoti)
+                notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
+            }
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
                 .frame(height: 5)
-            logoutButton
-            deleteUserButton
+            VStack(alignment: .leading, spacing: 16) {
+                sendToDeveloper
+                opensourceLicense
+            }
+            Rectangle()
+                    .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
+                    .frame(height: 5)
+            VStack(alignment: .leading, spacing: 16) {
+                logoutButton
+                deleteUserButton
+            }
             Spacer()
         }
         .sheet(isPresented: $showProfile) {
@@ -129,6 +140,26 @@ private extension MyPageView {
                 .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
                 .padding(.top)
                 .padding(.horizontal)
+        }
+    }
+
+    var sendToDeveloper: some View {
+        Button {
+            print("notificationSetting")
+        } label: {
+            Text("개발자에게 의견 남기기")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .padding()
+        }
+    }
+
+    var opensourceLicense: some View {
+        Button {
+            print("opensourceLicense")
+        } label: {
+            Text("오픈소스 라이선스")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .padding()
         }
     }
 }
