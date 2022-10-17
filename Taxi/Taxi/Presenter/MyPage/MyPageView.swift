@@ -145,7 +145,7 @@ private extension MyPageView {
 
     var sendToDeveloper: some View {
         Button {
-            print("notificationSetting")
+            EmailHelper.shared.sendEmail(subject: "[popopot]", body: "[제안 내용]", recipient: "qkrdlstj1234@gmail.com")
         } label: {
             Text("개발자에게 의견 남기기")
                 .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
