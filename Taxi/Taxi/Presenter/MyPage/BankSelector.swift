@@ -37,7 +37,7 @@ struct BankSelector: View {
 private extension BankSelector {
     func filterBanks(_ bankName: String) {
         bankList = Bank.allCases.filter {
-            $0.name.uppercased().contains(bankName.uppercased())
+            $0.rawValue.uppercased().contains(bankName.uppercased())
         }
     }
 }
@@ -71,10 +71,13 @@ private extension BankSelector {
     }
 
     func bankList(list: [Bank]) -> some View {
-        LazyVGrid(columns: [.init(.adaptive(minimum: 80), spacing: 16)]) {
-            ForEach(list, id: \.self) { bank in
-                bankCell(bank: bank)
+        ScrollView(.vertical, showsIndicators: true) {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: 8), count: 3)) {
+                ForEach(list, id: \.self) { bank in
+                    bankCell(bank: bank)
+                }
             }
+            .padding(.horizontal)
         }
     }
 
@@ -83,15 +86,17 @@ private extension BankSelector {
             onBankSelect(bank)
             dismiss()
         } label: {
-            VStack {
+            VStack(spacing: 8) {
                 bank.image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 30)
-                Text(bank.name)
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
+                Text(bank.rawValue)
+                    .font(.caption)
+                    .fontWeight(.regular)
+                    .lineLimit(1)
             }
+            .frame(maxWidth: .infinity)
             .padding()
             .background(RoundedRectangle(cornerRadius: 8).fill(Color.lightGray))
             .contentShape(Rectangle())

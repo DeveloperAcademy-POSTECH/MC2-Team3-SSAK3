@@ -70,6 +70,8 @@
 		009F33E9289644270060D51A /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009F33E8289644270060D51A /* SignInViewModel.swift */; };
 		009F33EB2896443E0060D51A /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009F33EA2896443E0060D51A /* SignUpViewModel.swift */; };
 		00A1160F28C7375E00353CD5 /* KeyChainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 00A1160E28C7375E00353CD5 /* KeyChainWrapper */; };
+		00A30F43290D4ED90057CAA1 /* AccountNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A30F42290D4ED90057CAA1 /* AccountNumber.swift */; };
+		00A30F45290D50AC0057CAA1 /* AccountOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A30F44290D50AC0057CAA1 /* AccountOwner.swift */; };
 		00A4BB2328D0726C004C0479 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 00A4BB2228D0726C004C0479 /* Amplitude */; };
 		00A5705A2851826A008B220E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A570592851826A008B220E /* ColorExtension.swift */; };
 		00A5705C285182E1008B220E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5705B285182E1008B220E /* RoundedButton.swift */; };
@@ -231,6 +233,8 @@
 		00981E64290D18DB00444E36 /* UserDefaultsAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAccountRepository.swift; sourceTree = "<group>"; };
 		009F33E8289644270060D51A /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		009F33EA2896443E0060D51A /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		00A30F42290D4ED90057CAA1 /* AccountNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountNumber.swift; sourceTree = "<group>"; };
+		00A30F44290D50AC0057CAA1 /* AccountOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOwner.swift; sourceTree = "<group>"; };
 		00A570592851826A008B220E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		00A5705B285182E1008B220E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		00A570632851E993008B220E /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
@@ -651,6 +655,8 @@
 				009164BC28960A270076D680 /* Password.swift */,
 				00B5394C2895713E0058D27F /* Validatable.swift */,
 				00B5394E289576C70058D27F /* ValidationResult.swift */,
+				00A30F42290D4ED90057CAA1 /* AccountNumber.swift */,
+				00A30F44290D50AC0057CAA1 /* AccountOwner.swift */,
 			);
 			path = Validatable;
 			sourceTree = "<group>";
@@ -950,6 +956,7 @@
 				002003522894D8DC00545E2B /* SignHome.swift in Sources */,
 				00F6B7312859C44D00DACA06 /* ChattingRepository.swift in Sources */,
 				000E545A285321250085C39E /* JoinTaxiPartyUseCase.swift in Sources */,
+				00A30F43290D4ED90057CAA1 /* AccountNumber.swift in Sources */,
 				002003542894DD4500545E2B /* SignIn.swift in Sources */,
 				0045BEB1289F42A1006A18BC /* PohangFilter.swift in Sources */,
 				00E7435328781E2E00C37B2E /* AuthenticateAdapter.swift in Sources */,
@@ -1026,6 +1033,7 @@
 				00662A032897BBE8006266B9 /* DeleteUserUsecase.swift in Sources */,
 				000C24F52859C8930054D679 /* ChattingFirebaseDataSource.swift in Sources */,
 				00981E58290D05A900444E36 /* Account.swift in Sources */,
+				00A30F45290D50AC0057CAA1 /* AccountOwner.swift in Sources */,
 				00CE233A287A90C600931394 /* ChangeProfieImageUseCase.swift in Sources */,
 				009164BB289607170076D680 /* Email.swift in Sources */,
 				50459E35285490CC00287371 /* TaxiPartyInfo.swift in Sources */,

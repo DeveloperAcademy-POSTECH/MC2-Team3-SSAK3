@@ -12,19 +12,21 @@ struct AccountSetting: View {
     @Environment(\.dismiss) private var dismiss
     @State private var isShowBankSelector: Bool = false
     @State private var bank: Bank?
-    @State private var accountNumber: String
-    @State private var owner: String
+    @State private var accountNumber: AccountNumber
+    @State private var owner: AccountOwner
+    @State private var accountNumberValidation: ValidationResult = .empty(message: "")
+    @State private var accountOwnerValidation: ValidationResult = .empty(message: "")
 
     init(viewModel: AccountViewModel) {
         self.viewModel = viewModel
         if let account = viewModel.account {
             self._bank = State(initialValue: account.bank)
-            self._accountNumber = State(initialValue: account.accountNumber)
-            self._owner = State(initialValue: account.owner)
+            self._accountNumber = State(initialValue: .init(account.accountNumber))
+            self._owner = State(initialValue: .init(account.owner))
         } else {
             self._bank = State(initialValue: nil)
-            self._accountNumber = State(initialValue: "")
-            self._owner = State(initialValue: "")
+            self._accountNumber = State(initialValue: .init())
+            self._owner = State(initialValue: .init())
         }
     }
 
@@ -32,7 +34,7 @@ struct AccountSetting: View {
         VStack {
             navigationBar()
             Group {
-                HStack(spacing: 16) {
+                HStack(alignment: .center, spacing: 16) {
                     bankSelector
                     nameTextField
                 }
@@ -45,6 +47,12 @@ struct AccountSetting: View {
             BankSelector {
                 bank = $0
             }
+        }
+        .onChange(of: accountNumber.value) { _ in
+            accountNumberValidation = accountNumber.validate()
+        }
+        .onChange(of: owner.value) { _ in
+            accountOwnerValidation = owner.validate()
         }
     }
 }
@@ -71,18 +79,18 @@ private extension AccountSetting {
     var applyChangeButton: some View {
         Button {
             guard let bank else { return }
-            viewModel.saveAccount(bank: bank, accountNumber: accountNumber, owner: owner)
+            viewModel.saveAccount(bank: bank, accountNumber: accountNumber.value, owner: owner.value)
             dismiss()
         } label: {
             Text("저장")
         }
-        .disabled(bank == nil || accountNumber.isEmpty || owner.isEmpty)
+        .disabled(bank == nil || !accountNumberValidation.isValid || !accountOwnerValidation.isValid)
     }
     var bankSelector: some View {
         Button {
             isShowBankSelector = true
         } label: {
-            Text(bank?.name ?? "은행선택")
+            Text(bank?.rawValue ?? "은행선택")
                 .foregroundColor(.black)
                 .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
                 .background(RoundedRectangle(cornerRadius: 8).fill(Color.customYellow))
@@ -90,13 +98,11 @@ private extension AccountSetting {
     }
 
     var accountNumberTextField: some View {
-        TextField("계좌번호를 입력해주세요.", text: $accountNumber)
-            .textFieldStyle(.roundedBorder)
+        UnderlinedTextField(text: $accountNumber.value, accountNumberValidation, "계좌번호를 입력해주세요")
             .keyboardType(.numberPad)
     }
     var nameTextField: some View {
-        TextField("계좌 주인을 입력해주세요.", text: $owner)
-            .textFieldStyle(.roundedBorder)
+        UnderlinedTextField(text: $owner.value, accountOwnerValidation, "계좌주인을 입력해주세요")
     }
 }
 

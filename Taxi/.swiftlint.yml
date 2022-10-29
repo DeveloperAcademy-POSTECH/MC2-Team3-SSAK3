@@ -4,3 +4,4 @@ disabled_rules:
 included:
 excluded:
     - Taxi/Domain/Model/Place.swift
+    - Taxi/Domain/Model/Account/Bank.swift

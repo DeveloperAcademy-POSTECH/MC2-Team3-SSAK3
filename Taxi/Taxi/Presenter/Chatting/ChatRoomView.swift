@@ -305,7 +305,10 @@ struct Typing: View {
 
     @Binding private var input: String
     @State private var textEditorHeight: CGFloat = 0
+    @State private var isShowingAccountSetting: Bool = false
     @FocusState private var focusState: Bool
+    @StateObject private var accountViewModel: AccountViewModel = .init()
+
     private let sendMessage: () -> Void
 
     init(input: Binding<String>, focusState: FocusState<Bool>, sendMessage: @escaping () -> Void) {
@@ -316,46 +319,65 @@ struct Typing: View {
     }
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            ZStack(alignment: .leading) {
-                Text(input)
-                    .lineLimit(3)
-                    .foregroundColor(.clear)
-                    .padding(.horizontal, 7)
-                    .padding(.vertical, 5)
-                    .lineSpacing(5)
-                    .background(GeometryReader { geo in
-                        Color.clear.preference(key: ViewHeightKey.self,
-                                               value: geo.frame(in: .global).size.height)
-                    })
-                TextEditor(text: $input)
-                    .colorMultiply(.lightGray)
-                    .disableAutocorrection(true)
-                    .lineSpacing(5)
-                    .frame(maxHeight: textEditorHeight)
-                    .padding(.vertical, 5)
-                    .focused($focusState)
-            }
-            .onPreferenceChange(ViewHeightKey.self) { textEditorHeight = $0 }
-            .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 35))
-            .background(RoundedRectangle(cornerRadius: 17)
-                .fill(Color.lightGray))
-
+        HStack(alignment: .bottom) {
             Button {
-                sendMessage()
+                if let account = accountViewModel.account {
+                    input = account.description
+                    sendMessage()
+                    return
+                }
+                isShowingAccountSetting = true
             } label: {
-                Circle()
-                    .fill(Color.customYellow)
-                    .frame(width: 24, height: 24)
-                    .overlay(
-                        Image(systemName: "arrow.up")
-                            .foregroundColor(.customBlack)
-                    )
-                    .padding([.bottom, .trailing], 5)
+                Image(systemName: "banknote")
+                    .imageScale(.medium)
+                    .padding(9)
+                    .background(Circle().fill(Color.lightGray))
+            }
+            ZStack(alignment: .bottomTrailing) {
+                ZStack(alignment: .leading) {
+                    Text(input)
+                        .lineLimit(3)
+                        .foregroundColor(.clear)
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 5)
+                        .lineSpacing(5)
+                        .background(GeometryReader { geo in
+                            Color.clear.preference(key: ViewHeightKey.self,
+                                                   value: geo.frame(in: .global).size.height)
+                        })
+                    TextEditor(text: $input)
+                        .colorMultiply(.lightGray)
+                        .disableAutocorrection(true)
+                        .lineSpacing(5)
+                        .frame(maxHeight: textEditorHeight)
+                        .padding(.vertical, 5)
+                        .focused($focusState)
+                }
+                .onPreferenceChange(ViewHeightKey.self) { textEditorHeight = $0 }
+                .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 35))
+                .background(RoundedRectangle(cornerRadius: 17)
+                    .fill(Color.lightGray))
+
+                Button {
+                    sendMessage()
+                } label: {
+                    Circle()
+                        .fill(Color.customYellow)
+                        .frame(width: 24, height: 24)
+                        .overlay(
+                            Image(systemName: "arrow.up")
+                                .foregroundColor(.customBlack)
+                        )
+                        .padding([.bottom, .trailing], 5)
+                }
+                .disabled(input.isEmpty)
             }
         }
         .padding(EdgeInsets(top: 8, leading: 10, bottom: 5, trailing: 10))
         .background(.white)
+        .fullScreenCover(isPresented: $isShowingAccountSetting) {
+            AccountSetting(viewModel: accountViewModel)
+        }
     }
 }
 

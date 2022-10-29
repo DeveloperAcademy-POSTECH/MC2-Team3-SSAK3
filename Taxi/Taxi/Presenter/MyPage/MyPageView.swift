@@ -152,7 +152,7 @@ private extension MyPageView {
                 Spacer()
                 Group {
                     if let account = accountViewModel.account {
-                        Text(account.bank.name)
+                        Text(account.bank.rawValue)
                             .foregroundColor(.darkGray)
                     } else {
                         Text("등록해서 편하게 정산하세요!")

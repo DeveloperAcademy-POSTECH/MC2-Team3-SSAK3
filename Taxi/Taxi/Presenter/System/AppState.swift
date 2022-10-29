@@ -21,7 +21,11 @@ final class AppState: ObservableObject {
 
     // MARK: - States
     @Published var tab: Tab = .taxiParty
-    @Published var showChattingRoom: Bool = false
+    @Published var showChattingRoom: Bool = false {
+        willSet {
+            print("will set to newValue")
+        }
+    }
     @Published var showToastMessage: Bool = false
     @Published var loginState: LoginState = .none
     @Published var isLoginFailed: Bool = false
