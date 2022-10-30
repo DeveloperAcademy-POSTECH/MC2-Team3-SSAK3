@@ -35,8 +35,10 @@ struct MyPageView: View {
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
                 .frame(height: 5)
-            sendToDeveloper
-            opensourceLicense
+            Group {
+                sendToDeveloper
+                opensourceLicense
+            }
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
                 .frame(height: 5)
