@@ -30,7 +30,7 @@ extension EmailHelper {
 
             if let defaultUrl = URL(string: "mailto:\(mails)?subject=\(subjectEncoded)&body=\(bodyEncoded)"),
                UIApplication.shared.canOpenURL(defaultUrl) {
-                alert.addAction(UIAlertAction(title: "Mail", style: .default, handler: { (action) in
+                alert.addAction(UIAlertAction(title: "Mail", style: .default, handler: { _ in
                     UIApplication.shared.open(defaultUrl)
                 }))
             }

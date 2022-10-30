@@ -122,6 +122,7 @@
 		A8C146A7285A4A5E00F6D37F /* OnboardSecondPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */; };
 		A8C146A9285A525100F6D37F /* OnboardThirdPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */; };
 		A8D578982852F2000059FE49 /* TextStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D578972852F2000059FE49 /* TextStyleExtension.swift */; };
+		AF8FD6E9290E16B200E4A70A /* EmailSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8FD6E8290E16B200E4A70A /* EmailSendView.swift */; };
 		AF99395728B5D2D000495AF3 /* ChatRoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF99395628B5D2D000495AF3 /* ChatRoomInfo.swift */; };
 		AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA12582857BCFE0076CB2F /* CalendarModal.swift */; };
 		E622D8F628503D19005A68F3 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622D8F528503D19005A68F3 /* ViewExtension.swift */; };
@@ -264,6 +265,7 @@
 		A8C146A6285A4A5E00F6D37F /* OnboardSecondPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardSecondPage.swift; sourceTree = "<group>"; };
 		A8C146A8285A525100F6D37F /* OnboardThirdPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardThirdPage.swift; sourceTree = "<group>"; };
 		A8D578972852F2000059FE49 /* TextStyleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleExtension.swift; sourceTree = "<group>"; };
+		AF8FD6E8290E16B200E4A70A /* EmailSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSendView.swift; sourceTree = "<group>"; };
 		AF99395628B5D2D000495AF3 /* ChatRoomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomInfo.swift; sourceTree = "<group>"; };
 		AFFA12582857BCFE0076CB2F /* CalendarModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarModal.swift; sourceTree = "<group>"; };
 		E622D8F528503D19005A68F3 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 			children = (
 				50595594285037AE001DA44C /* MyPageView.swift */,
 				505955962850BF46001DA44C /* ProfileView.swift */,
+				AF8FD6E8290E16B200E4A70A /* EmailSendView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -933,6 +936,7 @@
 				E63C7AA92858B6130080530B /* CalendarView.swift in Sources */,
 				AFFA12592857BCFE0076CB2F /* CalendarModal.swift in Sources */,
 				000D83262840E23800BA3DFA /* TaxiApp.swift in Sources */,
+				AF8FD6E9290E16B200E4A70A /* EmailSendView.swift in Sources */,
 				00CE2336287A72C700931394 /* GetUserInfoUseCase.swift in Sources */,
 				0007A749285CA71600B7EF1F /* MyPartyViewModel.swift in Sources */,
 				508AE80F285A6E5500D111D3 /* UserProfileViewModel.swift in Sources */,
