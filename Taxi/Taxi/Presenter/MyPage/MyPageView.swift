@@ -13,6 +13,7 @@ struct MyPageView: View {
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
     @State private var isShowAccountModal: Bool = false
+    @State private var isLicenseNavigationView: Bool = false
     @State private var showProfile: Bool = false
     @State private var isTryingDeleteUser: Bool = false
     @State private var isAccountOff: Bool = false
@@ -51,6 +52,9 @@ struct MyPageView: View {
         }
         .sheet(isPresented: $showProfile) {
             ProfileView()
+        }
+        .sheet(isPresented: $isLicenseNavigationView) {
+                LicenseView()
         }
         .sheet(isPresented: $isShowAccountModal, content: {
             AccountSetting(viewModel: accountViewModel)
@@ -143,7 +147,7 @@ private extension MyPageView {
 
     var opensourceLicense: some View {
         Button {
-            print("opensourceLicense")
+            isLicenseNavigationView = true
         } label: {
             Text("오픈소스 라이선스")
                 .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
