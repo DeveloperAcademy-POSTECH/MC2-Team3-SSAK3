@@ -66,6 +66,7 @@ extension TaxiPartyList {
                     self.taxiPartyForCalendar = taxiParties
                     return self.dateMapper.mapping(taxiParties)
                 }
+                .receive(on: DispatchQueue.main)
                 .sink { [weak self] completion in
                     guard let self = self else { return }
                     switch completion {
@@ -91,6 +92,7 @@ extension TaxiPartyList {
 
         func addTaxiParty(_ taxiParty: TaxiParty, user: UserInfo, onSuccess: @escaping (TaxiParty) -> Void = { _ in }, onError: @escaping (Error) -> Void = { _ in }) {
             addTaxiPartyUsecase.addTaxiParty(taxiParty, user: user)
+                .receive(on: DispatchQueue.main)
                 .sink { completion in
                     if case let .failure(error) = completion {
                         onError(error)

@@ -11,11 +11,11 @@ struct SignUpComplete: View {
 
     // MARK: - States
     @ObservedObject private var viewModel: SignUpViewModel
-    @Binding private var isSignUpActive: Bool
+    @StateObject var signInViewModel: SignInViewModel = SignInViewModel()
+    @State private var goToSignIn: Bool = false
 
-    init(_ viewModel: SignUpViewModel, _ isSignUpActive: Binding<Bool>) {
+    init(_ viewModel: SignUpViewModel) {
         self.viewModel = viewModel
-        self._isSignUpActive = isSignUpActive
     }
 
     var body: some View {
@@ -41,7 +41,16 @@ struct SignUpComplete: View {
                     .padding(.top, 48)
                 Spacer()
                 RoundedButton("시작하기") {
-                    isSignUpActive = false
+                    goToSignIn = true
+                }
+                NavigationLink(isActive: $goToSignIn) {
+                    SignIn(
+                        signInViewModel: signInViewModel,
+                        signUpEmail: viewModel.email.value,
+                        signUpPassword: viewModel.password.value
+                    )
+                } label: {
+                    EmptyView()
                 }
             }
             .padding()
@@ -108,7 +117,7 @@ private extension SignUpComplete {
 struct SignUpComplete_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SignUpComplete(SignUpViewModel(), .constant(true))
+            SignUpComplete(SignUpViewModel())
         }
     }
 }

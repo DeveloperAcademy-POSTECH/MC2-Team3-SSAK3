@@ -13,12 +13,10 @@ struct SignUpPassword: View {
     @State private var passwordValidation: ValidationResult = .empty(message: "6자 이상 써주세요")
     @ObservedObject private var viewModel: SignUpViewModel
     @FocusState private var passwordFocusState: Bool
-    @Binding private var isSignUpActive: Bool
     @State private var goToNicknmae: Bool = false
 
-    init(_ viewModel: SignUpViewModel, _ isSignUpActive: Binding<Bool>) {
+    init(_ viewModel: SignUpViewModel) {
         self.viewModel = viewModel
-        self._isSignUpActive = isSignUpActive
     }
 
     var body: some View {
@@ -38,7 +36,7 @@ struct SignUpPassword: View {
             .padding(.bottom, passwordFocusState ? 0 : 16)
 
             NavigationLink(isActive: $goToNicknmae) {
-                SignUpNickname(viewModel, $isSignUpActive)
+                SignUpNickname(viewModel)
             } label: {
                 EmptyView()
             }
@@ -60,7 +58,7 @@ struct SignUpPassword: View {
 struct SignUpPassword_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SignUpPassword(SignUpViewModel(), .constant(true))
+            SignUpPassword(SignUpViewModel())
         }
     }
 }

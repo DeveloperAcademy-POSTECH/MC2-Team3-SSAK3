@@ -20,28 +20,30 @@ extension ValidationResult {
 
     @ViewBuilder
     var stateText: some View {
-        switch self {
-        case .empty(let message):
-            Text(message)
+        Group {
+            switch self {
+            case .empty(let message):
+                Text(message.isEmpty ? "Empty": message)
+                    .font(.caption)
+                    .fontWeight(.regular)
+                    .foregroundColor(message.isEmpty ? .white.opacity(0): .darkGray)
+            case .invalid(let message):
+                HStack {
+                    Image(systemName: "x.circle.fill")
+                    Text(message)
+                        .fontWeight(.regular)
+                }
                 .font(.caption)
-                .fontWeight(.regular)
-                .foregroundColor(.darkGray)
-        case .invalid(let message):
-            HStack {
-                Image(systemName: "x.circle.fill")
-                Text(message)
-                    .fontWeight(.regular)
+                .foregroundColor(.customRed)
+            case .valid(let message):
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text(message)
+                        .fontWeight(.regular)
+                }
+                .font(.caption)
+                .foregroundColor(.customGreen)
             }
-            .font(.caption)
-            .foregroundColor(.customRed)
-        case .valid(let message):
-            HStack {
-                Image(systemName: "checkmark.circle.fill")
-                Text(message)
-                    .fontWeight(.regular)
-            }
-            .font(.caption)
-            .foregroundColor(.customGreen)
         }
     }
 

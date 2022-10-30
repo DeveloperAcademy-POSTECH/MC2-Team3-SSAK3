@@ -38,26 +38,33 @@ final class UserInfoState: ObservableObject {
     func updateNickname(_ newName: String) {
         changeNicknameUseCase.changeNickname(userInfo, to: newName) { [weak self] user, error in
             guard let user = user, error == nil, let self = self else { return }
-            self.userInfo = user
+            DispatchQueue.main.async {
+                self.userInfo = user
+            }
         }
     }
 
     func updateProfileImage(_ newImage: Data) {
         changeProfileImageUseCase.changeProfileImage(userInfo, to: newImage) { [weak self] user, error in
             guard let user = user, error == nil, let self = self else { return }
-            self.userInfo = user
+            DispatchQueue.main.async {
+                self.userInfo = user
+            }
         }
     }
 
     func deleteProfileImage() {
         deleteProfileImageUseCase.deleteProfileImage(for: userInfo) { [weak self] user, error in
             guard let user = user, error == nil, let self = self else { return }
-            self.userInfo = user
+            DispatchQueue.main.async {
+                self.userInfo = user
+            }
         }
     }
 
     func deleteUser() {
         deleteUserUsecase.deleteUser(userInfo)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }
                 switch completion {

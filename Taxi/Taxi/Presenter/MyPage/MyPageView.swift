@@ -12,11 +12,13 @@ struct MyPageView: View {
     @AppStorage("partyCompleteNoti") private var partyCompleteNoti: Bool = true
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
+    @State private var isShowAccountModal: Bool = false
     @State private var showProfile: Bool = false
     @State private var isTryingDeleteUser: Bool = false
     @State private var isAccountOff: Bool = false
     @EnvironmentObject private var authentication: UserInfoState
     @EnvironmentObject private var appState: AppState
+    @StateObject private var accountViewModel: AccountViewModel = AccountViewModel()
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -26,6 +28,7 @@ struct MyPageView: View {
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
                 .frame(height: 5)
             VStack(alignment: .leading, spacing: 16) {
+            Group {
                 notificationHeader
                 notificationSetting("채팅 알림", isOn: $chattingNoti)
                 notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
@@ -41,6 +44,9 @@ struct MyPageView: View {
                     .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
                     .frame(height: 5)
             VStack(alignment: .leading, spacing: 16) {
+
+            Group {
+                accountButton
                 logoutButton
                 deleteUserButton
             }
@@ -49,6 +55,9 @@ struct MyPageView: View {
         .sheet(isPresented: $showProfile) {
             ProfileView()
         }
+        .sheet(isPresented: $isShowAccountModal, content: {
+            AccountSetting(viewModel: accountViewModel)
+        })
         .onChange(of: authentication.goToHomeEvent) { newValue in
             if newValue {
                 appState.logout()
@@ -143,6 +152,31 @@ private extension MyPageView {
                 .padding(.horizontal)
         }
     }
+
+    var accountButton: some View {
+        Button {
+            isShowAccountModal = true
+        } label: {
+            HStack(alignment: .center) {
+                Text("계좌번호")
+                    .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                Spacer()
+                Group {
+                    if let account = accountViewModel.account {
+                        Text(account.bank.rawValue)
+                            .foregroundColor(.darkGray)
+                    } else {
+                        Text("등록해서 편하게 정산하세요!")
+                            .foregroundColor(.darkGray)
+                    }
+                }
+            }
+            .padding(.top)
+            .padding(.horizontal)
+            .contentShape(Rectangle())
+        }
+    }
+}
 
     var sendToDeveloper: some View {
         Button {

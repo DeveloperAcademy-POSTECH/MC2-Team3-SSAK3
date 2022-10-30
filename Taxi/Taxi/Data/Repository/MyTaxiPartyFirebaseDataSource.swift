@@ -41,7 +41,6 @@ final class MyTaxiPartyFirebaseSource: MyTaxiPartyRepository {
                     }
                 }
             }
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 
@@ -58,7 +57,6 @@ final class MyTaxiPartyFirebaseSource: MyTaxiPartyRepository {
                 let message: Message = Message(sender: user.id, body: "\(user.nickname)님이 택시팟에서 나가셨습니다.", messageType: .entrance)
                 return self.chattingUseCase.sendMessage(message, to: taxiParty)
             }
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }
