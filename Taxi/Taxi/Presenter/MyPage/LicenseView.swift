@@ -17,13 +17,20 @@ struct LicenseView: View {
 
 private extension LicenseView {
     var opensourceLicense2: some View {
-            Button {
-                print("opensourceLicense")
-            } label: {
-                Text("오픈소스 라이선스")
-                    .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
-                    .padding()
-            }
+        ScrollView {
+            Text("오픈소스 라이선스")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .padding()
+            Text("오픈소스 라이선스")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .padding()
+            Text("오픈소스 라이선스")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .padding()
+            Text("오픈소스 라이선스")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .padding()
+        }
     }
 }
 
