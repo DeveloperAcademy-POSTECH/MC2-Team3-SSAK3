@@ -101,6 +101,7 @@
 		00F554BF28A375610007B8AD /* MessageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F554BE28A375610007B8AD /* MessageTest.swift */; };
 		00F6B72728596EEF00DACA06 /* PatyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B72628596EEF00DACA06 /* PatyListCell.swift */; };
 		00F6B7312859C44D00DACA06 /* ChattingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6B7302859C44D00DACA06 /* ChattingRepository.swift */; };
+		00F7ED95290E0DA000BE7CEA /* FullScreenDismissGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F7ED94290E0DA000BE7CEA /* FullScreenDismissGesture.swift */; };
 		00F8569E2844A985008E2E2F /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F8569D2844A985008E2E2F /* FirebaseAuthCombine-Community */; };
 		00F856A22844A985008E2E2F /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A12844A985008E2E2F /* FirebaseFirestoreCombine-Community */; };
 		00F856A42844A985008E2E2F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 00F856A32844A985008E2E2F /* FirebaseFirestoreSwift */; };
@@ -262,6 +263,7 @@
 		00F554BE28A375610007B8AD /* MessageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTest.swift; sourceTree = "<group>"; };
 		00F6B72628596EEF00DACA06 /* PatyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatyListCell.swift; sourceTree = "<group>"; };
 		00F6B7302859C44D00DACA06 /* ChattingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingRepository.swift; sourceTree = "<group>"; };
+		00F7ED94290E0DA000BE7CEA /* FullScreenDismissGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenDismissGesture.swift; sourceTree = "<group>"; };
 		3771CFAA28FD5185001942CA /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
 		3771CFAC28FD5248001942CA /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		3771CFAE28FD5291001942CA /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 				002003552894DE6300545E2B /* UnderlinedPasswordTextField.swift */,
 				E63C7AB32858C2650080530B /* UnderlinedTextField.swift */,
 				5043A9EF28D1ADF500B57ABE /* Header.swift */,
+				00F7ED94290E0DA000BE7CEA /* FullScreenDismissGesture.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -750,8 +753,8 @@
 			isa = PBXGroup;
 			children = (
 				00A570592851826A008B220E /* ColorExtension.swift */,
-				E63C7AA12858B5520080530B /* DateExtension.swift */,
 				50459E322854701C00287371 /* ImageExtension.swift */,
+				E63C7AA12858B5520080530B /* DateExtension.swift */,
 				E6E0E06E285A15B1001BAF6F /* StringExtension.swift */,
 				A8D578972852F2000059FE49 /* TextStyleExtension.swift */,
 				50305A2C285DB20D00C10C82 /* UINavigationControllerExtension.swift */,
@@ -1001,6 +1004,7 @@
 				50595595285037AE001DA44C /* MyPageView.swift in Sources */,
 				00842A96284B287D000292E5 /* Place.swift in Sources */,
 				5043A9F028D1ADF500B57ABE /* Header.swift in Sources */,
+				00F7ED95290E0DA000BE7CEA /* FullScreenDismissGesture.swift in Sources */,
 				0045BEB6289F42F3006A18BC /* DateMapper.swift in Sources */,
 				37D4D1F12856D285002E787B /* ChatRoomView.swift in Sources */,
 				00EF78E028AC7EE600BE625D /* Injected.swift in Sources */,

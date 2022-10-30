@@ -377,6 +377,9 @@ struct Typing: View {
         .background(.white)
         .fullScreenCover(isPresented: $isShowingAccountSetting) {
             AccountSetting(viewModel: accountViewModel)
+                .background(Color.white)
+                .clearBackground()
+                .enableDismissGesture($isShowingAccountSetting)
         }
     }
 }

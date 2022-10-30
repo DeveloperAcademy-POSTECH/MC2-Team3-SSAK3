@@ -15,18 +15,13 @@ struct TaxiPartyInfo: View {
     @State private var isLoading: Bool = false
     @Binding var showBlur: Bool
     @Binding var isShowTaxiPartyInfo: Bool
-    @State private var infoYOffset: CGFloat = .zero
     let taxiParty: TaxiParty
     private let profileSize: CGFloat = 62
     private let remainSeat: Int
-    private let meetingMonth: Int
-    private let meetingDay: Int
 
     init(taxiParty: TaxiParty, viewModel: TaxiPartyList.ViewModel, showBlur: Binding<Bool>, isShowTaxiPartyInfo: Binding<Bool>) {
         self.taxiParty = taxiParty
         self.remainSeat = taxiParty.maxPersonNumber - taxiParty.members.count
-        self.meetingMonth = taxiParty.meetingDate / 100 % 100
-        self.meetingDay = taxiParty.meetingDate % 100
         self.viewModel = viewModel
         self._showBlur = showBlur
         self._isShowTaxiPartyInfo = isShowTaxiPartyInfo
@@ -57,34 +52,9 @@ struct TaxiPartyInfo: View {
             .padding()
         }
         .clearBackground()
-        .offset(y: infoYOffset)
-        .gesture(dragGesture)
+        .enableDismissGesture($isShowTaxiPartyInfo)
     }
 }
-
-// MARK: - drag gesture
-private extension TaxiPartyInfo {
-    var dragGesture: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                withAnimation(.interactiveSpring()) {
-                if value.translation.height > 0 {
-                    showBlur = false
-                    infoYOffset = value.translation.height
-                    }
-                }
-            }
-            .onEnded { value in
-                if value.translation.height > 60 {
-                    isShowTaxiPartyInfo.toggle()
-                } else {
-                    showBlur.toggle()
-                    infoYOffset = .zero
-                }
-            }
-    }
-}
-
 // MARK: - 뷰 변수
 
 private extension TaxiPartyInfo {
@@ -182,7 +152,7 @@ private extension TaxiPartyInfo {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     appState.showChattingRoom(taxiParty)
                 }
-            } onError: { error in
+            } onError: { _ in
                 isLoading = false
             }
         }

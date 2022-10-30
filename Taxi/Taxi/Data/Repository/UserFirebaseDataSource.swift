@@ -28,7 +28,6 @@ final class UserFirebaseDataSource: UserRepository {
         let user: UserInfo = UserInfo(id: id, nickname: nickname, profileImage: nil)
         return fireStore.collection("User").document(id).setData(from: user)
             .map { user }
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 
@@ -47,7 +46,6 @@ final class UserFirebaseDataSource: UserRepository {
                     promise(Result.success(user))
                 }
             }
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
         }
         // 서버에서 유저를 불러와야할 때
@@ -72,10 +70,8 @@ final class UserFirebaseDataSource: UserRepository {
         let metaData: StorageMetadata = StorageMetadata()
         metaData.cacheControl = "public,max-age=300"
         metaData.contentType = "image/jpeg"
-        print("upload file")
         return Future<String, Error> { promise in
             ref.putData(imageData, metadata: metaData) { _, error in
-                print("put file")
                 if let error = error {
                     print(error)
                     promise(.failure(error))
@@ -101,7 +97,6 @@ final class UserFirebaseDataSource: UserRepository {
         .map {
             UserInfo(id: user.id, nickname: user.nickname, profileImage: downloadUrl)
         }
-        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
 
@@ -114,7 +109,6 @@ final class UserFirebaseDataSource: UserRepository {
         .map { _ in
             UserInfo(id: user.id, nickname: user.nickname, profileImage: user.profileImage)
         }
-        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
 
@@ -127,7 +121,6 @@ final class UserFirebaseDataSource: UserRepository {
         .map {
             UserInfo(id: user.id, nickname: user.nickname, profileImage: nil)
         }
-        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
 

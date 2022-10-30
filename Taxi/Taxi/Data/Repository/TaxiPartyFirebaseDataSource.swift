@@ -52,7 +52,6 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
                 }
             })
             .map(filterPassedTaxiParty(_:))
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 
@@ -71,7 +70,6 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
             .map {
                 taxiParty
             }
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 
@@ -93,7 +91,6 @@ final class TaxiPartyFirebaseDataSource: TaxiPartyRepository {
             updatedMembers.append(user.id)
             return TaxiParty(id: taxiParty.id, departureCode: taxiParty.departureCode, destinationCode: taxiParty.destinationCode, meetingDate: taxiParty.meetingDate, meetingTime: taxiParty.meetingTime, maxPersonNumber: taxiParty.maxPersonNumber, members: updatedMembers, isClosed: taxiParty.isClosed)
         }
-        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
 }

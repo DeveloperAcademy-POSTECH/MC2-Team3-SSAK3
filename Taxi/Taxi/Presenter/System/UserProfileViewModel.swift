@@ -18,7 +18,9 @@ final class UserProfileViewModel: ObservableObject {
     func getUser(_ id: String) {
         getUserInfoUseCase.getUserInfo(id) { [weak self] user, error in
             guard let self = self, error == nil, let user = user else { return }
-            self.user = user
+            DispatchQueue.main.async {
+                self.user = user
+            }
         }
     }
 }
