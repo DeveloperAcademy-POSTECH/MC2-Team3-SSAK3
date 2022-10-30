@@ -15,6 +15,7 @@ struct MyPageView: View {
     @State private var isShowAccountModal: Bool = false
     @State private var showProfile: Bool = false
     @State private var isTryingDeleteUser: Bool = false
+    @State private var isAccountOff: Bool = false
     @EnvironmentObject private var authentication: UserInfoState
     @EnvironmentObject private var appState: AppState
     @StateObject private var accountViewModel: AccountViewModel = AccountViewModel()
@@ -31,6 +32,11 @@ struct MyPageView: View {
                 notificationSetting("채팅 알림", isOn: $chattingNoti)
                 notificationSetting("택시팟 완료 알림", isOn: $partyCompleteNoti)
             }
+            Rectangle()
+                .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
+                .frame(height: 5)
+            sendToDeveloper
+            opensourceLicense
             Rectangle()
                 .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
                 .frame(height: 5)
@@ -118,6 +124,29 @@ private extension MyPageView {
                 .tint(.customYellow)
         }
         .padding(.horizontal)
+    }
+
+    var sendToDeveloper: some View {
+        Button {
+            EmailHelper.shared.send(subject: "[popopot]", body: "[제안 내용]", recipient: ["qkrdlstj1234@gmail.com"])
+        } label: {
+            Text("개발자에게 의견 남기기")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .padding()
+                .alert(isPresented: $isAccountOff) {
+                    Alert(title: Text("Title"), message: Text("This is a alert message"), dismissButton: .default(Text("Dismiss")))
+                }
+        }
+    }
+
+    var opensourceLicense: some View {
+        Button {
+            print("opensourceLicense")
+        } label: {
+            Text("오픈소스 라이선스")
+                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                .padding()
+        }
     }
 
     var deleteUserButton: some View {
