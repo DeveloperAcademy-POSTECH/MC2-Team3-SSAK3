@@ -9,13 +9,14 @@ import SwiftUI
 
 struct LicenseView: View {
     var body: some View {
-        opensourceLicense2
+        NavigationView {
+            opensourceLicense2
+        }.navigationBarTitle("오픈소스 라이선스")
     }
 }
 
 private extension LicenseView {
     var opensourceLicense2: some View {
-        NavigationView {
             Button {
                 print("opensourceLicense")
             } label: {
@@ -23,7 +24,6 @@ private extension LicenseView {
                     .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
                     .padding()
             }
-        }.navigationBarTitle("Bar Title", displayMode: .inline)
     }
 }
 
