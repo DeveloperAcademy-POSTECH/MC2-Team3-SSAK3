@@ -53,9 +53,6 @@ struct MyPageView: View {
         .sheet(isPresented: $showProfile) {
             ProfileView()
         }
-        .sheet(isPresented: $isLicenseNavigationView) {
-                LicenseView()
-        }
         .sheet(isPresented: $isShowAccountModal, content: {
             AccountSetting(viewModel: accountViewModel)
         })
@@ -146,13 +143,11 @@ private extension MyPageView {
     }
 
     var opensourceLicense: some View {
-        Button {
-            isLicenseNavigationView = true
-        } label: {
-            Text("오픈소스 라이선스")
-                .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
-                .padding()
-        }
+        NavigationLink(destination: LicenseView()) {
+                Text("오픈소스 라이선스")
+                    .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
+                    .padding()
+            }
     }
 
     var deleteUserButton: some View {
