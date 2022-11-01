@@ -21,14 +21,14 @@ private extension LicenseView {
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(Color(red: 0 / 255, green: 0 / 255, blue: 0 / 255))
-                    .frame(height: 60)
+                    .frame(height: 50)
                     .padding(5)
                 Text("OSS Notice | popopot-iOS")
                     .font(Font.custom("AppleSDGothicNeo-Bold", size: 18))
                     .foregroundColor(.white)
-                    .padding(30)
+                    .padding(20)
             }
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text("This application is Copyright © SSAK3 Team. All rights reserved.")
                     .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
                     .foregroundColor(.darkGray)
@@ -38,29 +38,38 @@ private extension LicenseView {
                 Text("If you have any questions about these notices, please email us at popopothelp@gmail.com")
                     .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
                     .foregroundColor(.darkGray)
-                Rectangle()
-                    .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
-                    .frame(height: 2)
-            }.padding()
+            }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
 
-            VStack(alignment: .leading) {
-                Text("This application")
-                    .font(Font.custom("AppleSDGothicNeo-Bold", size: 18))
-                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
+            Rectangle()
+                .fill(Color(red: 240 / 255, green: 240 / 255, blue: 240 / 255))
+                .frame(height: 2)
+                .padding(5)
+
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .fill(Color(red: 255 / 255, green: 255 / 255, blue: 255 / 255))
+                    .frame(height: 50)
                 VStack(alignment: .leading) {
-                    Text("https://github.com/DeveloperAcademy-POSTECH/MC2-Team3-SSAK3/pull/273")
-                        .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
-                    Text("Copyright 2022 popopot")
-                        .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
-                        .foregroundColor(.darkGray)
-                    Text("MIT License")
-                        .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
-                }.padding(EdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 0))
+                    Text("This application")
+                        .font(Font.custom("AppleSDGothicNeo-Bold", size: 18))
+                        .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                    VStack(alignment: .leading) {
+                        Text(.init("[Link Example](https://www.google.es/)"))
+                            .underline()
+                            .accentColor(.blue)
+                            .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
+                        Text("Copyright 2022 popopot")
+                            .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
+                            .foregroundColor(.darkGray)
+                        Text("MIT License")
+                            .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
+                    }.padding(EdgeInsets(top: 0, leading: 35, bottom: 0, trailing: 15))
+                }
             }
+
         }
     }
 }
-
 
 struct LicenseView_Previews: PreviewProvider {
     static var previews: some View {
