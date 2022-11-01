@@ -13,7 +13,6 @@ struct MyPageView: View {
     @State private var isTryLogout: Bool = false
     @State private var isTryWithdrawal: Bool = false
     @State private var isShowAccountModal: Bool = false
-    @State private var isLicenseNavigationView: Bool = false
     @State private var showProfile: Bool = false
     @State private var isTryingDeleteUser: Bool = false
     @EnvironmentObject private var authentication: UserInfoState

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LicenseView: View {
+    let email: String = "popopothelp@gmail.com"
+
     var body: some View {
         NavigationView {
             opensourceLicense
@@ -28,16 +30,21 @@ private extension LicenseView {
                     .foregroundColor(.white)
                     .padding(20)
             }
+
             VStack(alignment: .leading, spacing: 10) {
                 Text("This application is Copyright © SSAK3 Team. All rights reserved.")
-                    .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
                     .foregroundColor(.darkGray)
+                    .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
                 Text("The following sets forth attribution notices for third party software that may be contained in this application.")
-                    .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
                     .foregroundColor(.darkGray)
-                Text("If you have any questions about these notices, please email us at popopothelp@gmail.com")
                     .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
-                    .foregroundColor(.darkGray)
+
+                Group {
+                    Text("If you have any questions about these notices, please email us at ")
+                        .foregroundColor(.darkGray)
+                        .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
+                    + Text("\(email)").underline().foregroundColor(.blue).font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
+                }.onTapGesture { EmailHelper.shared.send(subject: "[popopot]", body: "[제안 내용]", recipient: ["popopothelp@gmail.com"]) }
             }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
 
             Rectangle()
@@ -45,34 +52,39 @@ private extension LicenseView {
                 .frame(height: 2)
                 .padding(5)
 
+            licenseContents(title: "firebase-ios-sdk", url: "[https://github.com/firebase/firebase-ios-sdk/blob/master/LICENSE](https://github.com/firebase/firebase-ios-sdk/blob/master/LICENSE)", copyright: "Copyright 2018 Google LLC", licenseName: "Apache License 2.0")
+            licenseContents(title: "Amplitude-iOS", url: "[https://github.com/amplitude/Amplitude-iOS/blob/main/LICENSE](https://github.com/amplitude/Amplitude-iOS/blob/main/LICENSE)", copyright: "Copyright (c) 2014 Amplitude Analytics", licenseName: "MIT License")
+            licenseContents(title: "SDWebImageSwiftUI", url: "[https://github.com/SDWebImage/SDWebImageSwiftUI/blob/master/LICENSE](https://github.com/SDWebImage/SDWebImageSwiftUI/blob/master/LICENSE)", copyright: "Copyright (c) 2019 lizhuoli1126@126.com", licenseName: "MIT License")
+            licenseContents(title: "nanopb", url: "[https://github.com/nanopb/nanopb/blob/master/LICENSE.txt](https://github.com/nanopb/nanopb/blob/master/LICENSE.txt)", copyright: "Copyright (c) 2011 Petteri Aimonen", licenseName: "zlib License")
+            licenseContents(title: "SwiftKeychainWrapper", url: "[https://github.com/jrendel/SwiftKeychainWrapper/blob/develop/LICENSE](https://github.com/jrendel/SwiftKeychainWrapper/blob/develop/LICENSE)", copyright: "Copyright (c) 2014 Jason Rendel", licenseName: "MIT License")
+            licenseContents(title: "SwiftUI-Introspect", url: "[https://github.com/siteline/SwiftUI-Introspect/blob/master/LICENSE](https://github.com/siteline/SwiftUI-Introspect/blob/master/LICENSE)", copyright: "Copyright (c) 2019 Timber Software", licenseName: "MIT License")
+        }
+    }
+
+    private func licenseContents(title: String, url: String, copyright: String, licenseName: String) -> some View {
+        var licenseContentsView: some View {
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(Color(red: 255 / 255, green: 255 / 255, blue: 255 / 255))
                     .frame(height: 50)
                 VStack(alignment: .leading) {
-                    Text("This application")
+                    Text(title)
                         .font(Font.custom("AppleSDGothicNeo-Bold", size: 18))
                         .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
                     VStack(alignment: .leading) {
-                        Text(.init("[Link Example](https://www.google.es/)"))
+                        Text(.init(url))
                             .underline()
                             .accentColor(.blue)
                             .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
-                        Text("Copyright 2022 popopot")
+                        Text(copyright)
                             .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
                             .foregroundColor(.darkGray)
-                        Text("MIT License")
+                        Text(licenseName)
                             .font(Font.custom("AppleSDGothicNeo-Medium", size: 15))
                     }.padding(EdgeInsets(top: 0, leading: 35, bottom: 0, trailing: 15))
                 }
             }
-
         }
-    }
-}
-
-struct LicenseView_Previews: PreviewProvider {
-    static var previews: some View {
-        LicenseView()
+        return licenseContentsView
     }
 }
