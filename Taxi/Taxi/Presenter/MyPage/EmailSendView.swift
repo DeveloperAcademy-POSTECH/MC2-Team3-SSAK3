@@ -5,11 +5,10 @@
 //  Created by Yosep on 2022/10/17.
 //
 
-import Foundation
 import MessageUI
 import SwiftUI
 
-class EmailHelper: NSObject {
+final class EmailHelper: NSObject {
     static let shared = EmailHelper()
     private override init() {}
 }

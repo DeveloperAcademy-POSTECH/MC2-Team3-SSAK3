@@ -16,7 +16,6 @@ struct MyPageView: View {
     @State private var isLicenseNavigationView: Bool = false
     @State private var showProfile: Bool = false
     @State private var isTryingDeleteUser: Bool = false
-    @State private var isAccountOff: Bool = false
     @EnvironmentObject private var authentication: UserInfoState
     @EnvironmentObject private var appState: AppState
     @StateObject private var accountViewModel: AccountViewModel = AccountViewModel()
@@ -136,9 +135,6 @@ private extension MyPageView {
             Text("개발자에게 의견 남기기")
                 .font(Font.custom("AppleSDGothicNeo-Medium", size: 18))
                 .padding()
-                .alert(isPresented: $isAccountOff) {
-                    Alert(title: Text("Title"), message: Text("This is a alert message"), dismissButton: .default(Text("Dismiss")))
-                }
         }
     }
 
