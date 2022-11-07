@@ -17,9 +17,16 @@ final class MyTaxiPartyFirebaseSource: MyTaxiPartyRepository {
     private let fireStore: Firestore = Firestore.firestore()
     private let chattingUseCase: ChattingUseCase = ChattingUseCase.shared
     private init() {}
+    private var collectionName: String {
+        if ProcessInfo().isRunningTests {
+            return "TaxiParty"
+        } else {
+            return "TaxiParty"
+        }
+    }
 
     func getMyTaxiParty(of userId: String, force load: Bool = false) -> AnyPublisher<[TaxiParty], Error> {
-        fireStore.collection("TaxiParty")
+        fireStore.collection(collectionName)
             .whereField("members", arrayContains: userId)
             .getDocuments(source: load ? .server: .cache)
             .map(\.documents)
@@ -45,7 +52,7 @@ final class MyTaxiPartyFirebaseSource: MyTaxiPartyRepository {
     }
 
     func leaveTaxiParty(_ taxiParty: TaxiParty, user: UserInfo) -> AnyPublisher<Void, Error> {
-        fireStore.collection("TaxiParty").document(taxiParty.id)
+        fireStore.collection(collectionName).document(taxiParty.id)
             .updateData([
                 "members": FieldValue.arrayRemove([user.id])
             ])
