@@ -8,6 +8,19 @@
 import Combine
 import Foundation
 
+enum TaxiPartyRepositoryError: Error {
+    case taxiPartyIsFull
+}
+
+extension TaxiPartyRepositoryError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .taxiPartyIsFull:
+            return "택시팟 모집이 마감되었습니다!"
+        }
+    }
+}
+
 protocol TaxiPartyRepository {
 
     /// 현재 모집중인 택시팟을 가져오는 함수

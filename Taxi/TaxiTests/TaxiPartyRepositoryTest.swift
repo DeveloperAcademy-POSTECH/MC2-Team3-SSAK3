@@ -12,14 +12,17 @@ import XCTest
 class TaxiPartyRepositoryTest: XCTestCase {
 
     private var taxiPartyRepository: TaxiPartyRepository!
-    private var cancelBag: Set<AnyCancellable> = []
+    private var cancelBag: Set<AnyCancellable>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
         taxiPartyRepository = TaxiPartyFirebaseDataSource.shared
+        cancelBag = []
     }
 
     override func tearDownWithError() throws {
+        cancelBag = nil
+        taxiPartyRepository = nil
         try super.tearDownWithError()
     }
 
@@ -90,6 +93,65 @@ class TaxiPartyRepositoryTest: XCTestCase {
         // then
         wait(for: [promise], timeout: 5)
         XCTAssertNil(error)
+    }
+
+    func test_엄청많이_참가할때_정상적으로_참가되는지() throws {
+        let promise = expectation(description: #function)
+        let taxiParty: TaxiParty = TaxiParty(id: "TestID", departureCode: 0, destinationCode: 1, meetingDate: 20231111, meetingTime: 930, maxPersonNumber: 2, members: ["TestUser1"], isClosed: false)
+        taxiPartyRepository.addTaxiParty(taxiParty, user: UserInfo(id: "123", nickname: "테스트유저", profileImage: nil))
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    XCTFail(#function + " \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+                promise.fulfill()
+            } receiveValue: { _ in }
+            .store(in: &cancelBag)
+        // 택시팟이 추가될 때 까지 기다림
+        wait(for: [promise], timeout: 5)
+        let promise2 = expectation(description: #function + " 택시팟에 모두 참가한다.")
+        let usersToJoin: [UserInfo] = {
+            var ret: [UserInfo] = []
+            for index in 0...20 {
+                ret.append(UserInfo(id: String(index), nickname: "테스트유저", profileImage: nil))
+            }
+            return ret
+        }()
+        Publishers.MergeMany(usersToJoin.map({ userInfo in
+            taxiPartyRepository.joinTaxiParty(in: taxiParty, user: userInfo)
+        }))
+        .sink { completion in
+            switch completion {
+            case .failure(let error):
+                print(error)
+            case .finished:
+                break
+            }
+            promise2.fulfill()
+        } receiveValue: { _ in
+        }
+        .store(in: &cancelBag)
+        // 택시팟에 모두 참가할 때 까지 기다림
+        wait(for: [promise2], timeout: 10)
+        let promise3 = expectation(description: #function)
+        var taxiParties: [TaxiParty]?
+        taxiPartyRepository.getTaxiParty(exclude: nil, force: true)
+            .sink { _ in
+                promise3.fulfill()
+            } receiveValue: {
+                taxiParties = $0
+            }
+            .store(in: &cancelBag)
+        wait(for: [promise3], timeout: 5)
+        guard let addedParty = taxiParties?.first(where: {
+            $0.id == "TestID"
+        }) else {
+            XCTFail("Taxi Party는 존재해야 합니다.")
+            return
+        }
+        XCTAssertEqual(2, addedParty.currentMemeberCount)
     }
 
 }

@@ -14,11 +14,17 @@ final class ChattingFirebaseDataSource: ChattingRepository {
 
     static let shared: ChattingFirebaseDataSource = ChattingFirebaseDataSource()
     private let fireStore: Firestore = Firestore.firestore()
-
+    private var collectionName: String {
+        if ProcessInfo().isRunningTests {
+            return "TaxiParty"
+        } else {
+            return "TaxiParty"
+        }
+    }
     private init() {}
 
     func sendMessage(_ message: Message, to taxiParty: TaxiParty) -> AnyPublisher<Void, Error> {
-        fireStore.collection("TaxiParty").document(taxiParty.id)
+        fireStore.collection(collectionName).document(taxiParty.id)
             .collection("messages")
             .addDocument(from: message)
             .map { _ in }

@@ -38,7 +38,6 @@
 		003ABC0C284749F7000FA7A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 003ABC0B284749F7000FA7A2 /* .swiftlint.yml */; };
 		003C339928574BBF002B22F4 /* AddTaxiPartyUsecaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C339828574BBF002B22F4 /* AddTaxiPartyUsecaseTest.swift */; };
 		003C339B2857559D002B22F4 /* JoinTaxiPartyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C339A2857559D002B22F4 /* JoinTaxiPartyTest.swift */; };
-		003C339D28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C339C28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift */; };
 		003C339F285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C339E285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift */; };
 		00437E2F28503D3000844821 /* MyTaxiPartyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */; };
 		00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */; };
@@ -84,6 +83,7 @@
 		00BC474128581E860055CB6A /* InfoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC474028581E860055CB6A /* InfoContainer.swift */; };
 		00BC47472858CAF80055CB6A /* AddTaxiPartyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E545728531C510085C39E /* AddTaxiPartyUseCase.swift */; };
 		00C4D09B287907E30019B8C4 /* RegisterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */; };
+		00C881D22918DDF8007D3237 /* ProcessInfoExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C881D12918DDF8007D3237 /* ProcessInfoExtension.swift */; };
 		00CE2336287A72C700931394 /* GetUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CE2335287A72C700931394 /* GetUserInfoUseCase.swift */; };
 		00CE2338287A904800931394 /* ChangeNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CE2337287A904800931394 /* ChangeNicknameUseCase.swift */; };
 		00CE233A287A90C600931394 /* ChangeProfieImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CE2339287A90C600931394 /* ChangeProfieImageUseCase.swift */; };
@@ -202,7 +202,6 @@
 		003ABC0B284749F7000FA7A2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		003C339828574BBF002B22F4 /* AddTaxiPartyUsecaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiPartyUsecaseTest.swift; sourceTree = "<group>"; };
 		003C339A2857559D002B22F4 /* JoinTaxiPartyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTaxiPartyTest.swift; sourceTree = "<group>"; };
-		003C339C28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTaxiPartyUsecaseTest.swift; sourceTree = "<group>"; };
 		003C339E285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyUsecaseTest.swift; sourceTree = "<group>"; };
 		00437E2E28503D3000844821 /* MyTaxiPartyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyRepository.swift; sourceTree = "<group>"; };
 		00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTaxiPartyRepositoryTest.swift; sourceTree = "<group>"; };
@@ -248,6 +247,7 @@
 		00BC473E28581E740055CB6A /* AddTaxiParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaxiParty.swift; sourceTree = "<group>"; };
 		00BC474028581E860055CB6A /* InfoContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoContainer.swift; sourceTree = "<group>"; };
 		00C4D09A287907E30019B8C4 /* RegisterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUseCase.swift; sourceTree = "<group>"; };
+		00C881D12918DDF8007D3237 /* ProcessInfoExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessInfoExtension.swift; sourceTree = "<group>"; };
 		00CE2335287A72C700931394 /* GetUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfoUseCase.swift; sourceTree = "<group>"; };
 		00CE2337287A904800931394 /* ChangeNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNicknameUseCase.swift; sourceTree = "<group>"; };
 		00CE2339287A90C600931394 /* ChangeProfieImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfieImageUseCase.swift; sourceTree = "<group>"; };
@@ -501,7 +501,6 @@
 				00437E302850409C00844821 /* MyTaxiPartyRepositoryTest.swift */,
 				003C339828574BBF002B22F4 /* AddTaxiPartyUsecaseTest.swift */,
 				003C339A2857559D002B22F4 /* JoinTaxiPartyTest.swift */,
-				003C339C28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift */,
 				003C339E285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift */,
 				000C24F82859CC240054D679 /* ChattingUseCaseTest.swift */,
 			);
@@ -765,6 +764,7 @@
 				A8D578972852F2000059FE49 /* TextStyleExtension.swift */,
 				50305A2C285DB20D00C10C82 /* UINavigationControllerExtension.swift */,
 				E622D8F528503D19005A68F3 /* ViewExtension.swift */,
+				00C881D12918DDF8007D3237 /* ProcessInfoExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1021,6 +1021,7 @@
 				000C24FB2859E74E0054D679 /* ChattingViewModel.swift in Sources */,
 				00BC474128581E860055CB6A /* InfoContainer.swift in Sources */,
 				000103DD28A48FEA004FF7EA /* SignUpPassword.swift in Sources */,
+				00C881D22918DDF8007D3237 /* ProcessInfoExtension.swift in Sources */,
 				E6E0E06F285A15B1001BAF6F /* StringExtension.swift in Sources */,
 				A8BD8115285A3543003D744B /* Onboarding.swift in Sources */,
 				000103DB28A48B1C004FF7EA /* SignUpEmail.swift in Sources */,
@@ -1080,7 +1081,6 @@
 				00D3AE74284F87DB001E34A0 /* TaxiPartyRepositoryTest.swift in Sources */,
 				002F89EF284CA5FF00D7E51B /* UserRepositoryTest.swift in Sources */,
 				000C24F92859CC240054D679 /* ChattingUseCaseTest.swift in Sources */,
-				003C339D28575712002B22F4 /* GetTaxiPartyUsecaseTest.swift in Sources */,
 				00437E312850409C00844821 /* MyTaxiPartyRepositoryTest.swift in Sources */,
 				003C339F285757F3002B22F4 /* MyTaxiPartyUsecaseTest.swift in Sources */,
 				000D83372840E23A00BA3DFA /* TaxiTests.swift in Sources */,
@@ -1247,7 +1247,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Taxi/Resources/TaxiRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20221018;
+				CURRENT_PROJECT_VERSION = 20221030;
 				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
@@ -1265,7 +1265,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.ssak3.Taxi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1282,7 +1282,7 @@
 				CODE_SIGN_ENTITLEMENTS = Taxi/Resources/TaxiRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20221018;
+				CURRENT_PROJECT_VERSION = 20221030;
 				DEVELOPMENT_ASSET_PATHS = "\"Taxi/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 44RS35G3C5;
 				ENABLE_PREVIEWS = YES;
@@ -1300,7 +1300,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.ssak3.Taxi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
