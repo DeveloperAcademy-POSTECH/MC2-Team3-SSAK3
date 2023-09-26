@@ -32,7 +32,7 @@
 ## 🫂 Authors
 |HoJongE|Avo|Yosep|Jerry|Raymond|Joy|
 |:-:|:-:|:-:|:-:|:-:|:-:|
-[@HoJongPARK](https://github.com/HoJongPARK) | [@Chaeho-Min](https://github.com/Chaeho-Min) | [@pis3120](https://github.com/pis3120) | [@YoonyoungL](https://github.com/YoonyoungL) | [@SH0123n](https://github.com/SH0123n) | [@jsyworks](https://github.com/jsyworks)
+[@HoJongPARK](https://github.com/HoJongPARK) | [@Chaeho-Min](https://github.com/Chaeho-Min) | [@pis3120](https://github.com/pis3120) | [@YoonyoungL](https://github.com/YoonyoungL) | [@SH0123n](https://github.com/SH0123) | [@jsyworks](https://github.com/jsyworks)
 <br>
 
 ## 🔏 License
